@@ -9,7 +9,6 @@ import WhyUsSection from "./WhyUsSection";
 import AICounsellorSection from "./AICounsellorSection";
 import HowItWorksSection from "./HowItWorksSection";
 import TrustStripSection from "./TrustStripSection";
-import TestimonialsSection from "./TestimonialsSection";
 import BlogSection from "./BlogSection";
 import FAQSection from "./FAQSection";
 import CTABand from "./CTABand";
@@ -34,7 +33,6 @@ export default function HomePageClient() {
       <AICounsellorSection />
       <HowItWorksSection />
       <TrustStripSection />
-      <TestimonialsSection />
       <BlogSection />
       <FAQSection />
       <CTABand onOpenLeadForm={() => openLeadForm("cta-band")} />

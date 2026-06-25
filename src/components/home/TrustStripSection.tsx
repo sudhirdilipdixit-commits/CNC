@@ -1,35 +1,20 @@
-const badges = [
-  { code: "UGC", label: "UGC-DEB Approved Universities" },
-  { code: "AC", label: "AICTE Approved Institutions" },
-  { code: "NA", label: "NAAC Accredited Universities" },
-];
-
 export default function TrustStripSection() {
   return (
-    <section
-      className="py-12"
-      style={{ background: "var(--white)" }}
-      aria-label="Accreditation and recognition"
-    >
+    <section className="section-trust" aria-label="Accreditation and recognition">
       <div className="container">
-        <p
-          className="text-center text-sm mb-5 max-w-[60ch] mx-auto"
-          style={{ color: "var(--grey)" }}
-        >
+        <p className="trust-strip-caption">
           We only list programmes from approved and accredited institutions.
         </p>
-        <div className="flex flex-wrap items-center justify-center gap-5 lg:gap-8">
-          {badges.map((b) => (
-            <div key={b.code} className="trust-badge">
-              <span
-                className="w-7 h-7 rounded-[4px] inline-flex items-center justify-center text-[11px] font-extrabold flex-none"
-                style={{ background: "var(--navy)", color: "var(--yellow)" }}
-              >
-                {b.code}
-              </span>
-              {b.label}
-            </div>
-          ))}
+        <div className="trust-strip-large">
+          <div className="trust-badge">
+            <span className="trust-badge-icon">UGC</span> UGC-DEB Approved Universities
+          </div>
+          <div className="trust-badge">
+            <span className="trust-badge-icon">AC</span> AICTE Approved Institutions
+          </div>
+          <div className="trust-badge">
+            <span className="trust-badge-icon">NA</span> NAAC Accredited Universities
+          </div>
         </div>
       </div>
     </section>
