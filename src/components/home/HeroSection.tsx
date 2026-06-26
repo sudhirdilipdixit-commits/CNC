@@ -1,35 +1,64 @@
-interface HeroSectionProps {
-  onOpenLeadForm: () => void;
+interface HeroData {
+  eyebrow?: string;
+  headline?: string;
+  subheadline?: string;
+  primaryCTA?: string;
+  secondaryCTA?: string;
+  trustStrip?: string[];
 }
 
-export default function HeroSection({ onOpenLeadForm }: HeroSectionProps) {
+interface HeroSectionProps {
+  onOpenLeadForm: () => void;
+  hero?: HeroData;
+}
+
+const DEFAULTS: Required<HeroData> = {
+  eyebrow: "INDIA'S TRUSTED HIGHER-EDUCATION COMPASS",
+  headline: "Compare. Choose. Begin.",
+  subheadline:
+    "Online MBA, Distance MBA, and Executive MBA programmes from UGC-DEB and AICTE approved universities, compared honestly and explained by real counsellors.",
+  primaryCTA: "Get Free Counselling",
+  secondaryCTA: "Try the AI Counsellor",
+  trustStrip: [
+    "UGC-DEB & AICTE approved programmes",
+    "30-minute counsellor callback",
+    "No spam. No obligation.",
+  ],
+};
+
+export default function HeroSection({ onOpenLeadForm, hero }: HeroSectionProps) {
+  const eyebrow = hero?.eyebrow || DEFAULTS.eyebrow;
+  const headline = hero?.headline || DEFAULTS.headline;
+  const subheadline = hero?.subheadline || DEFAULTS.subheadline;
+  const primaryCTA = hero?.primaryCTA || DEFAULTS.primaryCTA;
+  const secondaryCTA = hero?.secondaryCTA || DEFAULTS.secondaryCTA;
+  const trustStrip = hero?.trustStrip?.length ? hero.trustStrip : DEFAULTS.trustStrip;
+
   return (
     <section className="hero">
       <div className="container hero-inner">
         <div className="hero-content">
-          <div className="eyebrow">INDIA&#39;S TRUSTED HIGHER-EDUCATION COMPASS</div>
-          <h1 className="h-display h1 hero-headline">Compare. Choose. Begin.</h1>
-          <p className="lede hero-sub">
-            Online MBA, Distance MBA, and Executive MBA programmes from UGC-DEB and AICTE approved
-            universities, compared honestly and explained by real counsellors.
-          </p>
+          <div className="eyebrow">{eyebrow}</div>
+          <h1 className="h-display h1 hero-headline">{headline}</h1>
+          <p className="lede hero-sub">{subheadline}</p>
 
           <div className="hero-cta-row">
             <button type="button" className="btn btn-primary" onClick={onOpenLeadForm}>
-              Get Free Counselling
+              {primaryCTA}
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </button>
-            <a href="#ai-counsellor" className="btn btn-secondary">Try the AI Counsellor</a>
+            <a href="#ai-counsellor" className="btn btn-secondary">{secondaryCTA}</a>
           </div>
 
           <div className="trust-strip" aria-label="Trust signals">
-            <span>UGC-DEB &amp; AICTE approved programmes</span>
-            <span className="sep">·</span>
-            <span>30-minute counsellor callback</span>
-            <span className="sep">·</span>
-            <span>No spam. No obligation.</span>
+            {trustStrip.map((item, i) => (
+              <>
+                {i > 0 && <span key={`sep-${i}`} className="sep">·</span>}
+                <span key={item}>{item}</span>
+              </>
+            ))}
           </div>
         </div>
 

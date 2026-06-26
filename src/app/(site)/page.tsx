@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import HomePageClient from "@/components/home/HomePageClient";
+import { sanityFetch } from "@/sanity/lib/client";
+import { homepageQuery } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title:
@@ -86,7 +88,9 @@ const websiteSchema = {
   },
 };
 
-export default function HomePage() {
+export default async function HomePage() {
+  const cmsData = await sanityFetch<Record<string, unknown>>({ query: homepageQuery, revalidate: 3600 }).catch(() => null);
+
   return (
     <>
       <script
@@ -101,7 +105,7 @@ export default function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
-      <HomePageClient />
+      <HomePageClient cmsData={cmsData} />
     </>
   );
 }

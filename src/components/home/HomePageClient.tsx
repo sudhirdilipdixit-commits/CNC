@@ -14,7 +14,11 @@ import FAQSection from "./FAQSection";
 import CTABand from "./CTABand";
 import LeadModal from "@/components/forms/LeadModal";
 
-export default function HomePageClient() {
+interface HomePageClientProps {
+  cmsData?: Record<string, unknown> | null;
+}
+
+export default function HomePageClient({ cmsData }: HomePageClientProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSource, setModalSource] = useState("home");
 
@@ -25,7 +29,7 @@ export default function HomePageClient() {
 
   return (
     <>
-      <HeroSection onOpenLeadForm={() => openLeadForm("hero")} />
+      <HeroSection onOpenLeadForm={() => openLeadForm("hero")} hero={cmsData?.hero as never} />
       <PromiseSection />
       <PathSection />
       <ProgrammesSection onOpenLeadForm={() => openLeadForm("programmes")} />
@@ -33,8 +37,8 @@ export default function HomePageClient() {
       <AICounsellorSection />
       <HowItWorksSection />
       <TrustStripSection />
-      <BlogSection />
-      <FAQSection />
+      <BlogSection blogPosts={cmsData?.blogPosts as never} />
+      <FAQSection faqs={cmsData?.faqs as never} />
       <CTABand onOpenLeadForm={() => openLeadForm("cta-band")} />
 
       <LeadModal

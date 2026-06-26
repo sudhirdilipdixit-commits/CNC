@@ -1,11 +1,24 @@
-const articles = [
+interface BlogPost {
+  _id?: string;
+  tag?: string;
+  title: string;
+  excerpt?: string;
+  readTime?: string;
+  publishedAt?: string;
+}
+
+interface BlogSectionProps {
+  blogPosts?: BlogPost[];
+}
+
+const DEFAULT_POSTS: BlogPost[] = [
   {
     tag: "AI in Education",
     title: "AI Specializations in MBA: The Five Programmes Worth Considering in 2026",
     excerpt:
       "Symbiosis, IIM Indore, and Amity now offer dedicated AI tracks. Which ones are actually substantive, and which are repackaging?",
     readTime: "6 min read",
-    date: "15 Apr 2026",
+    publishedAt: "2026-04-15",
   },
   {
     tag: "Regulatory Update",
@@ -13,7 +26,7 @@ const articles = [
     excerpt:
       "Three programmes lost approval this year. Five new ones joined. Here's the current list, cross-checked with UGC.",
     readTime: "8 min read",
-    date: "02 May 2026",
+    publishedAt: "2026-05-02",
   },
   {
     tag: "Programme Choice",
@@ -21,11 +34,19 @@ const articles = [
     excerpt:
       "Twelve-month programmes are gaining traction with experienced professionals. The tradeoffs are real. Read before you commit.",
     readTime: "7 min read",
-    date: "28 May 2026",
+    publishedAt: "2026-05-28",
   },
 ];
 
-export default function BlogSection() {
+function formatDate(iso?: string) {
+  if (!iso) return "";
+  const d = new Date(iso);
+  return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+}
+
+export default function BlogSection({ blogPosts }: BlogSectionProps) {
+  const posts = blogPosts?.length ? blogPosts : DEFAULT_POSTS;
+
   return (
     <section id="blog">
       <div className="container">
@@ -36,19 +57,19 @@ export default function BlogSection() {
         </div>
 
         <div className="blog-grid">
-          {articles.map((a) => (
-            <article className="blog-card" key={a.title}>
+          {posts.map((post, i) => (
+            <article className="blog-card" key={post._id || post.title || i}>
               <div className="blog-cover">
                 <div className="blog-cover-deco"></div>
-                <span className="blog-cover-tag">{a.tag}</span>
+                {post.tag && <span className="blog-cover-tag">{post.tag}</span>}
               </div>
               <div className="blog-card-body">
-                <h3>{a.title}</h3>
-                <p className="blog-card-excerpt">{a.excerpt}</p>
+                <h3>{post.title}</h3>
+                {post.excerpt && <p className="blog-card-excerpt">{post.excerpt}</p>}
                 <div className="blog-card-meta">
-                  <span>{a.readTime}</span>
-                  <span>·</span>
-                  <span>{a.date}</span>
+                  {post.readTime && <span>{post.readTime}</span>}
+                  {post.readTime && post.publishedAt && <span>·</span>}
+                  {post.publishedAt && <span>{formatDate(post.publishedAt)}</span>}
                 </div>
                 <a href="#" className="blog-card-read">
                   Read article{" "}
