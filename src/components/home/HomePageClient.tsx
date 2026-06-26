@@ -12,6 +12,7 @@ import TrustStripSection from "./TrustStripSection";
 import BlogSection from "./BlogSection";
 import FAQSection from "./FAQSection";
 import CTABand from "./CTABand";
+import PageBuilder from "./PageBuilder";
 import LeadModal from "@/components/forms/LeadModal";
 
 interface HomePageClientProps {
@@ -27,19 +28,27 @@ export default function HomePageClient({ cmsData }: HomePageClientProps) {
     setModalOpen(true);
   }, []);
 
+  const sections = cmsData?.sections as Array<Record<string, unknown>> | undefined;
+
   return (
     <>
-      <HeroSection onOpenLeadForm={() => openLeadForm("hero")} hero={cmsData?.hero as never} />
-      <PromiseSection />
-      <PathSection />
-      <ProgrammesSection onOpenLeadForm={() => openLeadForm("programmes")} />
-      <WhyUsSection />
-      <AICounsellorSection />
-      <HowItWorksSection />
-      <TrustStripSection />
-      <BlogSection blogPosts={cmsData?.blogPosts as never} />
-      <FAQSection faqs={cmsData?.faqs as never} />
-      <CTABand onOpenLeadForm={() => openLeadForm("cta-band")} />
+      {sections?.length ? (
+        <PageBuilder sections={sections as never} onOpenLeadForm={openLeadForm} />
+      ) : (
+        <>
+          <HeroSection onOpenLeadForm={() => openLeadForm("hero")} hero={cmsData?.hero as never} />
+          <PromiseSection />
+          <PathSection />
+          <ProgrammesSection onOpenLeadForm={() => openLeadForm("programmes")} />
+          <WhyUsSection />
+          <AICounsellorSection />
+          <HowItWorksSection />
+          <TrustStripSection />
+          <BlogSection blogPosts={cmsData?.blogPosts as never} />
+          <FAQSection faqs={cmsData?.faqs as never} />
+          <CTABand onOpenLeadForm={() => openLeadForm("cta-band")} />
+        </>
+      )}
 
       <LeadModal
         open={modalOpen}

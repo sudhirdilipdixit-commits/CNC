@@ -12,6 +12,11 @@ import seoSettings from "./seoSettings";
 import globalSettings from "./globalSettings";
 import landingPage from "./landingPage";
 import page from "./page";
+import {
+  heroBlock, promiseBlock, pathBlock, programmesBlock,
+  whyUsBlock, aiCounsellorBlock, howItWorksBlock, trustStripBlock,
+  blogBlock, faqBlock, ctaBandBlock,
+} from "./blocks";
 
 export const schemaTypes = [
   homepage,
@@ -28,4 +33,8 @@ export const schemaTypes = [
   globalSettings,
   landingPage,
   page,
+  // Page builder blocks
+  heroBlock, promiseBlock, pathBlock, programmesBlock,
+  whyUsBlock, aiCounsellorBlock, howItWorksBlock, trustStripBlock,
+  blogBlock, faqBlock, ctaBandBlock,
 ];
