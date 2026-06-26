@@ -34,6 +34,15 @@
   --header-h: 72px;
   --header-h-scrolled: 56px;
   --mobile-bar-h: 64px;
+
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
 }
 
 @media (min-width: 768px) {
@@ -1025,35 +1034,208 @@ section { padding: 64px 0; }
 /* =====================================================================
    LEAD FORM MODAL
    ===================================================================== */
-.form-field { margin-bottom: 16px; }
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(36,48,72,0.65);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 200;
+  padding: 0;
+}
+.modal-backdrop.open { display: flex; }
+.modal-backdrop.closing { animation: fadeOut 0.18s ease forwards; }
+.modal {
+  background: var(--ivory);
+  width: 100%;
+  max-width: 560px;
+  max-height: 92vh;
+  overflow-y: auto;
+  border-top-left-radius: var(--radius-lg);
+  border-top-right-radius: var(--radius-lg);
+  animation: slideUp 0.28s cubic-bezier(0.16,1,0.3,1);
+  box-shadow: var(--shadow-lg);
+}
+@media (min-width: 768px) {
+  .modal-backdrop { align-items: center; padding: var(--s-4); }
+  .modal { border-radius: var(--radius-lg); max-height: 88vh; }
+}
+.modal-header {
+  background: var(--navy);
+  color: var(--ivory);
+  padding: var(--s-5);
+  padding-right: 56px;
+  position: relative;
+}
+.modal-header h2 {
+  font-family: var(--font-serif);
+  color: var(--ivory);
+  font-size: 22px;
+  line-height: 1.2;
+  margin-bottom: var(--s-2);
+}
+.modal-header p { color: var(--yellow); font-size: 13px; margin: 0; }
+.modal-close {
+  position: absolute;
+  top: var(--s-3);
+  right: var(--s-3);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.25);
+  color: var(--ivory);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+}
+.modal-close:hover { background: rgba(255,255,255,0.3); }
+.modal-progress {
+  display: flex;
+  gap: 4px;
+  margin-top: var(--s-4);
+}
+.modal-progress span {
+  flex: 1;
+  height: 4px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 2px;
+  transition: background 0.2s;
+}
+.modal-progress span.active { background: var(--yellow); }
+.modal-body { padding: var(--s-5); background: var(--white); }
+.modal-step { display: none; }
+.modal-step.active { display: block; }
+.form-field { margin-bottom: 20px; }
+.form-field:last-of-type { margin-bottom: 0; }
 .form-field label {
   display: block;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--navy);
-  margin-bottom: 8px;
+  margin-bottom: 6px;
 }
+.form-field label .req { color: #B83A2A; margin-left: 2px; }
 .form-field input,
 .form-field select,
 .form-field textarea {
   width: 100%;
-  padding: 12px 14px;
-  border: 1px solid var(--pale-navy);
+  padding: 13px 14px;
+  min-height: 48px;
+  border: 1.5px solid var(--pale-navy);
   border-radius: var(--radius-md);
-  background: var(--white);
+  background: var(--ivory);
   font-size: 15px;
   font-family: var(--font-sans);
   color: var(--charcoal);
-  transition: border-color 0.15s;
+  transition: border-color 0.15s, box-shadow 0.15s;
 }
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: #9CA3AF; }
 .form-field input:focus,
 .form-field select:focus,
 .form-field textarea:focus {
   outline: none;
-  border-color: var(--yellow);
-  box-shadow: 0 0 0 3px rgba(252,204,0,0.2);
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px rgba(36,48,72,0.1);
+  background: var(--white);
+}
+.form-field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23243048' stroke-width='2.5'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 40px;
+  cursor: pointer;
+}
+.form-field textarea { resize: vertical; min-height: 80px; }
+.form-field .hint { font-size: 12px; color: var(--grey); margin-top: 4px; }
+.form-field-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--s-3);
+  margin-bottom: 20px;
+}
+.form-field-row .form-field { margin-bottom: 0; }
+@media (min-width: 480px) {
+  .form-field-row { grid-template-columns: 1fr 1fr; }
+}
+.consent {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 8px;
+  align-items: flex-start;
+  font-size: 13px;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--grey);
+  margin-top: 8px;
+  margin-bottom: var(--s-4);
+  line-height: 1.5;
+  cursor: pointer;
+}
+.consent input[type=checkbox] { margin-top: 2px; flex: 0 0 16px; accent-color: var(--navy); }
+.modal-actions {
+  display: flex;
+  gap: var(--s-3);
+  justify-content: space-between;
+  margin-top: var(--s-5);
+}
+.modal-actions .btn { flex: 1; }
+.btn-back {
+  background: transparent;
+  color: var(--grey);
+  flex: 0 0 auto !important;
+  padding-left: 0;
+  padding-right: 0;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 15px;
+}
+.btn-back:hover { color: var(--charcoal); }
+.modal-success {
+  text-align: center;
+  padding: var(--s-6) var(--s-5);
+}
+.modal-success-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--yellow);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--s-4);
+  font-size: 32px;
+  font-weight: 800;
+}
+.modal-success h2 {
+  font-family: var(--font-serif);
+  color: var(--navy);
+  font-size: 24px;
+  margin-bottom: var(--s-3);
+}
+.modal-success p { color: var(--grey); font-size: 15px; margin-bottom: var(--s-3); }
+.enquiry-id {
+  display: inline-block;
+  background: var(--pale-navy);
+  color: var(--navy);
+  padding: 6px 12px;
+  border-radius: var(--radius-md);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--s-5);
 }
 
 /* =====================================================================
@@ -1063,6 +1245,7 @@ section { padding: 64px 0; }
   from { transform: translateY(40px); opacity: 0; }
   to { transform: translateY(0); opacity: 1; }
 }
+@keyframes fadeOut { to { opacity: 0; } }
 @keyframes fadeIn {
   from { opacity: 0; }
   to { opacity: 1; }

@@ -3,16 +3,13 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { z } from "zod";
 
-const step1Schema = z.object({
+const leadSchema = z.object({
   name: z.string().min(2, "Please enter your full name"),
   mobile: z.string().regex(/^[6-9]\d{9}$/, "Please enter a valid 10-digit mobile number"),
   email: z.string().email("Please enter a valid email address"),
   city: z.string().min(2, "Please enter your city"),
-});
-
-const fullSchema = step1Schema.extend({
-  courseInterested: z.string().optional(),
-  consent: z.boolean().refine((v) => v, "Please accept the terms to continue"),
+  courseInterested: z.string().min(1, "Please select a course"),
+  consent: z.boolean().refine((v) => v, "Please accept the Terms and Conditions to continue"),
 });
 
 type FormData = {
@@ -73,7 +70,6 @@ const DUPLICATE_MSG =
   "Thank you. Your enquiry has already been received. Our counsellor will contact you shortly.";
 
 export default function LeadModal({ open, onClose, source = "modal" }: LeadModalProps) {
-  const [step, setStep] = useState(1);
   const [data, setData] = useState<FormData>({
     name: "",
     mobile: "",
@@ -86,27 +82,24 @@ export default function LeadModal({ open, onClose, source = "modal" }: LeadModal
   const [submitting, setSubmitting] = useState(false);
   const [enquiryId, setEnquiryId] = useState("");
   const [isDuplicate, setIsDuplicate] = useState(false);
-  const dialogRef = useRef<HTMLDivElement>(null);
+  const [success, setSuccess] = useState(false);
   const firstInputRef = useRef<HTMLInputElement>(null);
 
-  const totalSteps = 2;
-
-  // Check cookie on open
   useEffect(() => {
     if (open) {
       const hasCookie = document.cookie.includes(COOKIE_NAME + "=true");
       if (hasCookie) {
         setIsDuplicate(true);
-        setStep(3);
+        setSuccess(true);
       } else {
         setIsDuplicate(false);
-        setStep(1);
+        setSuccess(false);
+        setErrors({});
       }
       setTimeout(() => firstInputRef.current?.focus(), 200);
     }
   }, [open]);
 
-  // Trap focus + Escape
   useEffect(() => {
     if (!open) return;
     const handleKey = (e: KeyboardEvent) => {
@@ -121,37 +114,27 @@ export default function LeadModal({ open, onClose, source = "modal" }: LeadModal
   }, [open, onClose]);
 
   const handleChange = useCallback(
-    (field: keyof FormData, value: string | boolean) => {
+    <K extends keyof FormData>(field: K, value: FormData[K]) => {
       setData((prev) => ({ ...prev, [field]: value }));
-      if (errors[field]) setErrors((prev) => ({ ...prev, [field]: undefined }));
+      setErrors((prev) => ({ ...prev, [field]: undefined }));
     },
-    [errors]
+    []
   );
-
-  const validateStep1 = () => {
-    const result = step1Schema.safeParse(data);
-    if (!result.success) {
-      const errs: FormErrors = {};
-      result.error.issues.forEach((e) => {
-        const key = e.path[0] as keyof FormData;
-        if (!errs[key]) errs[key] = e.message;
-      });
-      setErrors(errs);
-      return false;
-    }
-    return true;
-  };
-
-  const handleNext = () => {
-    if (step === 1 && validateStep1()) setStep(2);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!data.consent) {
-      setErrors((prev) => ({ ...prev, consent: "Please accept the terms" }));
+
+    const result = leadSchema.safeParse(data);
+    if (!result.success) {
+      const errs: FormErrors = {};
+      result.error.issues.forEach((issue) => {
+        const key = issue.path[0] as keyof FormData;
+        if (!errs[key]) errs[key] = issue.message;
+      });
+      setErrors(errs);
       return;
     }
+
     setSubmitting(true);
     try {
       const payload = {
@@ -169,22 +152,15 @@ export default function LeadModal({ open, onClose, source = "modal" }: LeadModal
 
       const json = await res.json();
 
+      const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
+      document.cookie = `${COOKIE_NAME}=true; expires=${expires}; path=/; SameSite=Lax`;
+
       if (json.duplicate) {
         setIsDuplicate(true);
-        setStep(3);
-        // Set cookie
-        const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
-        document.cookie = `${COOKIE_NAME}=true; expires=${expires}; path=/; SameSite=Lax`;
-        return;
-      }
-
-      if (json.id) {
-        // Set success cookie
-        const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
-        document.cookie = `${COOKIE_NAME}=true; expires=${expires}; path=/; SameSite=Lax`;
+      } else if (json.id) {
         setEnquiryId(json.id);
-        setStep(3);
       }
+      setSuccess(true);
     } catch {
       setErrors({ name: "Something went wrong. Please try again." });
     } finally {
@@ -200,236 +176,182 @@ export default function LeadModal({ open, onClose, source = "modal" }: LeadModal
 
   return (
     <div
-      className="fixed inset-0 z-[200] flex items-end md:items-center justify-center"
-      style={{ background: "rgba(36,48,72,0.65)", backdropFilter: "blur(4px)" }}
+      className="modal-backdrop open"
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
       aria-labelledby="modalTitle"
+      aria-hidden="false"
     >
-      <div
-        ref={dialogRef}
-        className="w-full max-w-[560px] max-h-[92vh] overflow-y-auto rounded-t-xl md:rounded-xl"
-        style={{
-          background: "var(--ivory)",
-          boxShadow: "var(--shadow-lg)",
-          animation: "slideUp 0.28s cubic-bezier(0.16,1,0.3,1)",
-        }}
-      >
+      <div className="modal" role="document">
         {/* Header */}
-        <div className="relative p-5" style={{ background: "var(--navy)", color: "var(--ivory)" }}>
-          <button
-            type="button"
-            onClick={onClose}
-            aria-label="Close"
-            className="absolute top-3 right-3 w-9 h-9 rounded-full inline-flex items-center justify-center text-2xl leading-none"
-            style={{ background: "rgba(255,255,255,0.1)" }}
-          >
+        <div className="modal-header">
+          <button type="button" className="modal-close" aria-label="Close" onClick={onClose}>
             ×
           </button>
-          <h2 id="modalTitle" className="font-serif text-[22px] leading-tight text-ivory mb-1">
-            Talk to a counsellor in 30 minutes
-          </h2>
-          <p className="text-sm m-0" style={{ color: "var(--yellow)" }}>
-            Free, no spam, no obligations.
-          </p>
-          {step < 3 && (
-            <div className="flex gap-1 mt-4">
-              {Array.from({ length: totalSteps }).map((_, i) => (
-                <span
-                  key={i}
-                  className="flex-1 h-1 rounded-sm transition-colors duration-200"
-                  style={{
-                    background: i < step ? "var(--yellow)" : "rgba(255,255,255,0.15)",
-                  }}
-                />
-              ))}
-            </div>
-          )}
+          <h2 id="modalTitle">Talk to a counsellor in 30 minutes</h2>
+          <p>Free, no spam, no obligations.</p>
         </div>
 
-        <div className="p-5">
-          {/* Step 1 */}
-          {step === 1 && (
-            <form onSubmit={(e) => { e.preventDefault(); handleNext(); }}>
-              <div className="form-field">
-                <label htmlFor="leadName">
-                  Full Name <span className="text-red-600">*</span>
-                </label>
-                <input
-                  ref={firstInputRef}
-                  id="leadName"
-                  type="text"
-                  value={data.name}
-                  onChange={(e) => handleChange("name", e.target.value)}
-                  placeholder="e.g. Priya Sharma"
-                  autoComplete="name"
-                />
-                {errors.name && <p className="text-red-600 text-xs mt-1">{errors.name}</p>}
+        {success ? (
+          /* Success state */
+          <div className="modal-body">
+            <div className="modal-step modal-success active">
+              <div className="modal-success-icon" aria-hidden="true">✓</div>
+              {isDuplicate ? (
+                <>
+                  <h2>Already received!</h2>
+                  <p>{DUPLICATE_MSG}</p>
+                </>
+              ) : (
+                <>
+                  <h2>Thanks, we&apos;ve got your enquiry.</h2>
+                  <p>A senior counsellor will call you within 30 minutes during working hours.</p>
+                  {enquiryId && <div className="enquiry-id">CNC-2026-{enquiryId}</div>}
+                  <p style={{ fontSize: 13 }}>
+                    We&apos;ve also sent a confirmation to your mobile.
+                  </p>
+                </>
+              )}
+            </div>
+          </div>
+        ) : (
+          /* Form */
+          <form className="modal-body" noValidate onSubmit={handleSubmit}>
+            <div className="modal-step active">
+              {/* Name + Mobile — 2 columns */}
+              <div className="form-field-row">
+                <div className="form-field">
+                  <label htmlFor="leadName">
+                    Name <span className="req">*</span>
+                  </label>
+                  <input
+                    ref={firstInputRef}
+                    type="text"
+                    id="leadName"
+                    name="name"
+                    autoComplete="name"
+                    placeholder="e.g. Priya Sharma"
+                    value={data.name}
+                    onChange={(e) => handleChange("name", e.target.value)}
+                  />
+                  {errors.name && <div className="hint" style={{ color: "#B83A2A" }}>{errors.name}</div>}
+                </div>
+                <div className="form-field">
+                  <label htmlFor="leadMobile">
+                    Mobile Number <span className="req">*</span>
+                  </label>
+                  <input
+                    type="tel"
+                    id="leadMobile"
+                    name="mobile"
+                    autoComplete="tel"
+                    placeholder="10-digit number"
+                    value={data.mobile}
+                    onChange={(e) =>
+                      handleChange("mobile", e.target.value.replace(/\D/g, "").slice(0, 10))
+                    }
+                  />
+                  {errors.mobile && <div className="hint" style={{ color: "#B83A2A" }}>{errors.mobile}</div>}
+                </div>
               </div>
-              <div className="form-field">
-                <label htmlFor="leadMobile">
-                  Mobile <span className="text-red-600">*</span>
-                </label>
-                <input
-                  id="leadMobile"
-                  type="tel"
-                  value={data.mobile}
-                  onChange={(e) => handleChange("mobile", e.target.value.replace(/\D/g, "").slice(0, 10))}
-                  placeholder="10-digit mobile number"
-                  autoComplete="tel"
-                />
-                {errors.mobile && <p className="text-red-600 text-xs mt-1">{errors.mobile}</p>}
-              </div>
-              <div className="form-field">
-                <label htmlFor="leadEmail">
-                  Email <span className="text-red-600">*</span>
-                </label>
-                <input
-                  id="leadEmail"
-                  type="email"
-                  value={data.email}
-                  onChange={(e) => handleChange("email", e.target.value)}
-                  placeholder="you@email.com"
-                  autoComplete="email"
-                />
-                {errors.email && <p className="text-red-600 text-xs mt-1">{errors.email}</p>}
-              </div>
-              <div className="form-field">
-                <label htmlFor="leadCity">
-                  City <span className="text-red-600">*</span>
-                </label>
-                <input
-                  id="leadCity"
-                  type="text"
-                  value={data.city}
-                  onChange={(e) => handleChange("city", e.target.value)}
-                  placeholder="e.g. Pune"
-                  autoComplete="address-level2"
-                />
-                {errors.city && <p className="text-red-600 text-xs mt-1">{errors.city}</p>}
-              </div>
-              <button type="submit" className="btn btn-primary w-full">
-                Next
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M5 12h14M13 5l7 7-7 7" />
-                </svg>
-              </button>
-            </form>
-          )}
 
-          {/* Step 2 */}
-          {step === 2 && (
-            <form onSubmit={handleSubmit}>
+              {/* Email + City — 2 columns */}
+              <div className="form-field-row">
+                <div className="form-field">
+                  <label htmlFor="leadEmail">
+                    Email Address <span className="req">*</span>
+                  </label>
+                  <input
+                    type="email"
+                    id="leadEmail"
+                    name="email"
+                    autoComplete="email"
+                    placeholder="you@email.com"
+                    value={data.email}
+                    onChange={(e) => handleChange("email", e.target.value)}
+                  />
+                  {errors.email && <div className="hint" style={{ color: "#B83A2A" }}>{errors.email}</div>}
+                </div>
+                <div className="form-field">
+                  <label htmlFor="leadCity">
+                    City <span className="req">*</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="leadCity"
+                    name="city"
+                    autoComplete="address-level2"
+                    placeholder="e.g. Pune"
+                    value={data.city}
+                    onChange={(e) => handleChange("city", e.target.value)}
+                  />
+                  {errors.city && <div className="hint" style={{ color: "#B83A2A" }}>{errors.city}</div>}
+                </div>
+              </div>
+
+              {/* Course Interested In — full width */}
               <div className="form-field">
-                <label htmlFor="leadCourse">Course Interested In</label>
+                <label htmlFor="leadCourse">
+                  Course Interested In <span className="req">*</span>
+                </label>
                 <select
                   id="leadCourse"
+                  name="courseInterested"
                   value={data.courseInterested}
                   onChange={(e) => handleChange("courseInterested", e.target.value)}
                 >
                   <option value="">Select a programme</option>
-                  <option value="Online MBA">Online MBA</option>
-                  <option value="Distance MBA">Distance MBA</option>
-                  <option value="Executive MBA">Executive MBA</option>
-                  <option value="MBA in Marketing">MBA in Marketing</option>
-                  <option value="MBA in Finance">MBA in Finance</option>
-                  <option value="MBA in HR">MBA in HR</option>
-                  <option value="MBA in Operations">MBA in Operations</option>
-                  <option value="MBA in IT & PM">MBA in IT & Project Management</option>
-                  <option value="MBA in Healthcare">MBA in Healthcare</option>
-                  <option value="Not sure yet">Not sure yet</option>
+                  <option>Online MBA</option>
+                  <option>Distance MBA</option>
+                  <option>Executive MBA</option>
+                  <option>MBA in Marketing</option>
+                  <option>MBA in Finance</option>
+                  <option>MBA in HR</option>
+                  <option>MBA in Operations</option>
+                  <option>MBA in IT &amp; Project Management</option>
+                  <option>MBA in Healthcare</option>
+                  <option>Design Programmes</option>
+                  <option>Not sure yet</option>
                 </select>
+                {errors.courseInterested && (
+                  <div className="hint" style={{ color: "#B83A2A" }}>{errors.courseInterested}</div>
+                )}
               </div>
 
-              <label className="flex gap-2 items-start text-xs text-[var(--grey)] mb-4 leading-relaxed">
+              {/* Consent */}
+              <label className="consent">
                 <input
                   type="checkbox"
+                  name="consent"
                   checked={data.consent}
                   onChange={(e) => handleChange("consent", e.target.checked)}
-                  className="mt-[3px] flex-none accent-[var(--navy)]"
                 />
                 <span>
-                  I accept the{" "}
-                  <a href="/terms-and-conditions" className="underline" style={{ color: "var(--navy)" }}>
+                  I Accept the{" "}
+                  <a href="/terms-and-conditions" style={{ color: "var(--navy)", textDecoration: "underline" }}>
                     Terms and Conditions
-                  </a>{" "}
-                  and agree to be contacted by CollegeNCourses about my enquiry.
+                  </a>
                 </span>
               </label>
-              {errors.consent && <p className="text-red-600 text-xs mb-4">{errors.consent}</p>}
-
-              <div className="flex gap-3 mt-4">
-                <button
-                  type="button"
-                  onClick={() => setStep(1)}
-                  className="text-[var(--grey)] font-medium text-sm"
-                >
-                  ← Back
-                </button>
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  className="btn btn-primary flex-1"
-                >
-                  {submitting ? "Submitting…" : "Submit My Enquiry"}
-                  {!submitting && (
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                      <path d="M5 12h14M13 5l7 7-7 7" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-            </form>
-          )}
-
-          {/* Step 3: Success or Duplicate */}
-          {step === 3 && (
-            <div className="text-center py-8">
-              <div
-                className="w-16 h-16 rounded-full flex items-center justify-center text-3xl font-bold mx-auto mb-4"
-                style={{ background: "var(--yellow)", color: "var(--navy)" }}
-              >
-                ✓
-              </div>
-              {isDuplicate ? (
-                <>
-                  <h2 className="font-serif text-2xl text-[var(--navy)] mb-3">
-                    Already received!
-                  </h2>
-                  <p className="text-[var(--grey)] text-[15px] mb-3">{DUPLICATE_MSG}</p>
-                </>
-              ) : (
-                <>
-                  <h2 className="font-serif text-2xl text-[var(--navy)] mb-3">
-                    Thanks, we&apos;ve got your enquiry.
-                  </h2>
-                  <p className="text-[var(--grey)] text-[15px] mb-3">
-                    A senior counsellor will call you within 30 minutes during working hours.
-                  </p>
-                  {enquiryId && (
-                    <span
-                      className="inline-block px-3 py-1.5 rounded-md font-bold text-sm tracking-wide mb-4"
-                      style={{ background: "var(--pale-navy)", color: "var(--navy)" }}
-                    >
-                      CNC-2026-{enquiryId}
-                    </span>
-                  )}
-                  <p className="text-xs text-[var(--grey)]">
-                    We&apos;ve sent a confirmation to your mobile.
-                  </p>
-                </>
+              {errors.consent && (
+                <div className="hint" style={{ color: "#B83A2A", marginBottom: 8 }}>
+                  {errors.consent}
+                </div>
               )}
-              <button
-                type="button"
-                onClick={onClose}
-                className="mt-6 btn btn-secondary text-sm"
-              >
-                Close
+
+              {/* Submit */}
+              <button type="submit" className="btn btn-primary" disabled={submitting} style={{ width: "100%", marginTop: 8 }}>
+                {submitting ? "Submitting…" : "Get Free Counselling"}{" "}
+                {!submitting && (
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M5 12h14M13 5l7 7-7 7" />
+                  </svg>
+                )}
               </button>
             </div>
-          )}
-        </div>
+          </form>
+        )}
       </div>
     </div>
   );

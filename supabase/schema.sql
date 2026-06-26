@@ -67,6 +67,7 @@ CREATE TRIGGER set_updated_at
 ALTER TABLE leads ENABLE ROW LEVEL SECURITY;
 
 -- Only service role (admin) can do anything; anon cannot read leads
+DROP POLICY IF EXISTS "service_role_all" ON leads;
 CREATE POLICY "service_role_all" ON leads
   FOR ALL
   TO service_role
@@ -74,6 +75,7 @@ CREATE POLICY "service_role_all" ON leads
   WITH CHECK (true);
 
 -- Allow anon INSERT (lead submission from website)
+DROP POLICY IF EXISTS "anon_insert" ON leads;
 CREATE POLICY "anon_insert" ON leads
   FOR INSERT
   TO anon
@@ -97,8 +99,10 @@ CREATE INDEX IF NOT EXISTS idx_events_created_at ON analytics_events (created_at
 
 ALTER TABLE analytics_events ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "service_role_all_events" ON analytics_events;
 CREATE POLICY "service_role_all_events" ON analytics_events
   FOR ALL TO service_role USING (true) WITH CHECK (true);
 
+DROP POLICY IF EXISTS "anon_insert_events" ON analytics_events;
 CREATE POLICY "anon_insert_events" ON analytics_events
   FOR INSERT TO anon WITH CHECK (true);
