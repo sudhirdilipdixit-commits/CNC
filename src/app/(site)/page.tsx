@@ -89,7 +89,7 @@ const websiteSchema = {
 };
 
 export default async function HomePage() {
-  const cmsData = await sanityFetch<Record<string, unknown>>({ query: homepageQuery, revalidate: 3600 }).catch(() => null);
+  const cmsData = await sanityFetch<Record<string, unknown>>({ query: homepageQuery, revalidate: 300 }).catch(() => null);
 
   return (
     <>
