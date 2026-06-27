@@ -1,36 +1,14 @@
 import { groq } from "next-sanity";
 
 export const homepageQuery = groq`*[_type == "homepage"][0]{
-  hero,
-  promise,
   sections[] {
     _type,
     _key,
-    // heroBlock
     eyebrow, headline, subheadline, primaryCTA, secondaryCTA, trustStrip,
-    // promiseBlock
     heading, body, pillars,
-    // programmesBlock / ctaBandBlock shared
     subheading, ctaText,
-    // blogBlock
     "posts": posts[]->{_id, title, slug, excerpt, tag, readTime, publishedAt},
-    // faqBlock
     "faqs": faqs[]->{_id, question, answer},
-  },
-  featuredProgrammes[]->{
-    _id, title, slug, mode, specialization, duration, feeMin, feeMax,
-    nextBatch, badge, isFeatured,
-    college->{name, logo, naacGrade}
-  },
-  testimonials[]->{
-    _id, name, role, company, quote, avatar, rating,
-    course->{title}
-  },
-  blogPosts[]->{
-    _id, title, slug, excerpt, coverImage, tag, readTime, publishedAt
-  },
-  faqs[]->{
-    _id, question, answer
   },
   seo
 }`;

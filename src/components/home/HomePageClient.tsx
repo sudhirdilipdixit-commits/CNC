@@ -36,7 +36,7 @@ export default function HomePageClient({ cmsData }: HomePageClientProps) {
         <PageBuilder sections={sections as never} onOpenLeadForm={openLeadForm} />
       ) : (
         <>
-          <HeroSection onOpenLeadForm={() => openLeadForm("hero")} hero={cmsData?.hero as never} />
+          <HeroSection onOpenLeadForm={() => openLeadForm("hero")} />
           <PromiseSection />
           <PathSection />
           <ProgrammesSection onOpenLeadForm={() => openLeadForm("programmes")} />
@@ -44,8 +44,8 @@ export default function HomePageClient({ cmsData }: HomePageClientProps) {
           <AICounsellorSection />
           <HowItWorksSection />
           <TrustStripSection />
-          <BlogSection blogPosts={cmsData?.blogPosts as never} />
-          <FAQSection faqs={cmsData?.faqs as never} />
+          <BlogSection />
+          <FAQSection />
           <CTABand onOpenLeadForm={() => openLeadForm("cta-band")} />
         </>
       )}
