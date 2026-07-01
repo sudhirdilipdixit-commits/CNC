@@ -62,7 +62,6 @@ export default function ContactForm() {
   const [form, setForm] = useState<FormData>(EMPTY);
   const [errors, setErrors] = useState<Partial<Record<keyof FormData, string>>>({});
   const [submitting, setSubmitting] = useState(false);
-  const [enquiryId, setEnquiryId] = useState<string | null>(null);
 
   const set = (k: keyof FormData, v: string | boolean) =>
     setForm((f) => ({ ...f, [k]: v }));
@@ -110,7 +109,10 @@ export default function ContactForm() {
       });
       const json = await res.json();
       if (res.ok) {
-        setEnquiryId(json.id || "XXXXX");
+        const id = `CNC-2026-${json.id || "XXXXX"}`;
+        const firstName = encodeURIComponent(form.name.trim().split(" ")[0]);
+        window.location.href = `/thank-you/?id=${encodeURIComponent(id)}&name=${firstName}&source=contact`;
+        return;
       } else {
         setErrors({ consent: json.error || "Something went wrong. Please try again." });
       }
@@ -119,40 +121,6 @@ export default function ContactForm() {
     } finally {
       setSubmitting(false);
     }
-  }
-
-  // ── Success state ──
-  if (enquiryId) {
-    return (
-      <div style={{ padding: "36px 28px", textAlign: "center" }}>
-        <div style={{
-          width: 64, height: 64, borderRadius: "50%",
-          background: "var(--yellow)", color: "var(--navy)",
-          display: "flex", alignItems: "center", justifyContent: "center",
-          margin: "0 auto 20px", fontSize: 28, fontWeight: 800,
-        }}>✓</div>
-        <div style={{
-          fontFamily: "var(--font-serif)", color: "var(--navy)",
-          fontSize: 24, marginBottom: 10,
-        }}>Thank you. We&apos;ve got your enquiry.</div>
-        <div style={{
-          display: "inline-block", background: "var(--pale-navy)",
-          color: "var(--navy)", padding: "7px 16px",
-          borderRadius: "var(--radius-md)", fontWeight: 700,
-          fontSize: 14, letterSpacing: "0.06em", margin: "10px 0 16px",
-        }}>
-          CNC-2026-{enquiryId}
-        </div>
-        <p style={{ color: "var(--grey)", fontSize: 14 }}>
-          A senior counsellor will call you within 30 minutes during working
-          hours. Confirmation sent by SMS and WhatsApp.
-        </p>
-        <a href="/" style={{
-          color: "var(--navy)", fontWeight: 600, fontSize: 14,
-          display: "inline-flex", alignItems: "center", gap: 6, marginTop: 12,
-        }}>← Back to homepage</a>
-      </div>
-    );
   }
 
   const dotStyle = (n: Step): React.CSSProperties => ({
