@@ -5,6 +5,9 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { blogListQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 
+// Always fetch fresh data — blog index should never serve stale posts
+export const dynamic = "force-dynamic";
+
 export const metadata: Metadata = {
   title: "Blog | CollegeNCourses",
   description:
@@ -35,7 +38,7 @@ function formatDate(iso?: string) {
 export default async function BlogIndexPage() {
   const posts = await sanityFetch<BlogPost[]>({
     query: blogListQuery,
-    revalidate: 1800,
+    revalidate: 0,
   });
 
   return (
