@@ -71,6 +71,10 @@ export const seoSettingsQuery = groq`*[_type == "seoSettings"][0]{
   googleSiteVerification, gaTrackingId
 }`;
 
+export const relatedBlogPostsQuery = groq`*[_type == "blog" && slug.current != $slug] | order(publishedAt desc)[0...3]{
+  _id, title, slug, excerpt, coverImage, tag, readTime, publishedAt
+}`;
+
 export const allBlogSlugsQuery = groq`*[_type == "blog"]{ "slug": slug.current }`;
 export const allCollegeSlugsQuery = groq`*[_type == "college"]{ "slug": slug.current }`;
 export const allCourseSlugsQuery = groq`*[_type == "course"]{ "slug": slug.current }`;
