@@ -256,8 +256,8 @@ export default function LandingPageClient({
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [defaultCourse, setDefaultCourse] = useState("");
-  const [activeModes, setActiveModes] = useState<Set<string>>(new Set());
-  const [activeDurations, setActiveDurations] = useState<Set<string>>(new Set());
+  const [activeMode, setActiveMode] = useState<string | null>(null);
+  const [activeDuration, setActiveDuration] = useState<string | null>(null);
   const [activeFeeCategory, setActiveFeeCategory] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
@@ -283,18 +283,15 @@ export default function LandingPageClient({
     return order.filter((c) => seen.has(c));
   }, [allItems]);
 
-  const anyFilterActive = activeModes.size > 0 || activeDurations.size > 0 || activeFeeCategory !== null;
+  const anyFilterActive = activeMode !== null || activeDuration !== null || activeFeeCategory !== null;
 
   const filtered = useMemo(() => {
     let items = allItems;
-    if (activeModes.size > 0)
-      items = items.filter((i) => i.mode && activeModes.has(i.mode));
-    if (activeDurations.size > 0)
-      items = items.filter((i) => i.duration && activeDurations.has(i.duration));
-    if (activeFeeCategory)
-      items = items.filter((i) => i.feeCategory === activeFeeCategory);
+    if (activeMode) items = items.filter((i) => i.mode === activeMode);
+    if (activeDuration) items = items.filter((i) => i.duration === activeDuration);
+    if (activeFeeCategory) items = items.filter((i) => i.feeCategory === activeFeeCategory);
     return items;
-  }, [allItems, activeModes, activeDurations, activeFeeCategory]);
+  }, [allItems, activeMode, activeDuration, activeFeeCategory]);
 
   const visible = filtered.slice(0, visibleCount);
   const hasMore = visibleCount < filtered.length;
@@ -305,20 +302,12 @@ export default function LandingPageClient({
   }, []);
 
   const toggleMode = useCallback((mode: string) => {
-    setActiveModes((prev) => {
-      const next = new Set(prev);
-      next.has(mode) ? next.delete(mode) : next.add(mode);
-      return next;
-    });
+    setActiveMode((prev) => (prev === mode ? null : mode));
     setVisibleCount(INITIAL_COUNT);
   }, []);
 
   const toggleDuration = useCallback((dur: string) => {
-    setActiveDurations((prev) => {
-      const next = new Set(prev);
-      next.has(dur) ? next.delete(dur) : next.add(dur);
-      return next;
-    });
+    setActiveDuration((prev) => (prev === dur ? null : dur));
     setVisibleCount(INITIAL_COUNT);
   }, []);
 
@@ -328,8 +317,8 @@ export default function LandingPageClient({
   }, []);
 
   const clearFilters = useCallback(() => {
-    setActiveModes(new Set());
-    setActiveDurations(new Set());
+    setActiveMode(null);
+    setActiveDuration(null);
     setActiveFeeCategory(null);
     setVisibleCount(INITIAL_COUNT);
   }, []);
@@ -408,13 +397,20 @@ export default function LandingPageClient({
                       {allModes.map((mode) => (
                         <label key={mode} className="lp-filter-check">
                           <input
-                            type="checkbox"
-                            checked={activeModes.has(mode)}
+                            type="radio"
+                            name="lp-mode-radio"
+                            checked={activeMode === mode}
                             onChange={() => toggleMode(mode)}
                           />
                           <span>{mode}</span>
                         </label>
                       ))}
+                      {activeMode && (
+                        <button className="lp-filter-clear-link" style={{ marginTop: 4 }}
+                          onClick={() => { setActiveMode(null); setVisibleCount(INITIAL_COUNT); }}>
+                          Clear ×
+                        </button>
+                      )}
                     </div>
                   )}
 
@@ -425,13 +421,20 @@ export default function LandingPageClient({
                       {allDurations.map((dur) => (
                         <label key={dur} className="lp-filter-check">
                           <input
-                            type="checkbox"
-                            checked={activeDurations.has(dur)}
+                            type="radio"
+                            name="lp-duration-radio"
+                            checked={activeDuration === dur}
                             onChange={() => toggleDuration(dur)}
                           />
                           <span>{dur}</span>
                         </label>
                       ))}
+                      {activeDuration && (
+                        <button className="lp-filter-clear-link" style={{ marginTop: 4 }}
+                          onClick={() => { setActiveDuration(null); setVisibleCount(INITIAL_COUNT); }}>
+                          Clear ×
+                        </button>
+                      )}
                     </div>
                   )}
 
