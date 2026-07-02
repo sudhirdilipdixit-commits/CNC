@@ -104,8 +104,8 @@ function CourseCard({ item, onCta }: { item: CourseCardItem; onCta: (name: strin
           <Image
             src={item.universityLogoUrl}
             alt={item.universityName || item.courseName}
-            width={80}
-            height={80}
+            width={243}
+            height={100}
             className="lp-card-logo"
           />
         ) : (
@@ -170,8 +170,8 @@ function UniversityCard({ item, onCta }: { item: UniversityCardItem; onCta: (nam
           <Image
             src={item.universityLogoUrl}
             alt={item.universityName}
-            width={80}
-            height={80}
+            width={243}
+            height={100}
             className="lp-card-logo"
           />
         ) : (
@@ -670,8 +670,8 @@ export default function LandingPageClient({
         .lp-card--featured { border-top-color: var(--yellow); }
         .lp-card-badge { position: absolute; top: 12px; right: 12px; background: var(--yellow); color: var(--navy); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
         .lp-card-head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding-bottom: 4px; }
-        .lp-card-logo { width: 80px; height: 80px; object-fit: contain; border: 1px solid var(--mist); border-radius: 10px; background: var(--ivory); }
-        .lp-card-logo-ph { width: 80px; height: 80px; border-radius: 10px; background: var(--navy); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; font-family: var(--font-serif); }
+        .lp-card-logo { width: 243px; max-width: 100%; height: 100px; object-fit: contain; border: 1px solid var(--mist); border-radius: 10px; background: var(--ivory); padding: 8px; }
+        .lp-card-logo-ph { width: 243px; max-width: 100%; height: 100px; border-radius: 10px; background: var(--navy); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 800; font-family: var(--font-serif); }
         .lp-card-name { font-family: var(--font-serif); font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--navy); margin-bottom: 0; }
         .lp-card-sub { font-size: 12px; color: var(--grey); margin-bottom: 0; }
         .lp-mode-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: var(--mist); color: var(--navy); padding: 2px 8px; border-radius: 999px; }
