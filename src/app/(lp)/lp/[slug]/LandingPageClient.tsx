@@ -15,6 +15,7 @@ export interface CourseCardItem {
   mode?: string;
   duration?: string;
   fees?: string;
+  feeCategory?: string;
   eligibility?: string;
   badge?: string;
   isFeatured?: boolean;
@@ -28,10 +29,13 @@ export interface UniversityCardItem {
   duration?: string;
   approvedBy?: string[];
   fees?: string;
+  feeCategory?: string;
   eligibility?: string;
   badge?: string;
   isFeatured?: boolean;
 }
+
+type AnyCardItem = CourseCardItem | UniversityCardItem;
 
 export interface LandingPageData {
   title: string;
@@ -95,7 +99,6 @@ function CourseCard({ item, onCta }: { item: CourseCardItem; onCta: (name: strin
   return (
     <article className={`lp-card${item.isFeatured ? " lp-card--featured" : ""}`}>
       {item.badge && <span className="lp-card-badge">{item.badge}</span>}
-
       <div className="lp-card-head">
         {item.universityLogoUrl ? (
           <Image
@@ -164,7 +167,6 @@ function UniversityCard({ item, onCta }: { item: UniversityCardItem; onCta: (nam
   return (
     <article className={`lp-card${item.isFeatured ? " lp-card--featured" : ""}`}>
       {item.badge && <span className="lp-card-badge">{item.badge}</span>}
-
       <div className="lp-card-head">
         {item.universityLogoUrl ? (
           <Image
@@ -258,28 +260,45 @@ export default function LandingPageClient({
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [defaultCourse, setDefaultCourse] = useState("");
-  const [activeMode, setActiveMode] = useState<string | null>(null);
+  const [activeModes, setActiveModes] = useState<Set<string>>(new Set());
+  const [activeDurations, setActiveDurations] = useState<Set<string>>(new Set());
+  const [activeFeeCategory, setActiveFeeCategory] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
   const pageType: "course" | "university" =
     data.pageType ?? (data.courseItems?.length ? "course" : "university");
 
-  const allItems: (CourseCardItem | UniversityCardItem)[] =
+  const allItems: AnyCardItem[] =
     pageType === "course" ? (data.courseItems ?? []) : (data.universityItems ?? []);
 
-  const fc = data.filterConfig ?? {};
-
+  // Extract unique filter values from all items (always from full list)
   const allModes = useMemo(
-    () => [...new Set(allItems.map((i) => i.mode).filter(Boolean) as string[])],
+    () => [...new Set(allItems.map((i) => i.mode).filter(Boolean) as string[])].sort(),
     [allItems]
   );
+  const allDurations = useMemo(
+    () => [...new Set(allItems.map((i) => i.duration).filter(Boolean) as string[])].sort(),
+    [allItems]
+  );
+  const allFeeCategories = useMemo(() => {
+    const seen = new Set<string>();
+    allItems.forEach((i) => { if (i.feeCategory) seen.add(i.feeCategory); });
+    const order = ["Under ₹1L", "₹1L – ₹2L", "₹2L – ₹3L", "₹3L – ₹5L", "₹5L+"];
+    return order.filter((c) => seen.has(c));
+  }, [allItems]);
 
-  const showModeFilter = fc.showMode !== false && allModes.length > 1;
+  const anyFilterActive = activeModes.size > 0 || activeDurations.size > 0 || activeFeeCategory !== null;
 
   const filtered = useMemo(() => {
-    if (!activeMode) return allItems;
-    return allItems.filter((i) => i.mode === activeMode);
-  }, [allItems, activeMode]);
+    let items = allItems;
+    if (activeModes.size > 0)
+      items = items.filter((i) => i.mode && activeModes.has(i.mode));
+    if (activeDurations.size > 0)
+      items = items.filter((i) => i.duration && activeDurations.has(i.duration));
+    if (activeFeeCategory)
+      items = items.filter((i) => i.feeCategory === activeFeeCategory);
+    return items;
+  }, [allItems, activeModes, activeDurations, activeFeeCategory]);
 
   const visible = filtered.slice(0, visibleCount);
   const hasMore = visibleCount < filtered.length;
@@ -289,8 +308,33 @@ export default function LandingPageClient({
     setModalOpen(true);
   }, []);
 
-  const handleModeToggle = useCallback((mode: string) => {
-    setActiveMode((prev) => (prev === mode ? null : mode));
+  const toggleMode = useCallback((mode: string) => {
+    setActiveModes((prev) => {
+      const next = new Set(prev);
+      next.has(mode) ? next.delete(mode) : next.add(mode);
+      return next;
+    });
+    setVisibleCount(INITIAL_COUNT);
+  }, []);
+
+  const toggleDuration = useCallback((dur: string) => {
+    setActiveDurations((prev) => {
+      const next = new Set(prev);
+      next.has(dur) ? next.delete(dur) : next.add(dur);
+      return next;
+    });
+    setVisibleCount(INITIAL_COUNT);
+  }, []);
+
+  const toggleFeeCategory = useCallback((cat: string) => {
+    setActiveFeeCategory((prev) => (prev === cat ? null : cat));
+    setVisibleCount(INITIAL_COUNT);
+  }, []);
+
+  const clearFilters = useCallback(() => {
+    setActiveModes(new Set());
+    setActiveDurations(new Set());
+    setActiveFeeCategory(null);
     setVisibleCount(INITIAL_COUNT);
   }, []);
 
@@ -341,41 +385,96 @@ export default function LandingPageClient({
         </div>
       </div>
 
-      {/* Mode filter chips */}
-      {showModeFilter && (
-        <div className="lp-filter-bar">
-          <div className="container">
-            <div className="lp-filter-row">
-              <span className="lp-filter-label">Mode</span>
-              {allModes.map((mode) => (
-                <button
-                  key={mode}
-                  className={`lp-chip${activeMode === mode ? " lp-chip-active" : ""}`}
-                  onClick={() => handleModeToggle(mode)}
-                  aria-pressed={activeMode === mode}
-                >
-                  {mode}
-                </button>
-              ))}
-              {activeMode && (
-                <button
-                  className="lp-clear-btn"
-                  onClick={() => { setActiveMode(null); setVisibleCount(INITIAL_COUNT); }}
-                >
-                  Clear ×
-                </button>
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
       {/* Main layout */}
       <div className="lp-main">
         <div className="container">
           <div className="lp-layout">
-            {/* Sidebar */}
-            <aside className="lp-sidebar" aria-label="Quick counselling">
+
+            {/* ── Left sidebar ─────────────────────────────────── */}
+            <aside className="lp-sidebar" aria-label="Filters">
+
+              {/* Filter sections */}
+              {(allModes.length > 0 || allDurations.length > 0 || allFeeCategories.length > 0) && (
+                <div className="lp-filter-panel">
+                  <div className="lp-filter-panel-head">
+                    <span className="lp-filter-panel-title">Filters</span>
+                    {anyFilterActive && (
+                      <button className="lp-filter-clear-link" onClick={clearFilters}>
+                        Clear all
+                      </button>
+                    )}
+                  </div>
+
+                  {/* Mode */}
+                  {allModes.length > 0 && (
+                    <div className="lp-filter-section">
+                      <h4 className="lp-filter-heading">Mode</h4>
+                      {allModes.map((mode) => (
+                        <label key={mode} className="lp-filter-check">
+                          <input
+                            type="checkbox"
+                            checked={activeModes.has(mode)}
+                            onChange={() => toggleMode(mode)}
+                          />
+                          <span>{mode}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Duration */}
+                  {allDurations.length > 0 && (
+                    <div className="lp-filter-section">
+                      <h4 className="lp-filter-heading">Duration</h4>
+                      {allDurations.map((dur) => (
+                        <label key={dur} className="lp-filter-check">
+                          <input
+                            type="checkbox"
+                            checked={activeDurations.has(dur)}
+                            onChange={() => toggleDuration(dur)}
+                          />
+                          <span>{dur}</span>
+                        </label>
+                      ))}
+                    </div>
+                  )}
+
+                  {/* Fee Range */}
+                  {allFeeCategories.length > 0 && (
+                    <div className="lp-filter-section">
+                      <h4 className="lp-filter-heading">Fee Range</h4>
+                      {allFeeCategories.map((cat) => (
+                        <label key={cat} className="lp-filter-check">
+                          <input
+                            type="radio"
+                            name="lp-fee-radio"
+                            checked={activeFeeCategory === cat}
+                            onChange={() => toggleFeeCategory(cat)}
+                          />
+                          <span>{cat}</span>
+                        </label>
+                      ))}
+                      {activeFeeCategory && (
+                        <button
+                          className="lp-filter-clear-link"
+                          style={{ marginTop: 4 }}
+                          onClick={() => { setActiveFeeCategory(null); setVisibleCount(INITIAL_COUNT); }}
+                        >
+                          Clear ×
+                        </button>
+                      )}
+                    </div>
+                  )}
+
+                  {anyFilterActive && (
+                    <button className="lp-filter-clear-btn" onClick={clearFilters}>
+                      Clear All Filters
+                    </button>
+                  )}
+                </div>
+              )}
+
+              {/* Counselling CTA */}
               {data.sidebarForm?.show !== false && (
                 <div className="lp-sidebar-cta">
                   <h4>{data.sidebarForm?.heading || "Need help choosing?"}</h4>
@@ -395,25 +494,22 @@ export default function LandingPageClient({
               )}
             </aside>
 
-            {/* Cards */}
+            {/* ── Cards area ───────────────────────────────────── */}
             <div className="lp-content">
               <div className="lp-results-header">
                 <p className="lp-results-count">
                   Showing <strong>{Math.min(visibleCount, filtered.length)}</strong> of{" "}
                   <strong>{filtered.length}</strong>{" "}
                   {filtered.length === 1 ? itemLabel : itemLabelPlural}
-                  {activeMode ? ` · ${activeMode}` : ""}
+                  {anyFilterActive && <span className="lp-filter-tag"> · filtered</span>}
                 </p>
               </div>
 
               {filtered.length === 0 ? (
                 <div className="lp-empty">
-                  <p>No results for &ldquo;{activeMode}&rdquo;.</p>
-                  <button
-                    className="btn btn-secondary btn-sm"
-                    onClick={() => setActiveMode(null)}
-                  >
-                    Clear Filter
+                  <p>No results match the selected filters.</p>
+                  <button className="btn btn-secondary btn-sm" onClick={clearFilters}>
+                    Clear All Filters
                   </button>
                 </div>
               ) : (
@@ -507,10 +603,10 @@ export default function LandingPageClient({
       />
 
       <style>{`
-        /* Urgency bar */
+        /* ── Urgency bar ── */
         .lp-urgency-bar { background: var(--yellow); color: var(--navy); font-size: 14px; font-weight: 600; text-align: center; padding: 10px 16px; border-bottom: 2px solid rgba(36,48,72,.15); }
 
-        /* Stripped header */
+        /* ── Stripped header ── */
         .lp-header { background: rgba(250,247,242,.97); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid var(--mist); position: sticky; top: 0; z-index: 100; }
         .lp-header-inner { display: flex; align-items: center; justify-content: space-between; height: 64px; gap: 16px; }
         .lp-logo { display: block; }
@@ -518,7 +614,7 @@ export default function LandingPageClient({
         .lp-phone { display: none; font-size: 13px; font-weight: 600; color: var(--navy); border: 1px solid var(--pale-navy); padding: 6px 12px; border-radius: 8px; text-decoration: none; align-items: center; gap: 6px; }
         @media (min-width: 768px) { .lp-phone { display: flex; } }
 
-        /* Hero */
+        /* ── Hero ── */
         .lp-hero { background: var(--navy); padding: 56px 0 48px; }
         .lp-eyebrow { color: var(--yellow) !important; margin-bottom: 12px; }
         .lp-h1 { font-family: var(--font-serif); color: var(--ivory); font-size: clamp(28px, 4.5vw, 52px); line-height: 1.1; margin: 0 0 16px; }
@@ -529,81 +625,83 @@ export default function LandingPageClient({
         .lp-trust-strip { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 20px; font-size: 13px; color: var(--pale-navy); }
         .lp-trust-bullet { color: var(--yellow); font-weight: 700; margin-right: 3px; }
 
-        /* Mode filter bar */
-        .lp-filter-bar { background: var(--white); border-bottom: 2px solid var(--mist); position: sticky; top: 64px; z-index: 90; box-shadow: 0 1px 3px rgba(36,48,72,.06); padding: 10px 0; }
-        .lp-filter-row { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; }
-        .lp-filter-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--grey); white-space: nowrap; }
-        .lp-chip { padding: 5px 13px; font-size: 12px; font-weight: 500; border: 1.5px solid var(--pale-navy); border-radius: 999px; color: var(--navy); background: var(--white); white-space: nowrap; cursor: pointer; transition: all .15s; font-family: var(--font-sans); }
-        .lp-chip:hover { border-color: var(--navy); }
-        .lp-chip-active { background: var(--navy); color: var(--ivory); border-color: var(--navy); }
-        .lp-clear-btn { color: var(--navy); font-size: 13px; font-weight: 600; text-decoration: underline; cursor: pointer; background: none; border: none; font-family: var(--font-sans); padding: 0; }
-
-        /* Main */
+        /* ── Main layout ── */
         .lp-main { padding: 28px 0 64px; }
         .lp-layout { display: grid; grid-template-columns: 1fr; gap: 24px; }
-        @media (min-width: 1024px) { .lp-layout { grid-template-columns: 220px 1fr; gap: 32px; align-items: start; } }
+        @media (min-width: 1024px) { .lp-layout { grid-template-columns: 240px 1fr; gap: 32px; align-items: start; } }
 
-        /* Sidebar */
+        /* ── Sidebar ── */
         .lp-sidebar { display: none; }
-        @media (min-width: 1024px) { .lp-sidebar { display: block; position: sticky; top: 100px; max-height: calc(100vh - 120px); overflow-y: auto; } }
-        .lp-sidebar-cta { background: var(--navy); border-radius: 12px; padding: 20px; }
+        @media (min-width: 1024px) {
+          .lp-sidebar { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 80px; max-height: calc(100vh - 96px); overflow-y: auto; }
+        }
+
+        /* Filter panel */
+        .lp-filter-panel { background: var(--white); border: 1px solid var(--mist); border-radius: 10px; overflow: hidden; }
+        .lp-filter-panel-head { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; border-bottom: 1px solid var(--mist); background: var(--ivory); }
+        .lp-filter-panel-title { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--navy); }
+        .lp-filter-clear-link { background: none; border: none; font-size: 12px; font-weight: 600; color: var(--grey); text-decoration: underline; cursor: pointer; font-family: var(--font-sans); padding: 0; }
+        .lp-filter-clear-link:hover { color: var(--navy); }
+        .lp-filter-section { padding: 14px 16px; border-bottom: 1px solid var(--mist); }
+        .lp-filter-section:last-of-type { border-bottom: none; }
+        .lp-filter-heading { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); margin-bottom: 10px; }
+        .lp-filter-check { display: flex; gap: 8px; align-items: center; font-size: 13px; color: var(--charcoal); cursor: pointer; margin-bottom: 7px; line-height: 1.3; }
+        .lp-filter-check:last-child { margin-bottom: 0; }
+        .lp-filter-check input { accent-color: var(--navy); width: 14px; height: 14px; flex: 0 0 14px; cursor: pointer; }
+        .lp-filter-clear-btn { display: block; width: calc(100% - 32px); margin: 12px 16px; padding: 9px; background: none; border: 1.5px solid var(--pale-navy); border-radius: 7px; color: var(--navy); font-size: 13px; font-weight: 600; font-family: var(--font-sans); cursor: pointer; text-align: center; transition: border-color .15s, background .15s; }
+        .lp-filter-clear-btn:hover { border-color: var(--navy); background: var(--mist); }
+
+        /* Sidebar CTA */
+        .lp-sidebar-cta { background: var(--navy); border-radius: 10px; padding: 20px; }
         .lp-sidebar-cta h4 { font-family: var(--font-serif); color: var(--yellow); font-size: 17px; margin-bottom: 8px; line-height: 1.2; }
         .lp-sidebar-cta p { color: var(--pale-navy); font-size: 13px; margin-bottom: 14px; line-height: 1.5; }
         .lp-sidebar-note { font-size: 11px; color: rgba(255,255,255,.4); text-align: center; margin-top: 8px; margin-bottom: 0; }
 
-        /* Results */
+        /* ── Results ── */
         .lp-results-header { margin-bottom: 14px; }
         .lp-results-count { font-size: 14px; color: var(--grey); }
         .lp-results-count strong { color: var(--navy); }
+        .lp-filter-tag { color: var(--navy); font-weight: 600; }
 
-        /* Card grid */
+        /* ── Card grid — 1 col → 2 col → 3 col ── */
         .lp-card-grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-        @media (min-width: 540px) { .lp-card-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 640px) { .lp-card-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1280px) { .lp-card-grid { grid-template-columns: repeat(3, 1fr); } }
 
-        /* Card base */
+        /* ── Card ── */
         .lp-card { background: var(--white); border: 1px solid var(--mist); border-top: 4px solid var(--mist); border-radius: 10px; display: flex; flex-direction: column; gap: 12px; padding: 16px; position: relative; transition: box-shadow .18s, transform .18s; }
         .lp-card:hover { box-shadow: 0 4px 18px rgba(36,48,72,.1); transform: translateY(-2px); }
         .lp-card--featured { border-top-color: var(--yellow); }
-
-        /* Badge */
         .lp-card-badge { position: absolute; top: 12px; right: 12px; background: var(--yellow); color: var(--navy); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
-
-        /* Card header */
         .lp-card-head { display: flex; gap: 12px; align-items: flex-start; }
         .lp-card-logo { width: 48px; height: 48px; flex: 0 0 48px; object-fit: contain; border: 1px solid var(--mist); border-radius: 6px; background: var(--ivory); }
         .lp-card-logo-ph { width: 48px; height: 48px; flex: 0 0 48px; border-radius: 6px; background: var(--navy); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; font-family: var(--font-serif); }
         .lp-card-titles { flex: 1; min-width: 0; }
-        .lp-card-name { font-family: var(--font-serif); font-size: 16px; font-weight: 700; line-height: 1.3; color: var(--navy); margin-bottom: 4px; padding-right: 52px; }
-        .lp-card-sub { font-size: 13px; color: var(--grey); margin-bottom: 4px; }
+        .lp-card-name { font-family: var(--font-serif); font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--navy); margin-bottom: 4px; padding-right: 52px; }
+        .lp-card-sub { font-size: 12px; color: var(--grey); margin-bottom: 4px; }
         .lp-mode-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: var(--mist); color: var(--navy); padding: 2px 8px; border-radius: 999px; }
-
-        /* Meta grid */
         .lp-card-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 0; border-top: 1px solid var(--mist); border-bottom: 1px solid var(--mist); }
         .lp-meta-cell { display: flex; flex-direction: column; gap: 2px; }
         .lp-meta-label { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
         .lp-meta-val { font-size: 13px; font-weight: 700; color: var(--navy); }
-
-        /* Info rows */
-        .lp-card-info-row { font-size: 13px; color: var(--charcoal); line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
-
-        /* Actions */
+        .lp-card-info-row { font-size: 12px; color: var(--charcoal); line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
         .lp-card-actions { display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 2px; }
-        .lp-card-sec-row { display: flex; gap: 8px; }
-        .lp-btn-primary-full { width: 100%; background: var(--yellow); color: var(--navy); border: 2px solid var(--navy); border-radius: 8px; font-size: 13px; font-weight: 700; font-family: var(--font-sans); padding: 10px 16px; cursor: pointer; transition: background .15s; text-align: center; }
+        .lp-card-sec-row { display: flex; gap: 6px; }
+        .lp-btn-primary-full { width: 100%; background: var(--yellow); color: var(--navy); border: 2px solid var(--navy); border-radius: 8px; font-size: 13px; font-weight: 700; font-family: var(--font-sans); padding: 9px 16px; cursor: pointer; transition: background .15s; text-align: center; }
         .lp-btn-primary-full:hover { background: #e6b800; }
-        .lp-btn-primary-half { flex: 1; background: var(--yellow); color: var(--navy); border: 2px solid var(--navy); border-radius: 8px; font-size: 13px; font-weight: 700; font-family: var(--font-sans); padding: 10px 12px; cursor: pointer; transition: background .15s; text-align: center; }
+        .lp-btn-primary-half { flex: 1; background: var(--yellow); color: var(--navy); border: 2px solid var(--navy); border-radius: 8px; font-size: 12px; font-weight: 700; font-family: var(--font-sans); padding: 9px 10px; cursor: pointer; transition: background .15s; text-align: center; }
         .lp-btn-primary-half:hover { background: #e6b800; }
-        .lp-btn-secondary { flex: 1; background: var(--white); color: var(--navy); border: 1.5px solid var(--pale-navy); border-radius: 8px; font-size: 13px; font-weight: 600; font-family: var(--font-sans); padding: 10px 10px; cursor: pointer; transition: border-color .15s, background .15s; text-align: center; }
+        .lp-btn-secondary { flex: 1; background: var(--white); color: var(--navy); border: 1.5px solid var(--pale-navy); border-radius: 8px; font-size: 12px; font-weight: 600; font-family: var(--font-sans); padding: 9px 8px; cursor: pointer; transition: border-color .15s, background .15s; text-align: center; }
         .lp-btn-secondary:hover { border-color: var(--navy); background: var(--ivory); }
 
-        /* Empty */
+        /* ── Empty ── */
         .lp-empty { text-align: center; padding: 64px 0; color: var(--grey); }
         .lp-empty p { font-size: 16px; margin-bottom: 16px; }
 
-        /* Load more */
+        /* ── Load more ── */
         .lp-load-more { text-align: center; margin-top: 36px; }
 
-        /* FAQ */
+        /* ── FAQ ── */
         .lp-faq-section { background: var(--white); padding: 56px 0; border-top: 1px solid var(--mist); }
         .lp-faq-heading { font-family: var(--font-serif); color: var(--navy); font-size: clamp(22px, 3vw, 34px); text-align: center; margin: 10px 0 32px; }
         .lp-faq-list { max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 10px; }
@@ -615,12 +713,12 @@ export default function LandingPageClient({
         .lp-faq-item[open] .lp-faq-icon { transform: rotate(45deg); }
         .lp-faq-a { padding: 0 18px 18px; font-size: 14px; color: var(--charcoal); line-height: 1.65; }
 
-        /* CTA band */
+        /* ── CTA band ── */
         .lp-cta-band { background: var(--yellow); padding: 56px 0; border-top: 4px solid var(--navy); }
         .lp-cta-band-headline { font-family: var(--font-serif); color: var(--navy); font-size: clamp(22px, 3.5vw, 34px); margin-bottom: 12px; line-height: 1.15; }
         .lp-cta-band-body { color: var(--navy); font-size: 16px; margin-bottom: 24px; line-height: 1.6; }
 
-        /* Mobile sticky bar */
+        /* ── Mobile sticky bar ── */
         .lp-mobile-bar { position: fixed; bottom: 0; left: 0; right: 0; background: var(--white); border-top: 1px solid var(--mist); box-shadow: 0 -4px 16px rgba(36,48,72,.08); z-index: 50; display: flex; align-items: stretch; height: 60px; padding: 6px; gap: 6px; }
         @media (min-width: 1024px) { .lp-mobile-bar { display: none; } }
         .lp-mb-call, .lp-mb-whatsapp { display: inline-flex; align-items: center; justify-content: center; border-radius: 8px; width: 48px; flex: 0 0 48px; text-decoration: none; }
@@ -628,7 +726,7 @@ export default function LandingPageClient({
         .lp-mb-whatsapp { background: #25D366; color: white; }
         .lp-mb-cta { background: var(--yellow); color: var(--navy); border-top: 3px solid var(--navy); flex: 1; font-weight: 700; font-size: 13px; font-family: var(--font-sans); border-radius: 8px; border-left: none; border-right: none; border-bottom: none; cursor: pointer; }
 
-        /* Body bottom padding for mobile bar */
+        /* Body padding for mobile bar */
         body { padding-bottom: 60px; }
         @media (min-width: 1024px) { body { padding-bottom: 0; } }
       `}</style>

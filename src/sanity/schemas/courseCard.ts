@@ -49,9 +49,20 @@ export default defineType({
     }),
     defineField({
       name: "fees",
-      title: "Fees",
+      title: "Fees (display)",
       type: "string",
-      description: "e.g. '₹80,000 – ₹1,20,000' or '₹1,50,000/year'",
+      description: "Shown on the card — e.g. '₹80,000 – ₹1,20,000'",
+    }),
+    defineField({
+      name: "feeCategory",
+      title: "Fee Range (for filter)",
+      type: "string",
+      options: {
+        list: ["Under ₹1L", "₹1L – ₹2L", "₹2L – ₹3L", "₹3L – ₹5L", "₹5L+"],
+        layout: "radio",
+        direction: "horizontal",
+      },
+      description: "Used to power the fee filter on landing pages.",
     }),
     defineField({
       name: "eligibility",
