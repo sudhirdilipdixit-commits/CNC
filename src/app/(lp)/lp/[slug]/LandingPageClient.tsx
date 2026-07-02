@@ -115,7 +115,7 @@ function CompareModal({
                     <th key={item._id} className="lp-cmp-th">
                       {item.universityLogoUrl ? (
                         <Image src={item.universityLogoUrl} alt={item.universityName || item.courseName}
-                          width={120} height={50} className="lp-cmp-logo" />
+                          width={200} height={90} className="lp-cmp-logo" />
                       ) : (
                         <div className="lp-cmp-logo-ph">{(item.universityName || item.courseName).charAt(0)}</div>
                       )}
@@ -942,8 +942,8 @@ export default function LandingPageClient({
         .lp-cmp-table { width: 100%; border-collapse: collapse; }
         .lp-cmp-th { padding: 20px 16px 16px; text-align: center; vertical-align: top; border-bottom: 2px solid var(--mist); min-width: 180px; background: var(--ivory); }
         .lp-cmp-th-label { min-width: 100px; max-width: 110px; background: var(--ivory); }
-        .lp-cmp-logo { object-fit: contain; height: 50px; width: auto; max-width: 120px; border: 1px solid var(--mist); border-radius: 8px; background: var(--white); padding: 4px; }
-        .lp-cmp-logo-ph { width: 72px; height: 50px; border-radius: 8px; background: var(--navy); color: var(--yellow); font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-family: var(--font-serif); }
+        .lp-cmp-logo { display: block; margin: 0 auto; width: 100%; max-width: 200px; height: 90px; object-fit: contain; border: 1px solid var(--mist); border-radius: 10px; background: var(--white); padding: 8px; }
+        .lp-cmp-logo-ph { width: 100%; max-width: 200px; height: 90px; border-radius: 10px; background: var(--navy); color: var(--yellow); font-size: 32px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-family: var(--font-serif); }
         .lp-cmp-course-name { font-family: var(--font-serif); font-size: 14px; font-weight: 700; color: var(--navy); margin-top: 10px; line-height: 1.3; }
         .lp-cmp-row { border-bottom: 1px solid var(--mist); }
         .lp-cmp-row:last-child { border-bottom: none; }
