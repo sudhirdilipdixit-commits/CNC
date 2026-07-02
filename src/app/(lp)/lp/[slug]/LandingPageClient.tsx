@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo, useCallback } from "react";
+import { useState, useMemo, useCallback, useEffect } from "react";
 import Image from "next/image";
 import Header from "@/components/layout/Header";
 import LeadModal from "@/components/forms/LeadModal";
@@ -68,6 +68,90 @@ export interface LandingPageData {
   seo?: { title?: string; description?: string; noIndex?: boolean };
 }
 
+// ── Compare modal ──────────────────────────────────────────────────────────
+
+function CompareModal({
+  items,
+  onClose,
+  onCta,
+}: {
+  items: CourseCardItem[];
+  onClose: () => void;
+  onCta: (name: string) => void;
+}) {
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  const fields: { label: string; render: (i: CourseCardItem) => string | undefined }[] = [
+    { label: "University", render: (i) => i.universityName },
+    { label: "Mode",       render: (i) => i.mode },
+    { label: "Duration",   render: (i) => i.duration },
+    { label: "Fees",       render: (i) => i.fees },
+    { label: "Eligibility",render: (i) => i.eligibility },
+  ];
+
+  return (
+    <div className="lp-cmp-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
+      role="dialog" aria-modal="true" aria-label="Compare courses">
+      <div className="lp-cmp-modal">
+        <div className="lp-cmp-header">
+          <h2 className="lp-cmp-title">Compare Courses</h2>
+          <button className="lp-cmp-close" onClick={onClose} aria-label="Close">×</button>
+        </div>
+        <div className="lp-cmp-body">
+          <div className="lp-cmp-table-wrap">
+            <table className="lp-cmp-table">
+              <thead>
+                <tr>
+                  <th className="lp-cmp-th lp-cmp-th-label"></th>
+                  {items.map((item) => (
+                    <th key={item._id} className="lp-cmp-th">
+                      {item.universityLogoUrl ? (
+                        <Image src={item.universityLogoUrl} alt={item.universityName || item.courseName}
+                          width={120} height={50} className="lp-cmp-logo" />
+                      ) : (
+                        <div className="lp-cmp-logo-ph">{(item.universityName || item.courseName).charAt(0)}</div>
+                      )}
+                      <div className="lp-cmp-course-name">{item.courseName}</div>
+                    </th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {fields.map(({ label, render }) => (
+                  <tr key={label} className="lp-cmp-row">
+                    <td className="lp-cmp-td lp-cmp-td-label">{label}</td>
+                    {items.map((item) => (
+                      <td key={item._id} className="lp-cmp-td">{render(item) || <span className="lp-cmp-na">—</span>}</td>
+                    ))}
+                  </tr>
+                ))}
+                <tr className="lp-cmp-row lp-cmp-row-action">
+                  <td className="lp-cmp-td lp-cmp-td-label"></td>
+                  {items.map((item) => (
+                    <td key={item._id} className="lp-cmp-td">
+                      <button className="lp-btn-primary-full" onClick={() => onCta(item.courseName)}>
+                        Enquire Now
+                      </button>
+                    </td>
+                  ))}
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
 // ── Stripped header ────────────────────────────────────────────────────────
 
 function LpHeader({ onOpenModal }: { onOpenModal: () => void }) {
@@ -95,9 +179,21 @@ function LpHeader({ onOpenModal }: { onOpenModal: () => void }) {
 
 // ── Course card ────────────────────────────────────────────────────────────
 
-function CourseCard({ item, onCta }: { item: CourseCardItem; onCta: (name: string) => void }) {
+function CourseCard({
+  item,
+  onCta,
+  inCompare = false,
+  canCompare = true,
+  onToggleCompare,
+}: {
+  item: CourseCardItem;
+  onCta: (name: string) => void;
+  inCompare?: boolean;
+  canCompare?: boolean;
+  onToggleCompare?: (id: string) => void;
+}) {
   return (
-    <article className={`lp-card${item.isFeatured ? " lp-card--featured" : ""}`}>
+    <article className={`lp-card${item.isFeatured ? " lp-card--featured" : ""}${inCompare ? " lp-card--comparing" : ""}`}>
       {item.badge && <span className="lp-card-badge">{item.badge}</span>}
       <div className="lp-card-head">
         {item.universityLogoUrl ? (
@@ -154,6 +250,16 @@ function CourseCard({ item, onCta }: { item: CourseCardItem; onCta: (name: strin
             Enquire Now
           </button>
         </div>
+        {onToggleCompare && (
+          <button
+            className={`lp-compare-btn${inCompare ? " lp-compare-btn--active" : ""}`}
+            onClick={() => onToggleCompare(item._id)}
+            disabled={!inCompare && !canCompare}
+            title={!inCompare && !canCompare ? "Maximum 3 courses can be compared" : undefined}
+          >
+            {inCompare ? "✓ Added to Compare" : "+ Compare"}
+          </button>
+        )}
       </div>
     </article>
   );
@@ -256,6 +362,8 @@ export default function LandingPageClient({
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [defaultCourse, setDefaultCourse] = useState("");
+  const [compareIds, setCompareIds] = useState<string[]>([]);
+  const [compareOpen, setCompareOpen] = useState(false);
   const [activeMode, setActiveMode] = useState<string | null>(null);
   const [activeDuration, setActiveDuration] = useState<string | null>(null);
   const [activeFeeCategory, setActiveFeeCategory] = useState<string | null>(null);
@@ -321,6 +429,17 @@ export default function LandingPageClient({
     setActiveDuration(null);
     setActiveFeeCategory(null);
     setVisibleCount(INITIAL_COUNT);
+  }, []);
+
+  const compareItems = useMemo(
+    () => compareIds.map((id) => (data.courseItems ?? []).find((c) => c._id === id)).filter(Boolean) as CourseCardItem[],
+    [compareIds, data.courseItems]
+  );
+
+  const toggleCompare = useCallback((id: string) => {
+    setCompareIds((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : prev.length < 3 ? [...prev, id] : prev
+    );
   }, []);
 
   const itemLabel = pageType === "course" ? "course" : "university";
@@ -515,7 +634,14 @@ export default function LandingPageClient({
                 <div className="lp-card-grid">
                   {pageType === "course"
                     ? (visible as CourseCardItem[]).map((item) => (
-                        <CourseCard key={item._id} item={item} onCta={openModal} />
+                        <CourseCard
+                          key={item._id}
+                          item={item}
+                          onCta={openModal}
+                          inCompare={compareIds.includes(item._id)}
+                          canCompare={compareIds.length < 3}
+                          onToggleCompare={toggleCompare}
+                        />
                       ))
                     : (visible as UniversityCardItem[]).map((item) => (
                         <UniversityCard key={item._id} item={item} onCta={openModal} />
@@ -593,6 +719,53 @@ export default function LandingPageClient({
           Get Free Counselling
         </button>
       </div>
+
+      {/* Compare tray — course pages only */}
+      {pageType === "course" && compareIds.length > 0 && (
+        <div className="lp-cmp-tray" role="region" aria-label="Compare tray">
+          <div className="lp-cmp-tray-inner container">
+            <div className="lp-cmp-tray-slots">
+              {[0, 1, 2].map((i) => {
+                const item = compareItems[i];
+                return item ? (
+                  <div key={item._id} className="lp-cmp-slot lp-cmp-slot--filled">
+                    {item.universityLogoUrl ? (
+                      <Image src={item.universityLogoUrl} alt={item.universityName || item.courseName}
+                        width={36} height={36} className="lp-cmp-slot-thumb" />
+                    ) : (
+                      <div className="lp-cmp-slot-ph">{(item.universityName || item.courseName).charAt(0)}</div>
+                    )}
+                    <span className="lp-cmp-slot-name">{item.courseName}</span>
+                    <button className="lp-cmp-slot-remove" onClick={() => toggleCompare(item._id)} aria-label="Remove">×</button>
+                  </div>
+                ) : (
+                  <div key={i} className="lp-cmp-slot lp-cmp-slot--empty">
+                    <span className="lp-cmp-slot-empty-label">+ Add course</span>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="lp-cmp-tray-actions">
+              <button
+                className="lp-cmp-tray-btn"
+                disabled={compareIds.length < 2}
+                onClick={() => setCompareOpen(true)}
+              >
+                Compare ({compareIds.length})
+              </button>
+              <button className="lp-cmp-tray-clear" onClick={() => setCompareIds([])}>Clear</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {compareOpen && compareItems.length >= 2 && (
+        <CompareModal
+          items={compareItems}
+          onClose={() => setCompareOpen(false)}
+          onCta={(name) => { setCompareOpen(false); openModal(name); }}
+        />
+      )}
 
       <LeadModal
         open={modalOpen}
@@ -727,6 +900,57 @@ export default function LandingPageClient({
         /* Body padding for mobile bar */
         body { padding-bottom: 60px; }
         @media (min-width: 1024px) { body { padding-bottom: 0; } }
+
+        /* ── Compare button on card ── */
+        .lp-compare-btn { width: 100%; background: none; border: 1.5px dashed var(--pale-navy); border-radius: 8px; font-size: 12px; font-weight: 600; font-family: var(--font-sans); color: var(--navy); padding: 7px 12px; cursor: pointer; transition: border-color .15s, background .15s, color .15s; text-align: center; }
+        .lp-compare-btn:hover:not(:disabled) { border-style: solid; border-color: var(--navy); background: var(--mist); }
+        .lp-compare-btn--active { background: var(--navy); color: var(--ivory); border-style: solid; border-color: var(--navy); }
+        .lp-compare-btn--active:hover { background: #1a2b44; }
+        .lp-compare-btn:disabled { opacity: 0.38; cursor: not-allowed; }
+        .lp-card--comparing { border-color: var(--navy); border-top-color: var(--navy); box-shadow: 0 0 0 2px var(--navy); }
+
+        /* ── Compare tray ── */
+        .lp-cmp-tray { position: fixed; bottom: 60px; left: 0; right: 0; z-index: 60; background: var(--navy); border-top: 3px solid var(--yellow); box-shadow: 0 -4px 20px rgba(36,48,72,.25); }
+        @media (min-width: 1024px) { .lp-cmp-tray { bottom: 0; } }
+        .lp-cmp-tray-inner { display: flex; align-items: center; gap: 12px; padding: 10px 16px; flex-wrap: wrap; }
+        .lp-cmp-tray-slots { display: flex; gap: 8px; flex: 1; min-width: 0; overflow-x: auto; }
+        .lp-cmp-slot { display: flex; align-items: center; gap: 8px; border-radius: 8px; padding: 6px 10px; flex: 0 0 auto; max-width: 200px; }
+        .lp-cmp-slot--filled { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); }
+        .lp-cmp-slot--empty { background: rgba(255,255,255,.05); border: 1.5px dashed rgba(255,255,255,.25); }
+        .lp-cmp-slot-empty-label { font-size: 11px; color: rgba(255,255,255,.45); font-weight: 500; white-space: nowrap; }
+        .lp-cmp-slot-thumb { width: 36px; height: 36px; object-fit: contain; border-radius: 6px; background: var(--ivory); flex: 0 0 36px; }
+        .lp-cmp-slot-ph { width: 36px; height: 36px; border-radius: 6px; background: var(--yellow); color: var(--navy); font-size: 14px; font-weight: 800; display: flex; align-items: center; justify-content: center; flex: 0 0 36px; font-family: var(--font-serif); }
+        .lp-cmp-slot-name { font-size: 11px; color: var(--ivory); font-weight: 600; line-height: 1.3; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 110px; }
+        .lp-cmp-slot-remove { background: none; border: none; color: rgba(255,255,255,.55); font-size: 16px; cursor: pointer; padding: 0 2px; line-height: 1; flex: 0 0 auto; }
+        .lp-cmp-slot-remove:hover { color: var(--ivory); }
+        .lp-cmp-tray-actions { display: flex; align-items: center; gap: 10px; flex: 0 0 auto; }
+        .lp-cmp-tray-btn { background: var(--yellow); color: var(--navy); border: 2px solid var(--yellow); border-radius: 8px; font-size: 13px; font-weight: 700; font-family: var(--font-sans); padding: 9px 20px; cursor: pointer; white-space: nowrap; transition: background .15s; }
+        .lp-cmp-tray-btn:hover:not(:disabled) { background: #e6b800; }
+        .lp-cmp-tray-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+        .lp-cmp-tray-clear { background: none; border: none; color: rgba(255,255,255,.55); font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font-sans); text-decoration: underline; }
+        .lp-cmp-tray-clear:hover { color: var(--ivory); }
+
+        /* ── Compare modal ── */
+        .lp-cmp-backdrop { position: fixed; inset: 0; background: rgba(20,30,48,.7); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; }
+        .lp-cmp-modal { background: var(--white); border-radius: 14px; width: 100%; max-width: 860px; max-height: 90vh; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 24px 64px rgba(20,30,48,.35); }
+        .lp-cmp-header { display: flex; align-items: center; justify-content: space-between; padding: 18px 24px; border-bottom: 1px solid var(--mist); background: var(--ivory); }
+        .lp-cmp-title { font-family: var(--font-serif); font-size: 20px; color: var(--navy); margin: 0; }
+        .lp-cmp-close { background: none; border: none; font-size: 26px; color: var(--grey); cursor: pointer; line-height: 1; padding: 0 4px; font-family: var(--font-sans); }
+        .lp-cmp-close:hover { color: var(--navy); }
+        .lp-cmp-body { overflow-y: auto; flex: 1; }
+        .lp-cmp-table-wrap { overflow-x: auto; }
+        .lp-cmp-table { width: 100%; border-collapse: collapse; }
+        .lp-cmp-th { padding: 20px 16px 16px; text-align: center; vertical-align: top; border-bottom: 2px solid var(--mist); min-width: 180px; background: var(--ivory); }
+        .lp-cmp-th-label { min-width: 100px; max-width: 110px; background: var(--ivory); }
+        .lp-cmp-logo { object-fit: contain; height: 50px; width: auto; max-width: 120px; border: 1px solid var(--mist); border-radius: 8px; background: var(--white); padding: 4px; }
+        .lp-cmp-logo-ph { width: 72px; height: 50px; border-radius: 8px; background: var(--navy); color: var(--yellow); font-size: 22px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin: 0 auto; font-family: var(--font-serif); }
+        .lp-cmp-course-name { font-family: var(--font-serif); font-size: 14px; font-weight: 700; color: var(--navy); margin-top: 10px; line-height: 1.3; }
+        .lp-cmp-row { border-bottom: 1px solid var(--mist); }
+        .lp-cmp-row:last-child { border-bottom: none; }
+        .lp-cmp-row-action { background: var(--ivory); }
+        .lp-cmp-td { padding: 14px 16px; font-size: 13px; color: var(--charcoal); vertical-align: middle; text-align: center; }
+        .lp-cmp-td-label { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); text-align: left; background: var(--ivory); border-right: 1px solid var(--mist); white-space: nowrap; }
+        .lp-cmp-na { color: var(--mist); }
       `}</style>
     </>
   );
