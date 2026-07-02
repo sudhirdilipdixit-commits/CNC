@@ -104,8 +104,8 @@ function CourseCard({ item, onCta }: { item: CourseCardItem; onCta: (name: strin
           <Image
             src={item.universityLogoUrl}
             alt={item.universityName || item.courseName}
-            width={48}
-            height={48}
+            width={80}
+            height={80}
             className="lp-card-logo"
           />
         ) : (
@@ -113,11 +113,9 @@ function CourseCard({ item, onCta }: { item: CourseCardItem; onCta: (name: strin
             {(item.universityName || item.courseName).charAt(0)}
           </div>
         )}
-        <div className="lp-card-titles">
-          <div className="lp-card-name">{item.courseName}</div>
-          {item.universityName && <div className="lp-card-sub">{item.universityName}</div>}
-          {item.mode && <span className="lp-mode-tag">{item.mode}</span>}
-        </div>
+        <div className="lp-card-name">{item.courseName}</div>
+        {item.universityName && <div className="lp-card-sub">{item.universityName}</div>}
+        {item.mode && <span className="lp-mode-tag">{item.mode}</span>}
       </div>
 
       {(item.duration || item.fees) && (
@@ -172,8 +170,8 @@ function UniversityCard({ item, onCta }: { item: UniversityCardItem; onCta: (nam
           <Image
             src={item.universityLogoUrl}
             alt={item.universityName}
-            width={48}
-            height={48}
+            width={80}
+            height={80}
             className="lp-card-logo"
           />
         ) : (
@@ -181,10 +179,8 @@ function UniversityCard({ item, onCta }: { item: UniversityCardItem; onCta: (nam
             {item.universityName.charAt(0)}
           </div>
         )}
-        <div className="lp-card-titles">
-          <div className="lp-card-name">{item.universityName}</div>
-          {item.mode && <span className="lp-mode-tag">{item.mode}</span>}
-        </div>
+        <div className="lp-card-name">{item.universityName}</div>
+        {item.mode && <span className="lp-mode-tag">{item.mode}</span>}
       </div>
 
       {(item.duration || item.fees) && (
@@ -673,12 +669,11 @@ export default function LandingPageClient({
         .lp-card:hover { box-shadow: 0 4px 18px rgba(36,48,72,.1); transform: translateY(-2px); }
         .lp-card--featured { border-top-color: var(--yellow); }
         .lp-card-badge { position: absolute; top: 12px; right: 12px; background: var(--yellow); color: var(--navy); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
-        .lp-card-head { display: flex; gap: 12px; align-items: flex-start; }
-        .lp-card-logo { width: 48px; height: 48px; flex: 0 0 48px; object-fit: contain; border: 1px solid var(--mist); border-radius: 6px; background: var(--ivory); }
-        .lp-card-logo-ph { width: 48px; height: 48px; flex: 0 0 48px; border-radius: 6px; background: var(--navy); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 20px; font-weight: 800; font-family: var(--font-serif); }
-        .lp-card-titles { flex: 1; min-width: 0; }
-        .lp-card-name { font-family: var(--font-serif); font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--navy); margin-bottom: 4px; padding-right: 52px; }
-        .lp-card-sub { font-size: 12px; color: var(--grey); margin-bottom: 4px; }
+        .lp-card-head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding-bottom: 4px; }
+        .lp-card-logo { width: 80px; height: 80px; object-fit: contain; border: 1px solid var(--mist); border-radius: 10px; background: var(--ivory); }
+        .lp-card-logo-ph { width: 80px; height: 80px; border-radius: 10px; background: var(--navy); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 800; font-family: var(--font-serif); }
+        .lp-card-name { font-family: var(--font-serif); font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--navy); margin-bottom: 0; }
+        .lp-card-sub { font-size: 12px; color: var(--grey); margin-bottom: 0; }
         .lp-mode-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: var(--mist); color: var(--navy); padding: 2px 8px; border-radius: 999px; }
         .lp-card-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 0; border-top: 1px solid var(--mist); border-bottom: 1px solid var(--mist); }
         .lp-meta-cell { display: flex; flex-direction: column; gap: 2px; }
