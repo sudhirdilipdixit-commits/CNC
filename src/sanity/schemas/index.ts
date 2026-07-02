@@ -1,7 +1,8 @@
 import homepage from "./homepage";
 import blog from "./blog";
 import landingPage from "./landingPage";
-import programmeGrid from "./programmeGrid";
+import courseCard from "./courseCard";
+import universityCard from "./universityCard";
 import {
   heroBlock, promiseBlock, pathBlock, programmesBlock,
   whyUsBlock, aiCounsellorBlock, howItWorksBlock, trustStripBlock,
@@ -12,7 +13,8 @@ export const schemaTypes = [
   homepage,
   blog,
   landingPage,
-  programmeGrid,
+  courseCard,
+  universityCard,
   // Page builder blocks
   heroBlock, promiseBlock, pathBlock, programmesBlock,
   whyUsBlock, aiCounsellorBlock, howItWorksBlock, trustStripBlock,

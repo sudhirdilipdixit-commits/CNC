@@ -30,24 +30,23 @@ export const allBlogSlugsQuery = groq`*[_type == "blog"]{ "slug": slug.current }
 export const allLandingPageSlugsQuery = groq`*[_type == "landingPage"]{ "slug": slug.current }`;
 
 export const landingPageQuery = groq`*[_type == "landingPage" && slug.current == $slug][0]{
-  title, campaign,
+  title, campaign, pageType,
   showFullHeader, showFooter, urgencyBanner,
   hero { eyebrow, headline, subheadline, primaryCtaLabel, secondaryCtaLabel, secondaryCtaHref },
-  filterConfig { showSpecialization, showMode, showFee, feeBrackets },
+  filterConfig { showMode },
   sidebarForm { show, heading, subheading },
   trustPoints,
-  "defaultSort": programmeGrid->defaultSort,
-  "programmes": programmeGrid->programmes[] {
-    isPinned,
-    "course": {
-      "_id": _key,
-      title, mode, specialization,
-      feeMin, feeMax, duration, nextBatch,
-      badge, isFeatured, accreditations,
-      shortDescription, rating,
-      "collegeName": collegeName,
-      "collegeLogoUrl": collegeLogo.asset->url,
-    },
+  "courseItems": courseItems[]->{
+    "_id": _id,
+    courseName, universityName,
+    "universityLogoUrl": universityLogo.asset->url,
+    mode, duration, fees, eligibility, badge, isFeatured,
+  },
+  "universityItems": universityItems[]->{
+    "_id": _id,
+    universityName,
+    "universityLogoUrl": universityLogo.asset->url,
+    mode, duration, approvedBy, fees, eligibility, badge, isFeatured,
   },
   "faqs": faqs[]{ "_id": _key, question, answer },
   ctaBand { headline, body, ctaLabel },

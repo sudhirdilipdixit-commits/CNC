@@ -45,6 +45,21 @@ export default defineType({
       },
       group: "content",
     }),
+    defineField({
+      name: "pageType",
+      title: "Page Type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Course / Programme Grid", value: "course" },
+          { title: "University Grid", value: "university" },
+        ],
+        layout: "radio",
+        direction: "horizontal",
+      },
+      initialValue: "course",
+      group: "filters",
+    }),
 
     // ── Display Settings ─────────────────────────────────────────────
     defineField({
@@ -130,45 +145,36 @@ export default defineType({
 
     // ── Filters & Grid ───────────────────────────────────────────────
     defineField({
-      name: "programmeGrid",
-      title: "Programme Grid",
-      type: "reference",
-      to: [{ type: "programmeGrid" }],
-      description: "The curated list of programmes to show on this landing page.",
+      name: "courseItems",
+      title: "Course Cards",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "courseCard" }] }],
+      description: "Select and reorder course cards. Drag to change display order.",
       group: "filters",
+      hidden: ({ document }) => (document as { pageType?: string })?.pageType === "university",
+    }),
+    defineField({
+      name: "universityItems",
+      title: "University Cards",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "universityCard" }] }],
+      description: "Select and reorder university cards. Drag to change display order.",
+      group: "filters",
+      hidden: ({ document }) => (document as { pageType?: string })?.pageType !== "university",
     }),
     defineField({
       name: "filterConfig",
       title: "Filter Configuration",
       type: "object",
-      description: "Choose which filter dimensions to expose on this page.",
+      description: "Choose which filters to expose on this page.",
       group: "filters",
       fields: [
-        defineField({
-          name: "showSpecialization",
-          title: "Show Specialization filter",
-          type: "boolean",
-          initialValue: true,
-        }),
         defineField({
           name: "showMode",
           title: "Show Mode filter (Online / Distance / etc.)",
           type: "boolean",
           initialValue: true,
-        }),
-        defineField({
-          name: "showFee",
-          title: "Show Fee / Budget filter",
-          type: "boolean",
-          initialValue: true,
-        }),
-        defineField({
-          name: "feeBrackets",
-          title: "Custom Fee Brackets",
-          type: "array",
-          of: [{ type: "string" }],
-          description:
-            "Leave empty to use defaults: Under ₹1L / ₹1L–₹2L / ₹2L–₹3L / ₹3L+. Add custom values to override.",
+          description: "Visible only when cards have two or more distinct mode values.",
         }),
       ],
     }),
