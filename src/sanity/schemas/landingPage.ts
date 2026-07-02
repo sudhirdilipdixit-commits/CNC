@@ -152,6 +152,16 @@ export default defineType({
       description: "Select and reorder course cards. Drag to change display order.",
       group: "filters",
       hidden: ({ document }) => (document as { pageType?: string })?.pageType === "university",
+      validation: (R) =>
+        R.custom((items?: Array<{ _ref: string }>) => {
+          if (!items || items.length === 0) return true;
+          const seen = new Set<string>();
+          for (const item of items) {
+            if (seen.has(item._ref)) return "Each course card can only be added once.";
+            seen.add(item._ref);
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "universityItems",
@@ -161,6 +171,16 @@ export default defineType({
       description: "Select and reorder university cards. Drag to change display order.",
       group: "filters",
       hidden: ({ document }) => (document as { pageType?: string })?.pageType !== "university",
+      validation: (R) =>
+        R.custom((items?: Array<{ _ref: string }>) => {
+          if (!items || items.length === 0) return true;
+          const seen = new Set<string>();
+          for (const item of items) {
+            if (seen.has(item._ref)) return "Each university card can only be added once.";
+            seen.add(item._ref);
+          }
+          return true;
+        }),
     }),
     defineField({
       name: "filterConfig",
