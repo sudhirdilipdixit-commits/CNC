@@ -11,6 +11,7 @@ import footerSettings from "./footerSettings";
 import seoSettings from "./seoSettings";
 import globalSettings from "./globalSettings";
 import landingPage from "./landingPage";
+import programmeGrid from "./programmeGrid";
 import page from "./page";
 import {
   heroBlock, promiseBlock, pathBlock, programmesBlock,
@@ -32,6 +33,7 @@ export const schemaTypes = [
   seoSettings,
   globalSettings,
   landingPage,
+  programmeGrid,
   page,
   // Page builder blocks
   heroBlock, promiseBlock, pathBlock, programmesBlock,

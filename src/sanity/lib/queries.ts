@@ -81,3 +81,28 @@ export const allCourseSlugsQuery = groq`*[_type == "course"]{ "slug": slug.curre
 export const allExamSlugsQuery = groq`*[_type == "exam"]{ "slug": slug.current }`;
 export const allScholarshipSlugsQuery = groq`*[_type == "scholarship"]{ "slug": slug.current }`;
 export const allPageSlugsQuery = groq`*[_type == "page"]{ "slug": slug.current }`;
+export const allLandingPageSlugsQuery = groq`*[_type == "landingPage"]{ "slug": slug.current }`;
+
+export const landingPageQuery = groq`*[_type == "landingPage" && slug.current == $slug][0]{
+  title, campaign,
+  showFullHeader, showFooter, urgencyBanner,
+  hero { eyebrow, headline, subheadline, primaryCtaLabel, secondaryCtaLabel, secondaryCtaHref },
+  filterConfig { showSpecialization, showMode, showFee, feeBrackets },
+  sidebarForm { show, heading, subheading },
+  trustPoints,
+  "defaultSort": programmeGrid->defaultSort,
+  "programmes": programmeGrid->programmes[] {
+    isPinned,
+    "course": course->{
+      _id, title, slug, mode, specialization,
+      feeMin, feeMax, duration, nextBatch,
+      badge, isFeatured, accreditations,
+      shortDescription, rating,
+      "collegeName": college->name,
+      "collegeLogoUrl": college->logo.asset->url,
+    },
+  },
+  faqs[]->{_id, question, answer},
+  ctaBand { headline, body, ctaLabel },
+  seo { title, description, noIndex },
+}`;

@@ -45,6 +45,19 @@ export default defineType({
       type: "array",
       of: [{ type: "string" }],
     }),
+    defineField({
+      name: "rating",
+      title: "Rating (e.g. 4.8)",
+      type: "number",
+      validation: (R) => R.min(0).max(5),
+    }),
+    defineField({
+      name: "shortDescription",
+      title: "Short Description (card excerpt)",
+      type: "text",
+      rows: 2,
+      description: "2-line summary shown on programme cards. Keep under 120 characters.",
+    }),
     defineField({ name: "isFeatured", title: "Featured Programme", type: "boolean" }),
     defineField({ name: "badge", title: "Badge (e.g. Bestseller)", type: "string" }),
     defineField({
