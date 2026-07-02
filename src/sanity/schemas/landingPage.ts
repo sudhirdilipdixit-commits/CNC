@@ -204,19 +204,32 @@ export default defineType({
       ],
     }),
 
-    // ── FAQs & Testimonials ──────────────────────────────────────────
+    // ── FAQs ────────────────────────────────────────────────────────
     defineField({
       name: "faqs",
       title: "FAQs",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "faq" }] }],
-      group: "content",
-    }),
-    defineField({
-      name: "testimonials",
-      title: "Testimonials",
-      type: "array",
-      of: [{ type: "reference", to: [{ type: "testimonial" }] }],
+      of: [
+        {
+          type: "object",
+          name: "faqItem",
+          fields: [
+            defineField({
+              name: "question",
+              title: "Question",
+              type: "string",
+              validation: (R) => R.required(),
+            }),
+            defineField({
+              name: "answer",
+              title: "Answer",
+              type: "text",
+              rows: 3,
+            }),
+          ],
+          preview: { select: { title: "question" } },
+        },
+      ],
       group: "content",
     }),
 

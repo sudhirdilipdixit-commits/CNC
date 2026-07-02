@@ -124,7 +124,17 @@ export const faqBlock = defineType({
       name: "faqs",
       title: "FAQ Items",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "faq" }] }],
+      of: [
+        {
+          type: "object",
+          name: "faqItem",
+          fields: [
+            defineField({ name: "question", title: "Question", type: "string", validation: (R) => R.required() }),
+            defineField({ name: "answer", title: "Answer", type: "text", rows: 3 }),
+          ],
+          preview: { select: { title: "question" } },
+        },
+      ],
     }),
   ],
   preview: { prepare: () => ({ title: "FAQ Section" }) },
