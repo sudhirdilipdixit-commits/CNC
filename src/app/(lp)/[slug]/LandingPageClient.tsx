@@ -82,10 +82,12 @@ export interface LandingPageData {
 
 function CompareModal({
   items,
+  pageType,
   onClose,
   onCta,
 }: {
-  items: CourseCardItem[];
+  items: AnyCardItem[];
+  pageType: "course" | "university";
   onClose: () => void;
   onCta: (name: string) => void;
 }) {
@@ -99,20 +101,35 @@ function CompareModal({
     };
   }, [onClose]);
 
-  const fields: { label: string; render: (i: CourseCardItem) => string | undefined }[] = [
-    { label: "University", render: (i) => i.universityName },
-    { label: "Mode",       render: (i) => i.mode },
-    { label: "Duration",   render: (i) => i.duration },
-    { label: "Fees",       render: (i) => i.fees },
-    { label: "Eligibility",render: (i) => i.eligibility },
-  ];
+  const getItemName = (item: AnyCardItem) =>
+    pageType === "course" ? (item as CourseCardItem).courseName : item.universityName;
+
+  const fields: { label: string; render: (i: AnyCardItem) => string | undefined }[] =
+    pageType === "course"
+      ? [
+          { label: "University", render: (i) => i.universityName },
+          { label: "Mode",       render: (i) => i.mode },
+          { label: "Duration",   render: (i) => i.duration },
+          { label: "Fees",       render: (i) => i.fees },
+          { label: "Eligibility",render: (i) => i.eligibility },
+        ]
+      : [
+          { label: "Mode",        render: (i) => i.mode },
+          { label: "Duration",    render: (i) => i.duration },
+          { label: "Fees",        render: (i) => i.fees },
+          { label: "Approved By", render: (i) => (i as UniversityCardItem).approvedBy?.join(" • ") },
+          { label: "Eligibility", render: (i) => i.eligibility },
+        ];
+
+  const modalLabel = pageType === "course" ? "Compare courses" : "Compare universities";
+  const modalTitle = pageType === "course" ? "Compare Courses" : "Compare Universities";
 
   return (
     <div className="lp-cmp-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
-      role="dialog" aria-modal="true" aria-label="Compare courses">
+      role="dialog" aria-modal="true" aria-label={modalLabel}>
       <div className="lp-cmp-modal">
         <div className="lp-cmp-header">
-          <h2 className="lp-cmp-title">Compare Courses</h2>
+          <h2 className="lp-cmp-title">{modalTitle}</h2>
           <button className="lp-cmp-close" onClick={onClose} aria-label="Close">×</button>
         </div>
         <div className="lp-cmp-body">
@@ -124,12 +141,12 @@ function CompareModal({
                   {items.map((item) => (
                     <th key={item._id} className="lp-cmp-th">
                       {item.universityLogoUrl ? (
-                        <Image src={item.universityLogoUrl} alt={item.universityName || item.courseName}
+                        <Image src={item.universityLogoUrl} alt={item.universityName}
                           width={200} height={90} className="lp-cmp-logo" />
                       ) : (
-                        <div className="lp-cmp-logo-ph">{(item.universityName || item.courseName).charAt(0)}</div>
+                        <div className="lp-cmp-logo-ph">{item.universityName.charAt(0)}</div>
                       )}
-                      <div className="lp-cmp-course-name">{item.courseName}</div>
+                      <div className="lp-cmp-course-name">{getItemName(item)}</div>
                     </th>
                   ))}
                 </tr>
@@ -147,7 +164,7 @@ function CompareModal({
                   <td className="lp-cmp-td lp-cmp-td-label"></td>
                   {items.map((item) => (
                     <td key={item._id} className="lp-cmp-td">
-                      <button className="lp-btn-primary-full" onClick={() => onCta(item.courseName)}>
+                      <button className="lp-btn-primary-full" onClick={() => onCta(getItemName(item))}>
                         Enquire Now
                       </button>
                     </td>
@@ -277,9 +294,21 @@ function CourseCard({
 
 // ── University card ────────────────────────────────────────────────────────
 
-function UniversityCard({ item, onCta }: { item: UniversityCardItem; onCta: (name: string) => void }) {
+function UniversityCard({
+  item,
+  onCta,
+  inCompare = false,
+  canCompare = true,
+  onToggleCompare,
+}: {
+  item: UniversityCardItem;
+  onCta: (name: string) => void;
+  inCompare?: boolean;
+  canCompare?: boolean;
+  onToggleCompare?: (id: string) => void;
+}) {
   return (
-    <article className={`lp-card${item.isFeatured ? " lp-card--featured" : ""}`}>
+    <article className={`lp-card${item.isFeatured ? " lp-card--featured" : ""}${inCompare ? " lp-card--comparing" : ""}`}>
       {item.badge && <span className="lp-card-badge">{item.badge}</span>}
       <div className="lp-card-head">
         {item.universityLogoUrl ? (
@@ -339,6 +368,16 @@ function UniversityCard({ item, onCta }: { item: UniversityCardItem; onCta: (nam
             Enquire Now
           </button>
         </div>
+        {onToggleCompare && (
+          <button
+            className={`lp-compare-btn${inCompare ? " lp-compare-btn--active" : ""}`}
+            onClick={() => onToggleCompare(item._id)}
+            disabled={!inCompare && !canCompare}
+            title={!inCompare && !canCompare ? "Maximum 3 universities can be compared" : undefined}
+          >
+            {inCompare ? "✓ Added to Compare" : "+ Compare"}
+          </button>
+        )}
       </div>
     </article>
   );
@@ -441,10 +480,10 @@ export default function LandingPageClient({
     setVisibleCount(INITIAL_COUNT);
   }, []);
 
-  const compareItems = useMemo(
-    () => compareIds.map((id) => (data.courseItems ?? []).find((c) => c._id === id)).filter(Boolean) as CourseCardItem[],
-    [compareIds, data.courseItems]
-  );
+  const compareItems = useMemo(() => {
+    const pool: AnyCardItem[] = pageType === "course" ? (data.courseItems ?? []) : (data.universityItems ?? []);
+    return compareIds.map((id) => pool.find((c) => c._id === id)).filter(Boolean) as AnyCardItem[];
+  }, [compareIds, data.courseItems, data.universityItems, pageType]);
 
   const toggleCompare = useCallback((id: string) => {
     setCompareIds((prev) =>
@@ -686,7 +725,14 @@ export default function LandingPageClient({
                         />
                       ))
                     : (visible as UniversityCardItem[]).map((item) => (
-                        <UniversityCard key={item._id} item={item} onCta={openModal} />
+                        <UniversityCard
+                          key={item._id}
+                          item={item}
+                          onCta={openModal}
+                          inCompare={compareIds.includes(item._id)}
+                          canCompare={compareIds.length < 3}
+                          onToggleCompare={toggleCompare}
+                        />
                       ))}
                 </div>
               )}
@@ -762,27 +808,30 @@ export default function LandingPageClient({
         </button>
       </div>
 
-      {/* Compare tray — course pages only */}
-      {pageType === "course" && compareIds.length > 0 && (
+      {/* Compare tray */}
+      {compareIds.length > 0 && (
         <div className="lp-cmp-tray" role="region" aria-label="Compare tray">
           <div className="lp-cmp-tray-inner container">
             <div className="lp-cmp-tray-slots">
               {[0, 1, 2].map((i) => {
                 const item = compareItems[i];
+                const emptyLabel = pageType === "course" ? "+ Add course" : "+ Add university";
                 return item ? (
                   <div key={item._id} className="lp-cmp-slot lp-cmp-slot--filled">
                     {item.universityLogoUrl ? (
-                      <Image src={item.universityLogoUrl} alt={item.universityName || item.courseName}
+                      <Image src={item.universityLogoUrl} alt={item.universityName}
                         width={36} height={36} className="lp-cmp-slot-thumb" />
                     ) : (
-                      <div className="lp-cmp-slot-ph">{(item.universityName || item.courseName).charAt(0)}</div>
+                      <div className="lp-cmp-slot-ph">{item.universityName.charAt(0)}</div>
                     )}
-                    <span className="lp-cmp-slot-name">{item.courseName}</span>
+                    <span className="lp-cmp-slot-name">
+                      {pageType === "course" ? (item as CourseCardItem).courseName : item.universityName}
+                    </span>
                     <button className="lp-cmp-slot-remove" onClick={() => toggleCompare(item._id)} aria-label="Remove">×</button>
                   </div>
                 ) : (
                   <div key={i} className="lp-cmp-slot lp-cmp-slot--empty">
-                    <span className="lp-cmp-slot-empty-label">+ Add course</span>
+                    <span className="lp-cmp-slot-empty-label">{emptyLabel}</span>
                   </div>
                 );
               })}
@@ -804,6 +853,7 @@ export default function LandingPageClient({
       {compareOpen && compareItems.length >= 2 && (
         <CompareModal
           items={compareItems}
+          pageType={pageType}
           onClose={() => setCompareOpen(false)}
           onCta={(name) => { setCompareOpen(false); openModal(name); }}
         />
