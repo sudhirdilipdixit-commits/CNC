@@ -31,7 +31,7 @@ export const allLandingPageSlugsQuery = groq`*[_type == "landingPage"]{ "slug": 
 
 export const landingPageQuery = groq`*[_type == "landingPage" && slug.current == $slug][0]{
   title, campaign, pageType,
-  showFullHeader, showFooter, urgencyBanner,
+  showFullHeader, showFooter, hideSidebar, urgencyBanner,
   hero { eyebrow, headline, subheadline, primaryCtaLabel, secondaryCtaLabel, secondaryCtaHref },
   filterConfig { showMode },
   sidebarForm { show, heading, subheading },

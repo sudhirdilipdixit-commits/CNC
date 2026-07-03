@@ -52,6 +52,7 @@ export interface LandingPageData {
     secondaryCtaLabel?: string;
     secondaryCtaHref?: string;
   };
+  hideSidebar?: boolean;
   filterConfig?: {
     showMode?: boolean;
     showDuration?: boolean;
@@ -494,10 +495,10 @@ export default function LandingPageClient({
       {/* Main layout */}
       <div className="lp-main">
         <div className="container">
-          <div className="lp-layout">
+          <div className={`lp-layout${data.hideSidebar ? " lp-layout--no-sidebar" : ""}`}>
 
             {/* ── Left sidebar ─────────────────────────────────── */}
-            <aside className="lp-sidebar" aria-label="Filters">
+            {!data.hideSidebar && <aside className="lp-sidebar" aria-label="Filters">
 
               {/* Filter sections */}
               {(allModes.length > 0 || allDurations.length > 0 || allFeeCategories.length > 0) && (
@@ -612,7 +613,7 @@ export default function LandingPageClient({
                   <p className="lp-sidebar-note">Free · No spam · 30 min</p>
                 </div>
               )}
-            </aside>
+            </aside>}
 
             {/* ── Cards area ───────────────────────────────────── */}
             <div className="lp-content">
@@ -803,6 +804,9 @@ export default function LandingPageClient({
         .lp-main { padding: 28px 0 64px; }
         .lp-layout { display: grid; grid-template-columns: 1fr; gap: 24px; }
         @media (min-width: 1024px) { .lp-layout { grid-template-columns: 240px 1fr; gap: 32px; align-items: start; } }
+        .lp-layout--no-sidebar { grid-template-columns: 1fr !important; }
+        @media (min-width: 1024px) { .lp-layout--no-sidebar .lp-card-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1280px) { .lp-layout--no-sidebar .lp-card-grid { grid-template-columns: repeat(4, 1fr); } }
 
         /* ── Sidebar ── */
         .lp-sidebar { display: none; }

@@ -86,6 +86,14 @@ export default defineType({
       initialValue: false,
       group: "display",
     }),
+    defineField({
+      name: "hideSidebar",
+      title: "Hide Sidebar (wider cards)",
+      type: "boolean",
+      initialValue: false,
+      description: "Hides the filter sidebar so cards stretch to full width. Filters are disabled when sidebar is hidden.",
+      group: "display",
+    }),
 
     // ── Hero ─────────────────────────────────────────────────────────
     defineField({
