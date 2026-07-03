@@ -196,6 +196,20 @@ export default defineType({
           initialValue: true,
           description: "Visible only when cards have two or more distinct mode values.",
         }),
+        defineField({
+          name: "showDuration",
+          title: "Show Duration filter",
+          type: "boolean",
+          initialValue: true,
+          description: "Visible only when cards have two or more distinct duration values.",
+        }),
+        defineField({
+          name: "showFeeRange",
+          title: "Show Fee Range filter",
+          type: "boolean",
+          initialValue: true,
+          description: "Visible only when cards have two or more distinct fee range values.",
+        }),
       ],
     }),
 

@@ -54,6 +54,8 @@ export interface LandingPageData {
   };
   filterConfig?: {
     showMode?: boolean;
+    showDuration?: boolean;
+    showFeeRange?: boolean;
   };
   sidebarForm?: {
     show?: boolean;
@@ -510,7 +512,7 @@ export default function LandingPageClient({
                   </div>
 
                   {/* Mode */}
-                  {allModes.length > 0 && (
+                  {data.filterConfig?.showMode !== false && allModes.length > 0 && (
                     <div className="lp-filter-section">
                       <h4 className="lp-filter-heading">Mode</h4>
                       {allModes.map((mode) => (
@@ -534,7 +536,7 @@ export default function LandingPageClient({
                   )}
 
                   {/* Duration */}
-                  {allDurations.length > 0 && (
+                  {data.filterConfig?.showDuration !== false && allDurations.length > 0 && (
                     <div className="lp-filter-section">
                       <h4 className="lp-filter-heading">Duration</h4>
                       {allDurations.map((dur) => (
@@ -558,7 +560,7 @@ export default function LandingPageClient({
                   )}
 
                   {/* Fee Range */}
-                  {allFeeCategories.length > 0 && (
+                  {data.filterConfig?.showFeeRange !== false && allFeeCategories.length > 0 && (
                     <div className="lp-filter-section">
                       <h4 className="lp-filter-heading">Fee Range</h4>
                       {allFeeCategories.map((cat) => (

@@ -1,3 +1,5 @@
+import React from "react";
+
 interface HeroData {
   eyebrow?: string;
   headline?: string;
@@ -54,10 +56,10 @@ export default function HeroSection({ onOpenLeadForm, hero }: HeroSectionProps) 
 
           <div className="trust-strip" aria-label="Trust signals">
             {trustStrip.map((item, i) => (
-              <>
-                {i > 0 && <span key={`sep-${i}`} className="sep">·</span>}
-                <span key={item}>{item}</span>
-              </>
+              <React.Fragment key={item}>
+                {i > 0 && <span className="sep">·</span>}
+                <span>{item}</span>
+              </React.Fragment>
             ))}
           </div>
         </div>
