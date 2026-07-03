@@ -122,19 +122,36 @@ export async function POST(request: NextRequest) {
 
     // Push to Agile CRM after response is sent — waitUntil keeps the function
     // alive on Vercel without making the user wait for the Agile API.
+    // Updates the Supabase lead status based on Agile's response.
+    const leadId = lead.id;
     waitUntil(
-      pushToAgile({
-        name: d.name,
-        mobile: d.mobile,
-        email: d.email,
-        city: d.city,
-        courseInterested: d.courseInterested,
-        utmSource: d.utmSource,
-        utmMedium: d.utmMedium,
-        utmCampaign: d.utmCampaign,
-        landingPage: d.landingPage,
-        source: d.source,
-      }).catch((e) => console.error("Agile CRM push failed:", e))
+      (async () => {
+        try {
+          const result = await pushToAgile({
+            name: d.name,
+            mobile: d.mobile,
+            email: d.email,
+            city: d.city,
+            courseInterested: d.courseInterested,
+            utmSource: d.utmSource,
+            utmMedium: d.utmMedium,
+            utmCampaign: d.utmCampaign,
+            landingPage: d.landingPage,
+            source: d.source,
+          });
+          if (result === null) return; // env vars not configured
+          const crmStatus =
+            result === "success" ? "Successfully Added in CRM" : "Lead Already Exist in CRM";
+          await supabase.from("leads").update({ status: crmStatus }).eq("id", leadId);
+        } catch (e) {
+          console.error("Agile CRM push failed:", e);
+          await supabase
+            .from("leads")
+            .update({ status: "CRM Push Failed" })
+            .eq("id", leadId)
+            .catch(() => {});
+        }
+      })()
     );
 
     return NextResponse.json({ id: String(lead.id).slice(-5).toUpperCase() });

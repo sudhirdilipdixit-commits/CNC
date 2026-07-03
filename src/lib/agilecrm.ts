@@ -18,7 +18,12 @@ type AgileProperty = {
   subtype?: string;
 };
 
-export async function pushToAgile(contact: AgileContact): Promise<void> {
+export type AgileResult = "success" | "duplicate";
+
+// Returns null if env vars are not configured (skip silently).
+// Returns "success" or "duplicate" when Agile responds.
+// Throws for unexpected errors so callers can log and update status accordingly.
+export async function pushToAgile(contact: AgileContact): Promise<AgileResult | null> {
   const domain = process.env.AGILE_CRM_DOMAIN;
   const email = process.env.AGILE_CRM_EMAIL;
   const apiKey = process.env.AGILE_CRM_API_KEY;
@@ -26,7 +31,7 @@ export async function pushToAgile(contact: AgileContact): Promise<void> {
   console.log("[Agile] env check — domain:", !!domain, "email:", !!email, "apiKey:", !!apiKey);
   if (!domain || !email || !apiKey) {
     console.log("[Agile] missing env vars, skipping push");
-    return;
+    return null;
   }
 
   const [firstName, ...rest] = contact.name.trim().split(" ");
@@ -65,9 +70,20 @@ export async function pushToAgile(contact: AgileContact): Promise<void> {
   });
 
   console.log("[Agile] response status:", res.status);
-  if (!res.ok) {
-    const text = await res.text().catch(() => "");
-    throw new Error(`Agile CRM ${res.status}: ${text}`);
+
+  if (res.ok) {
+    console.log("[Agile] contact pushed successfully");
+    return "success";
   }
-  console.log("[Agile] contact pushed successfully");
+
+  const text = await res.text().catch(() => "");
+  console.log("[Agile] error response:", res.status, text);
+
+  // Agile CRM returns 400 or 409 when a contact with the same email already exists
+  if (res.status === 400 || res.status === 409) {
+    console.log("[Agile] duplicate contact detected");
+    return "duplicate";
+  }
+
+  throw new Error(`Agile CRM ${res.status}: ${text}`);
 }
