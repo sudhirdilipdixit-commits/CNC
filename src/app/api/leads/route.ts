@@ -145,11 +145,9 @@ export async function POST(request: NextRequest) {
           await supabase.from("leads").update({ status: crmStatus }).eq("id", leadId);
         } catch (e) {
           console.error("Agile CRM push failed:", e);
-          await supabase
-            .from("leads")
-            .update({ status: "CRM Push Failed" })
-            .eq("id", leadId)
-            .catch(() => {});
+          try {
+            await supabase.from("leads").update({ status: "CRM Push Failed" }).eq("id", leadId);
+          } catch { /* non-critical, ignore */ }
         }
       })()
     );
