@@ -6,8 +6,6 @@ import { z } from "zod";
 
 const OTP_ENABLED = process.env.NEXT_PUBLIC_OTP_ENABLED === "true";
 
-const mobileSchema = z.string().regex(/^[6-9]\d{9}$/, "Please enter a valid 10-digit mobile number");
-
 const leadSchema = z.object({
   name: z.string().min(2, "Please enter your full name"),
   mobile: z.string().regex(/^[6-9]\d{9}$/, "Please enter a valid 10-digit mobile number"),
@@ -25,9 +23,7 @@ type FormData = {
   courseInterested: string;
   consent: boolean;
 };
-
 type FormErrors = Partial<Record<keyof FormData, string>>;
-type Step = "mobile" | "otp" | "form";
 
 interface LeadModalProps {
   open: boolean;
@@ -81,21 +77,21 @@ export default function LeadModal({
   title = "Talk to a counsellor in 30 minutes",
 }: LeadModalProps) {
   const router = useRouter();
-  const firstInputRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
+  const otpRef = useRef<HTMLInputElement>(null);
 
-  // Step state
-  const [step, setStep] = useState<Step>(OTP_ENABLED ? "mobile" : "form");
-
-  // Mobile / OTP step state
+  // Mobile / OTP state
   const [mobileInput, setMobileInput] = useState("");
   const [mobileError, setMobileError] = useState("");
+  const [otpSent, setOtpSent] = useState(false);
+  const [otpVerified, setOtpVerified] = useState(false);
   const [otpInput, setOtpInput] = useState("");
   const [otpError, setOtpError] = useState("");
   const [sending, setSending] = useState(false);
   const [verifying, setVerifying] = useState(false);
   const [resendCountdown, setResendCountdown] = useState(0);
 
-  // Form step state
+  // Form state
   const [data, setData] = useState<FormData>({
     name: "",
     mobile: "",
@@ -108,7 +104,7 @@ export default function LeadModal({
   const [submitting, setSubmitting] = useState(false);
   const [duplicate, setDuplicate] = useState(false);
 
-  // Reset all state on open
+  // Reset all state on modal open
   useEffect(() => {
     if (open) {
       const hasCookie = document.cookie.includes(COOKIE_NAME + "=true");
@@ -117,22 +113,25 @@ export default function LeadModal({
         return;
       }
       setDuplicate(false);
-      setStep(OTP_ENABLED ? "mobile" : "form");
       setMobileInput("");
       setMobileError("");
+      setOtpSent(false);
+      setOtpVerified(false);
       setOtpInput("");
       setOtpError("");
       setResendCountdown(0);
       setData({ name: "", mobile: "", email: "", city: "", courseInterested: "", consent: false });
       setErrors({});
-      setTimeout(() => firstInputRef.current?.focus(), 200);
+      setTimeout(() => nameRef.current?.focus(), 200);
     }
   }, [open]);
 
-  // Focus first input when step changes
+  // Focus OTP input when OTP section appears
   useEffect(() => {
-    if (open) setTimeout(() => firstInputRef.current?.focus(), 100);
-  }, [step, open]);
+    if (OTP_ENABLED && otpSent && !otpVerified) {
+      setTimeout(() => otpRef.current?.focus(), 100);
+    }
+  }, [otpSent, otpVerified]);
 
   // Resend countdown tick
   useEffect(() => {
@@ -141,7 +140,7 @@ export default function LeadModal({
     return () => clearTimeout(t);
   }, [resendCountdown]);
 
-  // Close on Escape, lock body scroll
+  // Escape + body scroll lock
   useEffect(() => {
     if (!open) return;
     const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
@@ -153,28 +152,23 @@ export default function LeadModal({
     };
   }, [open, onClose]);
 
-  // ── OTP step handlers ───────────────────────────────────────────────
+  // ── OTP helpers ─────────────────────────────────────────────────────
 
-  const handleSendOtp = async () => {
-    const parsed = mobileSchema.safeParse(mobileInput);
-    if (!parsed.success) {
-      setMobileError(parsed.error.issues[0]?.message ?? "Invalid mobile number");
-      return;
-    }
-    setMobileError("");
+  const sendOtp = async (mobile: string) => {
     setSending(true);
+    setMobileError("");
     try {
       const res = await fetch("/api/otp/send", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mobile: mobileInput }),
+        body: JSON.stringify({ mobile }),
       });
       const json = await res.json();
       if (!res.ok) {
         setMobileError(json.error ?? "Failed to send OTP. Please try again.");
         return;
       }
-      setStep("otp");
+      setOtpSent(true);
       setResendCountdown(30);
     } catch {
       setMobileError("Failed to send OTP. Please try again.");
@@ -183,8 +177,63 @@ export default function LeadModal({
     }
   };
 
+  const verifyOtpCode = async (otp: string) => {
+    if (otp.length !== 6) {
+      setOtpError("Please enter the 6-digit OTP");
+      return;
+    }
+    setOtpError("");
+    setVerifying(true);
+    try {
+      const res = await fetch("/api/otp/verify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ mobile: mobileInput, otp }),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        setOtpError(json.error ?? "Verification failed. Please try again.");
+        return;
+      }
+      setOtpVerified(true);
+      // Lock mobile into form data after verification
+      setData((prev) => ({ ...prev, mobile: mobileInput }));
+    } catch {
+      setOtpError("Verification failed. Please try again.");
+    } finally {
+      setVerifying(false);
+    }
+  };
+
+  const handleMobileChange = (val: string) => {
+    setMobileInput(val);
+    setMobileError("");
+    // Auto-send OTP when 10 digits are entered
+    if (val.length === 10 && !otpSent && !sending) {
+      sendOtp(val);
+    }
+  };
+
+  const handleOtpChange = (val: string) => {
+    setOtpInput(val);
+    setOtpError("");
+    // Auto-verify when all 6 digits entered
+    if (val.length === 6) verifyOtpCode(val);
+  };
+
+  const handleChangeMobile = () => {
+    setOtpSent(false);
+    setOtpVerified(false);
+    setOtpInput("");
+    setOtpError("");
+    setMobileInput("");
+    setMobileError("");
+    setResendCountdown(0);
+    setData((prev) => ({ ...prev, mobile: "" }));
+  };
+
   const handleResendOtp = async () => {
-    if (resendCountdown > 0) return;
+    if (resendCountdown > 0 || sending) return;
     setOtpInput("");
     setOtpError("");
     setSending(true);
@@ -207,35 +256,7 @@ export default function LeadModal({
     }
   };
 
-  const handleVerifyOtp = async () => {
-    if (otpInput.length !== 6) {
-      setOtpError("Please enter the 6-digit OTP");
-      return;
-    }
-    setOtpError("");
-    setVerifying(true);
-    try {
-      const res = await fetch("/api/otp/verify", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ mobile: mobileInput, otp: otpInput }),
-      });
-      const json = await res.json();
-      if (!res.ok) {
-        setOtpError(json.error ?? "Verification failed. Please try again.");
-        return;
-      }
-      // Mobile verified — pre-fill it in the form and lock it
-      setData((prev) => ({ ...prev, mobile: mobileInput }));
-      setStep("form");
-    } catch {
-      setOtpError("Verification failed. Please try again.");
-    } finally {
-      setVerifying(false);
-    }
-  };
-
-  // ── Form step handlers ──────────────────────────────────────────────
+  // ── Form handlers ────────────────────────────────────────────────────
 
   const handleChange = useCallback(<K extends keyof FormData>(field: K, value: FormData[K]) => {
     setData((prev) => ({ ...prev, [field]: value }));
@@ -244,6 +265,19 @@ export default function LeadModal({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Guard: OTP must be verified before submitting
+    if (OTP_ENABLED && !otpVerified) {
+      setMobileError(
+        otpSent
+          ? "Please verify the OTP sent to your mobile."
+          : mobileInput.length === 10
+          ? "OTP is being sent to your mobile…"
+          : "Please enter your mobile number to receive OTP."
+      );
+      return;
+    }
+
     const result = leadSchema.safeParse(data);
     if (!result.success) {
       const errs: FormErrors = {};
@@ -287,7 +321,12 @@ export default function LeadModal({
 
   if (!open) return null;
 
-  const maskedMobile = `+91 ${mobileInput.slice(0, 2)}${"•".repeat(6)}${mobileInput.slice(-2)}`;
+  const maskedMobile = mobileInput
+    ? `+91 ${mobileInput.slice(0, 2)}${"•".repeat(6)}${mobileInput.slice(-2)}`
+    : "";
+
+  // Submit should be disabled while OTP is pending (sent but not yet verified)
+  const submitDisabled = submitting || (OTP_ENABLED && otpSent && !otpVerified);
 
   return (
     <div
@@ -317,129 +356,19 @@ export default function LeadModal({
               <p>Your enquiry has already been received. Our counsellor will contact you shortly.</p>
             </div>
           </div>
-        ) : step === "mobile" ? (
-          /* ── Step 1: Mobile entry ── */
-          <div className="modal-body">
-            <div className="modal-step active">
-              <p style={{ fontSize: 14, color: "#555", marginBottom: 16 }}>
-                We&apos;ll send a one-time password to verify your mobile number.
-              </p>
-              <div className="form-field">
-                <label htmlFor="mobileVerify">
-                  Mobile Number <span className="req">*</span>
-                </label>
-                <input
-                  ref={firstInputRef}
-                  type="tel"
-                  id="mobileVerify"
-                  inputMode="numeric"
-                  placeholder="10-digit mobile number"
-                  value={mobileInput}
-                  onChange={(e) => {
-                    setMobileInput(e.target.value.replace(/\D/g, "").slice(0, 10));
-                    setMobileError("");
-                  }}
-                  onKeyDown={(e) => e.key === "Enter" && handleSendOtp()}
-                />
-                {mobileError && (
-                  <div className="hint" style={{ color: "#B83A2A" }}>{mobileError}</div>
-                )}
-              </div>
-              <button
-                type="button"
-                className="btn btn-primary"
-                disabled={sending}
-                onClick={handleSendOtp}
-                style={{ width: "100%", marginTop: 8 }}
-              >
-                {sending ? "Sending…" : "Send OTP"}
-                {!sending && (
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M5 12h14M13 5l7 7-7 7" />
-                  </svg>
-                )}
-              </button>
-            </div>
-          </div>
-        ) : step === "otp" ? (
-          /* ── Step 2: OTP entry ── */
-          <div className="modal-body">
-            <div className="modal-step active">
-              <p style={{ fontSize: 14, color: "#555", marginBottom: 16 }}>
-                OTP sent to <strong>{maskedMobile}</strong>.{" "}
-                <button
-                  type="button"
-                  onClick={() => { setStep("mobile"); setOtpInput(""); setOtpError(""); }}
-                  style={{ background: "none", border: "none", color: "var(--navy, #1a2e4a)", textDecoration: "underline", cursor: "pointer", fontSize: 14, padding: 0 }}
-                >
-                  Change
-                </button>
-              </p>
-              <div className="form-field">
-                <label htmlFor="otpInput">
-                  Enter OTP <span className="req">*</span>
-                </label>
-                <input
-                  ref={firstInputRef}
-                  type="text"
-                  id="otpInput"
-                  inputMode="numeric"
-                  placeholder="6-digit OTP"
-                  maxLength={6}
-                  value={otpInput}
-                  onChange={(e) => {
-                    setOtpInput(e.target.value.replace(/\D/g, "").slice(0, 6));
-                    setOtpError("");
-                  }}
-                  onKeyDown={(e) => e.key === "Enter" && handleVerifyOtp()}
-                  style={{ letterSpacing: "0.25em", fontSize: 20, textAlign: "center" }}
-                />
-                {otpError && (
-                  <div className="hint" style={{ color: "#B83A2A" }}>{otpError}</div>
-                )}
-              </div>
-              <button
-                type="button"
-                className="btn btn-primary"
-                disabled={verifying}
-                onClick={handleVerifyOtp}
-                style={{ width: "100%", marginTop: 8 }}
-              >
-                {verifying ? "Verifying…" : "Verify OTP"}
-                {!verifying && (
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                    <path d="M5 12h14M13 5l7 7-7 7" />
-                  </svg>
-                )}
-              </button>
-              <div style={{ textAlign: "center", marginTop: 14, fontSize: 14 }}>
-                {resendCountdown > 0 ? (
-                  <span style={{ color: "#888" }}>Resend OTP in {resendCountdown}s</span>
-                ) : (
-                  <button
-                    type="button"
-                    disabled={sending}
-                    onClick={handleResendOtp}
-                    style={{ background: "none", border: "none", color: "var(--navy, #1a2e4a)", textDecoration: "underline", cursor: "pointer", fontSize: 14, padding: 0 }}
-                  >
-                    {sending ? "Sending…" : "Resend OTP"}
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
         ) : (
-          /* ── Step 3: Full form ── */
           <form className="modal-body" noValidate onSubmit={handleSubmit}>
             <div className="modal-step active">
-              {/* Name + Mobile */}
+
+              {/* ── Row 1: Name + Mobile ── */}
               <div className="form-field-row">
+                {/* Name */}
                 <div className="form-field">
                   <label htmlFor="leadName">
                     Name <span className="req">*</span>
                   </label>
                   <input
-                    ref={firstInputRef}
+                    ref={nameRef}
                     type="text"
                     id="leadName"
                     name="name"
@@ -448,35 +377,164 @@ export default function LeadModal({
                     value={data.name}
                     onChange={(e) => handleChange("name", e.target.value)}
                   />
-                  {errors.name && <div className="hint" style={{ color: "#B83A2A" }}>{errors.name}</div>}
+                  {errors.name && (
+                    <div className="hint" style={{ color: "#B83A2A" }}>{errors.name}</div>
+                  )}
                 </div>
+
+                {/* Mobile */}
                 <div className="form-field">
                   <label htmlFor="leadMobile">
                     Mobile Number <span className="req">*</span>
-                    {OTP_ENABLED && (
-                      <span style={{ marginLeft: 6, fontSize: 12, color: "#2a7a4e", fontWeight: 600 }}>✓ Verified</span>
+                    {OTP_ENABLED && otpVerified && (
+                      <span style={{ marginLeft: 6, fontSize: 12, color: "#2a7a4e", fontWeight: 600 }}>
+                        ✓ Verified
+                      </span>
                     )}
                   </label>
-                  <input
-                    type="tel"
-                    id="leadMobile"
-                    name="mobile"
-                    autoComplete="tel"
-                    placeholder="10-digit number"
-                    value={data.mobile}
-                    readOnly={OTP_ENABLED}
-                    onChange={
-                      OTP_ENABLED
-                        ? undefined
-                        : (e) => handleChange("mobile", e.target.value.replace(/\D/g, "").slice(0, 10))
-                    }
-                    style={OTP_ENABLED ? { background: "#f5f5f5", cursor: "default" } : undefined}
-                  />
-                  {errors.mobile && <div className="hint" style={{ color: "#B83A2A" }}>{errors.mobile}</div>}
+                  <div style={{ position: "relative" }}>
+                    <input
+                      type="tel"
+                      id="leadMobile"
+                      name="mobile"
+                      autoComplete="tel"
+                      inputMode="numeric"
+                      placeholder="10-digit number"
+                      value={mobileInput}
+                      readOnly={OTP_ENABLED && otpSent}
+                      onChange={
+                        OTP_ENABLED
+                          ? (e) => handleMobileChange(e.target.value.replace(/\D/g, "").slice(0, 10))
+                          : (e) => {
+                              const val = e.target.value.replace(/\D/g, "").slice(0, 10);
+                              setMobileInput(val);
+                              handleChange("mobile", val);
+                            }
+                      }
+                      style={
+                        OTP_ENABLED && otpSent
+                          ? { background: "#f5f5f5", cursor: "default", paddingRight: 60 }
+                          : undefined
+                      }
+                    />
+                    {/* Change button — visible once mobile is locked */}
+                    {OTP_ENABLED && otpSent && (
+                      <button
+                        type="button"
+                        onClick={handleChangeMobile}
+                        style={{
+                          position: "absolute",
+                          right: 8,
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          background: "none",
+                          border: "none",
+                          color: "var(--navy, #1a2e4a)",
+                          fontSize: 12,
+                          cursor: "pointer",
+                          textDecoration: "underline",
+                          padding: "0 2px",
+                        }}
+                      >
+                        Change
+                      </button>
+                    )}
+                    {/* Sending spinner */}
+                    {OTP_ENABLED && sending && !otpSent && (
+                      <span
+                        style={{
+                          position: "absolute",
+                          right: 8,
+                          top: "50%",
+                          transform: "translateY(-50%)",
+                          fontSize: 12,
+                          color: "#888",
+                        }}
+                      >
+                        Sending…
+                      </span>
+                    )}
+                  </div>
+                  {mobileError && (
+                    <div className="hint" style={{ color: "#B83A2A" }}>{mobileError}</div>
+                  )}
+                  {errors.mobile && !mobileError && (
+                    <div className="hint" style={{ color: "#B83A2A" }}>{errors.mobile}</div>
+                  )}
+                  {/* Hint while typing */}
+                  {OTP_ENABLED && !otpSent && !sending && mobileInput.length > 0 && mobileInput.length < 10 && (
+                    <div className="hint" style={{ color: "#888" }}>
+                      OTP will be sent automatically
+                    </div>
+                  )}
                 </div>
               </div>
 
-              {/* Email + City */}
+              {/* ── Inline OTP section (appears after OTP is sent) ── */}
+              {OTP_ENABLED && otpSent && !otpVerified && (
+                <div className="form-field" style={{ marginTop: -8, marginBottom: 4 }}>
+                  <label htmlFor="otpInput">
+                    OTP sent to <strong>{maskedMobile}</strong> <span className="req">*</span>
+                  </label>
+                  <input
+                    ref={otpRef}
+                    type="text"
+                    id="otpInput"
+                    inputMode="numeric"
+                    placeholder="Enter 6-digit OTP"
+                    maxLength={6}
+                    value={otpInput}
+                    onChange={(e) => handleOtpChange(e.target.value.replace(/\D/g, "").slice(0, 6))}
+                    style={{ letterSpacing: "0.2em", fontSize: 20, textAlign: "center" }}
+                  />
+                  {otpError && (
+                    <div className="hint" style={{ color: "#B83A2A" }}>{otpError}</div>
+                  )}
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: 12,
+                      marginTop: 8,
+                    }}
+                  >
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      disabled={verifying || otpInput.length !== 6}
+                      onClick={() => verifyOtpCode(otpInput)}
+                      style={{ flex: 1 }}
+                    >
+                      {verifying ? "Verifying…" : "Verify OTP"}
+                    </button>
+                    {resendCountdown > 0 ? (
+                      <span style={{ fontSize: 13, color: "#888", whiteSpace: "nowrap" }}>
+                        Resend in {resendCountdown}s
+                      </span>
+                    ) : (
+                      <button
+                        type="button"
+                        disabled={sending}
+                        onClick={handleResendOtp}
+                        style={{
+                          background: "none",
+                          border: "none",
+                          color: "var(--navy, #1a2e4a)",
+                          textDecoration: "underline",
+                          cursor: "pointer",
+                          fontSize: 13,
+                          padding: 0,
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {sending ? "Sending…" : "Resend OTP"}
+                      </button>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* ── Row 2: Email + City ── */}
               <div className="form-field-row">
                 <div className="form-field">
                   <label htmlFor="leadEmail">
@@ -491,7 +549,9 @@ export default function LeadModal({
                     value={data.email}
                     onChange={(e) => handleChange("email", e.target.value)}
                   />
-                  {errors.email && <div className="hint" style={{ color: "#B83A2A" }}>{errors.email}</div>}
+                  {errors.email && (
+                    <div className="hint" style={{ color: "#B83A2A" }}>{errors.email}</div>
+                  )}
                 </div>
                 <div className="form-field">
                   <label htmlFor="leadCity">
@@ -506,11 +566,13 @@ export default function LeadModal({
                     value={data.city}
                     onChange={(e) => handleChange("city", e.target.value)}
                   />
-                  {errors.city && <div className="hint" style={{ color: "#B83A2A" }}>{errors.city}</div>}
+                  {errors.city && (
+                    <div className="hint" style={{ color: "#B83A2A" }}>{errors.city}</div>
+                  )}
                 </div>
               </div>
 
-              {/* Course Interested */}
+              {/* ── Course ── */}
               <div className="form-field">
                 <label htmlFor="leadCourse">
                   Course Interested In <span className="req">*</span>
@@ -539,7 +601,7 @@ export default function LeadModal({
                 )}
               </div>
 
-              {/* Consent */}
+              {/* ── Consent ── */}
               <label className="consent">
                 <input
                   type="checkbox"
@@ -549,7 +611,10 @@ export default function LeadModal({
                 />
                 <span>
                   I Accept the{" "}
-                  <a href="/terms-and-conditions" style={{ color: "var(--navy)", textDecoration: "underline" }}>
+                  <a
+                    href="/terms-and-conditions"
+                    style={{ color: "var(--navy)", textDecoration: "underline" }}
+                  >
                     Terms and Conditions
                   </a>
                 </span>
@@ -558,20 +623,33 @@ export default function LeadModal({
                 <div className="hint" style={{ color: "#B83A2A", marginBottom: 8 }}>{errors.consent}</div>
               )}
 
-              {/* Submit */}
+              {/* ── Submit ── */}
               <button
                 type="submit"
                 className="btn btn-primary"
-                disabled={submitting}
+                disabled={submitDisabled}
                 style={{ width: "100%", marginTop: 8 }}
               >
-                {submitting ? "Submitting…" : "Get Free Counselling"}{" "}
+                {submitting ? "Submitting…" : "Get Free Counselling"}
                 {!submitting && (
-                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                  <svg
+                    width="16"
+                    height="16"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                  >
                     <path d="M5 12h14M13 5l7 7-7 7" />
                   </svg>
                 )}
               </button>
+              {OTP_ENABLED && otpSent && !otpVerified && (
+                <p style={{ fontSize: 12, color: "#888", textAlign: "center", marginTop: 6, marginBottom: 0 }}>
+                  Please verify your OTP to submit the form
+                </p>
+              )}
+
             </div>
           </form>
         )}
