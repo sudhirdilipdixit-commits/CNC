@@ -193,6 +193,21 @@ export default defineType({
           ],
           description: "Rich text body. Supports headings, bold, italic, bullet/numbered lists, and links.",
         }),
+        defineField({
+          name: "textAlign",
+          title: "Body Text Alignment",
+          type: "string",
+          options: {
+            list: [
+              { title: "Left", value: "left" },
+              { title: "Center", value: "center" },
+              { title: "Right", value: "right" },
+            ],
+            layout: "radio",
+            direction: "horizontal",
+          },
+          initialValue: "left",
+        }),
       ],
     }),
 

@@ -63,6 +63,7 @@ export interface LandingPageData {
     heading?: string;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     body?: any[];
+    textAlign?: "left" | "center" | "right";
   };
   sidebarForm?: {
     show?: boolean;
@@ -506,7 +507,7 @@ export default function LandingPageClient({
               <h2 className="lp-content-block-heading">{data.contentBlock.heading}</h2>
             )}
             {data.contentBlock.body?.length ? (
-              <div className="lp-content-block-body">
+              <div className="lp-content-block-body" style={{ textAlign: data.contentBlock.textAlign ?? "left" }}>
                 <PortableText
                   value={data.contentBlock.body}
                   components={{
