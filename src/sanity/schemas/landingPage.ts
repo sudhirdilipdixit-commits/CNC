@@ -158,9 +158,40 @@ export default defineType({
         defineField({
           name: "body",
           title: "Body Text",
-          type: "text",
-          rows: 5,
-          description: "Paragraph(s) of supporting text. Use line breaks to separate paragraphs.",
+          type: "array",
+          of: [
+            {
+              type: "block",
+              styles: [
+                { title: "Normal", value: "normal" },
+                { title: "Heading 2", value: "h2" },
+                { title: "Heading 3", value: "h3" },
+              ],
+              lists: [
+                { title: "Bullet", value: "bullet" },
+                { title: "Numbered", value: "number" },
+              ],
+              marks: {
+                decorators: [
+                  { title: "Bold", value: "strong" },
+                  { title: "Italic", value: "em" },
+                  { title: "Underline", value: "underline" },
+                ],
+                annotations: [
+                  {
+                    name: "link",
+                    type: "object",
+                    title: "Link",
+                    fields: [
+                      defineField({ name: "href", type: "url", title: "URL" }),
+                      defineField({ name: "blank", type: "boolean", title: "Open in new tab", initialValue: true }),
+                    ],
+                  },
+                ],
+              },
+            },
+          ],
+          description: "Rich text body. Supports headings, bold, italic, bullet/numbered lists, and links.",
         }),
       ],
     }),

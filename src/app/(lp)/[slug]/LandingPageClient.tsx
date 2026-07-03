@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback, useEffect } from "react";
 import Image from "next/image";
+import { PortableText } from "@portabletext/react";
 import Header from "@/components/layout/Header";
 import LeadModal from "@/components/forms/LeadModal";
 
@@ -60,7 +61,8 @@ export interface LandingPageData {
   };
   contentBlock?: {
     heading?: string;
-    body?: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    body?: any[];
   };
   sidebarForm?: {
     show?: boolean;
@@ -497,19 +499,33 @@ export default function LandingPageClient({
       </div>
 
       {/* Content block — only rendered when at least one field has content */}
-      {(data.contentBlock?.heading || data.contentBlock?.body) && (
+      {(data.contentBlock?.heading || data.contentBlock?.body?.length) && (
         <section className="lp-content-block">
           <div className="container lp-content-block-inner">
             {data.contentBlock.heading && (
               <h2 className="lp-content-block-heading">{data.contentBlock.heading}</h2>
             )}
-            {data.contentBlock.body && (
+            {data.contentBlock.body?.length ? (
               <div className="lp-content-block-body">
-                {data.contentBlock.body.split("\n").map((line, i) =>
-                  line.trim() ? <p key={i}>{line}</p> : null
-                )}
+                <PortableText
+                  value={data.contentBlock.body}
+                  components={{
+                    marks: {
+                      link: ({ children, value }) => (
+                        <a
+                          href={value?.href}
+                          target={value?.blank ? "_blank" : undefined}
+                          rel={value?.blank ? "noopener noreferrer" : undefined}
+                          className="lp-cb-link"
+                        >
+                          {children}
+                        </a>
+                      ),
+                    },
+                  }}
+                />
               </div>
-            )}
+            ) : null}
           </div>
         </section>
       )}
@@ -825,9 +841,18 @@ export default function LandingPageClient({
         /* ── Content block ── */
         .lp-content-block { background: var(--ivory); border-bottom: 1px solid var(--mist); padding: 32px 0; }
         .lp-content-block-inner { max-width: 800px; }
-        .lp-content-block-heading { font-family: var(--font-serif); color: var(--navy); font-size: clamp(20px, 2.5vw, 28px); margin-bottom: 12px; line-height: 1.2; }
+        .lp-content-block-heading { font-family: var(--font-serif); color: var(--navy); font-size: clamp(20px, 2.5vw, 28px); margin-bottom: 16px; line-height: 1.2; text-align: center; }
         .lp-content-block-body p { font-size: 15px; color: var(--charcoal); line-height: 1.7; margin-bottom: 10px; }
         .lp-content-block-body p:last-child { margin-bottom: 0; }
+        .lp-content-block-body h2 { font-family: var(--font-serif); color: var(--navy); font-size: clamp(18px, 2vw, 24px); margin: 20px 0 8px; line-height: 1.2; }
+        .lp-content-block-body h3 { font-family: var(--font-serif); color: var(--navy); font-size: clamp(16px, 1.6vw, 20px); margin: 16px 0 6px; line-height: 1.3; }
+        .lp-content-block-body ul { list-style: disc; padding-left: 20px; margin-bottom: 10px; }
+        .lp-content-block-body ol { list-style: decimal; padding-left: 20px; margin-bottom: 10px; }
+        .lp-content-block-body li { font-size: 15px; color: var(--charcoal); line-height: 1.7; margin-bottom: 4px; }
+        .lp-content-block-body strong { font-weight: 700; color: var(--navy); }
+        .lp-content-block-body em { font-style: italic; }
+        .lp-content-block-body u { text-decoration: underline; }
+        .lp-cb-link { color: var(--navy); font-weight: 600; text-decoration: underline; text-underline-offset: 2px; }
 
         /* ── Main layout ── */
         .lp-main { padding: 28px 0 64px; }
