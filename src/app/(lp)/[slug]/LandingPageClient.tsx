@@ -58,6 +58,10 @@ export interface LandingPageData {
     showDuration?: boolean;
     showFeeRange?: boolean;
   };
+  contentBlock?: {
+    heading?: string;
+    body?: string;
+  };
   sidebarForm?: {
     show?: boolean;
     heading?: string;
@@ -492,6 +496,24 @@ export default function LandingPageClient({
         </div>
       </div>
 
+      {/* Content block — only rendered when at least one field has content */}
+      {(data.contentBlock?.heading || data.contentBlock?.body) && (
+        <section className="lp-content-block">
+          <div className="container lp-content-block-inner">
+            {data.contentBlock.heading && (
+              <h2 className="lp-content-block-heading">{data.contentBlock.heading}</h2>
+            )}
+            {data.contentBlock.body && (
+              <div className="lp-content-block-body">
+                {data.contentBlock.body.split("\n").map((line, i) =>
+                  line.trim() ? <p key={i}>{line}</p> : null
+                )}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* Main layout */}
       <div className="lp-main">
         <div className="container">
@@ -799,6 +821,13 @@ export default function LandingPageClient({
         .lp-btn-ghost-light:hover { background: rgba(255,255,255,.18); }
         .lp-trust-strip { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-top: 20px; font-size: 13px; color: var(--pale-navy); }
         .lp-trust-bullet { color: var(--yellow); font-weight: 700; margin-right: 3px; }
+
+        /* ── Content block ── */
+        .lp-content-block { background: var(--ivory); border-bottom: 1px solid var(--mist); padding: 32px 0; }
+        .lp-content-block-inner { max-width: 800px; }
+        .lp-content-block-heading { font-family: var(--font-serif); color: var(--navy); font-size: clamp(20px, 2.5vw, 28px); margin-bottom: 12px; line-height: 1.2; }
+        .lp-content-block-body p { font-size: 15px; color: var(--charcoal); line-height: 1.7; margin-bottom: 10px; }
+        .lp-content-block-body p:last-child { margin-bottom: 0; }
 
         /* ── Main layout ── */
         .lp-main { padding: 28px 0 64px; }

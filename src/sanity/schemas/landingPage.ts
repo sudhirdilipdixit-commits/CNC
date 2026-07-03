@@ -141,6 +141,30 @@ export default defineType({
       ],
     }),
 
+    // ── Content block (optional — shown between hero and cards) ─────────────
+    defineField({
+      name: "contentBlock",
+      title: "Content Block (below hero)",
+      type: "object",
+      description: "Optional section shown between the hero and the cards grid. Leave both fields empty to hide.",
+      group: "content",
+      fields: [
+        defineField({
+          name: "heading",
+          title: "Heading",
+          type: "string",
+          description: "e.g. 'Why choose an Online MBA?'",
+        }),
+        defineField({
+          name: "body",
+          title: "Body Text",
+          type: "text",
+          rows: 5,
+          description: "Paragraph(s) of supporting text. Use line breaks to separate paragraphs.",
+        }),
+      ],
+    }),
+
     // ── Trust points ─────────────────────────────────────────────────
     defineField({
       name: "trustPoints",

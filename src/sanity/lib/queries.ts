@@ -33,7 +33,8 @@ export const landingPageQuery = groq`*[_type == "landingPage" && slug.current ==
   title, campaign, pageType,
   showFullHeader, showFooter, hideSidebar, urgencyBanner,
   hero { eyebrow, headline, subheadline, primaryCtaLabel, secondaryCtaLabel, secondaryCtaHref },
-  filterConfig { showMode },
+  filterConfig { showMode, showDuration, showFeeRange },
+  contentBlock { heading, body },
   sidebarForm { show, heading, subheading },
   trustPoints,
   "courseItems": courseItems[]->{
