@@ -81,21 +81,22 @@ export default function LeadModal({ open, onClose, source = "modal", title = "Ta
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
+  const [duplicate, setDuplicate] = useState(false);
   const firstInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (open) {
       const hasCookie = document.cookie.includes(COOKIE_NAME + "=true");
       if (hasCookie) {
-        router.push("/thank-you");
-        onClose();
+        setDuplicate(true);
         return;
       }
+      setDuplicate(false);
       setErrors({});
       setData({ name: "", mobile: "", email: "", city: "", courseInterested: "", consent: false });
       setTimeout(() => firstInputRef.current?.focus(), 200);
     }
-  }, [open, router, onClose]);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -152,8 +153,12 @@ export default function LeadModal({ open, onClose, source = "modal", title = "Ta
       const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
       document.cookie = `${COOKIE_NAME}=true; expires=${expires}; path=/; SameSite=Lax`;
 
-      onClose();
-      router.push(`/thank-you${json.id ? `?ref=CNC-2026-${json.id}` : ""}`);
+      if (json.duplicate) {
+        setDuplicate(true);
+      } else {
+        onClose();
+        router.push(`/thank-you${json.id ? `?ref=CNC-2026-${json.id}` : ""}`);
+      }
 
     } catch {
       setErrors({ name: "Something went wrong. Please try again." });
@@ -187,7 +192,15 @@ export default function LeadModal({ open, onClose, source = "modal", title = "Ta
           <p>Free, no spam, no obligations.</p>
         </div>
 
-        {/* Form */}
+        {duplicate ? (
+          <div className="modal-body">
+            <div className="modal-step modal-success active">
+              <div className="modal-success-icon" aria-hidden="true">✓</div>
+              <h2>Already received!</h2>
+              <p>Your enquiry has already been received. Our counsellor will contact you shortly.</p>
+            </div>
+          </div>
+        ) : (
         <form className="modal-body" noValidate onSubmit={handleSubmit}>
           <div className="modal-step active">
             {/* Name + Mobile — 2 columns */}
@@ -322,6 +335,7 @@ export default function LeadModal({ open, onClose, source = "modal", title = "Ta
               </button>
             </div>
           </form>
+        )}
       </div>
     </div>
   );
