@@ -141,10 +141,10 @@ function CompareModal({
                   {items.map((item) => (
                     <th key={item._id} className="lp-cmp-th">
                       {item.universityLogoUrl ? (
-                        <Image src={item.universityLogoUrl} alt={item.universityName}
+                        <Image src={item.universityLogoUrl} alt={item.universityName ?? ""}
                           width={200} height={90} className="lp-cmp-logo" />
                       ) : (
-                        <div className="lp-cmp-logo-ph">{item.universityName.charAt(0)}</div>
+                        <div className="lp-cmp-logo-ph">{(item.universityName ?? "?").charAt(0)}</div>
                       )}
                       <div className="lp-cmp-course-name">{getItemName(item)}</div>
                     </th>
@@ -819,10 +819,10 @@ export default function LandingPageClient({
                 return item ? (
                   <div key={item._id} className="lp-cmp-slot lp-cmp-slot--filled">
                     {item.universityLogoUrl ? (
-                      <Image src={item.universityLogoUrl} alt={item.universityName}
+                      <Image src={item.universityLogoUrl} alt={item.universityName ?? ""}
                         width={36} height={36} className="lp-cmp-slot-thumb" />
                     ) : (
-                      <div className="lp-cmp-slot-ph">{item.universityName.charAt(0)}</div>
+                      <div className="lp-cmp-slot-ph">{(item.universityName ?? "?").charAt(0)}</div>
                     )}
                     <span className="lp-cmp-slot-name">
                       {pageType === "course" ? (item as CourseCardItem).courseName : item.universityName}
