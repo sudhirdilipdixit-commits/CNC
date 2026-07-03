@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 import { z } from "zod";
 
 const leadSchema = z.object({
@@ -67,10 +68,9 @@ function getBrowser(ua: string) {
 }
 
 const COOKIE_NAME = "cnc_lead_submitted";
-const DUPLICATE_MSG =
-  "Thank you. Your enquiry has already been received. Our counsellor will contact you shortly.";
 
 export default function LeadModal({ open, onClose, source = "modal", title = "Talk to a counsellor in 30 minutes" }: LeadModalProps) {
+  const router = useRouter();
   const [data, setData] = useState<FormData>({
     name: "",
     mobile: "",
@@ -81,26 +81,21 @@ export default function LeadModal({ open, onClose, source = "modal", title = "Ta
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [submitting, setSubmitting] = useState(false);
-  const [enquiryId, setEnquiryId] = useState("");
-  const [isDuplicate, setIsDuplicate] = useState(false);
-  const [success, setSuccess] = useState(false);
   const firstInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (open) {
       const hasCookie = document.cookie.includes(COOKIE_NAME + "=true");
       if (hasCookie) {
-        setIsDuplicate(true);
-        setSuccess(true);
-      } else {
-        setIsDuplicate(false);
-        setSuccess(false);
-        setErrors({});
-        setData({ name: "", mobile: "", email: "", city: "", courseInterested: "", consent: false });
+        router.push("/thank-you");
+        onClose();
+        return;
       }
+      setErrors({});
+      setData({ name: "", mobile: "", email: "", city: "", courseInterested: "", consent: false });
       setTimeout(() => firstInputRef.current?.focus(), 200);
     }
-  }, [open]);
+  }, [open, router, onClose]);
 
   useEffect(() => {
     if (!open) return;
@@ -157,12 +152,9 @@ export default function LeadModal({ open, onClose, source = "modal", title = "Ta
       const expires = new Date(Date.now() + 24 * 60 * 60 * 1000).toUTCString();
       document.cookie = `${COOKIE_NAME}=true; expires=${expires}; path=/; SameSite=Lax`;
 
-      if (json.duplicate) {
-        setIsDuplicate(true);
-      } else if (json.id) {
-        setEnquiryId(json.id);
-      }
-      setSuccess(true);
+      onClose();
+      router.push(`/thank-you${json.id ? `?ref=CNC-2026-${json.id}` : ""}`);
+
     } catch {
       setErrors({ name: "Something went wrong. Please try again." });
     } finally {
@@ -195,33 +187,10 @@ export default function LeadModal({ open, onClose, source = "modal", title = "Ta
           <p>Free, no spam, no obligations.</p>
         </div>
 
-        {success ? (
-          /* Success state */
-          <div className="modal-body">
-            <div className="modal-step modal-success active">
-              <div className="modal-success-icon" aria-hidden="true">✓</div>
-              {isDuplicate ? (
-                <>
-                  <h2>Already received!</h2>
-                  <p>{DUPLICATE_MSG}</p>
-                </>
-              ) : (
-                <>
-                  <h2>Thanks, we&apos;ve got your enquiry.</h2>
-                  <p>A senior counsellor will call you within 30 minutes during working hours.</p>
-                  {enquiryId && <div className="enquiry-id">CNC-2026-{enquiryId}</div>}
-                  <p style={{ fontSize: 13 }}>
-                    We&apos;ve also sent a confirmation to your mobile.
-                  </p>
-                </>
-              )}
-            </div>
-          </div>
-        ) : (
-          /* Form */
-          <form className="modal-body" noValidate onSubmit={handleSubmit}>
-            <div className="modal-step active">
-              {/* Name + Mobile — 2 columns */}
+        {/* Form */}
+        <form className="modal-body" noValidate onSubmit={handleSubmit}>
+          <div className="modal-step active">
+            {/* Name + Mobile — 2 columns */}
               <div className="form-field-row">
                 <div className="form-field">
                   <label htmlFor="leadName">
@@ -353,7 +322,6 @@ export default function LeadModal({ open, onClose, source = "modal", title = "Ta
               </button>
             </div>
           </form>
-        )}
       </div>
     </div>
   );
