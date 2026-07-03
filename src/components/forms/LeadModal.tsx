@@ -91,6 +91,9 @@ export default function LeadModal({
   const [verifying, setVerifying] = useState(false);
   const [resendCountdown, setResendCountdown] = useState(0);
 
+  // Close warning — shown when user tries to close with OTP pending
+  const [showCloseWarning, setShowCloseWarning] = useState(false);
+
   // Form state
   const [data, setData] = useState<FormData>({
     name: "",
@@ -120,6 +123,7 @@ export default function LeadModal({
       setOtpInput("");
       setOtpError("");
       setResendCountdown(0);
+      setShowCloseWarning(false);
       setData({ name: "", mobile: "", email: "", city: "", courseInterested: "", consent: false });
       setErrors({});
       setTimeout(() => nameRef.current?.focus(), 200);
@@ -140,17 +144,25 @@ export default function LeadModal({
     return () => clearTimeout(t);
   }, [resendCountdown]);
 
-  // Escape + body scroll lock
+  // Escape key — intercept if OTP pending
   useEffect(() => {
     if (!open) return;
-    const handleKey = (e: KeyboardEvent) => { if (e.key === "Escape") onClose(); };
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        if (OTP_ENABLED && otpSent && !otpVerified) {
+          setShowCloseWarning(true);
+        } else {
+          onClose();
+        }
+      }
+    };
     document.addEventListener("keydown", handleKey);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", handleKey);
       document.body.style.overflow = "";
     };
-  }, [open, onClose]);
+  }, [open, onClose, otpSent, otpVerified]);
 
   // ── OTP helpers ─────────────────────────────────────────────────────
 
@@ -170,6 +182,20 @@ export default function LeadModal({
       }
       setOtpSent(true);
       setResendCountdown(30);
+
+      // Fire-and-forget: save unverified lead so we don't lose the prospect
+      // if they close the modal before verifying. Non-critical — errors are ignored.
+      fetch("/api/leads/partial", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.name,
+          mobile,
+          ...getUTMParams(),
+          ...getDeviceInfo(),
+          source,
+        }),
+      }).catch(() => {});
     } catch {
       setMobileError("Failed to send OTP. Please try again.");
     } finally {
@@ -196,7 +222,8 @@ export default function LeadModal({
         return;
       }
       setOtpVerified(true);
-      // Lock mobile into form data after verification
+      setShowCloseWarning(false);
+      // Lock verified mobile into form data
       setData((prev) => ({ ...prev, mobile: mobileInput }));
     } catch {
       setOtpError("Verification failed. Please try again.");
@@ -208,7 +235,6 @@ export default function LeadModal({
   const handleMobileChange = (val: string) => {
     setMobileInput(val);
     setMobileError("");
-    // Auto-send OTP when 10 digits are entered
     if (val.length === 10 && !otpSent && !sending) {
       sendOtp(val);
     }
@@ -217,7 +243,6 @@ export default function LeadModal({
   const handleOtpChange = (val: string) => {
     setOtpInput(val);
     setOtpError("");
-    // Auto-verify when all 6 digits entered
     if (val.length === 6) verifyOtpCode(val);
   };
 
@@ -229,6 +254,7 @@ export default function LeadModal({
     setMobileInput("");
     setMobileError("");
     setResendCountdown(0);
+    setShowCloseWarning(false);
     setData((prev) => ({ ...prev, mobile: "" }));
   };
 
@@ -266,7 +292,6 @@ export default function LeadModal({
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // Guard: OTP must be verified before submitting
     if (OTP_ENABLED && !otpVerified) {
       setMobileError(
         otpSent
@@ -315,8 +340,17 @@ export default function LeadModal({
     }
   };
 
+  // Intercept close if OTP is pending
+  const tryClose = useCallback(() => {
+    if (OTP_ENABLED && otpSent && !otpVerified) {
+      setShowCloseWarning(true);
+    } else {
+      onClose();
+    }
+  }, [onClose, otpSent, otpVerified]);
+
   const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) onClose();
+    if (e.target === e.currentTarget) tryClose();
   };
 
   if (!open) return null;
@@ -325,7 +359,6 @@ export default function LeadModal({
     ? `+91 ${mobileInput.slice(0, 2)}${"•".repeat(6)}${mobileInput.slice(-2)}`
     : "";
 
-  // Submit should be disabled while OTP is pending (sent but not yet verified)
   const submitDisabled = submitting || (OTP_ENABLED && otpSent && !otpVerified);
 
   return (
@@ -340,7 +373,7 @@ export default function LeadModal({
       <div className="modal" role="document">
         {/* Header */}
         <div className="modal-header">
-          <button type="button" className="modal-close" aria-label="Close" onClick={onClose}>
+          <button type="button" className="modal-close" aria-label="Close" onClick={tryClose}>
             ×
           </button>
           <h2 id="modalTitle">{title}</h2>
@@ -359,6 +392,55 @@ export default function LeadModal({
         ) : (
           <form className="modal-body" noValidate onSubmit={handleSubmit}>
             <div className="modal-step active">
+
+              {/* ── Close warning banner ── */}
+              {showCloseWarning && (
+                <div
+                  style={{
+                    background: "#fffbeb",
+                    border: "1px solid #f59e0b",
+                    borderRadius: 8,
+                    padding: "12px 14px",
+                    marginBottom: 16,
+                  }}
+                >
+                  <p style={{ margin: "0 0 4px", fontSize: 14, fontWeight: 600, color: "#92400e" }}>
+                    OTP verification is pending
+                  </p>
+                  <p style={{ margin: "0 0 10px", fontSize: 13, color: "#78350f" }}>
+                    Enter the OTP sent to {maskedMobile} to complete verification and save your spot.
+                  </p>
+                  <div style={{ display: "flex", gap: 8 }}>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => {
+                        setShowCloseWarning(false);
+                        setTimeout(() => otpRef.current?.focus(), 50);
+                      }}
+                      style={{ flex: 1, fontSize: 13 }}
+                    >
+                      Continue Verifying
+                    </button>
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      style={{
+                        flex: 1,
+                        background: "none",
+                        border: "1px solid #d1d5db",
+                        borderRadius: 6,
+                        fontSize: 13,
+                        cursor: "pointer",
+                        color: "#6b7280",
+                        padding: "8px 12px",
+                      }}
+                    >
+                      Close anyway
+                    </button>
+                  </div>
+                </div>
+              )}
 
               {/* ── Row 1: Name + Mobile ── */}
               <div className="form-field-row">
@@ -417,7 +499,7 @@ export default function LeadModal({
                           : undefined
                       }
                     />
-                    {/* Change button — visible once mobile is locked */}
+                    {/* Change button — once mobile is locked */}
                     {OTP_ENABLED && otpSent && (
                       <button
                         type="button"
@@ -439,7 +521,7 @@ export default function LeadModal({
                         Change
                       </button>
                     )}
-                    {/* Sending spinner */}
+                    {/* Sending indicator */}
                     {OTP_ENABLED && sending && !otpSent && (
                       <span
                         style={{
@@ -461,7 +543,6 @@ export default function LeadModal({
                   {errors.mobile && !mobileError && (
                     <div className="hint" style={{ color: "#B83A2A" }}>{errors.mobile}</div>
                   )}
-                  {/* Hint while typing */}
                   {OTP_ENABLED && !otpSent && !sending && mobileInput.length > 0 && mobileInput.length < 10 && (
                     <div className="hint" style={{ color: "#888" }}>
                       OTP will be sent automatically
@@ -470,7 +551,7 @@ export default function LeadModal({
                 </div>
               </div>
 
-              {/* ── Inline OTP section (appears after OTP is sent) ── */}
+              {/* ── Inline OTP section ── */}
               {OTP_ENABLED && otpSent && !otpVerified && (
                 <div className="form-field" style={{ marginTop: -8, marginBottom: 4 }}>
                   <label htmlFor="otpInput">
@@ -490,14 +571,7 @@ export default function LeadModal({
                   {otpError && (
                     <div className="hint" style={{ color: "#B83A2A" }}>{otpError}</div>
                   )}
-                  <div
-                    style={{
-                      display: "flex",
-                      alignItems: "center",
-                      gap: 12,
-                      marginTop: 8,
-                    }}
-                  >
+                  <div style={{ display: "flex", alignItems: "center", gap: 12, marginTop: 8 }}>
                     <button
                       type="button"
                       className="btn btn-primary"

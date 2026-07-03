@@ -79,11 +79,13 @@ export async function POST(request: NextRequest) {
     const { data: d } = parsed;
 
     // Server-side duplicate check (last 24 hours)
+    // Exclude "unverified" records — they are partial saves and must not block full submissions.
     const { data: existing } = await supabase
       .from("leads")
       .select("id")
       .or(`mobile.eq.${d.mobile},email.eq.${d.email}`)
       .gte("created_at", new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString())
+      .not("status", "eq", "unverified")
       .limit(1);
 
     if (existing && existing.length > 0) {
