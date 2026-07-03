@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
 import { headers } from "next/headers";
+import { waitUntil } from "@vercel/functions";
 import { pushToAgile } from "@/lib/agilecrm";
 
 const leadSchema = z.object({
@@ -119,20 +120,22 @@ export async function POST(request: NextRequest) {
 
     if (error) throw error;
 
-    // Push to Agile CRM — awaited before response so Vercel doesn't cut it off;
-    // errors are caught so Agile failure never blocks the lead save response.
-    await pushToAgile({
-      name: d.name,
-      mobile: d.mobile,
-      email: d.email,
-      city: d.city,
-      courseInterested: d.courseInterested,
-      utmSource: d.utmSource,
-      utmMedium: d.utmMedium,
-      utmCampaign: d.utmCampaign,
-      landingPage: d.landingPage,
-      source: d.source,
-    }).catch((e) => console.error("Agile CRM push failed:", e));
+    // Push to Agile CRM after response is sent — waitUntil keeps the function
+    // alive on Vercel without making the user wait for the Agile API.
+    waitUntil(
+      pushToAgile({
+        name: d.name,
+        mobile: d.mobile,
+        email: d.email,
+        city: d.city,
+        courseInterested: d.courseInterested,
+        utmSource: d.utmSource,
+        utmMedium: d.utmMedium,
+        utmCampaign: d.utmCampaign,
+        landingPage: d.landingPage,
+        source: d.source,
+      }).catch((e) => console.error("Agile CRM push failed:", e))
+    );
 
     return NextResponse.json({ id: String(lead.id).slice(-5).toUpperCase() });
   } catch (err) {
