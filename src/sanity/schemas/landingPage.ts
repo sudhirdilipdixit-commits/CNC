@@ -26,7 +26,7 @@ export default defineType({
       type: "slug",
       options: { source: "title" },
       validation: (R) => R.required(),
-      description: "Page URL will be /lp/[slug]",
+      description: "Page URL will be /[slug]",
       group: "content",
     }),
     defineField({
