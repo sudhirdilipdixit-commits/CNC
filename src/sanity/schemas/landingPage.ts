@@ -11,6 +11,24 @@ export default defineType({
     { name: "seo", title: "SEO" },
   ],
   fields: [
+    // ── Page Type — ungrouped so it floats above all tabs ────────────
+    defineField({
+      name: "pageType",
+      title: "Page Type",
+      type: "string",
+      description: "Controls which card type is shown and which fields appear in the Filters & Grid tab.",
+      options: {
+        list: [
+          { title: "Course / Programme Grid", value: "course" },
+          { title: "University Grid", value: "university" },
+        ],
+        layout: "radio",
+        direction: "horizontal",
+      },
+      initialValue: "course",
+      validation: (R) => R.required(),
+    }),
+
     // ── Internal ─────────────────────────────────────────────────────
     defineField({
       name: "title",
@@ -44,21 +62,6 @@ export default defineType({
         ],
       },
       group: "content",
-    }),
-    defineField({
-      name: "pageType",
-      title: "Page Type",
-      type: "string",
-      options: {
-        list: [
-          { title: "Course / Programme Grid", value: "course" },
-          { title: "University Grid", value: "university" },
-        ],
-        layout: "radio",
-        direction: "horizontal",
-      },
-      initialValue: "course",
-      group: "filters",
     }),
 
     // ── Display Settings ─────────────────────────────────────────────
