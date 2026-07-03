@@ -101,8 +101,8 @@ function CompareModal({
     };
   }, [onClose]);
 
-  const getItemName = (item: AnyCardItem) =>
-    pageType === "course" ? (item as CourseCardItem).courseName : item.universityName;
+  const getItemName = (item: AnyCardItem): string =>
+    (pageType === "course" ? (item as CourseCardItem).courseName : item.universityName) ?? "";
 
   const fields: { label: string; render: (i: AnyCardItem) => string | undefined }[] =
     pageType === "course"
