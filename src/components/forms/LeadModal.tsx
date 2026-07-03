@@ -27,7 +27,7 @@ interface LeadModalProps {
   open: boolean;
   onClose: () => void;
   source?: string;
-  defaultCourse?: string;
+  title?: string;
 }
 
 function getUTMParams() {
@@ -70,7 +70,7 @@ const COOKIE_NAME = "cnc_lead_submitted";
 const DUPLICATE_MSG =
   "Thank you. Your enquiry has already been received. Our counsellor will contact you shortly.";
 
-export default function LeadModal({ open, onClose, source = "modal", defaultCourse = "" }: LeadModalProps) {
+export default function LeadModal({ open, onClose, source = "modal", title = "Talk to a counsellor in 30 minutes" }: LeadModalProps) {
   const [data, setData] = useState<FormData>({
     name: "",
     mobile: "",
@@ -96,13 +96,11 @@ export default function LeadModal({ open, onClose, source = "modal", defaultCour
         setIsDuplicate(false);
         setSuccess(false);
         setErrors({});
-        if (defaultCourse) {
-          setData((prev) => ({ ...prev, courseInterested: defaultCourse }));
-        }
+        setData({ name: "", mobile: "", email: "", city: "", courseInterested: "", consent: false });
       }
       setTimeout(() => firstInputRef.current?.focus(), 200);
     }
-  }, [open, defaultCourse]);
+  }, [open]);
 
   useEffect(() => {
     if (!open) return;
@@ -193,7 +191,7 @@ export default function LeadModal({ open, onClose, source = "modal", defaultCour
           <button type="button" className="modal-close" aria-label="Close" onClick={onClose}>
             ×
           </button>
-          <h2 id="modalTitle">Talk to a counsellor in 30 minutes</h2>
+          <h2 id="modalTitle">{title}</h2>
           <p>Free, no spam, no obligations.</p>
         </div>
 
@@ -299,39 +297,25 @@ export default function LeadModal({ open, onClose, source = "modal", defaultCour
                 <label htmlFor="leadCourse">
                   Course Interested In <span className="req">*</span>
                 </label>
-                {defaultCourse ? (
-                  <>
-                    <input
-                      type="text"
-                      id="leadCourse"
-                      name="courseInterested"
-                      value={data.courseInterested}
-                      readOnly
-                      style={{ background: "var(--ivory)", cursor: "default" }}
-                    />
-                    <input type="hidden" name="courseInterested" value={data.courseInterested} />
-                  </>
-                ) : (
-                  <select
-                    id="leadCourse"
-                    name="courseInterested"
-                    value={data.courseInterested}
-                    onChange={(e) => handleChange("courseInterested", e.target.value)}
-                  >
-                    <option value="">Select a programme</option>
-                    <option>Online MBA</option>
-                    <option>Distance MBA</option>
-                    <option>Executive MBA</option>
-                    <option>MBA in Marketing</option>
-                    <option>MBA in Finance</option>
-                    <option>MBA in HR</option>
-                    <option>MBA in Operations</option>
-                    <option>MBA in IT &amp; Project Management</option>
-                    <option>MBA in Healthcare</option>
-                    <option>Design Programmes</option>
-                    <option>Not sure yet</option>
-                  </select>
-                )}
+                <select
+                  id="leadCourse"
+                  name="courseInterested"
+                  value={data.courseInterested}
+                  onChange={(e) => handleChange("courseInterested", e.target.value)}
+                >
+                  <option value="">Select a programme</option>
+                  <option>Online MBA</option>
+                  <option>Distance MBA</option>
+                  <option>Executive MBA</option>
+                  <option>MBA in Marketing</option>
+                  <option>MBA in Finance</option>
+                  <option>MBA in HR</option>
+                  <option>MBA in Operations</option>
+                  <option>MBA in IT &amp; Project Management</option>
+                  <option>MBA in Healthcare</option>
+                  <option>Design Programmes</option>
+                  <option>Not sure yet</option>
+                </select>
                 {errors.courseInterested && (
                   <div className="hint" style={{ color: "#B83A2A" }}>{errors.courseInterested}</div>
                 )}
