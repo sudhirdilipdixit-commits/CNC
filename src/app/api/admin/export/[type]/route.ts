@@ -86,7 +86,7 @@ export async function GET(
     csv = [headers.join(","), ...rows].join("\n");
   }
 
-  return new NextResponse(csv, {
+  return new NextResponse("﻿" + csv, {
     headers: {
       "Content-Type": "text/csv; charset=utf-8",
       "Content-Disposition": `attachment; filename="${type}-export.csv"`,
