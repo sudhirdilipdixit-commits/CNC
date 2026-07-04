@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { LogoutButton } from "./logout-button";
 
 export const metadata: Metadata = {
   title: "Admin Dashboard | CollegeNCourses",
@@ -33,9 +34,12 @@ export default function AdminLayout({
           </span>
           <span className="text-base font-semibold">Admin Dashboard</span>
         </div>
-        <span className="text-xs" style={{ color: "var(--pale-navy)" }}>
-          CollegeNCourses CRM
-        </span>
+        <div style={{ display: "flex", alignItems: "center", gap: 16 }}>
+          <span className="text-xs" style={{ color: "var(--pale-navy)" }}>
+            CollegeNCourses CRM
+          </span>
+          <LogoutButton />
+        </div>
       </header>
 
       <div className="max-w-[1400px] mx-auto px-4 lg:px-8 py-8">{children}</div>
