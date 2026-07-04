@@ -1,11 +1,6 @@
 "use client";
 
 import { useRef, useState } from "react";
-import type { Metadata } from "next";
-
-// Note: metadata export is ignored in "use client" files.
-// Title is set via the admin layout.
-export const metadata: Metadata = { title: "Import / Export | Admin" };
 
 type Tab = "courses" | "universities";
 type ResultRow = { internalName: string; action: string; error?: string };
