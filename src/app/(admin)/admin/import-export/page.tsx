@@ -1,0 +1,290 @@
+"use client";
+
+import { useRef, useState } from "react";
+import type { Metadata } from "next";
+
+// Note: metadata export is ignored in "use client" files.
+// Title is set via the admin layout.
+export const metadata: Metadata = { title: "Import / Export | Admin" };
+
+type Tab = "courses" | "universities";
+type ResultRow = { internalName: string; action: string; error?: string };
+
+const COURSE_HEADERS = "internalName,courseName,universityName,mode,duration,fees,feeCategory,eligibility,badge,isFeatured,logoUrl";
+const COURSE_SAMPLE = `Amity Online MBA Marketing 2026,Online MBA in Marketing Management,Amity University Online,Online,2 Years,"₹80,000 – ₹1,20,000",₹1L – ₹2L,Graduation in any stream | Min. 50%,Top Pick,TRUE,https://example.com/logo.png`;
+
+const UNIVERSITY_HEADERS = "internalName,universityName,mode,duration,approvedBy,fees,feeCategory,eligibility,badge,isFeatured,logoUrl";
+const UNIVERSITY_SAMPLE = `Amity Online MBA 2026,Amity University Online,Online,2 Years,UGC-DEB|NAAC A++,"₹1,20,000/year",₹1L – ₹2L,Graduation in any stream | Min. 50%,NAAC A++,TRUE,https://example.com/logo.png`;
+
+function downloadText(content: string, filename: string) {
+  const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+const ACTION_STYLE: Record<string, React.CSSProperties> = {
+  created:  { background: "#dcfce7", color: "#166534" },
+  updated:  { background: "#dbeafe", color: "#1e40af" },
+  skipped:  { background: "#fef3c7", color: "#92400e" },
+  error:    { background: "#fee2e2", color: "#991b1b" },
+};
+
+export default function ImportExportPage() {
+  const [secret, setSecret]         = useState("");
+  const [tab, setTab]               = useState<Tab>("courses");
+  const [file, setFile]             = useState<File | null>(null);
+  const [importing, setImporting]   = useState(false);
+  const [exporting, setExporting]   = useState(false);
+  const [results, setResults]       = useState<ResultRow[] | null>(null);
+  const [importError, setImportError] = useState("");
+  const fileRef = useRef<HTMLInputElement>(null);
+
+  const resetImport = () => {
+    setResults(null);
+    setImportError("");
+    setFile(null);
+    if (fileRef.current) fileRef.current.value = "";
+  };
+
+  const switchTab = (t: Tab) => { setTab(t); resetImport(); };
+
+  const handleExport = async () => {
+    if (!secret.trim()) { alert("Enter the admin secret first."); return; }
+    setExporting(true);
+    try {
+      const res = await fetch(`/api/admin/export/${tab}`, {
+        headers: { Authorization: `Bearer ${secret}` },
+      });
+      if (!res.ok) {
+        const j = await res.json();
+        alert(j.error || "Export failed. Check the admin secret.");
+        return;
+      }
+      const text = await res.text();
+      downloadText(text, `${tab}-export.csv`);
+    } catch {
+      alert("Export failed. Check your connection.");
+    } finally {
+      setExporting(false);
+    }
+  };
+
+  const handleImport = async () => {
+    if (!secret.trim()) { alert("Enter the admin secret first."); return; }
+    if (!file) { alert("Select a CSV file first."); return; }
+    setImporting(true);
+    setResults(null);
+    setImportError("");
+    try {
+      const csv = await file.text();
+      const res = await fetch(`/api/admin/import/${tab}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${secret}`,
+        },
+        body: JSON.stringify({ csv }),
+      });
+      const json = await res.json();
+      if (!res.ok) {
+        setImportError(json.error || "Import failed.");
+        return;
+      }
+      setResults(json.results);
+      setFile(null);
+      if (fileRef.current) fileRef.current.value = "";
+    } catch {
+      setImportError("Import failed. Check your connection and try again.");
+    } finally {
+      setImporting(false);
+    }
+  };
+
+  const created = results?.filter((r) => r.action === "created").length ?? 0;
+  const updated = results?.filter((r) => r.action === "updated").length ?? 0;
+  const skipped = results?.filter((r) => r.action === "skipped").length ?? 0;
+  const errors  = results?.filter((r) => r.action === "error").length ?? 0;
+
+  const templateContent = tab === "courses"
+    ? `${COURSE_HEADERS}\n${COURSE_SAMPLE}`
+    : `${UNIVERSITY_HEADERS}\n${UNIVERSITY_SAMPLE}`;
+
+  return (
+    <div style={{ maxWidth: 860 }}>
+      <h1 className="font-serif text-3xl mb-1" style={{ color: "var(--navy)" }}>
+        Import / Export
+      </h1>
+      <p className="text-sm mb-6" style={{ color: "var(--grey)" }}>
+        Bulk manage Course Cards and University Cards via CSV.
+      </p>
+
+      {/* Admin Secret */}
+      <div className="rounded-lg p-5 mb-6" style={{ background: "var(--white)", border: "1px solid var(--mist)" }}>
+        <label className="block text-sm font-semibold mb-2" style={{ color: "var(--charcoal)" }}>
+          Admin Secret
+        </label>
+        <input
+          type="password"
+          placeholder="Enter ADMIN_SECRET from your .env"
+          value={secret}
+          onChange={(e) => setSecret(e.target.value)}
+          className="w-full max-w-sm text-sm"
+          style={{ padding: "8px 12px", border: "1px solid var(--mist)", borderRadius: 6 }}
+        />
+        <p className="text-xs mt-1" style={{ color: "var(--grey)" }}>
+          Required for both import and export. Set <code>ADMIN_SECRET</code> in your environment variables.
+        </p>
+      </div>
+
+      {/* Tabs */}
+      <div style={{ display: "flex", borderBottom: "2px solid var(--mist)", marginBottom: 24 }}>
+        {(["courses", "universities"] as Tab[]).map((t) => (
+          <button
+            key={t}
+            onClick={() => switchTab(t)}
+            style={{
+              padding: "10px 20px",
+              border: "none",
+              background: "none",
+              cursor: "pointer",
+              fontSize: 14,
+              fontWeight: tab === t ? 700 : 400,
+              color: tab === t ? "var(--navy)" : "var(--grey)",
+              borderBottom: tab === t ? "2px solid var(--navy)" : "2px solid transparent",
+              marginBottom: -2,
+            }}
+          >
+            {t === "courses" ? "Course Cards" : "University Cards"}
+          </button>
+        ))}
+      </div>
+
+      {/* Export */}
+      <div className="rounded-lg p-5 mb-4" style={{ background: "var(--white)", border: "1px solid var(--mist)" }}>
+        <h2 className="font-semibold text-base mb-1" style={{ color: "var(--navy)" }}>Export</h2>
+        <p className="text-sm mb-3" style={{ color: "var(--grey)" }}>
+          Download all current {tab === "courses" ? "Course Cards" : "University Cards"} as a CSV file.
+          Logo URLs are included — you can re-import the file after editing.
+        </p>
+        <button
+          onClick={handleExport}
+          disabled={exporting}
+          className="btn btn-primary"
+          style={{ fontSize: 13, opacity: exporting ? 0.7 : 1 }}
+        >
+          {exporting ? "Exporting…" : "Export as CSV"}
+        </button>
+      </div>
+
+      {/* Import */}
+      <div className="rounded-lg p-5" style={{ background: "var(--white)", border: "1px solid var(--mist)" }}>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
+          <h2 className="font-semibold text-base" style={{ color: "var(--navy)" }}>Import</h2>
+          <button
+            onClick={() => downloadText(templateContent, `${tab}-template.csv`)}
+            style={{ background: "none", border: "1px solid var(--mist)", borderRadius: 6, padding: "5px 12px", fontSize: 12, cursor: "pointer", color: "var(--charcoal)" }}
+          >
+            Download Template
+          </button>
+        </div>
+        <p className="text-sm mb-3" style={{ color: "var(--grey)" }}>
+          Existing records (matched by <code>internalName</code>) will be updated; new ones will be created.
+          Max 100 rows per file.
+        </p>
+
+        {/* Field reference */}
+        <details className="mb-4">
+          <summary className="text-xs cursor-pointer" style={{ color: "var(--grey)" }}>
+            Allowed values reference
+          </summary>
+          <div className="text-xs mt-2 leading-relaxed" style={{ color: "var(--charcoal)" }}>
+            <strong>mode:</strong> Online &nbsp;·&nbsp; Distance &nbsp;·&nbsp; Online + Distance &nbsp;·&nbsp; Blended<br />
+            <strong>feeCategory:</strong> Under ₹1L &nbsp;·&nbsp; ₹1L – ₹2L &nbsp;·&nbsp; ₹2L – ₹3L &nbsp;·&nbsp; ₹3L – ₹5L &nbsp;·&nbsp; ₹5L+<br />
+            <strong>isFeatured:</strong> TRUE or FALSE<br />
+            {tab === "universities" && (
+              <><strong>approvedBy:</strong> Pipe-separated — e.g. <code>UGC-DEB|AICTE|NAAC A++</code><br /></>
+            )}
+            <strong>logoUrl:</strong> Public HTTPS image URL. Leave blank to keep existing logo or skip.
+          </div>
+        </details>
+
+        <input
+          ref={fileRef}
+          type="file"
+          accept=".csv,text/csv"
+          onChange={(e) => { setFile(e.target.files?.[0] ?? null); resetImport(); }}
+          className="block text-sm mb-3"
+        />
+
+        {importError && (
+          <div
+            className="text-sm rounded-md mb-3"
+            style={{ background: "#fef2f2", border: "1px solid #fca5a5", padding: "10px 14px", color: "#991b1b" }}
+          >
+            {importError}
+          </div>
+        )}
+
+        <button
+          onClick={handleImport}
+          disabled={importing || !file}
+          className="btn btn-primary"
+          style={{ fontSize: 13, opacity: importing || !file ? 0.6 : 1 }}
+        >
+          {importing ? "Importing… (this may take up to 60s for large files)" : "Import CSV"}
+        </button>
+
+        {/* Results summary + table */}
+        {results && (
+          <div style={{ marginTop: 24 }}>
+            <div style={{ display: "flex", gap: 20, marginBottom: 12, fontSize: 13 }}>
+              {created > 0 && <span style={{ color: "#166534" }}>✓ {created} created</span>}
+              {updated > 0 && <span style={{ color: "#1e40af" }}>↑ {updated} updated</span>}
+              {skipped > 0 && <span style={{ color: "#92400e" }}>— {skipped} skipped</span>}
+              {errors  > 0 && <span style={{ color: "#991b1b" }}>✕ {errors} errors</span>}
+            </div>
+            <div style={{ overflowX: "auto" }}>
+              <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                <thead>
+                  <tr style={{ background: "var(--ivory)" }}>
+                    {["Internal Name", "Action", "Note"].map((h) => (
+                      <th key={h} style={{ padding: "8px 12px", textAlign: "left", borderBottom: "1px solid var(--mist)", fontWeight: 600 }}>
+                        {h}
+                      </th>
+                    ))}
+                  </tr>
+                </thead>
+                <tbody>
+                  {results.map((r, i) => (
+                    <tr key={i} style={{ borderBottom: "1px solid var(--ivory)" }}>
+                      <td style={{ padding: "7px 12px" }}>{r.internalName}</td>
+                      <td style={{ padding: "7px 12px" }}>
+                        <span style={{
+                          display: "inline-block",
+                          padding: "2px 8px",
+                          borderRadius: 4,
+                          fontSize: 11,
+                          fontWeight: 600,
+                          ...(ACTION_STYLE[r.action] ?? {}),
+                        }}>
+                          {r.action}
+                        </span>
+                      </td>
+                      <td style={{ padding: "7px 12px", fontSize: 12, color: "#6b7280" }}>
+                        {r.error || "—"}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
