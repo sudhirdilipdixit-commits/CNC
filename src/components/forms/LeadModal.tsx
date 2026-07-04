@@ -178,6 +178,20 @@ export default function LeadModal({
       const json = await res.json();
       if (!res.ok) {
         setMobileError(json.error ?? "Failed to send OTP. Please try again.");
+        // SMS provider down — still capture the prospect so they aren't lost
+        if (data.name.trim()) {
+          fetch("/api/leads/partial", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: data.name,
+              mobile,
+              ...getUTMParams(),
+              ...getDeviceInfo(),
+              source,
+            }),
+          }).catch(() => {});
+        }
         return;
       }
       setOtpSent(true);
@@ -491,6 +505,19 @@ export default function LeadModal({
                               const val = e.target.value.replace(/\D/g, "").slice(0, 10);
                               setMobileInput(val);
                               handleChange("mobile", val);
+                              if (val.length === 10 && data.name.trim()) {
+                                fetch("/api/leads/partial", {
+                                  method: "POST",
+                                  headers: { "Content-Type": "application/json" },
+                                  body: JSON.stringify({
+                                    name: data.name,
+                                    mobile: val,
+                                    ...getUTMParams(),
+                                    ...getDeviceInfo(),
+                                    source,
+                                  }),
+                                }).catch(() => {});
+                              }
                             }
                       }
                       style={
