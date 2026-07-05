@@ -211,9 +211,19 @@ export default function ImportExportPage() {
           ref={fileRef}
           type="file"
           accept=".csv,text/csv"
-          onChange={(e) => { setFile(e.target.files?.[0] ?? null); resetImport(); }}
-          className="block text-sm mb-3"
+          onChange={(e) => {
+            setFile(e.target.files?.[0] ?? null);
+            setResults(null);
+            setImportError("");
+          }}
+          className="block text-sm"
         />
+        {file && (
+          <p className="text-xs mt-1 mb-3" style={{ color: "#166534" }}>
+            ✓ {file.name} ({(file.size / 1024).toFixed(1)} KB) ready to import
+          </p>
+        )}
+        {!file && <div className="mb-3" />}
 
         {importError && (
           <div
