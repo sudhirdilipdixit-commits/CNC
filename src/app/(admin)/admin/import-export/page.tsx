@@ -84,16 +84,23 @@ export default function ImportExportPage() {
         },
         body: JSON.stringify({ csv }),
       });
-      const json = await res.json();
-      if (!res.ok) {
-        setImportError(json.error || "Import failed.");
+      const text = await res.text();
+      let json: { error?: string; results?: ResultRow[] };
+      try {
+        json = JSON.parse(text);
+      } catch {
+        setImportError(`Server error ${res.status}: ${text.slice(0, 300) || "(empty response)"}`);
         return;
       }
-      setResults(json.results);
+      if (!res.ok) {
+        setImportError(json.error || `Error ${res.status}`);
+        return;
+      }
+      setResults(json.results ?? []);
       setFile(null);
       if (fileRef.current) fileRef.current.value = "";
-    } catch {
-      setImportError("Import failed. Check your connection and try again.");
+    } catch (err) {
+      setImportError(`Network error: ${err instanceof Error ? err.message : String(err)}`);
     } finally {
       setImporting(false);
     }
