@@ -13,7 +13,7 @@ const SANITY_TYPE_MAP: Record<ImportType, string> = {
 };
 
 const VALID_MODES = ["Online", "Distance", "Online + Distance", "Blended"];
-const VALID_FEE_CATEGORIES = ["Under ₹1L", "₹1L – ₹2L", "₹2L – ₹3L", "₹3L – ₹5L", "₹5L+"];
+const VALID_FEE_CATEGORIES = ["Under 1L", "1L – 2L", "2L – 3L", "3L – 5L", "5L+"];
 
 function getSanityClient() {
   return createClient({

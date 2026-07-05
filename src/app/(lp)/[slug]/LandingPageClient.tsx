@@ -110,13 +110,13 @@ function CompareModal({
           { label: "University", render: (i) => i.universityName },
           { label: "Mode",       render: (i) => i.mode },
           { label: "Duration",   render: (i) => i.duration },
-          { label: "Fees",       render: (i) => i.fees },
+          { label: "Fees (₹)",    render: (i) => i.fees },
           { label: "Eligibility",render: (i) => i.eligibility },
         ]
       : [
           { label: "Mode",        render: (i) => i.mode },
           { label: "Duration",    render: (i) => i.duration },
-          { label: "Fees",        render: (i) => i.fees },
+          { label: "Fees (₹)",   render: (i) => i.fees },
           { label: "Approved By", render: (i) => (i as UniversityCardItem).approvedBy?.join(" • ") },
           { label: "Eligibility", render: (i) => i.eligibility },
         ];
@@ -251,7 +251,7 @@ function CourseCard({
           )}
           {item.fees && (
             <div className="lp-meta-cell">
-              <span className="lp-meta-label">Fees</span>
+              <span className="lp-meta-label">Fees (₹)</span>
               <span className="lp-meta-val">{item.fees}</span>
             </div>
           )}
@@ -338,7 +338,7 @@ function UniversityCard({
           )}
           {item.fees && (
             <div className="lp-meta-cell">
-              <span className="lp-meta-label">Fees</span>
+              <span className="lp-meta-label">Fees (₹)</span>
               <span className="lp-meta-val">{item.fees}</span>
             </div>
           )}
@@ -436,7 +436,7 @@ export default function LandingPageClient({
   const allFeeCategories = useMemo(() => {
     const seen = new Set<string>();
     allItems.forEach((i) => { if (i.feeCategory) seen.add(i.feeCategory); });
-    const order = ["Under ₹1L", "₹1L – ₹2L", "₹2L – ₹3L", "₹3L – ₹5L", "₹5L+"];
+    const order = ["Under 1L", "1L – 2L", "2L – 3L", "3L – 5L", "5L+"];
     return order.filter((c) => seen.has(c));
   }, [allItems]);
 
@@ -641,7 +641,7 @@ export default function LandingPageClient({
                   {/* Fee Range */}
                   {data.filterConfig?.showFeeRange !== false && allFeeCategories.length > 0 && (
                     <div className="lp-filter-section">
-                      <h4 className="lp-filter-heading">Fee Range</h4>
+                      <h4 className="lp-filter-heading">Fee Range (₹)</h4>
                       {allFeeCategories.map((cat) => (
                         <label key={cat} className="lp-filter-check">
                           <input

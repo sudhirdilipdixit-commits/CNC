@@ -58,7 +58,7 @@ export default defineType({
       title: "Fee Range (for filter)",
       type: "string",
       options: {
-        list: ["Under ₹1L", "₹1L – ₹2L", "₹2L – ₹3L", "₹3L – ₹5L", "₹5L+"],
+        list: ["Under 1L", "1L – 2L", "2L – 3L", "3L – 5L", "5L+"],
         layout: "radio",
         direction: "horizontal",
       },

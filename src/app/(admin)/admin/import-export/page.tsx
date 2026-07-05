@@ -6,10 +6,10 @@ type Tab = "courses" | "universities";
 type ResultRow = { internalName: string; action: string; error?: string };
 
 const COURSE_HEADERS = "internalName,courseName,universityName,mode,duration,fees,feeCategory,eligibility,badge,isFeatured,logoUrl";
-const COURSE_SAMPLE = `Amity Online MBA Marketing 2026,Online MBA in Marketing Management,Amity University Online,Online,2 Years,"₹80,000 – ₹1,20,000",₹1L – ₹2L,Graduation in any stream | Min. 50%,Top Pick,TRUE,https://example.com/logo.png`;
+const COURSE_SAMPLE = `Amity Online MBA Marketing 2026,Online MBA in Marketing Management,Amity University Online,Online,2 Years,"₹80,000 – ₹1,20,000",1L – 2L,Graduation in any stream | Min. 50%,Top Pick,TRUE,https://example.com/logo.png`;
 
 const UNIVERSITY_HEADERS = "internalName,universityName,mode,duration,approvedBy,fees,feeCategory,eligibility,badge,isFeatured,logoUrl";
-const UNIVERSITY_SAMPLE = `Amity Online MBA 2026,Amity University Online,Online,2 Years,UGC-DEB|NAAC A++,"₹1,20,000/year",₹1L – ₹2L,Graduation in any stream | Min. 50%,NAAC A++,TRUE,https://example.com/logo.png`;
+const UNIVERSITY_SAMPLE = `Amity Online MBA 2026,Amity University Online,Online,2 Years,UGC-DEB|NAAC A++,"₹1,20,000/year",1L – 2L,Graduation in any stream | Min. 50%,NAAC A++,TRUE,https://example.com/logo.png`;
 
 function downloadText(content: string, filename: string) {
   const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
@@ -198,7 +198,7 @@ export default function ImportExportPage() {
           </summary>
           <div className="text-xs mt-2 leading-relaxed" style={{ color: "var(--charcoal)" }}>
             <strong>mode:</strong> Online &nbsp;·&nbsp; Distance &nbsp;·&nbsp; Online + Distance &nbsp;·&nbsp; Blended<br />
-            <strong>feeCategory:</strong> Under ₹1L &nbsp;·&nbsp; ₹1L – ₹2L &nbsp;·&nbsp; ₹2L – ₹3L &nbsp;·&nbsp; ₹3L – ₹5L &nbsp;·&nbsp; ₹5L+<br />
+            <strong>feeCategory:</strong> Under 1L &nbsp;·&nbsp; 1L – 2L &nbsp;·&nbsp; 2L – 3L &nbsp;·&nbsp; 3L – 5L &nbsp;·&nbsp; 5L+<br />
             <strong>isFeatured:</strong> TRUE or FALSE<br />
             {tab === "universities" && (
               <><strong>approvedBy:</strong> Pipe-separated — e.g. <code>UGC-DEB|AICTE|NAAC A++</code><br /></>
