@@ -358,9 +358,35 @@ export default defineType({
           type: "reference",
           title: "FAQ from Library",
           to: [{ type: "faq" }],
+          options: {
+            // Already-added FAQs are hidden from the picker so you can't add the same one twice.
+            filter: ({ document }: { document: Record<string, unknown> }) => {
+              const faqs = Array.isArray(document?.faqs)
+                ? (document.faqs as Array<Record<string, unknown>>)
+                : [];
+              const usedIds = faqs
+                .filter((item) => item._type === "reference" && typeof item._ref === "string")
+                .map((item) => item._ref as string);
+              if (!usedIds.length) return { filter: "true", params: {} };
+              return { filter: "!(_id in $usedIds)", params: { usedIds } };
+            },
+          },
         },
       ],
       group: "content",
+      validation: (R) =>
+        R.custom((items?: Array<Record<string, unknown>>) => {
+          if (!items) return true;
+          const refs = items
+            .filter((item) => item._type === "reference" && typeof item._ref === "string")
+            .map((item) => item._ref as string);
+          const seen = new Set<string>();
+          for (const ref of refs) {
+            if (seen.has(ref)) return "Each FAQ from Library can only be added once.";
+            seen.add(ref);
+          }
+          return true;
+        }),
     }),
 
     // ── CTA band ─────────────────────────────────────────────────────
