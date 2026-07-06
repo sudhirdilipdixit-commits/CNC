@@ -37,6 +37,7 @@ export default function ImportExportPage() {
   const [file, setFile]             = useState<File | null>(null);
   const [importing, setImporting]   = useState(false);
   const [exporting, setExporting]   = useState(false);
+  const [deleting, setDeleting]     = useState(false);
   const [results, setResults]       = useState<ResultRow[] | null>(null);
   const [importError, setImportError] = useState("");
   const fileRef = useRef<HTMLInputElement>(null);
@@ -49,6 +50,33 @@ export default function ImportExportPage() {
   };
 
   const switchTab = (t: Tab) => { setTab(t); resetImport(); };
+
+  const TAB_LABEL: Record<Tab, string> = {
+    courses: "Course Cards",
+    universities: "University Cards",
+    faqs: "FAQ Library entries",
+  };
+
+  const handleDeleteAll = async () => {
+    if (!secret.trim()) { alert("Enter the admin secret first."); return; }
+    const label = TAB_LABEL[tab];
+    if (!window.confirm(`Delete ALL ${label} from Sanity?\n\nThis cannot be undone.`)) return;
+    setDeleting(true);
+    try {
+      const res = await fetch(`/api/admin/delete/${tab}`, {
+        method: "DELETE",
+        headers: { Authorization: `Bearer ${secret}` },
+      });
+      const json = await res.json() as { deleted?: number; error?: string };
+      if (!res.ok) { alert(json.error || "Delete failed. Check the admin secret."); return; }
+      alert(`Deleted ${json.deleted ?? 0} ${label}.`);
+      resetImport();
+    } catch {
+      alert("Delete failed. Check your connection.");
+    } finally {
+      setDeleting(false);
+    }
+  };
 
   const handleExport = async () => {
     if (!secret.trim()) { alert("Enter the admin secret first."); return; }
@@ -322,6 +350,30 @@ export default function ImportExportPage() {
             </div>
           </div>
         )}
+      </div>
+      {/* Danger Zone */}
+      <div className="rounded-lg p-5 mt-4" style={{ background: "#fff5f5", border: "1px solid #fca5a5" }}>
+        <h2 className="font-semibold text-base mb-1" style={{ color: "#991b1b" }}>Danger Zone</h2>
+        <p className="text-sm mb-3" style={{ color: "#6b7280" }}>
+          Permanently delete <strong>all</strong> {TAB_LABEL[tab]} from Sanity. This cannot be undone — export first if you need a backup.
+        </p>
+        <button
+          onClick={handleDeleteAll}
+          disabled={deleting}
+          style={{
+            background: "#dc2626",
+            color: "#fff",
+            border: "none",
+            borderRadius: 6,
+            padding: "8px 16px",
+            fontSize: 13,
+            fontWeight: 600,
+            cursor: deleting ? "not-allowed" : "pointer",
+            opacity: deleting ? 0.7 : 1,
+          }}
+        >
+          {deleting ? "Deleting…" : `Delete All ${TAB_LABEL[tab]}`}
+        </button>
       </div>
     </div>
   );
