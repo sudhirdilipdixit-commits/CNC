@@ -3,13 +3,14 @@ import { createClient } from "next-sanity";
 
 export const maxDuration = 60;
 
-const VALID_TYPES = ["courses", "universities", "faqs"] as const;
+const VALID_TYPES = ["courses", "universities", "faqs", "blogs"] as const;
 type DeleteType = (typeof VALID_TYPES)[number];
 
 const SANITY_TYPE_MAP: Record<DeleteType, string> = {
   courses: "courseCard",
   universities: "universityCard",
   faqs: "faq",
+  blogs: "blog",
 };
 
 function getSanityClient() {
@@ -38,7 +39,7 @@ export async function DELETE(
   const { type } = await params;
   if (!VALID_TYPES.includes(type as DeleteType)) {
     return NextResponse.json(
-      { error: "Invalid type. Use 'courses', 'universities', or 'faqs'." },
+      { error: "Invalid type. Use 'courses', 'universities', 'faqs', or 'blogs'." },
       { status: 400 }
     );
   }

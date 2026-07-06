@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-type Tab = "courses" | "universities" | "faqs";
+type Tab = "courses" | "universities" | "faqs" | "blogs";
 type ResultRow = { internalName: string; action: string; error?: string };
 
 const COURSE_HEADERS = "internalName,courseName,universityName,mode,duration,fees,feeCategory,eligibility,badge,isFeatured,logoUrl";
@@ -55,6 +55,7 @@ export default function ImportExportPage() {
     courses: "Course Cards",
     universities: "University Cards",
     faqs: "FAQ Library entries",
+    blogs: "Blog Posts",
   };
 
   const handleDeleteAll = async () => {
@@ -185,7 +186,7 @@ export default function ImportExportPage() {
 
       {/* Tabs */}
       <div style={{ display: "flex", borderBottom: "2px solid var(--mist)", marginBottom: 24 }}>
-        {(["courses", "universities", "faqs"] as Tab[]).map((t) => (
+        {(["courses", "universities", "faqs", "blogs"] as Tab[]).map((t) => (
           <button
             key={t}
             onClick={() => switchTab(t)}
@@ -201,7 +202,7 @@ export default function ImportExportPage() {
               marginBottom: -2,
             }}
           >
-            {t === "courses" ? "Course Cards" : t === "universities" ? "University Cards" : "FAQ Library"}
+            {t === "courses" ? "Course Cards" : t === "universities" ? "University Cards" : t === "faqs" ? "FAQ Library" : "Blog Posts"}
           </button>
         ))}
       </div>
@@ -210,8 +211,8 @@ export default function ImportExportPage() {
       <div className="rounded-lg p-5 mb-4" style={{ background: "var(--white)", border: "1px solid var(--mist)" }}>
         <h2 className="font-semibold text-base mb-1" style={{ color: "var(--navy)" }}>Export</h2>
         <p className="text-sm mb-3" style={{ color: "var(--grey)" }}>
-          Download all current {tab === "courses" ? "Course Cards" : tab === "universities" ? "University Cards" : "FAQ Library entries"} as a CSV file.
-          {tab !== "faqs" && " Logo URLs are included — you can re-import the file after editing."}
+          Download all current {TAB_LABEL[tab]} as a CSV file.
+          {tab !== "faqs" && tab !== "blogs" && " Logo URLs are included — you can re-import the file after editing."}
         </p>
         <button
           onClick={handleExport}

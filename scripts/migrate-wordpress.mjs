@@ -1,4 +1,4 @@
-#!/usr/bin/env node
+﻿#!/usr/bin/env node
 /**
  * WordPress → Sanity Blog Migration Script
  *
@@ -229,7 +229,18 @@ function parseInline(html) {
 }
 
 function stripTags(s) {
-  return s.replace(/<[^>]+>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&nbsp;/g, " ").replace(/&#8211;/g, "–").replace(/&#8212;/g, "—").replace(/&#8216;/g, "'").replace(/&#8217;/g, "'").replace(/&#8220;/g, """).replace(/&#8221;/g, """);
+  return s
+    .replace(/<[^>]+>/g, "")
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&nbsp;/g, " ")
+    .replace(/&#8211;/g, "–")
+    .replace(/&#8212;/g, "—")
+    .replace(/&#8216;/g, "‘")
+    .replace(/&#8217;/g, "’")
+    .replace(/&#8220;/g, "“")
+    .replace(/&#8221;/g, "”");
 }
 
 // ─── Image upload ─────────────────────────────────────────────────────────────
