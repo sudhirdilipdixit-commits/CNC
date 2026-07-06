@@ -113,9 +113,10 @@ export async function POST(
   if (rows.length === 0) {
     return NextResponse.json({ error: "CSV has no data rows (only a header was found)." }, { status: 400 });
   }
-  if (rows.length > 100) {
+  const maxRows = importType === "faqs" ? 500 : 100;
+  if (rows.length > maxRows) {
     return NextResponse.json(
-      { error: `Too many rows (${rows.length}). Max 100 per import — split into smaller batches.` },
+      { error: `Too many rows (${rows.length}). Max ${maxRows} per import — split into smaller batches.` },
       { status: 400 }
     );
   }
@@ -123,9 +124,15 @@ export async function POST(
   const client = getSanityClient();
   const results: ResultRow[] = [];
 
-  for (const row of rows) {
-    // ── FAQ Library — handled separately (no internalName, no logo) ──────────
-    if (importType === "faqs") {
+  // ── FAQ Library — single transaction (1 fetch + 1 commit regardless of row count) ──
+  if (importType === "faqs") {
+    const existingFaqs = await client.fetch<{ _id: string; question: string }[]>(
+      `*[_type == "faq"]{_id, question}`
+    );
+    const existingMap = new Map(existingFaqs.map((f) => [f.question, f._id]));
+    const tx = client.transaction();
+
+    for (const row of rows) {
       const question = row.question?.trim();
       if (!question) {
         results.push({ internalName: "(empty)", action: "skipped", error: "Missing question" });
@@ -136,34 +143,34 @@ export async function POST(
         results.push({ internalName: question.slice(0, 70), action: "skipped", error: "Missing answer" });
         continue;
       }
-      try {
-        const fields = {
-          question,
-          answer,
-          tags: row.tags?.trim()
-            ? row.tags.split("|").map((s: string) => s.trim()).filter(Boolean)
-            : [],
-        };
-        const existingId = await client.fetch<string | null>(
-          `*[_type == "faq" && question == $question][0]._id`,
-          { question }
-        );
-        if (existingId) {
-          await client.patch(existingId).set(fields).commit();
-          results.push({ internalName: question.slice(0, 70), action: "updated" });
-        } else {
-          await client.create({ _type: "faq", ...fields });
-          results.push({ internalName: question.slice(0, 70), action: "created" });
-        }
-      } catch (err) {
-        results.push({
-          internalName: row.question?.slice(0, 70) ?? "(empty)",
-          action: "error",
-          error: err instanceof Error ? err.message : "Unknown error",
-        });
+      const fields = {
+        question,
+        answer,
+        tags: row.tags?.trim()
+          ? row.tags.split("|").map((s: string) => s.trim()).filter(Boolean)
+          : [],
+      };
+      const existingId = existingMap.get(question);
+      if (existingId) {
+        tx.patch(existingId, (p) => p.set(fields));
+        results.push({ internalName: question.slice(0, 70), action: "updated" });
+      } else {
+        tx.create({ _type: "faq", ...fields });
+        results.push({ internalName: question.slice(0, 70), action: "created" });
       }
-      continue;
     }
+
+    try {
+      await tx.commit();
+    } catch (err) {
+      return NextResponse.json({
+        error: `Transaction failed: ${err instanceof Error ? err.message : "Unknown error"}`,
+      }, { status: 500 });
+    }
+    return NextResponse.json({ results });
+  }
+
+  for (const row of rows) {
 
     // ── Courses & Universities ────────────────────────────────────────────────
     const internalName = row.internalName?.trim();
