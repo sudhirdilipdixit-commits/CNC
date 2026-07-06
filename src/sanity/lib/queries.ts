@@ -14,11 +14,18 @@ export const homepageQuery = groq`*[_type == "homepage"][0]{
 }`;
 
 export const blogListQuery = groq`*[_type == "blog"] | order(publishedAt desc){
-  _id, title, slug, excerpt, coverImage, tag, readTime, publishedAt, author
+  _id, title, slug, excerpt, coverImage, tag, readTime, publishedAt, updatedAt, author
 }`;
 
 export const blogBySlugQuery = groq`*[_type == "blog" && slug.current == $slug][0]{
-  _id, title, slug, excerpt, coverImage, tag, readTime, publishedAt, author, body, seo
+  _id, title, slug, excerpt,
+  coverImage{ asset, alt },
+  tag, readTime, publishedAt, author,
+  updatedAt, focusKeyword, keywords, noIndex, faqs, wordCount,
+  contentType, about, mentions, howToSteps,
+  "category": category->{ _id, name, "slug": slug.current },
+  "authorData": authorRef->{ name, "slug": slug.current, jobTitle, linkedIn, twitter },
+  body, seo
 }`;
 
 export const relatedBlogPostsQuery = groq`*[_type == "blog" && slug.current != $slug] | order(publishedAt desc)[0...3]{
@@ -26,6 +33,41 @@ export const relatedBlogPostsQuery = groq`*[_type == "blog" && slug.current != $
 }`;
 
 export const allBlogSlugsQuery = groq`*[_type == "blog"]{ "slug": slug.current }`;
+
+export const allBlogPostsForSitemapQuery = groq`*[_type == "blog"]{
+  "slug": slug.current,
+  publishedAt,
+  updatedAt,
+  "coverImageUrl": coverImage.asset->url
+}`;
+
+// ── Author queries ────────────────────────────────────────────────────────────
+
+export const allAuthorSlugsQuery = groq`*[_type == "author"]{ "slug": slug.current }`;
+
+export const authorBySlugQuery = groq`*[_type == "author" && slug.current == $slug][0]{
+  _id, name, slug, jobTitle, qualifications, bio, avatar, linkedIn, twitter
+}`;
+
+export const blogsByAuthorRefQuery = groq`*[_type == "blog" && authorRef._ref == $authorId] | order(publishedAt desc){
+  _id, title, slug, excerpt, coverImage, tag, readTime, publishedAt, author
+}`;
+
+// ── Category queries ──────────────────────────────────────────────────────────
+
+export const allCategorySlugsQuery = groq`*[_type == "blogCategory"]{ "slug": slug.current }`;
+
+export const categoryBySlugQuery = groq`*[_type == "blogCategory" && slug.current == $slug][0]{
+  _id, name, slug, description, coverImage
+}`;
+
+export const blogsByCategoryQuery = groq`*[_type == "blog" && category._ref == $categoryId] | order(publishedAt desc){
+  _id, title, slug, excerpt, coverImage, tag, readTime, publishedAt, author
+}`;
+
+export const relatedBlogPostsByCategoryQuery = groq`*[_type == "blog" && slug.current != $slug && category._ref == $categoryId] | order(publishedAt desc)[0...3]{
+  _id, title, slug, coverImage, tag, readTime, publishedAt
+}`;
 
 export const allLandingPageSlugsQuery = groq`*[_type == "landingPage"]{ "slug": slug.current }`;
 
@@ -49,7 +91,11 @@ export const landingPageQuery = groq`*[_type == "landingPage" && slug.current ==
     "universityLogoUrl": universityLogo.asset->url,
     mode, duration, approvedBy, fees, feeCategory, eligibility, badge, isFeatured,
   },
-  "faqs": faqs[]{ "_id": _key, question, answer },
+  "faqs": faqs[]{
+    "_id": select(_type == "reference" => @->_id, _key),
+    "question": select(_type == "reference" => @->question, question),
+    "answer": select(_type == "reference" => @->answer, answer),
+  },
   ctaBand { headline, body, ctaLabel },
   seo { title, description, noIndex },
 }`;

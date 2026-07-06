@@ -5,12 +5,15 @@ import { blogListQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import BlogIndexClient, { type BlogPostCard } from "./BlogIndexClient";
 
-export const dynamic = "force-dynamic";
+export const revalidate = 300;
 
 export const metadata: Metadata = {
   title: "Blog | CollegeNCourses",
   description:
     "Expert insights on online MBA programmes, career strategy, accreditation updates, and everything working professionals need to make smarter education decisions.",
+  alternates: {
+    canonical: "https://collegencourses.com/blog",
+  },
 };
 
 interface RawPost {
@@ -26,7 +29,7 @@ interface RawPost {
 }
 
 export default async function BlogIndexPage() {
-  const raw = await sanityFetch<RawPost[]>({ query: blogListQuery, revalidate: 0 });
+  const raw = await sanityFetch<RawPost[]>({ query: blogListQuery, revalidate: 300 });
 
   // Pre-compute image URLs server-side so the client component needs no Sanity SDK
   const posts: BlogPostCard[] = raw.map((p) => ({
@@ -47,7 +50,19 @@ export default async function BlogIndexPage() {
   const allTags = [...new Set(posts.map((p) => p.tag).filter(Boolean) as string[])];
 
   return (
-    <main>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: "https://collegencourses.com" },
+            { "@type": "ListItem", position: 2, name: "Blog", item: "https://collegencourses.com/blog" },
+          ],
+        }) }}
+      />
+      <main>
       {/* Hero */}
       <div className="bi-hero">
         <div className="container">
@@ -316,5 +331,6 @@ export default async function BlogIndexPage() {
         .btn-inverted:hover { opacity: .9; }
       `}</style>
     </main>
+    </>
   );
 }

@@ -4,7 +4,12 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PortableText, type PortableTextComponents } from "@portabletext/react";
 import { sanityFetch, client } from "@/sanity/lib/client";
-import { blogBySlugQuery, relatedBlogPostsQuery, allBlogSlugsQuery } from "@/sanity/lib/queries";
+import {
+  blogBySlugQuery,
+  relatedBlogPostsQuery,
+  relatedBlogPostsByCategoryQuery,
+  allBlogSlugsQuery,
+} from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import BlogProgressBar from "./BlogProgressBar";
 import BlogSidebarClient from "./BlogSidebarClient";
@@ -35,6 +40,20 @@ interface BlogPost {
   readTime?: string;
   publishedAt?: string;
   author?: string;
+  // Phase 2 fields
+  updatedAt?: string;
+  authorData?: { name: string; slug: string; jobTitle?: string; linkedIn?: string; twitter?: string };
+  category?: { _id: string; name: string; slug: string };
+  focusKeyword?: string;
+  keywords?: string[];
+  noIndex?: boolean;
+  faqs?: { question: string; answer: string }[];
+  wordCount?: number;
+  // Phase 4 fields
+  contentType?: "guide" | "tutorial" | "listicle" | "review" | "news";
+  about?: { entity: string; url?: string };
+  mentions?: { entity: string; url?: string }[];
+  howToSteps?: { name: string; text: string }[];
   body?: ContentBlock[];
   seo?: { title?: string; description?: string; ogImage?: { asset: { _ref: string } } };
 }
@@ -155,14 +174,28 @@ export async function generateMetadata(
     ? urlFor(post.coverImage).width(1200).height(630).url()
     : undefined;
 
+  const BASE = "https://collegencourses.com";
   return {
     title: seoTitle,
     description: seoDesc,
+    alternates: {
+      canonical: `${BASE}/blog/${slug}`,
+    },
     openGraph: {
+      type: "article" as const,
       title: seoTitle,
       description: seoDesc,
+      url: `${BASE}/blog/${slug}`,
+      ...(post.publishedAt && { publishedTime: post.publishedAt }),
+      authors: [post.author || "CollegeNCourses Editorial"],
+      ...(post.tag && { tags: [post.tag] }),
       ...(ogImage && { images: [{ url: ogImage, width: 1200, height: 630 }] }),
     },
+    twitter: {
+      card: "summary_large_image" as const,
+      ...(ogImage && { images: [ogImage] }),
+    },
+    ...(post.noIndex && { robots: { index: false, follow: false } }),
   };
 }
 
@@ -173,26 +206,130 @@ export default async function BlogPostPage(
 ) {
   const { slug } = await params;
 
-  const [post, related] = await Promise.all([
-    sanityFetch<BlogPost>({
-      query: blogBySlugQuery,
-      params: { slug },
-      tags: [`blog:${slug}`],
-    }),
-    sanityFetch<RelatedPost[]>({
-      query: relatedBlogPostsQuery,
-      params: { slug },
-      revalidate: 3600,
-    }),
-  ]);
+  const post = await sanityFetch<BlogPost>({
+    query: blogBySlugQuery,
+    params: { slug },
+    tags: [`blog:${slug}`],
+  });
 
   if (!post) notFound();
 
+  // Prefer same-category related posts; fall back to newest
+  const related = await sanityFetch<RelatedPost[]>(
+    post.category?._id
+      ? { query: relatedBlogPostsByCategoryQuery, params: { slug, categoryId: post.category._id }, revalidate: 3600 }
+      : { query: relatedBlogPostsQuery, params: { slug }, revalidate: 3600 }
+  );
+
   const tocItems = post.body ? extractHeadings(post.body) : [];
   const byline = post.author || "CollegeNCourses Editorial";
+  const BASE = "https://collegencourses.com";
+  const postUrl = `${BASE}/blog/${slug}`;
+  const ogImageUrl = post.seo?.ogImage
+    ? urlFor(post.seo.ogImage).width(1200).height(630).url()
+    : post.coverImage
+    ? urlFor(post.coverImage).width(1200).height(630).url()
+    : undefined;
 
   return (
-    <main style={{ background: "var(--ivory)" }}>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": post.contentType === "news" ? "NewsArticle" : "BlogPosting",
+          headline: post.title,
+          description: post.seo?.description || post.excerpt || "",
+          ...(ogImageUrl && { image: [ogImageUrl] }),
+          datePublished: post.publishedAt,
+          dateModified: post.updatedAt || post.publishedAt,
+          author: {
+            "@type": "Person",
+            name: post.authorData?.name || byline,
+            ...(post.authorData?.linkedIn && { sameAs: [post.authorData.linkedIn] }),
+            ...(post.authorData?.jobTitle && { jobTitle: post.authorData.jobTitle }),
+          },
+          publisher: {
+            "@type": "Organization",
+            name: "CollegeNCourses",
+            logo: { "@type": "ImageObject", url: `${BASE}/logo.webp` },
+          },
+          mainEntityOfPage: { "@type": "WebPage", "@id": postUrl },
+          ...(post.keywords?.length
+            ? { keywords: post.keywords.join(", ") }
+            : post.tag
+            ? { keywords: post.tag }
+            : {}),
+          articleSection: post.category?.name || post.tag,
+          ...(post.wordCount && { wordCount: post.wordCount }),
+          // GEO: entity signals for AI knowledge graph
+          ...(post.about?.entity && {
+            about: {
+              "@type": "Thing",
+              name: post.about.entity,
+              ...(post.about.url && { sameAs: post.about.url }),
+            },
+          }),
+          ...(post.mentions?.length && {
+            mentions: post.mentions.map((m) => ({
+              "@type": "Thing",
+              name: m.entity,
+              ...(m.url && { sameAs: m.url }),
+            })),
+          }),
+          // AEO: speakable — marks intro and excerpt as voice-readable
+          speakable: {
+            "@type": "SpeakableSpecification",
+            cssSelector: [".lede", "#articleBody > p:first-of-type"],
+          },
+        }) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: BASE },
+            { "@type": "ListItem", position: 2, name: "Blog", item: `${BASE}/blog` },
+            { "@type": "ListItem", position: 3, name: post.title, item: postUrl },
+          ],
+        }) }}
+      />
+      {post.faqs && post.faqs.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: post.faqs.map((f) => ({
+              "@type": "Question",
+              name: f.question,
+              acceptedAnswer: { "@type": "Answer", text: f.answer },
+            })),
+          }) }}
+        />
+      )}
+      {post.contentType === "tutorial" && post.howToSteps && post.howToSteps.length > 0 && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "HowTo",
+            name: post.title,
+            description: post.seo?.description || post.excerpt || "",
+            ...(ogImageUrl && { image: ogImageUrl }),
+            step: post.howToSteps.map((s, i) => ({
+              "@type": "HowToStep",
+              position: i + 1,
+              name: s.name,
+              text: s.text,
+              url: `${postUrl}#step-${i + 1}`,
+            })),
+          }) }}
+        />
+      )}
+      <main style={{ background: "var(--ivory)" }}>
       <BlogProgressBar />
 
       {/* Breadcrumb */}
@@ -542,5 +679,6 @@ export default async function BlogPostPage(
         .bp-related-meta { font-size: 11px; color: var(--grey); }
       `}</style>
     </main>
+    </>
   );
 }

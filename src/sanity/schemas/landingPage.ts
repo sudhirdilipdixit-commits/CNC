@@ -330,10 +330,13 @@ export default defineType({
       name: "faqs",
       title: "FAQs",
       type: "array",
+      description:
+        "Add FAQs in any order. Use 'FAQ from Library' for shared questions — edit once and it updates everywhere. Use 'Custom FAQ' for questions unique to this page.",
       of: [
         {
           type: "object",
           name: "faqItem",
+          title: "Custom FAQ (this page only)",
           fields: [
             defineField({
               name: "question",
@@ -346,9 +349,15 @@ export default defineType({
               title: "Answer",
               type: "text",
               rows: 3,
+              validation: (R) => R.required(),
             }),
           ],
           preview: { select: { title: "question" } },
+        },
+        {
+          type: "reference",
+          title: "FAQ from Library",
+          to: [{ type: "faq" }],
         },
       ],
       group: "content",
