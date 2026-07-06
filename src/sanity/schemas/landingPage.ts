@@ -229,7 +229,22 @@ export default defineType({
       name: "courseItems",
       title: "Course Cards",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "courseCard" }] }],
+      of: [{
+        type: "reference",
+        to: [{ type: "courseCard" }],
+        options: {
+          filter: ({ document }: { document: Record<string, unknown> }) => {
+            const items = Array.isArray(document?.courseItems)
+              ? (document.courseItems as Array<Record<string, unknown>>)
+              : [];
+            const usedIds = items
+              .filter((item) => typeof item._ref === "string")
+              .map((item) => item._ref as string);
+            if (!usedIds.length) return { filter: "true", params: {} };
+            return { filter: "!(_id in $usedIds)", params: { usedIds } };
+          },
+        },
+      }],
       description: "Select and reorder course cards. Drag to change display order.",
       group: "filters",
       hidden: ({ document }) => (document as { pageType?: string })?.pageType === "university",
@@ -248,7 +263,22 @@ export default defineType({
       name: "universityItems",
       title: "University Cards",
       type: "array",
-      of: [{ type: "reference", to: [{ type: "universityCard" }] }],
+      of: [{
+        type: "reference",
+        to: [{ type: "universityCard" }],
+        options: {
+          filter: ({ document }: { document: Record<string, unknown> }) => {
+            const items = Array.isArray(document?.universityItems)
+              ? (document.universityItems as Array<Record<string, unknown>>)
+              : [];
+            const usedIds = items
+              .filter((item) => typeof item._ref === "string")
+              .map((item) => item._ref as string);
+            if (!usedIds.length) return { filter: "true", params: {} };
+            return { filter: "!(_id in $usedIds)", params: { usedIds } };
+          },
+        },
+      }],
       description: "Select and reorder university cards. Drag to change display order.",
       group: "filters",
       hidden: ({ document }) => (document as { pageType?: string })?.pageType !== "university",
