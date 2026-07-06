@@ -239,6 +239,8 @@ function parseInline(html) {
 function stripTags(s) {
   return s
     .replace(/<[^>]+>/g, "")
+    // Belt-and-suspenders: strip any shortcode tags that survived HTML parsing
+    .replace(/\[\/?\w[^[\]]*\]/g, "")
     .replace(/&amp;/g, "&")
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">")
