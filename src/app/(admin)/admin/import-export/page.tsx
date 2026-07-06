@@ -78,7 +78,15 @@ export default function ImportExportPage() {
     setResults(null);
     setImportError("");
     try {
-      const csv = await file.text();
+      const buffer = await file.arrayBuffer();
+      let csv: string;
+      try {
+        // Try strict UTF-8 first (throws on invalid bytes — catches Windows-1252 files)
+        csv = new TextDecoder("utf-8", { fatal: true }).decode(buffer);
+      } catch {
+        // Fallback for files saved by Excel as Windows-1252
+        csv = new TextDecoder("windows-1252").decode(buffer);
+      }
       const res = await fetch(`/api/admin/import/${tab}`, {
         method: "POST",
         headers: {
@@ -229,6 +237,9 @@ export default function ImportExportPage() {
           </div>
         </details>
 
+        <p className="text-xs mb-2" style={{ color: "var(--grey)" }}>
+          <strong>Excel users:</strong> save as <em>CSV UTF-8 (Comma delimited)</em> — not plain CSV — to preserve ₹ and other special characters.
+        </p>
         <input
           ref={fileRef}
           type="file"
