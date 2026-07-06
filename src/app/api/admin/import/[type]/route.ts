@@ -4,12 +4,13 @@ import { createClient } from "next-sanity";
 // Vercel Pro: extend timeout for image uploads. Hobby plan caps at 10s.
 export const maxDuration = 60;
 
-const VALID_TYPES = ["courses", "universities"] as const;
+const VALID_TYPES = ["courses", "universities", "faqs"] as const;
 type ImportType = (typeof VALID_TYPES)[number];
 
 const SANITY_TYPE_MAP: Record<ImportType, string> = {
   courses: "courseCard",
   universities: "universityCard",
+  faqs: "faq",
 };
 
 const VALID_MODES = ["Online", "Distance", "Online + Distance", "Blended"];
@@ -97,7 +98,7 @@ export async function POST(
 
   const { type } = await params;
   if (!VALID_TYPES.includes(type as ImportType)) {
-    return NextResponse.json({ error: "Invalid type. Use 'courses' or 'universities'." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid type. Use 'courses', 'universities', or 'faqs'." }, { status: 400 });
   }
 
   const importType = type as ImportType;
@@ -123,6 +124,48 @@ export async function POST(
   const results: ResultRow[] = [];
 
   for (const row of rows) {
+    // ── FAQ Library — handled separately (no internalName, no logo) ──────────
+    if (importType === "faqs") {
+      const question = row.question?.trim();
+      if (!question) {
+        results.push({ internalName: "(empty)", action: "skipped", error: "Missing question" });
+        continue;
+      }
+      const answer = row.answer?.trim();
+      if (!answer) {
+        results.push({ internalName: question.slice(0, 70), action: "skipped", error: "Missing answer" });
+        continue;
+      }
+      try {
+        const fields = {
+          question,
+          answer,
+          tags: row.tags?.trim()
+            ? row.tags.split("|").map((s: string) => s.trim()).filter(Boolean)
+            : [],
+        };
+        const existingId = await client.fetch<string | null>(
+          `*[_type == "faq" && question == $question][0]._id`,
+          { question }
+        );
+        if (existingId) {
+          await client.patch(existingId).set(fields).commit();
+          results.push({ internalName: question.slice(0, 70), action: "updated" });
+        } else {
+          await client.create({ _type: "faq", ...fields });
+          results.push({ internalName: question.slice(0, 70), action: "created" });
+        }
+      } catch (err) {
+        results.push({
+          internalName: row.question?.slice(0, 70) ?? "(empty)",
+          action: "error",
+          error: err instanceof Error ? err.message : "Unknown error",
+        });
+      }
+      continue;
+    }
+
+    // ── Courses & Universities ────────────────────────────────────────────────
     const internalName = row.internalName?.trim();
     if (!internalName) {
       results.push({ internalName: "(empty)", action: "skipped", error: "Missing internalName" });

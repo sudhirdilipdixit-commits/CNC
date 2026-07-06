@@ -2,7 +2,7 @@
 
 import { useRef, useState } from "react";
 
-type Tab = "courses" | "universities";
+type Tab = "courses" | "universities" | "faqs";
 type ResultRow = { internalName: string; action: string; error?: string };
 
 const COURSE_HEADERS = "internalName,courseName,universityName,mode,duration,fees,feeCategory,eligibility,badge,isFeatured,logoUrl";
@@ -10,6 +10,9 @@ const COURSE_SAMPLE = `Amity Online MBA Marketing 2026,Online MBA in Marketing M
 
 const UNIVERSITY_HEADERS = "internalName,universityName,mode,duration,approvedBy,fees,feeCategory,eligibility,badge,isFeatured,logoUrl";
 const UNIVERSITY_SAMPLE = `Amity Online MBA 2026,Amity University Online,Online,2 Years,UGC-DEB|NAAC A++,"₹1,20,000/year",1–2 Lakh,Graduation in any stream | Min. 50%,NAAC A++,TRUE,https://example.com/logo.png`;
+
+const FAQ_HEADERS = "question,answer,tags";
+const FAQ_SAMPLE = `Is online MBA valid in India?,"Yes, an online MBA from a UGC-DEB approved university carries the same validity as a regular MBA for government and private sector jobs.",validity|ugc-deb`;
 
 function downloadText(content: string, filename: string) {
   const blob = new Blob([content], { type: "text/csv;charset=utf-8;" });
@@ -113,7 +116,9 @@ export default function ImportExportPage() {
 
   const templateContent = tab === "courses"
     ? `${COURSE_HEADERS}\n${COURSE_SAMPLE}`
-    : `${UNIVERSITY_HEADERS}\n${UNIVERSITY_SAMPLE}`;
+    : tab === "universities"
+    ? `${UNIVERSITY_HEADERS}\n${UNIVERSITY_SAMPLE}`
+    : `${FAQ_HEADERS}\n${FAQ_SAMPLE}`;
 
   return (
     <div style={{ maxWidth: 860 }}>
@@ -121,7 +126,7 @@ export default function ImportExportPage() {
         Import / Export
       </h1>
       <p className="text-sm mb-6" style={{ color: "var(--grey)" }}>
-        Bulk manage Course Cards and University Cards via CSV.
+        Bulk manage Course Cards, University Cards, and the FAQ Library via CSV.
       </p>
 
       {/* Admin Secret */}
@@ -144,7 +149,7 @@ export default function ImportExportPage() {
 
       {/* Tabs */}
       <div style={{ display: "flex", borderBottom: "2px solid var(--mist)", marginBottom: 24 }}>
-        {(["courses", "universities"] as Tab[]).map((t) => (
+        {(["courses", "universities", "faqs"] as Tab[]).map((t) => (
           <button
             key={t}
             onClick={() => switchTab(t)}
@@ -160,7 +165,7 @@ export default function ImportExportPage() {
               marginBottom: -2,
             }}
           >
-            {t === "courses" ? "Course Cards" : "University Cards"}
+            {t === "courses" ? "Course Cards" : t === "universities" ? "University Cards" : "FAQ Library"}
           </button>
         ))}
       </div>
@@ -169,8 +174,8 @@ export default function ImportExportPage() {
       <div className="rounded-lg p-5 mb-4" style={{ background: "var(--white)", border: "1px solid var(--mist)" }}>
         <h2 className="font-semibold text-base mb-1" style={{ color: "var(--navy)" }}>Export</h2>
         <p className="text-sm mb-3" style={{ color: "var(--grey)" }}>
-          Download all current {tab === "courses" ? "Course Cards" : "University Cards"} as a CSV file.
-          Logo URLs are included — you can re-import the file after editing.
+          Download all current {tab === "courses" ? "Course Cards" : tab === "universities" ? "University Cards" : "FAQ Library entries"} as a CSV file.
+          {tab !== "faqs" && " Logo URLs are included — you can re-import the file after editing."}
         </p>
         <button
           onClick={handleExport}
@@ -194,7 +199,7 @@ export default function ImportExportPage() {
           </button>
         </div>
         <p className="text-sm mb-3" style={{ color: "var(--grey)" }}>
-          Existing records (matched by <code>internalName</code>) will be updated; new ones will be created.
+          Existing records (matched by <code>{tab === "faqs" ? "question" : "internalName"}</code>) will be updated; new ones will be created.
           Max 100 rows per file.
         </p>
 
@@ -204,13 +209,23 @@ export default function ImportExportPage() {
             Allowed values reference
           </summary>
           <div className="text-xs mt-2 leading-relaxed" style={{ color: "var(--charcoal)" }}>
-            <strong>mode:</strong> Online &nbsp;·&nbsp; Distance &nbsp;·&nbsp; Online + Distance &nbsp;·&nbsp; Blended<br />
-            <strong>feeCategory:</strong> Under 1 Lakh &nbsp;·&nbsp; 1–2 Lakh &nbsp;·&nbsp; 2–3 Lakh &nbsp;·&nbsp; 3–5 Lakh &nbsp;·&nbsp; 5+ Lakh<br />
-            <strong>isFeatured:</strong> TRUE or FALSE<br />
-            {tab === "universities" && (
-              <><strong>approvedBy:</strong> Pipe-separated — e.g. <code>UGC-DEB|AICTE|NAAC A++</code><br /></>
+            {tab === "faqs" ? (
+              <>
+                <strong>question:</strong> Required. The exact question text — used as the unique key for upsert.<br />
+                <strong>answer:</strong> Required. Plain text answer.<br />
+                <strong>tags:</strong> Pipe-separated topic tags — e.g. <code>fees|ugc-deb|eligibility</code>. Optional.
+              </>
+            ) : (
+              <>
+                <strong>mode:</strong> Online &nbsp;·&nbsp; Distance &nbsp;·&nbsp; Online + Distance &nbsp;·&nbsp; Blended<br />
+                <strong>feeCategory:</strong> Under 1 Lakh &nbsp;·&nbsp; 1–2 Lakh &nbsp;·&nbsp; 2–3 Lakh &nbsp;·&nbsp; 3–5 Lakh &nbsp;·&nbsp; 5+ Lakh<br />
+                <strong>isFeatured:</strong> TRUE or FALSE<br />
+                {tab === "universities" && (
+                  <><strong>approvedBy:</strong> Pipe-separated — e.g. <code>UGC-DEB|AICTE|NAAC A++</code><br /></>
+                )}
+                <strong>logoUrl:</strong> Public HTTPS image URL. Leave blank to keep existing logo or skip.
+              </>
             )}
-            <strong>logoUrl:</strong> Public HTTPS image URL. Leave blank to keep existing logo or skip.
           </div>
         </details>
 
@@ -263,7 +278,7 @@ export default function ImportExportPage() {
               <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
                 <thead>
                   <tr style={{ background: "var(--ivory)" }}>
-                    {["Internal Name", "Action", "Note"].map((h) => (
+                    {["Identifier", "Action", "Note"].map((h) => (
                       <th key={h} style={{ padding: "8px 12px", textAlign: "left", borderBottom: "1px solid var(--mist)", fontWeight: 600 }}>
                         {h}
                       </th>

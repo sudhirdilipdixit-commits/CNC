@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "next-sanity";
 
-const VALID_TYPES = ["courses", "universities"] as const;
+const VALID_TYPES = ["courses", "universities", "faqs"] as const;
 type ExportType = (typeof VALID_TYPES)[number];
 
 function getSanityClient() {
@@ -41,7 +41,7 @@ export async function GET(
 
   const { type } = await params;
   if (!VALID_TYPES.includes(type as ExportType)) {
-    return NextResponse.json({ error: "Invalid type. Use 'courses' or 'universities'." }, { status: 400 });
+    return NextResponse.json({ error: "Invalid type. Use 'courses', 'universities', or 'faqs'." }, { status: 400 });
   }
 
   const client = getSanityClient();
@@ -81,6 +81,21 @@ export async function GET(
         u.fees, u.feeCategory, u.eligibility, u.badge,
         u.isFeatured ? "TRUE" : "FALSE",
         u.logoUrl ?? "",
+      ])
+    );
+    csv = [headers.join(","), ...rows].join("\n");
+  }
+
+  if (type === "faqs") {
+    const docs = await client.fetch<Record<string, unknown>[]>(
+      `*[_type == "faq"] | order(question asc) { question, answer, tags }`
+    );
+    const headers = ["question", "answer", "tags"];
+    const rows = docs.map((f) =>
+      toCsvRow([
+        f.question,
+        f.answer,
+        Array.isArray(f.tags) ? (f.tags as string[]).join("|") : "",
       ])
     );
     csv = [headers.join(","), ...rows].join("\n");
