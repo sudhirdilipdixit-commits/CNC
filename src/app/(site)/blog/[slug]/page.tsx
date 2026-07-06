@@ -426,6 +426,21 @@ export default async function BlogPostPage(
                 <p style={{ color: "var(--grey)" }}>No content yet.</p>
               )}
             </article>
+
+            {/* FAQ accordion */}
+            {post.faqs && post.faqs.length > 0 && (
+              <section className="bp-faqs" aria-label="Frequently Asked Questions">
+                <h2 className="bp-faqs-title">Frequently Asked Questions</h2>
+                <div className="bp-faq-list">
+                  {post.faqs.map((faq, i) => (
+                    <details key={i} className="bp-faq-item">
+                      <summary className="bp-faq-q">{faq.question}</summary>
+                      <div className="bp-faq-a">{faq.answer}</div>
+                    </details>
+                  ))}
+                </div>
+              </section>
+            )}
           </div>
 
           {/* Sidebar */}
@@ -640,6 +655,64 @@ export default async function BlogPostPage(
           background: var(--yellow); color: var(--navy);
         }
         .bp-tag-sm { font-size: 9px; padding: 3px 8px; }
+
+        /* FAQ accordion */
+        .bp-faqs {
+          max-width: 720px;
+          margin-top: 48px;
+          padding-top: 40px;
+          border-top: 2px solid var(--mist);
+        }
+        .bp-faqs-title {
+          font-family: var(--font-serif);
+          color: var(--navy);
+          font-size: clamp(22px, 2.8vw, 30px);
+          margin: 0 0 24px;
+          padding-bottom: 12px;
+          border-bottom: 2px solid var(--mist);
+          position: relative;
+        }
+        .bp-faqs-title::before {
+          content: '';
+          position: absolute;
+          bottom: -2px; left: 0;
+          width: 40px; height: 2px;
+          background: var(--yellow);
+        }
+        .bp-faq-list {
+          display: flex; flex-direction: column; gap: 8px;
+        }
+        .bp-faq-item {
+          background: var(--white);
+          border: 1px solid var(--mist);
+          border-radius: var(--radius-md);
+          overflow: hidden;
+        }
+        .bp-faq-item[open] { border-color: var(--pale-navy); }
+        .bp-faq-q {
+          padding: 16px 20px;
+          font-family: var(--font-serif);
+          font-size: 17px; font-weight: 600;
+          color: var(--navy);
+          cursor: pointer;
+          list-style: none;
+          display: flex; justify-content: space-between; align-items: center; gap: 12px;
+        }
+        .bp-faq-q::-webkit-details-marker { display: none; }
+        .bp-faq-q::after {
+          content: '+';
+          font-size: 22px; font-weight: 300;
+          color: var(--grey);
+          flex: 0 0 auto;
+          transition: transform .2s;
+        }
+        .bp-faq-item[open] .bp-faq-q::after { transform: rotate(45deg); }
+        .bp-faq-a {
+          padding: 4px 20px 18px;
+          font-size: 16px; line-height: 1.7;
+          color: var(--charcoal);
+          white-space: pre-line;
+        }
 
         /* Related */
         .bp-related-grid {
