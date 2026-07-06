@@ -75,6 +75,22 @@ export interface LandingPageData {
   universityItems?: UniversityCardItem[];
   faqs?: { _id: string; question: string; answer: string }[];
   ctaBand?: { headline?: string; body?: string; ctaLabel?: string };
+  iconStrip?: {
+    items?: { iconUrl?: string; label: string }[];
+  };
+  placementStats?: {
+    eyebrow?: string;
+    heading?: string;
+    description?: string;
+    stats?: { value: string; label: string }[];
+  };
+  howWeHelp?: {
+    heading?: string;
+    subheading?: string;
+    leftPoints?: string[];
+    rightPoints?: string[];
+    ctaLabel?: string;
+  };
   seo?: { title?: string; description?: string; noIndex?: boolean };
 }
 
@@ -767,6 +783,92 @@ export default function LandingPageClient({
         </section>
       )}
 
+      {/* Icon Feature Strip */}
+      {data.iconStrip?.items && data.iconStrip.items.length > 0 && (
+        <section className="lp-icon-strip">
+          <div className="container">
+            <div className="lp-icon-strip-card">
+              {data.iconStrip.items.map((item, i) => (
+                <div key={i} className="lp-icon-strip-item">
+                  <div className="lp-icon-strip-circle">
+                    {item.iconUrl && (
+                      <Image src={item.iconUrl} alt={item.label} width={48} height={48} className="lp-icon-strip-img" />
+                    )}
+                  </div>
+                  <span className="lp-icon-strip-label">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Placement Stats */}
+      {data.placementStats?.heading && (
+        <section className="lp-stats">
+          <div className="container">
+            {data.placementStats.eyebrow && (
+              <p className="lp-stats-eyebrow">{data.placementStats.eyebrow}</p>
+            )}
+            <h2 className="lp-stats-heading">{data.placementStats.heading}</h2>
+            {data.placementStats.description && (
+              <p className="lp-stats-desc">{data.placementStats.description}</p>
+            )}
+            {data.placementStats.stats && data.placementStats.stats.length > 0 && (
+              <div className="lp-stats-grid">
+                {data.placementStats.stats.map((stat, i) => (
+                  <div key={i} className="lp-stat-card">
+                    <span className="lp-stat-value">{stat.value}</span>
+                    <span className="lp-stat-label">{stat.label}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* How We Help */}
+      {data.howWeHelp?.heading && (
+        <section className="lp-how-help">
+          <div className="container">
+            <h2 className="lp-how-help-heading">{data.howWeHelp.heading}</h2>
+            {data.howWeHelp.subheading && (
+              <p className="lp-how-help-sub">{data.howWeHelp.subheading}</p>
+            )}
+            {((data.howWeHelp.leftPoints?.length ?? 0) > 0 || (data.howWeHelp.rightPoints?.length ?? 0) > 0) && (
+              <div className="lp-how-help-cards">
+                {data.howWeHelp.leftPoints && data.howWeHelp.leftPoints.length > 0 && (
+                  <div className="lp-how-help-card">
+                    <ul>
+                      {data.howWeHelp.leftPoints.map((pt, i) => (
+                        <li key={i}>{pt}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {data.howWeHelp.rightPoints && data.howWeHelp.rightPoints.length > 0 && (
+                  <div className="lp-how-help-card">
+                    <ul>
+                      {data.howWeHelp.rightPoints.map((pt, i) => (
+                        <li key={i}>{pt}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            )}
+            {data.howWeHelp.ctaLabel && (
+              <div className="lp-how-help-cta">
+                <button className="lp-how-help-cta-btn" onClick={() => openModal(data.howWeHelp?.ctaLabel ?? "")}>
+                  {data.howWeHelp.ctaLabel}
+                </button>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
       {/* CTA band */}
       <section className="lp-cta-band">
         <div className="container" style={{ textAlign: "center", maxWidth: 560 }}>
@@ -1040,6 +1142,39 @@ export default function LandingPageClient({
         .lp-cmp-tray-btn:disabled { opacity: 0.45; cursor: not-allowed; }
         .lp-cmp-tray-clear { background: none; border: none; color: rgba(255,255,255,.55); font-size: 12px; font-weight: 600; cursor: pointer; font-family: var(--font-sans); text-decoration: underline; }
         .lp-cmp-tray-clear:hover { color: var(--ivory); }
+
+        /* ── Icon Feature Strip ── */
+        .lp-icon-strip { padding: 28px 0 36px; background: var(--white); }
+        .lp-icon-strip-card { border: 1px solid var(--mist); border-radius: 16px; padding: 28px 24px; display: flex; flex-wrap: wrap; justify-content: center; gap: 28px 48px; }
+        .lp-icon-strip-item { display: flex; flex-direction: column; align-items: center; gap: 12px; max-width: 150px; text-align: center; }
+        .lp-icon-strip-circle { width: 80px; height: 80px; border-radius: 50%; border: 2px dashed #e879a0; display: flex; align-items: center; justify-content: center; flex: 0 0 80px; background: var(--white); }
+        .lp-icon-strip-img { width: 48px; height: 48px; object-fit: contain; }
+        .lp-icon-strip-label { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.35; }
+
+        /* ── Placement Stats ── */
+        .lp-stats { padding: 56px 0; background: var(--white); border-top: 1px solid var(--mist); }
+        .lp-stats-eyebrow { text-align: center; font-size: 13px; color: var(--grey); font-weight: 500; margin-bottom: 8px; letter-spacing: .03em; }
+        .lp-stats-heading { font-family: var(--font-serif); font-size: clamp(24px, 3.5vw, 40px); color: var(--navy); text-align: center; margin-bottom: 16px; line-height: 1.15; }
+        .lp-stats-desc { text-align: center; font-size: 15px; color: var(--charcoal); max-width: 680px; margin: 0 auto 40px; line-height: 1.65; }
+        .lp-stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+        @media (min-width: 640px) { .lp-stats-grid { grid-template-columns: repeat(4, 1fr); } }
+        .lp-stat-card { background: #f9c812; border-radius: 20px; padding: 28px 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; text-align: center; min-height: 130px; }
+        .lp-stat-value { font-family: var(--font-serif); font-size: clamp(30px, 5vw, 52px); font-weight: 800; color: var(--navy); line-height: 1; }
+        .lp-stat-label { font-size: 13px; font-weight: 600; color: var(--navy); line-height: 1.4; }
+
+        /* ── How We Help ── */
+        .lp-how-help { background: var(--navy); padding: 56px 0; }
+        .lp-how-help-heading { font-family: var(--font-serif); font-size: clamp(22px, 3.5vw, 38px); color: var(--ivory); text-align: center; margin-bottom: 14px; line-height: 1.15; }
+        .lp-how-help-sub { font-size: 15px; color: var(--pale-navy); text-align: center; max-width: 620px; margin: 0 auto 36px; line-height: 1.65; }
+        .lp-how-help-cards { display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 36px; }
+        @media (min-width: 640px) { .lp-how-help-cards { grid-template-columns: 1fr 1fr; } }
+        .lp-how-help-card { background: var(--white); border-radius: 16px; padding: 28px 32px; }
+        .lp-how-help-card ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 14px; }
+        .lp-how-help-card li { display: flex; align-items: flex-start; gap: 10px; font-size: 15px; font-weight: 700; color: var(--navy); line-height: 1.4; }
+        .lp-how-help-card li::before { content: "●"; color: var(--navy); font-size: 7px; flex: 0 0 7px; margin-top: 6px; }
+        .lp-how-help-cta { text-align: center; }
+        .lp-how-help-cta-btn { background: var(--yellow); color: var(--navy); border: none; border-radius: 28px; padding: 14px 36px; font-size: 15px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: background .15s, transform .15s; }
+        .lp-how-help-cta-btn:hover { background: #e6b800; transform: translateY(-1px); }
 
         /* ── Compare modal ── */
         .lp-cmp-backdrop { position: fixed; inset: 0; background: rgba(20,30,48,.7); z-index: 200; display: flex; align-items: center; justify-content: center; padding: 16px; }

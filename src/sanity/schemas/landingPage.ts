@@ -419,6 +419,77 @@ export default defineType({
         }),
     }),
 
+    // ── Icon Feature Strip ───────────────────────────────────────────
+    defineField({
+      name: "iconStrip",
+      title: "Icon Feature Strip",
+      description: "Row of icon + label highlights shown after FAQs. Leave empty to hide.",
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({
+          name: "items",
+          title: "Items (max 6)",
+          type: "array",
+          of: [{
+            type: "object",
+            name: "iconStripItem",
+            title: "Item",
+            fields: [
+              defineField({ name: "icon", title: "Icon Image", type: "image" }),
+              defineField({ name: "label", title: "Label", type: "string", validation: (R) => R.required() }),
+            ],
+            preview: { select: { title: "label", media: "icon" } },
+          }],
+        }),
+      ],
+    }),
+
+    // ── Placement Stats ──────────────────────────────────────────────
+    defineField({
+      name: "placementStats",
+      title: "Placement Stats Section",
+      description: "Yellow stat cards. Leave heading empty to hide the section.",
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({ name: "eyebrow", title: "Eyebrow", type: "string", description: "e.g. 'Placements In Distance MBA'" }),
+        defineField({ name: "heading", title: "Heading", type: "string" }),
+        defineField({ name: "description", title: "Description", type: "text", rows: 2 }),
+        defineField({
+          name: "stats",
+          title: "Stat Cards",
+          type: "array",
+          of: [{
+            type: "object",
+            name: "statItem",
+            title: "Stat",
+            fields: [
+              defineField({ name: "value", title: "Value", type: "string", description: "e.g. '50%' or '25K+'", validation: (R) => R.required() }),
+              defineField({ name: "label", title: "Label", type: "string", description: "e.g. 'Average Salary Hike'", validation: (R) => R.required() }),
+            ],
+            preview: { select: { title: "value", subtitle: "label" } },
+          }],
+        }),
+      ],
+    }),
+
+    // ── How We Help ─────────────────────────────────────────────────
+    defineField({
+      name: "howWeHelp",
+      title: "How We Help Section",
+      description: "Dark navy section with two columns of bullet points. Leave heading empty to hide.",
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({ name: "heading", title: "Heading", type: "string" }),
+        defineField({ name: "subheading", title: "Sub-heading", type: "text", rows: 2 }),
+        defineField({ name: "leftPoints", title: "Left Column Bullet Points", type: "array", of: [{ type: "string" }] }),
+        defineField({ name: "rightPoints", title: "Right Column Bullet Points", type: "array", of: [{ type: "string" }] }),
+        defineField({ name: "ctaLabel", title: "CTA Button Label", type: "string", initialValue: "Get Free Career Counseling" }),
+      ],
+    }),
+
     // ── CTA band ─────────────────────────────────────────────────────
     defineField({
       name: "ctaBand",

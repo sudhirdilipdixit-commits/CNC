@@ -96,6 +96,9 @@ export const landingPageQuery = groq`*[_type == "landingPage" && slug.current ==
     "question": select(_type == "reference" => @->question, question),
     "answer": select(_type == "reference" => @->answer, answer),
   },
+  "iconStrip": iconStrip { "items": items[] { "iconUrl": icon.asset->url, label } },
+  placementStats { eyebrow, heading, description, "stats": stats[] { value, label } },
+  howWeHelp { heading, subheading, leftPoints, rightPoints, ctaLabel },
   ctaBand { headline, body, ctaLabel },
   seo { title, description, noIndex },
 }`;
