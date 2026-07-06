@@ -104,6 +104,14 @@ function htmlToBlocks(html) {
 
   // Strip WordPress Gutenberg block comments
   html = html.replace(/<!--\s*wp:[^>]*-->/g, "").replace(/<!--\s*\/wp:[^>]*-->/g, "");
+  // Strip WPBakery / Visual Composer shortcode tags — keep text inside [vc_column_text]
+  html = html.replace(/\[vc_[^\]]*\]/g, "").replace(/\[\/vc_[^\]]*\]/g, "");
+  // Strip other common WordPress plugin shortcodes entirely (no useful content inside)
+  html = html.replace(/\[gallery[^\]]*\]/g, "");
+  html = html.replace(/\[embed[^\]]*\][\s\S]*?\[\/embed\]/g, "");
+  html = html.replace(/\[caption[^\]]*\]([\s\S]*?)\[\/caption\]/g, "$1");
+  // Strip any remaining unrecognised shortcodes (catch-all)
+  html = html.replace(/\[[a-z_]+[^\]]*\/\]/g, "");
   // Normalize line endings & whitespace
   html = html.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
 
