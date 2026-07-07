@@ -1,6 +1,6 @@
 ﻿"use client";
 
-import { useState, useMemo, useCallback, useEffect } from "react";
+import { useState, useMemo, useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import Header from "@/components/layout/Header";
@@ -74,6 +74,7 @@ export interface LandingPageData {
   courseItems?: CourseCardItem[];
   universityItems?: UniversityCardItem[];
   faqs?: { _id: string; question: string; answer: string }[];
+  cardLoadMode?: "load-more" | "auto-load" | "lazy";
   ctaBand?: { headline?: string; body?: string; ctaLabel?: string };
   iconStrip?: {
     items?: { iconUrl?: string; label: string }[];
@@ -413,6 +414,31 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
   );
 }
 
+// ── Lazy-reveal card wrapper ───────────────────────────────────────────────
+
+function LazyCard({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [revealed, setRevealed] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (typeof IntersectionObserver === "undefined") { setRevealed(true); return; }
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setRevealed(true); obs.disconnect(); } },
+      { threshold: 0.08 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <div ref={ref} className={`lp-lazy-card${revealed ? " lp-lazy-card--in" : ""}`}>
+      {children}
+    </div>
+  );
+}
+
 // ── Main component ─────────────────────────────────────────────────────────
 
 const INITIAL_COUNT = 9;
@@ -433,6 +459,12 @@ export default function LandingPageClient({
   const [activeDuration, setActiveDuration] = useState<string | null>(null);
   const [activeFeeCategory, setActiveFeeCategory] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+
+  const cardLoadMode = data.cardLoadMode ?? "load-more";
+
+  // ── Auto-load sentinel ref ──────────────────────────────────────────
+  const sentinelRef = useRef<HTMLDivElement>(null);
+  const hasMoreRef = useRef(false); // kept in sync each render below
 
   const pageType: "course" | "university" =
     data.pageType ?? (data.courseItems?.length ? "course" : "university");
@@ -468,6 +500,24 @@ export default function LandingPageClient({
 
   const visible = filtered.slice(0, visibleCount);
   const hasMore = visibleCount < filtered.length;
+  hasMoreRef.current = hasMore;
+
+  // ── Auto-load: trigger when sentinel scrolls into view ─────────────
+  useEffect(() => {
+    if (cardLoadMode !== "auto-load") return;
+    const sentinel = sentinelRef.current;
+    if (!sentinel || typeof IntersectionObserver === "undefined") return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMoreRef.current) {
+          setVisibleCount((c) => c + LOAD_BATCH);
+        }
+      },
+      { rootMargin: "300px" }
+    );
+    observer.observe(sentinel);
+    return () => observer.disconnect();
+  }, [cardLoadMode]);
 
   const openModal = useCallback((title = "") => {
     setFormTitle(title);
@@ -713,10 +763,20 @@ export default function LandingPageClient({
             <div className="lp-content">
               <div className="lp-results-header">
                 <p className="lp-results-count">
-                  Showing <strong>{Math.min(visibleCount, filtered.length)}</strong> of{" "}
-                  <strong>{filtered.length}</strong>{" "}
-                  {filtered.length === 1 ? itemLabel : itemLabelPlural}
-                  {anyFilterActive && <span className="lp-filter-tag"> · filtered</span>}
+                  {cardLoadMode === "lazy" ? (
+                    <>
+                      Showing all <strong>{filtered.length}</strong>{" "}
+                      {filtered.length === 1 ? itemLabel : itemLabelPlural}
+                      {anyFilterActive && <span className="lp-filter-tag"> · filtered</span>}
+                    </>
+                  ) : (
+                    <>
+                      Showing <strong>{Math.min(visibleCount, filtered.length)}</strong> of{" "}
+                      <strong>{filtered.length}</strong>{" "}
+                      {filtered.length === 1 ? itemLabel : itemLabelPlural}
+                      {anyFilterActive && <span className="lp-filter-tag"> · filtered</span>}
+                    </>
+                  )}
                 </p>
               </div>
 
@@ -729,31 +789,30 @@ export default function LandingPageClient({
                 </div>
               ) : (
                 <div className="lp-card-grid">
-                  {pageType === "course"
-                    ? (visible as CourseCardItem[]).map((item) => (
-                        <CourseCard
-                          key={item._id}
-                          item={item}
-                          onCta={openModal}
-                          inCompare={compareIds.includes(item._id)}
-                          canCompare={compareIds.length < 3}
-                          onToggleCompare={toggleCompare}
-                        />
-                      ))
-                    : (visible as UniversityCardItem[]).map((item) => (
-                        <UniversityCard
-                          key={item._id}
-                          item={item}
-                          onCta={openModal}
-                          inCompare={compareIds.includes(item._id)}
-                          canCompare={compareIds.length < 3}
-                          onToggleCompare={toggleCompare}
-                        />
-                      ))}
+                  {cardLoadMode === "lazy"
+                    ? pageType === "course"
+                      ? (filtered as CourseCardItem[]).map((item) => (
+                          <LazyCard key={item._id}>
+                            <CourseCard item={item} onCta={openModal} inCompare={compareIds.includes(item._id)} canCompare={compareIds.length < 3} onToggleCompare={toggleCompare} />
+                          </LazyCard>
+                        ))
+                      : (filtered as UniversityCardItem[]).map((item) => (
+                          <LazyCard key={item._id}>
+                            <UniversityCard item={item} onCta={openModal} inCompare={compareIds.includes(item._id)} canCompare={compareIds.length < 3} onToggleCompare={toggleCompare} />
+                          </LazyCard>
+                        ))
+                    : pageType === "course"
+                      ? (visible as CourseCardItem[]).map((item) => (
+                          <CourseCard key={item._id} item={item} onCta={openModal} inCompare={compareIds.includes(item._id)} canCompare={compareIds.length < 3} onToggleCompare={toggleCompare} />
+                        ))
+                      : (visible as UniversityCardItem[]).map((item) => (
+                          <UniversityCard key={item._id} item={item} onCta={openModal} inCompare={compareIds.includes(item._id)} canCompare={compareIds.length < 3} onToggleCompare={toggleCompare} />
+                        ))}
                 </div>
               )}
 
-              {hasMore && (
+              {/* Load More button — only in load-more mode */}
+              {cardLoadMode === "load-more" && hasMore && (
                 <div className="lp-load-more">
                   <button
                     className="btn btn-secondary"
@@ -762,6 +821,11 @@ export default function LandingPageClient({
                     Load {Math.min(LOAD_BATCH, filtered.length - visibleCount)} more
                   </button>
                 </div>
+              )}
+
+              {/* Auto-load sentinel — invisible trigger element */}
+              {cardLoadMode === "auto-load" && (
+                <div ref={sentinelRef} className="lp-sentinel" aria-hidden="true" />
               )}
             </div>
           </div>
@@ -1197,6 +1261,16 @@ export default function LandingPageClient({
         .lp-cmp-td { padding: 14px 16px; font-size: 13px; color: var(--charcoal); vertical-align: middle; text-align: center; }
         .lp-cmp-td-label { font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); text-align: left; background: var(--ivory); border-right: 1px solid var(--mist); white-space: nowrap; }
         .lp-cmp-na { color: var(--mist); }
+
+        /* ── Lazy card reveal ── */
+        .lp-lazy-card { opacity: 0; transform: translateY(20px); transition: opacity .45s ease, transform .45s ease; }
+        .lp-lazy-card--in { opacity: 1; transform: translateY(0); }
+        @media (prefers-reduced-motion: reduce) {
+          .lp-lazy-card { opacity: 1; transform: none; transition: none; }
+        }
+
+        /* ── Auto-load sentinel ── */
+        .lp-sentinel { height: 1px; margin-top: 16px; }
       `}</style>
     </>
   );

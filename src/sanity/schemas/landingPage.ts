@@ -97,6 +97,22 @@ export default defineType({
       description: "Hides the filter sidebar so cards stretch to full width. Filters are disabled when sidebar is hidden.",
       group: "display",
     }),
+    defineField({
+      name: "cardLoadMode",
+      title: "Card Loading Mode",
+      type: "string",
+      description: "How additional cards are revealed after the initial batch (9 cards).",
+      options: {
+        list: [
+          { title: "Load More button (default)", value: "load-more" },
+          { title: "Auto-load on scroll", value: "auto-load" },
+          { title: "Lazy fade-in (all cards, scroll reveal)", value: "lazy" },
+        ],
+        layout: "radio",
+      },
+      initialValue: "load-more",
+      group: "display",
+    }),
 
     // ── Hero ─────────────────────────────────────────────────────────
     defineField({
