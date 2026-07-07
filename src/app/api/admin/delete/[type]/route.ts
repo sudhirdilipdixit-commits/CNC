@@ -45,23 +45,40 @@ export async function DELETE(
   }
 
   const sanityType = SANITY_TYPE_MAP[type as DeleteType];
+
+  if (!process.env.SANITY_API_TOKEN) {
+    return NextResponse.json({ error: "SANITY_API_TOKEN is not set in environment variables." }, { status: 500 });
+  }
+
   const client = getSanityClient();
 
-  const ids = await client.fetch<string[]>(
-    `*[_type == $sanityType]._id`,
-    { sanityType }
-  );
+  let ids: string[];
+  try {
+    ids = await client.fetch<string[]>(`*[_type == $sanityType]._id`, { sanityType });
+  } catch (err) {
+    return NextResponse.json(
+      { error: `Failed to fetch IDs: ${err instanceof Error ? err.message : String(err)}` },
+      { status: 500 }
+    );
+  }
 
   if (ids.length === 0) {
     return NextResponse.json({ deleted: 0 });
   }
 
-  // Delete in batches of 50 to avoid large transaction timeouts
+  // Delete in batches of 50
   const BATCH = 50;
-  for (let i = 0; i < ids.length; i += BATCH) {
-    const tx = client.transaction();
-    ids.slice(i, i + BATCH).forEach((id) => tx.delete(id));
-    await tx.commit();
+  try {
+    for (let i = 0; i < ids.length; i += BATCH) {
+      const tx = client.transaction();
+      ids.slice(i, i + BATCH).forEach((id) => tx.delete(id));
+      await tx.commit();
+    }
+  } catch (err) {
+    return NextResponse.json(
+      { error: `Delete failed: ${err instanceof Error ? err.message : String(err)}` },
+      { status: 500 }
+    );
   }
 
   return NextResponse.json({ deleted: ids.length });

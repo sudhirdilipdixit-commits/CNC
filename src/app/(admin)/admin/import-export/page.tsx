@@ -72,7 +72,7 @@ export default function ImportExportPage() {
       let json: { deleted?: number; error?: string } = {};
       try { json = JSON.parse(text); } catch { /* non-JSON response (e.g. 504 timeout) */ }
       if (!res.ok) {
-        alert(json.error || `Delete failed (HTTP ${res.status}). The function may have timed out — try again or delete in smaller batches via Sanity Studio.`);
+        alert(json.error || `Delete failed (HTTP ${res.status}). Check Vercel logs for details.`);
         return;
       }
       alert(`Deleted ${json.deleted ?? 0} ${label}.`);
