@@ -68,12 +68,17 @@ export default function ImportExportPage() {
         method: "DELETE",
         headers: { Authorization: `Bearer ${secret}` },
       });
-      const json = await res.json() as { deleted?: number; error?: string };
-      if (!res.ok) { alert(json.error || "Delete failed. Check the admin secret."); return; }
+      const text = await res.text();
+      let json: { deleted?: number; error?: string } = {};
+      try { json = JSON.parse(text); } catch { /* non-JSON response (e.g. 504 timeout) */ }
+      if (!res.ok) {
+        alert(json.error || `Delete failed (HTTP ${res.status}). The function may have timed out — try again or delete in smaller batches via Sanity Studio.`);
+        return;
+      }
       alert(`Deleted ${json.deleted ?? 0} ${label}.`);
       resetImport();
-    } catch {
-      alert("Delete failed. Check your connection.");
+    } catch (err) {
+      alert(`Delete failed: ${err instanceof Error ? err.message : "Network error. Check your connection."}`);
     } finally {
       setDeleting(false);
     }

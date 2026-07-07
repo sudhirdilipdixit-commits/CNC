@@ -56,9 +56,13 @@ export async function DELETE(
     return NextResponse.json({ deleted: 0 });
   }
 
-  const tx = client.transaction();
-  ids.forEach((id) => tx.delete(id));
-  await tx.commit();
+  // Delete in batches of 50 to avoid large transaction timeouts
+  const BATCH = 50;
+  for (let i = 0; i < ids.length; i += BATCH) {
+    const tx = client.transaction();
+    ids.slice(i, i + BATCH).forEach((id) => tx.delete(id));
+    await tx.commit();
+  }
 
   return NextResponse.json({ deleted: ids.length });
 }
