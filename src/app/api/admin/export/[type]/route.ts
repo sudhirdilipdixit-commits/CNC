@@ -51,17 +51,20 @@ export async function GET(
     const docs = await client.fetch<Record<string, unknown>[]>(
       `*[_type == "courseCard"] | order(courseName asc) {
         internalName, courseName, universityName, mode, duration, fees, feeCategory, eligibility, badge, isFeatured,
-        "logoUrl": universityLogo.asset->url
+        "logoUrl": universityLogo.asset->url,
+        "logoAlt": universityLogo.alt,
+        "logoTitle": universityLogo.title,
+        "logoDescription": universityLogo.description
       }`
     );
 
-    const headers = ["internalName","courseName","universityName","mode","duration","fees","feeCategory","eligibility","badge","isFeatured","logoUrl"];
+    const headers = ["internalName","courseName","universityName","mode","duration","fees","feeCategory","eligibility","badge","isFeatured","logoUrl","logoAlt","logoTitle","logoDescription"];
     const rows = docs.map((c) =>
       toCsvRow([
         c.internalName, c.courseName, c.universityName, c.mode, c.duration,
         c.fees, c.feeCategory, c.eligibility, c.badge,
         c.isFeatured ? "TRUE" : "FALSE",
-        c.logoUrl ?? "",
+        c.logoUrl ?? "", c.logoAlt ?? "", c.logoTitle ?? "", c.logoDescription ?? "",
       ])
     );
     csv = [headers.join(","), ...rows].join("\n");
@@ -69,18 +72,21 @@ export async function GET(
     const docs = await client.fetch<Record<string, unknown>[]>(
       `*[_type == "universityCard"] | order(universityName asc) {
         internalName, universityName, mode, duration, approvedBy, fees, feeCategory, eligibility, badge, isFeatured,
-        "logoUrl": universityLogo.asset->url
+        "logoUrl": universityLogo.asset->url,
+        "logoAlt": universityLogo.alt,
+        "logoTitle": universityLogo.title,
+        "logoDescription": universityLogo.description
       }`
     );
 
-    const headers = ["internalName","universityName","mode","duration","approvedBy","fees","feeCategory","eligibility","badge","isFeatured","logoUrl"];
+    const headers = ["internalName","universityName","mode","duration","approvedBy","fees","feeCategory","eligibility","badge","isFeatured","logoUrl","logoAlt","logoTitle","logoDescription"];
     const rows = docs.map((u) =>
       toCsvRow([
         u.internalName, u.universityName, u.mode, u.duration,
         Array.isArray(u.approvedBy) ? (u.approvedBy as string[]).join("|") : "",
         u.fees, u.feeCategory, u.eligibility, u.badge,
         u.isFeatured ? "TRUE" : "FALSE",
-        u.logoUrl ?? "",
+        u.logoUrl ?? "", u.logoAlt ?? "", u.logoTitle ?? "", u.logoDescription ?? "",
       ])
     );
     csv = [headers.join(","), ...rows].join("\n");

@@ -220,13 +220,23 @@ export async function POST(
         };
       }
 
-      // Upload logo if URL provided
-      let logoError: string | undefined;
+      // ── Logo handling ──────────────────────────────────────────
       const logoUrl = row.logoUrl?.trim();
+      const logoAlt = row.logoAlt?.trim() || "";
+      const logoTitle = row.logoTitle?.trim() || "";
+      const logoDescription = row.logoDescription?.trim() || "";
+      let logoError: string | undefined;
+
       if (logoUrl) {
         try {
           const slug = internalName.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 40);
-          fields.universityLogo = await uploadLogoFromUrl(client, logoUrl, slug);
+          const asset = await uploadLogoFromUrl(client, logoUrl, slug);
+          fields.universityLogo = {
+            ...asset,
+            ...(logoAlt && { alt: logoAlt }),
+            ...(logoTitle && { title: logoTitle }),
+            ...(logoDescription && { description: logoDescription }),
+          };
         } catch (e) {
           logoError = `Logo skipped: ${e instanceof Error ? e.message : "Unknown error"}`;
         }
@@ -239,7 +249,17 @@ export async function POST(
       );
 
       if (existingId) {
-        await client.patch(existingId).set(fields).commit();
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        let patch = (client.patch(existingId) as any).set(fields);
+        // Update logo metadata even without a new logo URL
+        if (!logoUrl && (logoAlt || logoTitle || logoDescription)) {
+          const metaPatch: Record<string, string> = {};
+          if (logoAlt) metaPatch["universityLogo.alt"] = logoAlt;
+          if (logoTitle) metaPatch["universityLogo.title"] = logoTitle;
+          if (logoDescription) metaPatch["universityLogo.description"] = logoDescription;
+          patch = patch.set(metaPatch);
+        }
+        await patch.commit();
         results.push({ internalName, action: "updated", error: logoError });
       } else {
         await client.create({ _type: sanityType, ...fields });
