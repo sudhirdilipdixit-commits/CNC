@@ -452,7 +452,7 @@ export default function LandingPageClient({
   const allFeeCategories = useMemo(() => {
     const seen = new Set<string>();
     allItems.forEach((i) => { if (i.feeCategory) seen.add(i.feeCategory); });
-    const order = ["Under 1 Lakh", "1–2 Lakh", "2–3 Lakh", "3–5 Lakh", "5+ Lakh"];
+    const order = ["Under 1 Lakh", "1-2 Lakh", "2-3 Lakh", "3-5 Lakh", "5+ Lakh"];
     return order.filter((c) => seen.has(c));
   }, [allItems]);
 
