@@ -69,7 +69,7 @@ export default function Footer() {
           <div className="footer-col">
             <h4>About &amp; Legal</h4>
             <ul className="footer-list">
-              <li><a href="#">About Us</a></li>
+              <li><a href="/about">About Us</a></li>
               <li><a href="#">Counselling</a></li>
               <li><a href="#">Blog</a></li>
               <li><a href="/privacy-policy">Privacy Policy</a></li>
