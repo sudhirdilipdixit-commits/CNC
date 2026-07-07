@@ -6,6 +6,7 @@ import faq from "./faq";
 import landingPage from "./landingPage";
 import courseCard from "./courseCard";
 import universityCard from "./universityCard";
+import specializationsPage from "./specializationsPage";
 import {
   heroBlock, promiseBlock, pathBlock, programmesBlock,
   whyUsBlock, aiCounsellorBlock, howItWorksBlock, trustStripBlock,
@@ -21,6 +22,7 @@ export const schemaTypes = [
   landingPage,
   courseCard,
   universityCard,
+  specializationsPage,
   // Page builder blocks
   heroBlock, promiseBlock, pathBlock, programmesBlock,
   whyUsBlock, aiCounsellorBlock, howItWorksBlock, trustStripBlock,

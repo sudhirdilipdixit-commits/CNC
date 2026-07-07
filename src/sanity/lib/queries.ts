@@ -69,6 +69,21 @@ export const relatedBlogPostsByCategoryQuery = groq`*[_type == "blog" && slug.cu
   _id, title, slug, coverImage, tag, readTime, publishedAt
 }`;
 
+export const specializationsPageQuery = groq`*[_type == "specializationsPage"][0]{
+  hero{ eyebrow, heading, lede, notSureText, notSureCTA },
+  specGrid{
+    eyebrow, heading,
+    cards[]{ icon, name, description, salary, pageSlug }
+  },
+  freshness{ eyebrow, heading, body },
+  framework{
+    eyebrow, heading,
+    items[]{ question, answer }
+  },
+  ctaBand{ heading, body, primaryCTA, secondaryCTA },
+  seo
+}`;
+
 export const allLandingPageSlugsQuery = groq`*[_type == "landingPage"]{ "slug": slug.current }`;
 
 export const landingPageQuery = groq`*[_type == "landingPage" && slug.current == $slug][0]{

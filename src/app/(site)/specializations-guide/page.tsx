@@ -1,31 +1,38 @@
 import type { Metadata } from "next";
+import { sanityFetch } from "@/sanity/lib/client";
+import { specializationsPageQuery } from "@/sanity/lib/queries";
 import SpecializationsHubClient from "./SpecializationsHubClient";
 
-export const metadata: Metadata = {
-  title: "MBA Specializations Guide 2026 | Find Your Perfect Track | CollegeNCourses",
-  description:
-    "The honest, jargon-free guide to 8 MBA specializations Indian aspirants are choosing in 2026. Career outcomes, salary benchmarks, top programmes, and the questions to ask before deciding.",
-  alternates: {
-    canonical: "https://collegencourses.com/specializations-guide",
-  },
-  openGraph: {
-    url: "https://collegencourses.com/specializations-guide",
-    title: "MBA Specializations Guide 2026 | CollegeNCourses",
-    description:
-      "Explore 8 MBA specializations with career outcomes, salary benchmarks, and expert guidance for Indian aspirants.",
-  },
-};
+const DEFAULT_TITLE =
+  "MBA Specializations Guide 2026 | Find Your Perfect Track | CollegeNCourses";
+const DEFAULT_DESCRIPTION =
+  "The honest, jargon-free guide to 8 MBA specializations Indian aspirants are choosing in 2026. Career outcomes, salary ranges, top programmes, and the questions to ask before deciding.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const data = await sanityFetch<{ seo?: { title?: string; description?: string } }>({
+    query: specializationsPageQuery,
+    revalidate: 300,
+  }).catch(() => null);
+
+  return {
+    title: data?.seo?.title || DEFAULT_TITLE,
+    description: data?.seo?.description || DEFAULT_DESCRIPTION,
+    alternates: { canonical: "https://collegencourses.com/specializations-guide" },
+    openGraph: {
+      url: "https://collegencourses.com/specializations-guide",
+      title: data?.seo?.title || "MBA Specializations Guide 2026 | CollegeNCourses",
+      description:
+        data?.seo?.description ||
+        "Explore 8 MBA specializations with career outcomes, salary ranges, and expert guidance for Indian aspirants.",
+    },
+  };
+}
 
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   itemListElement: [
-    {
-      "@type": "ListItem",
-      position: 1,
-      name: "Home",
-      item: "https://collegencourses.com",
-    },
+    { "@type": "ListItem", position: 1, name: "Home", item: "https://collegencourses.com" },
     {
       "@type": "ListItem",
       position: 2,
@@ -52,7 +59,7 @@ const faqSchema = {
       name: "Which MBA specialization is best for a working professional?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "IT & Project Management has the highest density of working professionals, particularly from tech backgrounds. HR and Operations are also popular for mid-career professionals. The best choice depends on your current domain — staying within your field usually provides the strongest career leverage.",
+        text: "IT & Project Management has the highest density of working professionals, particularly from tech backgrounds. HR and Operations are also popular for mid-career professionals.",
       },
     },
     {
@@ -60,7 +67,7 @@ const faqSchema = {
       name: "Is it possible to switch to a completely different field with an MBA?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Yes, but the curve is steeper when switching both industry and function simultaneously. The MBA provides the credential bridge, but without domain experience, you start the job search at a disadvantage to peers who already have that context.",
+        text: "Yes, but the curve is steeper when switching both industry and function simultaneously. The MBA provides the credential bridge, but without domain experience, you start the job search at a disadvantage.",
       },
     },
     {
@@ -68,7 +75,7 @@ const faqSchema = {
       name: "Which MBA specialization is right if I am not sure what I want?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Marketing and General Management are the most forgiving specializations for the undecided — they offer broad skill sets applicable across industries. However, if you have a domain background, using it is almost always more powerful than abandoning it.",
+        text: "Marketing and General Management are the most forgiving specializations for the undecided — they offer broad skill sets applicable across industries.",
       },
     },
     {
@@ -100,22 +107,18 @@ const itemListSchema = {
   ],
 };
 
-export default function SpecializationsGuidePage() {
+export default async function SpecializationsGuidePage() {
+  const data = await sanityFetch<Record<string, unknown>>({
+    query: specializationsPageQuery,
+    revalidate: 300,
+  }).catch(() => null);
+
   return (
     <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }}
-      />
-      <SpecializationsHubClient />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(itemListSchema) }} />
+      <SpecializationsHubClient data={data} />
     </>
   );
 }
