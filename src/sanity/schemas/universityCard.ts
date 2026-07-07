@@ -17,6 +17,11 @@ export default defineType({
       title: "University Logo",
       type: "image",
       options: { hotspot: true },
+      fields: [
+        defineField({ name: "alt", title: "Alt Text", type: "string", description: "Describe the logo for screen readers and SEO, e.g. 'Amity University Online logo'" }),
+        defineField({ name: "title", title: "Title", type: "string", description: "Tooltip shown on hover" }),
+        defineField({ name: "description", title: "Description", type: "text", rows: 2, description: "Optional longer description for accessibility" }),
+      ],
     }),
     defineField({
       name: "universityName",

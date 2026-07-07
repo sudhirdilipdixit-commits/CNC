@@ -98,12 +98,16 @@ export const landingPageQuery = groq`*[_type == "landingPage" && slug.current ==
     "_id": _id,
     courseName, universityName,
     "universityLogoUrl": universityLogo.asset->url,
+    "universityLogoAlt": universityLogo.alt,
+    "universityLogoTitle": universityLogo.title,
     mode, duration, fees, feeCategory, eligibility, badge, isFeatured,
   },
   "universityItems": universityItems[]->{
     "_id": _id,
     universityName,
     "universityLogoUrl": universityLogo.asset->url,
+    "universityLogoAlt": universityLogo.alt,
+    "universityLogoTitle": universityLogo.title,
     mode, duration, approvedBy, fees, feeCategory, eligibility, badge, isFeatured,
   },
   "faqs": faqs[]{
