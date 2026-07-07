@@ -59,7 +59,7 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
             <a href="/top-distance-mba-business-management" className={isActive("/top-distance-mba-business-management") ? "cur" : ""}>Course LP</a>
             <a href="/#resources">Resources</a>
             <a href="/blog" className={isActive("/blog") ? "cur" : ""}>Blogs</a>
-            <a href="/#contact">Contact</a>
+            <a href="/contact-us" className={isActive("/contact-us") ? "cur" : ""}>Contact</a>
           </nav>
 
           <div className="header-cta-group">
@@ -90,7 +90,7 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
           <a href="/top-distance-mba-business-management" onClick={closeMenu}>Course LP</a>
           <a href="/#resources" onClick={closeMenu}>Resources</a>
           <a href="/blog" onClick={closeMenu}>Blogs</a>
-          <a href="/#contact" onClick={closeMenu}>Contact</a>
+          <a href="/contact-us" onClick={closeMenu}>Contact</a>
           <button
             type="button"
             className="btn btn-primary"
