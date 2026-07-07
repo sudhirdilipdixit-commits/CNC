@@ -55,8 +55,8 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
           <nav className="primary-nav" aria-label="Primary">
             <a href="/" className={isActive("/") ? "cur" : ""}>Home</a>
             <a href="/specializations-guide" className={isActive("/specializations-guide") ? "cur" : ""}>Specializations</a>
-            <a href="/#programmes">Programs</a>
-            <a href="/#counselling">Counselling</a>
+            <a href="/top-10-distance-mba-universities-colleges-north-zone/" className={isActive("/top-10-distance-mba-universities-colleges-north-zone") ? "cur" : ""}>University LP</a>
+            <a href="/top-distance-mba-business-management" className={isActive("/top-distance-mba-business-management") ? "cur" : ""}>Course LP</a>
             <a href="/#resources">Resources</a>
             <a href="/blog" className={isActive("/blog") ? "cur" : ""}>Blogs</a>
             <a href="/#contact">Contact</a>
@@ -86,8 +86,8 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
         >
           <a href="/" onClick={closeMenu}>Home</a>
           <a href="/specializations-guide" onClick={closeMenu}>Specializations</a>
-          <a href="/#programmes" onClick={closeMenu}>Programs</a>
-          <a href="/#counselling" onClick={closeMenu}>Counselling</a>
+          <a href="/top-10-distance-mba-universities-colleges-north-zone/" onClick={closeMenu}>University LP</a>
+          <a href="/top-distance-mba-business-management" onClick={closeMenu}>Course LP</a>
           <a href="/#resources" onClick={closeMenu}>Resources</a>
           <a href="/blog" onClick={closeMenu}>Blogs</a>
           <a href="/#contact" onClick={closeMenu}>Contact</a>
