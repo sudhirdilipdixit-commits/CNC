@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
 
 interface HeaderProps {
@@ -10,6 +11,13 @@ interface HeaderProps {
 export default function Header({ onOpenLeadForm }: HeaderProps) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    if (href.startsWith("/#")) return false;
+    return pathname.startsWith(href);
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 16);
@@ -45,11 +53,13 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
           </a>
 
           <nav className="primary-nav" aria-label="Primary">
-            <a href="#programmes">Specializations</a>
-            <a href="#counselling">Counselling</a>
-            <a href="#programmes">Programs</a>
-            <a href="#resources">Resources</a>
-            <a href="#blog">Blog</a>
+            <a href="/" className={isActive("/") ? "cur" : ""}>Home</a>
+            <a href="/specializations-guide" className={isActive("/specializations-guide") ? "cur" : ""}>Specializations</a>
+            <a href="/#programmes">Programs</a>
+            <a href="/#counselling">Counselling</a>
+            <a href="/#resources">Resources</a>
+            <a href="/blog" className={isActive("/blog") ? "cur" : ""}>Blogs</a>
+            <a href="/#contact">Contact</a>
           </nav>
 
           <div className="header-cta-group">
@@ -74,13 +84,13 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
           id="mobileMenu"
           aria-hidden={!menuOpen}
         >
-          <a href="#programmes" onClick={closeMenu}>Specializations</a>
-          <a href="#counselling" onClick={closeMenu}>Counselling</a>
-          <a href="#programmes" onClick={closeMenu}>Programs</a>
-          <a href="#resources" onClick={closeMenu}>Resources</a>
-          <a href="#blog" onClick={closeMenu}>Blog</a>
-          <a href="#about" onClick={closeMenu}>About</a>
-          <a href="#contact" onClick={closeMenu}>Contact</a>
+          <a href="/" onClick={closeMenu}>Home</a>
+          <a href="/specializations-guide" onClick={closeMenu}>Specializations</a>
+          <a href="/#programmes" onClick={closeMenu}>Programs</a>
+          <a href="/#counselling" onClick={closeMenu}>Counselling</a>
+          <a href="/#resources" onClick={closeMenu}>Resources</a>
+          <a href="/blog" onClick={closeMenu}>Blogs</a>
+          <a href="/#contact" onClick={closeMenu}>Contact</a>
           <button
             type="button"
             className="btn btn-primary"
