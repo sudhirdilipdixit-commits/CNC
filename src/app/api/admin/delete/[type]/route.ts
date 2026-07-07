@@ -52,6 +52,7 @@ export async function DELETE(
 
   const client = getSanityClient();
 
+  // ── 1. Fetch all IDs of the documents to delete ───────────────
   let ids: string[];
   try {
     ids = await client.fetch<string[]>(`*[_type == $sanityType]._id`, { sanityType });
@@ -66,7 +67,30 @@ export async function DELETE(
     return NextResponse.json({ deleted: 0 });
   }
 
-  // Delete in batches of 50
+  // ── 2. Remove references from landing pages to avoid integrity errors ──
+  // Landing pages reference courseCards via courseItems[] and universityCards via universityItems[]
+  const lpRefField = type === "universities" ? "universityItems" : type === "courses" ? "courseItems" : null;
+
+  if (lpRefField) {
+    try {
+      type LPRef = { _id: string; items: { _ref?: string; _key?: string }[] };
+      const landingPages = await client.fetch<LPRef[]>(
+        `*[_type == "landingPage" && count(${lpRefField}[@._ref in $ids]) > 0]{ _id, "items": ${lpRefField} }`,
+        { ids }
+      );
+      for (const lp of landingPages) {
+        const filtered = (lp.items ?? []).filter((item) => !item._ref || !ids.includes(item._ref));
+        await client.patch(lp._id).set({ [lpRefField]: filtered }).commit();
+      }
+    } catch (err) {
+      return NextResponse.json(
+        { error: `Failed to clear landing page references: ${err instanceof Error ? err.message : String(err)}` },
+        { status: 500 }
+      );
+    }
+  }
+
+  // ── 3. Delete in batches of 50 ────────────────────────────────
   const BATCH = 50;
   try {
     for (let i = 0; i < ids.length; i += BATCH) {
