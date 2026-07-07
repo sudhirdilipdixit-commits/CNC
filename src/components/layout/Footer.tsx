@@ -72,10 +72,10 @@ export default function Footer() {
               <li><a href="#">About Us</a></li>
               <li><a href="#">Counselling</a></li>
               <li><a href="#">Blog</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms &amp; Conditions</a></li>
-              <li><a href="#">Cookie Policy</a></li>
-              <li><a href="#">Grievances</a></li>
+              <li><a href="/privacy-policy">Privacy Policy</a></li>
+              <li><a href="/terms-conditions">Terms &amp; Conditions</a></li>
+              <li><a href="/cookie-policy">Cookie Policy</a></li>
+              <li><a href="/grievances">Grievances</a></li>
             </ul>
           </div>
         </div>
