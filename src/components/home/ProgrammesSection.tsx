@@ -25,6 +25,7 @@ const FALLBACK_COURSES: FeaturedCourse[] = [
     mode: "Online",
     duration: "24 months",
     fees: "₹1.8 L",
+    eligibility: "Graduate from any discipline with min. 50% marks",
   },
   {
     _id: "f2",
@@ -33,6 +34,7 @@ const FALLBACK_COURSES: FeaturedCourse[] = [
     mode: "Distance",
     duration: "24 months",
     fees: "₹1.5 L",
+    eligibility: "Graduate from any recognised university",
   },
   {
     _id: "f3",
@@ -41,6 +43,7 @@ const FALLBACK_COURSES: FeaturedCourse[] = [
     mode: "Executive",
     duration: "12 months",
     fees: "₹6.5 L",
+    eligibility: "Graduate with min. 2 years work experience",
   },
 ];
 
@@ -58,49 +61,55 @@ export default function ProgrammesSection({ onOpenLeadForm, featuredCourses }: P
 
         <div className="programme-grid">
           {courses.map((course) => (
-            <article className="programme-card" key={course._id}>
-              <div className="programme-card-body">
+            <article className="fp-card" key={course._id}>
+              <div className="fp-card-head">
                 {course.universityLogoUrl ? (
-                  <div className="programme-logo-wrap">
-                    <Image
-                      src={course.universityLogoUrl}
-                      alt={course.universityName ?? course.courseName}
-                      width={160}
-                      height={56}
-                      style={{ objectFit: "contain", maxHeight: 56 }}
-                    />
+                  <Image
+                    src={course.universityLogoUrl}
+                    alt={course.universityName ?? course.courseName}
+                    width={220}
+                    height={90}
+                    className="fp-card-logo"
+                  />
+                ) : (
+                  <div className="fp-card-logo-ph" aria-hidden="true">
+                    {(course.universityName ?? course.courseName).charAt(0)}
                   </div>
-                ) : null}
-                <div className="programme-tags">
-                  {course.mode && <span className="tag tag-mode">{course.mode}</span>}
-                  {course.badge && <span className="tag tag-new">{course.badge}</span>}
-                </div>
-                <h3>{course.courseName}</h3>
-                {course.universityName && (
-                  <div className="programme-university">{course.universityName}</div>
                 )}
-                <div className="programme-meta">
+                <div className="fp-card-name">{course.courseName}</div>
+                {course.universityName && (
+                  <div className="fp-card-sub">{course.universityName}</div>
+                )}
+                {course.mode && <span className="fp-mode-tag">{course.mode}</span>}
+              </div>
+
+              {(course.duration || course.fees) && (
+                <div className="fp-card-meta">
                   {course.duration && (
-                    <div className="programme-meta-item">
-                      <div className="programme-meta-label">Duration</div>
-                      <div className="programme-meta-value">{course.duration}</div>
+                    <div className="fp-meta-cell">
+                      <span className="fp-meta-label">Duration</span>
+                      <span className="fp-meta-val">{course.duration}</span>
                     </div>
                   )}
                   {course.fees && (
-                    <div className="programme-meta-item">
-                      <div className="programme-meta-label">Fee</div>
-                      <div className="programme-meta-value">{course.fees}</div>
-                    </div>
-                  )}
-                  {course.eligibility && (
-                    <div className="programme-meta-item">
-                      <div className="programme-meta-label">Eligibility</div>
-                      <div className="programme-meta-value">{course.eligibility}</div>
+                    <div className="fp-meta-cell">
+                      <span className="fp-meta-label">Fees (₹)</span>
+                      <span className="fp-meta-val">{course.fees}</span>
                     </div>
                   )}
                 </div>
-                <button type="button" className="btn btn-primary btn-sm" onClick={onOpenLeadForm}>
-                  Get Details
+              )}
+
+              {course.eligibility && (
+                <div className="fp-card-info-row">
+                  <span className="fp-meta-label">Eligibility</span>
+                  <span>{course.eligibility}</span>
+                </div>
+              )}
+
+              <div className="fp-card-actions">
+                <button type="button" className="fp-btn-primary" onClick={onOpenLeadForm}>
+                  Get Free Career Counselling
                 </button>
               </div>
             </article>
