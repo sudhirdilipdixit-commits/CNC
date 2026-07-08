@@ -89,6 +89,35 @@ export const specializationsPageQuery = groq`*[_type == "specializationsPage"][0
   seo
 }`;
 
+export const allSpecializationDetailSlugsQuery = groq`*[_type == "specializationDetail"]{ "slug": slug.current }`;
+
+export const specializationDetailQuery = groq`*[_type == "specializationDetail" && slug.current == $slug][0]{
+  title, slug,
+  hero {
+    eyebrow, heading, lede,
+    heroStats[]{ icon, value, label },
+    softCta { text, buttonLabel }
+  },
+  overview {
+    eyebrow, heading, body,
+    skills[]{ name, isNew },
+    infoCard { title, body }
+  },
+  careerOutcomes {
+    eyebrow, heading, sourceNote,
+    careers[]{ icon, role, industries, salaryRange }
+  },
+  editorialCta { text, linkLabel, linkHref },
+  universities {
+    eyebrow, heading, seeAllLabel, seeAllHref,
+    items[]{ rank, name, programme, accreditations, fee, detailsHref }
+  },
+  faqs[]{ "_id": _key, question, answer },
+  faqsHeading,
+  ctaBand { heading, body, primaryCtaLabel, secondaryCtaLabel, secondaryCtaHref },
+  seo { title, description, noIndex }
+}`;
+
 export const allLandingPageSlugsQuery = groq`*[_type == "landingPage"]{ "slug": slug.current }`;
 
 export const landingPageQuery = groq`*[_type == "landingPage" && slug.current == $slug][0]{
