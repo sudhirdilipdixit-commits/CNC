@@ -7,8 +7,13 @@ export const homepageQuery = groq`*[_type == "homepage"][0]{
     eyebrow, headline, subheadline, primaryCTA, secondaryCTA, trustStrip,
     heading, body, pillars,
     subheading, ctaText,
-    "posts": posts[]->{_id, title, slug, excerpt, tag, readTime, publishedAt},
+    "posts": posts[]->{_id, title, slug, excerpt, tag, readTime, publishedAt, "coverImageUrl": coverImage.asset->url},
     "faqs": faqs[]{"_id": _key, question, answer},
+    "featuredCourses": featuredCourses[]->{
+      "_id": _id,
+      courseName, universityName, mode, duration, fees, eligibility, badge,
+      "universityLogoUrl": universityLogo.asset->url
+    },
   },
   seo
 }`;

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 interface BlogPost {
   _id?: string;
   slug?: { current: string };
@@ -6,6 +8,7 @@ interface BlogPost {
   excerpt?: string;
   readTime?: string;
   publishedAt?: string;
+  coverImageUrl?: string;
 }
 
 interface BlogSectionProps {
@@ -61,7 +64,18 @@ export default function BlogSection({ blogPosts }: BlogSectionProps) {
           {posts.map((post, i) => (
             <article className="blog-card" key={post._id || post.title || i}>
               <div className="blog-cover">
-                <div className="blog-cover-deco"></div>
+                {post.coverImageUrl ? (
+                  <Image
+                    src={post.coverImageUrl}
+                    alt={post.title}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    className="blog-cover-img"
+                    style={{ objectFit: "cover" }}
+                  />
+                ) : (
+                  <div className="blog-cover-deco"></div>
+                )}
                 {post.tag && <span className="blog-cover-tag">{post.tag}</span>}
               </div>
               <div className="blog-card-body">

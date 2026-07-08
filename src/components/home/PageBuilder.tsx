@@ -52,7 +52,11 @@ export default function PageBuilder({ sections, onOpenLeadForm }: PageBuilderPro
 
           case "programmesBlock":
             return (
-              <ProgrammesSection key={key} onOpenLeadForm={() => onOpenLeadForm("programmes")} />
+              <ProgrammesSection
+                key={key}
+                onOpenLeadForm={() => onOpenLeadForm("programmes")}
+                featuredCourses={section.featuredCourses as never}
+              />
             );
 
           case "whyUsBlock":

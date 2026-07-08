@@ -50,6 +50,14 @@ export const programmesBlock = defineType({
   fields: [
     defineField({ name: "heading", title: "Section Heading", type: "string" }),
     defineField({ name: "subheading", title: "Sub-heading", type: "string" }),
+    defineField({
+      name: "featuredCourses",
+      title: "Featured Courses (max 3)",
+      type: "array",
+      of: [{ type: "reference", to: [{ type: "courseCard" }] }],
+      description: "Pick up to 3 isFeatured course cards to show here. Falls back to placeholder data if empty.",
+      validation: (R) => R.max(3),
+    }),
   ],
   preview: { prepare: () => ({ title: "Programmes Section" }) },
 });
