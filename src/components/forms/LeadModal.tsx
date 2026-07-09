@@ -685,17 +685,25 @@ export default function LeadModal({
                   onChange={(e) => handleChange("courseInterested", e.target.value)}
                 >
                   <option value="">Select a programme</option>
-                  <option>Online MBA</option>
-                  <option>Distance MBA</option>
+                  <option>Banking and Finance Management</option>
+                  <option>Business Management</option>
+                  <option>Digital Marketing</option>
+                  <option>Finance Management</option>
+                  <option>Healthcare Management</option>
+                  <option>Human Resource Management</option>
+                  <option>IT &amp; Project Management</option>
+                  <option>Marketing Management</option>
+                  <option>Operations Management</option>
+                  <option>Supply Chain Management</option>
                   <option>Executive MBA</option>
-                  <option>MBA in Marketing</option>
-                  <option>MBA in Finance</option>
-                  <option>MBA in HR</option>
-                  <option>MBA in Operations</option>
-                  <option>MBA in IT &amp; Project Management</option>
-                  <option>MBA in Healthcare</option>
-                  <option>Design Programmes</option>
-                  <option>Not sure yet</option>
+                  <option>Information Technology and System Management</option>
+                  <option>International Business Management</option>
+                  <option>Retail Management</option>
+                  <option>Project Management</option>
+                  <option>General Management</option>
+                  <option>MCA</option>
+                  <option>BBA</option>
+                  <option>BCA</option>
                 </select>
                 {errors.courseInterested && (
                   <div className="hint" style={{ color: "#B83A2A" }}>{errors.courseInterested}</div>
