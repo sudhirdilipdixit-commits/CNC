@@ -8,14 +8,29 @@ interface HeaderProps {
   onOpenLeadForm: () => void;
 }
 
+const PROGRAMMES = [
+  { label: "Online MBA",        href: "#" },
+  { label: "Distance MBA",      href: "#" },
+  { label: "Executive MBA",     href: "#" },
+  { label: "Design Programmes", href: "#" },
+  { label: "Compare on Portal", href: "#" },
+];
+
+const Chevron = ({ className = "" }: { className?: string }) => (
+  <svg className={className} width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
+    <path d="M2 3.5l3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+  </svg>
+);
+
 export default function Header({ onOpenLeadForm }: HeaderProps) {
-  const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [progOpen,  setProgOpen]  = useState(false);
   const pathname = usePathname();
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
-    if (href.startsWith("/#")) return false;
+    if (href.startsWith("/#") || href === "#") return false;
     return pathname.startsWith(href);
   };
 
@@ -27,12 +42,14 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
 
   const closeMenu = () => {
     setMenuOpen(false);
+    setProgOpen(false);
     document.body.style.overflow = "";
   };
 
   const toggleMenu = () => {
     const next = !menuOpen;
     setMenuOpen(next);
+    if (!next) setProgOpen(false);
     document.body.style.overflow = next ? "hidden" : "";
   };
 
@@ -43,20 +60,26 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
       <header className={`site-header${scrolled ? " scrolled" : ""}`} id="siteHeader">
         <div className="container header-inner">
           <a href="/" className="logo" aria-label="CollegeNCourses Home">
-            <Image
-              src="/logo.webp"
-              alt="CollegeNCourses logo"
-              width={160}
-              height={40}
-              priority
-            />
+            <Image src="/logo.webp" alt="CollegeNCourses logo" width={160} height={40} priority />
           </a>
 
+          {/* Desktop nav */}
           <nav className="primary-nav" aria-label="Primary">
             <a href="/" className={isActive("/") ? "cur" : ""}>Home</a>
+
+            {/* Programmes dropdown */}
+            <div className="nav-has-dropdown">
+              <span className="nav-dropdown-label">
+                Programmes <Chevron className="nav-chevron" />
+              </span>
+              <div className="nav-dropdown" role="menu">
+                {PROGRAMMES.map(({ label, href }) => (
+                  <a key={label} href={href} role="menuitem">{label}</a>
+                ))}
+              </div>
+            </div>
+
             <a href="/specializations-guide" className={isActive("/specializations-guide") ? "cur" : ""}>Specializations</a>
-            <a href="/top-10-distance-mba-universities-colleges-north-zone/" className={isActive("/top-10-distance-mba-universities-colleges-north-zone") ? "cur" : ""}>University LP</a>
-            <a href="/top-distance-mba-business-management" className={isActive("/top-distance-mba-business-management") ? "cur" : ""}>Course LP</a>
             <a href="/#resources">Resources</a>
             <a href="/blog" className={isActive("/blog") ? "cur" : ""}>Blogs</a>
             <a href="/contact-us" className={isActive("/contact-us") ? "cur" : ""}>Contact</a>
@@ -79,15 +102,29 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
           </div>
         </div>
 
-        <div
-          className={`mobile-menu${menuOpen ? " open" : ""}`}
-          id="mobileMenu"
-          aria-hidden={!menuOpen}
-        >
+        {/* Mobile menu */}
+        <div className={`mobile-menu${menuOpen ? " open" : ""}`} id="mobileMenu" aria-hidden={!menuOpen}>
           <a href="/" onClick={closeMenu}>Home</a>
+
+          {/* Programmes accordion */}
+          <button
+            type="button"
+            className="mobile-submenu-toggle"
+            aria-expanded={progOpen}
+            onClick={() => setProgOpen(p => !p)}
+          >
+            Programmes
+            <Chevron className={`nav-chevron${progOpen ? " open" : ""}`} />
+          </button>
+          {progOpen && (
+            <div className="mobile-submenu">
+              {PROGRAMMES.map(({ label, href }) => (
+                <a key={label} href={href} onClick={closeMenu}>{label}</a>
+              ))}
+            </div>
+          )}
+
           <a href="/specializations-guide" onClick={closeMenu}>Specializations</a>
-          <a href="/top-10-distance-mba-universities-colleges-north-zone/" onClick={closeMenu}>University LP</a>
-          <a href="/top-distance-mba-business-management" onClick={closeMenu}>Course LP</a>
           <a href="/#resources" onClick={closeMenu}>Resources</a>
           <a href="/blog" onClick={closeMenu}>Blogs</a>
           <a href="/contact-us" onClick={closeMenu}>Contact</a>

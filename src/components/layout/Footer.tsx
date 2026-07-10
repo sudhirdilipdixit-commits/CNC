@@ -72,6 +72,8 @@ export default function Footer() {
               <li><a href="/about">About Us</a></li>
               <li><a href="#">Counselling</a></li>
               <li><a href="#">Blog</a></li>
+              <li><a href="/top-10-distance-mba-universities-colleges-north-zone/">University LP</a></li>
+              <li><a href="/top-distance-mba-business-management">Course LP</a></li>
               <li><a href="/privacy-policy">Privacy Policy</a></li>
               <li><a href="/terms-conditions">Terms &amp; Conditions</a></li>
               <li><a href="/cookie-policy">Cookie Policy</a></li>
