@@ -7,6 +7,7 @@ import landingPage from "./landingPage";
 import courseCard from "./courseCard";
 import universityCard from "./universityCard";
 import resourceItem from "./resourceItem";
+import resourceDetail from "./resourceDetail";
 import specializationsPage from "./specializationsPage";
 import specializationDetail from "./specializationDetail";
 import {
@@ -25,6 +26,7 @@ export const schemaTypes = [
   courseCard,
   universityCard,
   resourceItem,
+  resourceDetail,
   specializationsPage,
   specializationDetail,
   // Page builder blocks

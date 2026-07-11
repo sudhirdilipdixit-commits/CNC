@@ -120,6 +120,29 @@ export const specializationDetailQuery = groq`*[_type == "specializationDetail" 
 
 export const allLandingPageSlugsQuery = groq`*[_type == "landingPage"]{ "slug": slug.current }`;
 
+export const allResourceDetailSlugsQuery = groq`*[_type == "resourceDetail"]{ "slug": slug.current }`;
+
+export const resourceDetailQuery = groq`*[_type == "resourceDetail" && slug.current == $slug][0]{
+  _id,
+  eyebrow,
+  headline,
+  lede,
+  downloadCount,
+  ratingText,
+  checklistItems,
+  freshnessNote,
+  testimonials[]{ quote, attribution },
+  formTitle,
+  formSubtitle,
+  formFooterNote,
+  pageCount,
+  lastUpdated,
+  pdfName,
+  pdfDownloadUrl,
+  afterSteps[]{ stepLabel, title, body },
+  seo{ title, description },
+}`;
+
 export const resourcesPageQuery = groq`*[_type == "resourceItem"] | order(isFeatured desc, order asc){
   _id,
   title,
