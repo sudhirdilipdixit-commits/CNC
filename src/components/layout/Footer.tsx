@@ -70,7 +70,7 @@ export default function Footer() {
             <h4>About &amp; Legal</h4>
             <ul className="footer-list">
               <li><a href="/about">About Us</a></li>
-              <li><a href="#">Counselling</a></li>
+              <li><a href="/counselling">Counselling</a></li>
               <li><a href="#">Blog</a></li>
               <li><a href="/top-10-distance-mba-universities-colleges-north-zone/">University LP</a></li>
               <li><a href="/top-distance-mba-business-management">Course LP</a></li>
