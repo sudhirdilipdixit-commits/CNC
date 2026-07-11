@@ -120,6 +120,23 @@ export const specializationDetailQuery = groq`*[_type == "specializationDetail" 
 
 export const allLandingPageSlugsQuery = groq`*[_type == "landingPage"]{ "slug": slug.current }`;
 
+export const resourcesPageQuery = groq`*[_type == "resourceItem"] | order(isFeatured desc, order asc){
+  _id,
+  title,
+  titleHighlight,
+  coverType,
+  category,
+  lastUpdated,
+  pageCount,
+  isInteractiveTool,
+  isFeatured,
+  downloadCount,
+  checklistItems,
+  "slug": slug.current,
+  href,
+  order,
+}`;
+
 export const aiCounsellorProgrammesQuery = groq`*[_type == "courseCard" && defined(aiMode)] | order(isFeatured desc, _createdAt asc){
   _id,
   courseName,
