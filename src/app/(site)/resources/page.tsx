@@ -14,7 +14,6 @@ export interface ResourceItem {
   isFeatured: boolean;
   downloadCount: string | null;
   checklistItems: string[] | null;
-  slug: string | null;
   href: string | null;
   order: number | null;
 }

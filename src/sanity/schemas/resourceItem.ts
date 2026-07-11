@@ -98,13 +98,6 @@ export default defineType({
       description: "4 bullet points shown in the card body.",
     }),
     defineField({
-      name: "slug",
-      title: "Slug",
-      type: "slug",
-      options: { source: "title" },
-      description: "Used for the individual resource page URL at /resources/[slug]",
-    }),
-    defineField({
       name: "href",
       title: "Link URL",
       type: "string",

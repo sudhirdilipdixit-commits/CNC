@@ -1,4 +1,4 @@
-import { revalidatePath, revalidateTag } from "next/cache";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
@@ -8,18 +8,15 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid secret" }, { status: 401 });
   }
 
-  const tag = request.nextUrl.searchParams.get("tag");
+  const path = request.nextUrl.searchParams.get("path");
 
-  if (tag) {
-    revalidateTag(tag);
+  if (path) {
+    revalidatePath(path);
   } else {
-    // Bust all known cache tags
-    revalidateTag("resourceItem");
-    revalidateTag("resourceDetail");
-    revalidateTag("courseCard");
     revalidatePath("/");
     revalidatePath("/resources");
+    revalidatePath("/ai-counsellor");
   }
 
-  return NextResponse.json({ revalidated: true, tag: tag ?? "all", at: new Date().toISOString() });
+  return NextResponse.json({ revalidated: true, path: path ?? "all", at: new Date().toISOString() });
 }

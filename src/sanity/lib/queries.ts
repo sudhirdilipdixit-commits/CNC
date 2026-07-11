@@ -155,7 +155,6 @@ export const resourcesPageQuery = groq`*[_type == "resourceItem"] | order(isFeat
   isFeatured,
   downloadCount,
   checklistItems,
-  "slug": slug.current,
   href,
   order,
 }`;
