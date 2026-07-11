@@ -22,7 +22,7 @@ export interface ResourceItem {
 export default async function ResourcesPage() {
   const resources = await sanityFetch<ResourceItem[]>({
     query: resourcesPageQuery,
-    revalidate: 3600,
+    revalidate: 300,
     tags: ["resourceItem"],
   });
 
