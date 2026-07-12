@@ -31,8 +31,8 @@
   --radius-lg: 12px;
   --radius-pill: 999px;
 
-  --header-h: 72px;
-  --header-h-scrolled: 56px;
+  --header-h: 108px;
+  --header-h-scrolled: 80px;
   --mobile-bar-h: 64px;
 
   --s-1: 4px;
@@ -262,8 +262,9 @@ section { padding: 64px 0; }
 }
 .site-header.scrolled .header-inner { height: var(--header-h-scrolled); }
 
-.logo { flex: 0 0 auto; display: block; height: 40px; width: auto; }
-.logo img { height: 100%; width: auto; }
+.logo { flex: 0 0 auto; display: flex; align-items: center; height: 90px; width: auto; line-height: 0; border: none; outline: none; }
+.logo img { height: 100%; width: auto; display: block; }
+.site-header.scrolled .logo { height: 64px; }
 
 .primary-nav {
   display: none;

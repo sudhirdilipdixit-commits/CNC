@@ -42,7 +42,7 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
       <header className={`site-header${scrolled ? " scrolled" : ""}`} id="siteHeader">
         <div className="container header-inner">
           <a href="/" className="logo" aria-label="CollegeNCourses Home">
-            <Image src="/logo.webp" alt="CollegeNCourses logo" width={160} height={40} priority />
+            <Image src="/logo.webp" alt="CollegeNCourses logo" width={360} height={90} priority style={{ height: "100%", width: "auto" }} />
           </a>
 
           {/* Desktop nav */}
