@@ -238,7 +238,7 @@ export default function FinanceGuideClient() {
         .fm-bc-inner a:hover{text-decoration:underline}
         .fm-hero{background:var(--navy);color:#fff;padding:3.5rem 0 2.5rem}
         .fm-eyebrow{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:.75rem}
-        .fm-h1{font-family:var(--font-serif);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;font-weight:700;text-wrap:balance;margin-bottom:1rem}
+        .fm-h1{font-family:var(--font-serif);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;font-weight:700;text-wrap:balance;margin-bottom:1rem;color:#fff}
         .fm-sub{font-size:1.05rem;line-height:1.6;color:#cbd5e1;max-width:640px;margin-bottom:1.5rem}
         .fm-trust{font-size:.8rem;color:#94a3b8;margin-bottom:1.5rem}
         .fm-cta-row{display:flex;flex-wrap:wrap;gap:.75rem}
@@ -273,7 +273,7 @@ export default function FinanceGuideClient() {
         .fm-snapshot-card{background:var(--pale-navy,#f0f4ff);border-radius:8px;overflow:hidden}
         .fm-snapshot-card table{width:100%;border-collapse:collapse;font-size:.87rem}
         .fm-snapshot-card td{padding:.6rem .9rem;border-bottom:1px solid #dde3ef;vertical-align:top}
-        .fm-snapshot-card td:first-child{font-weight:600;white-space:nowrap;color:var(--navy);width:45%}
+        .fm-snapshot-card td:first-child{font-weight:600;color:var(--navy);width:40%}
         .fm-callout{border-left:4px solid var(--yellow);background:var(--pale-navy,#f0f4ff);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin:1.5rem 0;font-size:.9rem;line-height:1.55;font-style:italic}
         .fm-profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
         .fm-profile-card{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:1.25rem}
