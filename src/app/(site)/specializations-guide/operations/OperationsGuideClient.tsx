@@ -229,7 +229,13 @@ export default function OperationsGuideClient() {
       <style>{`
         .om-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--yellow);z-index:999;transition:width .1s linear}
         .om-wrap{max-width:1140px;margin:0 auto;padding:0 1.25rem;font-family:var(--font-sans);color:var(--charcoal)}
-        .om-hero{background:var(--navy);color:#fff;padding:3.5rem 2rem 3rem;border-radius:0 0 1rem 1rem;margin-bottom:2rem}
+        .om-breadcrumb{background:var(--pale-navy);padding:.75rem 0}
+        .om-bc-inner{display:flex;flex-wrap:wrap;gap:.4rem .5rem;font-size:.8rem;color:var(--grey);list-style:none;margin:0;padding:0}
+        .om-bc-inner li::after{content:"›";margin-left:.5rem;color:var(--grey)}
+        .om-bc-inner li:last-child::after{content:""}
+        .om-bc-inner a{color:var(--navy);text-decoration:none}
+        .om-bc-inner a:hover{text-decoration:underline}
+        .om-hero{background:var(--navy);color:#fff;padding:3.5rem 0 2.5rem}
         .om-eyebrow{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:.75rem}
         .om-h1{font-family:var(--font-serif);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;font-weight:700;text-wrap:balance;margin-bottom:1rem}
         .om-sub{font-size:1.05rem;line-height:1.6;color:#cbd5e1;max-width:640px;margin-bottom:1.5rem}
@@ -238,19 +244,23 @@ export default function OperationsGuideClient() {
         .om-btn-primary{background:var(--yellow);color:var(--navy);padding:.65rem 1.5rem;border-radius:6px;font-weight:700;font-size:.95rem;border:none;cursor:pointer}
         .om-btn-secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);padding:.65rem 1.5rem;border-radius:6px;font-size:.95rem;cursor:pointer;text-decoration:none;display:inline-block}
         .om-verify{font-size:.72rem;color:#94a3b8;margin-top:.75rem;font-style:italic}
-        .om-layout{display:grid;grid-template-columns:220px 1fr;gap:2.5rem;align-items:start}
-        @media(max-width:900px){.om-layout{display:block}}
-        .om-toc-sidebar{position:sticky;top:4rem;background:var(--pale-navy,#f0f4ff);border-radius:8px;padding:1.25rem}
-        @media(max-width:900px){.om-toc-sidebar{display:none}}
-        .om-toc-sidebar h3{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grey,#64748b);margin-bottom:.75rem}
-        .om-toc-sidebar a{display:block;font-size:.85rem;color:var(--charcoal);padding:.35rem 0 .35rem .75rem;border-left:3px solid transparent;text-decoration:none;transition:color .15s,border-color .15s}
-        .om-toc-sidebar a.om-active,.om-toc-sidebar a:hover{color:var(--navy);border-color:var(--yellow);font-weight:600}
-        .om-toc-mobile{display:none}
-        @media(max-width:900px){.om-toc-mobile{display:block;margin:0 0 1.5rem}}
-        .om-toc-mobile details{background:var(--pale-navy,#f0f4ff);border-radius:8px}
-        .om-toc-mobile summary{padding:.75rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;list-style:none}
-        .om-toc-mobile summary::-webkit-details-marker{display:none}
-        .om-toc-mobile a{display:block;font-size:.85rem;color:var(--charcoal);padding:.4rem 1rem;text-decoration:none}
+        .om-layout{display:grid;grid-template-columns:220px 1fr;gap:2.5rem;align-items:start;padding:2rem 0 4rem}
+        @media(max-width:900px){.om-layout{grid-template-columns:1fr}}
+        .om-toc-sticky{position:sticky;top:80px}
+        .om-toc-desktop{background:#fff;border:1.5px solid var(--pale-navy);border-radius:10px;padding:1.25rem}
+        .om-toc-desktop h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--grey);margin:0 0 .85rem;font-weight:600}
+        .om-toc-desktop nav a{display:block;font-size:.84rem;color:var(--charcoal);text-decoration:none;padding:.3rem .6rem;border-left:3px solid transparent;border-radius:0 4px 4px 0;line-height:1.4;transition:all .15s}
+        .om-toc-desktop nav a.om-active,.om-toc-desktop nav a:hover{color:var(--navy);border-left-color:var(--yellow);background:var(--pale-navy)}
+        .om-toc-cta{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--pale-navy)}
+        .om-toc-cta button{width:100%;background:var(--yellow);color:var(--navy);font-weight:700;font-size:.84rem;padding:.6rem;border-radius:6px;border:none;cursor:pointer;transition:opacity .15s}
+        .om-toc-cta button:hover{opacity:.85}
+        @media(min-width:901px){.om-toc-mobile{display:none}}
+        @media(max-width:900px){.om-toc-desktop{display:none}.om-toc-mobile{background:var(--pale-navy);border-radius:8px;margin-bottom:1.5rem}}
+        .om-toc-mobile summary{padding:.85rem 1rem;font-weight:600;font-size:.9rem;color:var(--navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+        .om-toc-mobile summary::after{content:"▾"}
+        .om-toc-mobile[open] summary::after{content:"▴"}
+        .om-toc-mobile a{display:block;padding:.45rem 1rem;font-size:.85rem;color:var(--charcoal);text-decoration:none;border-bottom:1px solid rgba(0,0,0,.05)}
+        .om-toc-mobile a:hover{background:var(--mist)}
         .om-section{margin-bottom:3.5rem;padding-top:.5rem}
         .om-section h2{font-family:var(--font-serif);font-size:clamp(1.3rem,2.5vw,1.75rem);color:var(--navy);margin-bottom:1.25rem;text-wrap:balance}
         .om-takeaway-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.75rem}
@@ -311,21 +321,33 @@ export default function OperationsGuideClient() {
         .om-voice-tag{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:4px;margin-left:.5rem;vertical-align:middle}
         .om-related-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.6rem}
         .om-related-list a{color:var(--navy);font-size:.93rem;text-decoration:underline;text-underline-offset:3px}
-        .om-cta-band{background:var(--navy);color:#fff;border-radius:12px;padding:2.5rem 2rem;text-align:center;margin:0 0 3rem}
-        .om-cta-band h2{font-family:var(--font-serif);font-size:1.6rem;margin-bottom:.75rem}
-        .om-cta-band p{color:#cbd5e1;font-size:.95rem;margin-bottom:1.5rem;max-width:560px;margin-left:auto;margin-right:auto}
-        .om-cta-band button{background:var(--yellow);color:var(--navy);border:none;padding:.75rem 2rem;border-radius:6px;font-weight:700;font-size:1rem;cursor:pointer}
+        .om-cta-band{background:var(--navy);color:#fff;padding:3rem 0;text-align:center}
+        .om-cta-band h2{font-family:var(--font-serif);font-size:clamp(1.4rem,2.5vw,2rem);color:#fff;margin:0 0 .6rem}
+        .om-cta-band p{color:rgba(255,255,255,.78);font-size:.95rem;margin:0 0 1.5rem;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7}
+        .om-cta-band button{background:var(--yellow);color:var(--navy);border:none;padding:.85rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:opacity .15s}
+        .om-cta-band button:hover{opacity:.88}
         .om-source{font-size:.75rem;color:#94a3b8;font-style:italic;margin-top:.75rem;line-height:1.4}
         .om-below-cta{text-align:center;margin-top:1.25rem}
         .om-below-cta button{background:var(--yellow);color:var(--navy);border:none;padding:.6rem 1.4rem;border-radius:6px;font-weight:700;cursor:pointer}
-        @media(max-width:768px){.om-hero{padding:2rem 1.25rem}.om-cta-row{flex-direction:column}.om-salary-table th,.om-salary-table td,.om-top10-table th,.om-top10-table td{font-size:.78rem;padding:.5rem .55rem}}
+        @media(max-width:768px){.om-cta-row{flex-direction:column}.om-salary-table th,.om-salary-table td,.om-top10-table th,.om-top10-table td{font-size:.78rem;padding:.5rem .55rem}}
       `}</style>
 
       <div ref={progressRef} className="om-progress" aria-hidden="true" />
 
-      <div className="om-wrap">
-        {/* Hero */}
-        <header className="om-hero">
+      {/* Breadcrumb */}
+      <nav className="om-breadcrumb" aria-label="Breadcrumb">
+        <div className="om-wrap">
+          <ol className="om-bc-inner">
+            <li><a href="/">Home</a></li>
+            <li><a href="/specializations-guide/">Specializations Guide</a></li>
+            <li aria-current="page">MBA in Operations Management</li>
+          </ol>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <header className="om-hero">
+        <div className="om-wrap">
           <p className="om-eyebrow">Specialization Guide • 2025-26 Edition</p>
           <h1 className="om-h1">MBA in Operations Management: the honest 2025-26 guide to Distance, Online &amp; Executive modes</h1>
           <p className="om-sub">Fees from ₹1.2 lakh to ₹22 lakh. Real salary data from 312 alumni across manufacturing, supply chain, quality, and ops consulting roles. Top 10 UGC-DEB approved programmes compared, mode-by-mode.</p>
@@ -335,25 +357,32 @@ export default function OperationsGuideClient() {
             <a href="#top10" className="om-btn-secondary">Jump to top 10 programmes ↓</a>
           </div>
           <p className="om-verify"><em>Last verified against the UGC-DEB current approved-institutions list.</em></p>
-        </header>
-
-        {/* Mobile TOC */}
-        <div className="om-toc-mobile">
-          <details>
-            <summary>Table of contents ▾</summary>
-            {TOC_ITEMS.map((t) => (
-              <a key={t.id} href={`#${t.id}`}>{t.label}</a>
-            ))}
-          </details>
         </div>
+      </header>
 
+      <div className="om-wrap">
         <div className="om-layout">
-          {/* Sidebar TOC */}
-          <aside className="om-toc-sidebar">
-            <h3>Contents</h3>
-            {TOC_ITEMS.map((t) => (
-              <a key={t.id} href={`#${t.id}`} className={activeId === t.id ? "om-active" : ""}>{t.label}</a>
-            ))}
+          {/* Sidebar + mobile ToC */}
+          <aside>
+            <div className="om-toc-sticky">
+              <details className="om-toc-mobile">
+                <summary>Table of Contents</summary>
+                {TOC_ITEMS.map((t) => (
+                  <a key={t.id} href={`#${t.id}`}>{t.label}</a>
+                ))}
+              </details>
+              <div className="om-toc-desktop">
+                <h3>Contents</h3>
+                <nav>
+                  {TOC_ITEMS.map((t) => (
+                    <a key={t.id} href={`#${t.id}`} className={activeId === t.id ? "om-active" : ""}>{t.label}</a>
+                  ))}
+                </nav>
+                <div className="om-toc-cta">
+                  <button onClick={() => setModalOpen(true)}>Free counselling call</button>
+                </div>
+              </div>
+            </div>
           </aside>
 
           <main>
@@ -589,14 +618,16 @@ export default function OperationsGuideClient() {
             </section>
           </main>
         </div>
+      </div>
 
-        {/* Final CTA */}
-        <div className="om-cta-band">
+      {/* CTA Band */}
+      <section className="om-cta-band">
+        <div className="om-wrap">
           <h2>Ready to shortlist your Operations Management MBA?</h2>
-          <p>Talk to a CollegeNCourses counsellor. We'll match you to three programmes based on your target segment, Six Sigma exposure, consulting aspirations, budget, and timeline. Free, 30 minutes.</p>
+          <p>Talk to a CollegeNCourses counsellor. We&apos;ll match you to three programmes based on your target segment, Six Sigma exposure, consulting aspirations, budget, and timeline. Free, 30 minutes.</p>
           <button onClick={() => setModalOpen(true)}>Get free counselling →</button>
         </div>
-      </div>
+      </section>
 
       <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} source="spec-guide-operations" />
     </>

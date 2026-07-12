@@ -230,7 +230,13 @@ export default function FinanceGuideClient() {
       <style>{`
         .fm-progress{position:fixed;top:0;left:0;width:0%;height:3px;background:var(--yellow);z-index:999;transition:width .1s linear}
         .fm-wrap{max-width:1140px;margin:0 auto;padding:0 1.25rem;font-family:var(--font-sans);color:var(--charcoal)}
-        .fm-hero{background:var(--navy);color:#fff;padding:3.5rem 2rem 3rem;border-radius:0 0 1rem 1rem;margin-bottom:2rem}
+        .fm-breadcrumb{background:var(--pale-navy);padding:.75rem 0}
+        .fm-bc-inner{display:flex;flex-wrap:wrap;gap:.4rem .5rem;font-size:.8rem;color:var(--grey);list-style:none;margin:0;padding:0}
+        .fm-bc-inner li::after{content:"›";margin-left:.5rem;color:var(--grey)}
+        .fm-bc-inner li:last-child::after{content:""}
+        .fm-bc-inner a{color:var(--navy);text-decoration:none}
+        .fm-bc-inner a:hover{text-decoration:underline}
+        .fm-hero{background:var(--navy);color:#fff;padding:3.5rem 0 2.5rem}
         .fm-eyebrow{font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);margin-bottom:.75rem}
         .fm-h1{font-family:var(--font-serif);font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.2;font-weight:700;text-wrap:balance;margin-bottom:1rem}
         .fm-sub{font-size:1.05rem;line-height:1.6;color:#cbd5e1;max-width:640px;margin-bottom:1.5rem}
@@ -239,19 +245,23 @@ export default function FinanceGuideClient() {
         .fm-btn-primary{background:var(--yellow);color:var(--navy);padding:.65rem 1.5rem;border-radius:6px;font-weight:700;font-size:.95rem;border:none;cursor:pointer}
         .fm-btn-secondary{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);padding:.65rem 1.5rem;border-radius:6px;font-size:.95rem;cursor:pointer;text-decoration:none;display:inline-block}
         .fm-verify{font-size:.72rem;color:#94a3b8;margin-top:.75rem;font-style:italic}
-        .fm-layout{display:grid;grid-template-columns:220px 1fr;gap:2.5rem;align-items:start}
-        @media(max-width:900px){.fm-layout{display:block}}
-        .fm-toc-sidebar{position:sticky;top:4rem;background:var(--pale-navy,#f0f4ff);border-radius:8px;padding:1.25rem}
-        @media(max-width:900px){.fm-toc-sidebar{display:none}}
-        .fm-toc-sidebar h3{font-size:.7rem;letter-spacing:.08em;text-transform:uppercase;color:var(--grey,#64748b);margin-bottom:.75rem}
-        .fm-toc-sidebar a{display:block;font-size:.85rem;color:var(--charcoal);padding:.35rem 0 .35rem .75rem;border-left:3px solid transparent;text-decoration:none;transition:color .15s,border-color .15s}
-        .fm-toc-sidebar a.fm-active,.fm-toc-sidebar a:hover{color:var(--navy);border-color:var(--yellow);font-weight:600}
-        .fm-toc-mobile{display:none}
-        @media(max-width:900px){.fm-toc-mobile{display:block;margin:0 0 1.5rem}}
-        .fm-toc-mobile details{background:var(--pale-navy,#f0f4ff);border-radius:8px}
-        .fm-toc-mobile summary{padding:.75rem 1rem;font-size:.9rem;font-weight:600;cursor:pointer;list-style:none}
-        .fm-toc-mobile summary::-webkit-details-marker{display:none}
-        .fm-toc-mobile a{display:block;font-size:.85rem;color:var(--charcoal);padding:.4rem 1rem;text-decoration:none}
+        .fm-layout{display:grid;grid-template-columns:220px 1fr;gap:2.5rem;align-items:start;padding:2rem 0 4rem}
+        @media(max-width:900px){.fm-layout{grid-template-columns:1fr}}
+        .fm-toc-sticky{position:sticky;top:80px}
+        .fm-toc-desktop{background:#fff;border:1.5px solid var(--pale-navy);border-radius:10px;padding:1.25rem}
+        .fm-toc-desktop h3{font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;color:var(--grey);margin:0 0 .85rem;font-weight:600}
+        .fm-toc-desktop nav a{display:block;font-size:.84rem;color:var(--charcoal);text-decoration:none;padding:.3rem .6rem;border-left:3px solid transparent;border-radius:0 4px 4px 0;line-height:1.4;transition:all .15s}
+        .fm-toc-desktop nav a.fm-active,.fm-toc-desktop nav a:hover{color:var(--navy);border-left-color:var(--yellow);background:var(--pale-navy)}
+        .fm-toc-cta{margin-top:1.25rem;padding-top:1.25rem;border-top:1px solid var(--pale-navy)}
+        .fm-toc-cta button{width:100%;background:var(--yellow);color:var(--navy);font-weight:700;font-size:.84rem;padding:.6rem;border-radius:6px;border:none;cursor:pointer;transition:opacity .15s}
+        .fm-toc-cta button:hover{opacity:.85}
+        @media(min-width:901px){.fm-toc-mobile{display:none}}
+        @media(max-width:900px){.fm-toc-desktop{display:none}.fm-toc-mobile{background:var(--pale-navy);border-radius:8px;margin-bottom:1.5rem}}
+        .fm-toc-mobile summary{padding:.85rem 1rem;font-weight:600;font-size:.9rem;color:var(--navy);cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+        .fm-toc-mobile summary::after{content:"▾"}
+        .fm-toc-mobile[open] summary::after{content:"▴"}
+        .fm-toc-mobile a{display:block;padding:.45rem 1rem;font-size:.85rem;color:var(--charcoal);text-decoration:none;border-bottom:1px solid rgba(0,0,0,.05)}
+        .fm-toc-mobile a:hover{background:var(--mist)}
         .fm-section{margin-bottom:3.5rem;padding-top:.5rem}
         .fm-section h2{font-family:var(--font-serif);font-size:clamp(1.3rem,2.5vw,1.75rem);color:var(--navy);margin-bottom:1.25rem;text-wrap:balance}
         .fm-takeaway-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.75rem}
@@ -313,21 +323,33 @@ export default function FinanceGuideClient() {
         .fm-voice-tag{font-size:.7rem;text-transform:uppercase;letter-spacing:.06em;background:#e0f2fe;color:#0369a1;padding:2px 6px;border-radius:4px;margin-left:.5rem;vertical-align:middle}
         .fm-related-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.6rem}
         .fm-related-list a{color:var(--navy);font-size:.93rem;text-decoration:underline;text-underline-offset:3px}
-        .fm-cta-band{background:var(--navy);color:#fff;border-radius:12px;padding:2.5rem 2rem;text-align:center;margin:0 0 3rem}
-        .fm-cta-band h2{font-family:var(--font-serif);font-size:1.6rem;margin-bottom:.75rem}
-        .fm-cta-band p{color:#cbd5e1;font-size:.95rem;margin-bottom:1.5rem;max-width:560px;margin-left:auto;margin-right:auto}
-        .fm-cta-band button{background:var(--yellow);color:var(--navy);border:none;padding:.75rem 2rem;border-radius:6px;font-weight:700;font-size:1rem;cursor:pointer}
+        .fm-cta-band{background:var(--navy);color:#fff;padding:3rem 0;text-align:center}
+        .fm-cta-band h2{font-family:var(--font-serif);font-size:clamp(1.4rem,2.5vw,2rem);color:#fff;margin:0 0 .6rem}
+        .fm-cta-band p{color:rgba(255,255,255,.78);font-size:.95rem;margin:0 0 1.5rem;max-width:560px;margin-left:auto;margin-right:auto;line-height:1.7}
+        .fm-cta-band button{background:var(--yellow);color:var(--navy);border:none;padding:.85rem 2rem;border-radius:8px;font-weight:700;font-size:1rem;cursor:pointer;transition:opacity .15s}
+        .fm-cta-band button:hover{opacity:.88}
         .fm-source{font-size:.75rem;color:#94a3b8;font-style:italic;margin-top:.75rem;line-height:1.4}
         .fm-below-cta{text-align:center;margin-top:1.25rem}
         .fm-below-cta button{background:var(--yellow);color:var(--navy);border:none;padding:.6rem 1.4rem;border-radius:6px;font-weight:700;cursor:pointer}
-        @media(max-width:768px){.fm-hero{padding:2rem 1.25rem}.fm-cta-row{flex-direction:column}.fm-salary-table th,.fm-salary-table td,.fm-top10-table th,.fm-top10-table td{font-size:.78rem;padding:.5rem .55rem}}
+        @media(max-width:768px){.fm-cta-row{flex-direction:column}.fm-salary-table th,.fm-salary-table td,.fm-top10-table th,.fm-top10-table td{font-size:.78rem;padding:.5rem .55rem}}
       `}</style>
 
       <div ref={progressRef} className="fm-progress" aria-hidden="true" />
 
-      <div className="fm-wrap">
-        {/* Hero */}
-        <header className="fm-hero">
+      {/* Breadcrumb */}
+      <nav className="fm-breadcrumb" aria-label="Breadcrumb">
+        <div className="fm-wrap">
+          <ol className="fm-bc-inner">
+            <li><a href="/">Home</a></li>
+            <li><a href="/specializations-guide/">Specializations Guide</a></li>
+            <li aria-current="page">MBA in Finance Management</li>
+          </ol>
+        </div>
+      </nav>
+
+      {/* Hero */}
+      <header className="fm-hero">
+        <div className="fm-wrap">
           <p className="fm-eyebrow">Specialization Guide • 2025-26 Edition</p>
           <h1 className="fm-h1">MBA in Finance Management: the honest 2025-26 guide to Distance, Online &amp; Executive modes</h1>
           <p className="fm-sub">Fees from ₹1.3 lakh to ₹40 lakh. Real salary data from 389 alumni across corporate finance, FP&amp;A, treasury, investment analysis, and consulting roles. Top 10 UGC-DEB approved programmes compared, mode-by-mode.</p>
@@ -337,25 +359,32 @@ export default function FinanceGuideClient() {
             <a href="#top10" className="fm-btn-secondary">Jump to top 10 programmes ↓</a>
           </div>
           <p className="fm-verify"><em>Last verified against the UGC-DEB current approved-institutions list.</em></p>
-        </header>
-
-        {/* Mobile TOC */}
-        <div className="fm-toc-mobile">
-          <details>
-            <summary>Table of contents ▾</summary>
-            {TOC_ITEMS.map((t) => (
-              <a key={t.id} href={`#${t.id}`}>{t.label}</a>
-            ))}
-          </details>
         </div>
+      </header>
 
+      <div className="fm-wrap">
         <div className="fm-layout">
-          {/* Sidebar TOC */}
-          <aside className="fm-toc-sidebar">
-            <h3>Contents</h3>
-            {TOC_ITEMS.map((t) => (
-              <a key={t.id} href={`#${t.id}`} className={activeId === t.id ? "fm-active" : ""}>{t.label}</a>
-            ))}
+          {/* Sidebar + mobile ToC */}
+          <aside>
+            <div className="fm-toc-sticky">
+              <details className="fm-toc-mobile">
+                <summary>Table of Contents</summary>
+                {TOC_ITEMS.map((t) => (
+                  <a key={t.id} href={`#${t.id}`}>{t.label}</a>
+                ))}
+              </details>
+              <div className="fm-toc-desktop">
+                <h3>Contents</h3>
+                <nav>
+                  {TOC_ITEMS.map((t) => (
+                    <a key={t.id} href={`#${t.id}`} className={activeId === t.id ? "fm-active" : ""}>{t.label}</a>
+                  ))}
+                </nav>
+                <div className="fm-toc-cta">
+                  <button onClick={() => setModalOpen(true)}>Free counselling call</button>
+                </div>
+              </div>
+            </div>
           </aside>
 
           <main>
@@ -594,14 +623,16 @@ export default function FinanceGuideClient() {
             </section>
           </main>
         </div>
+      </div>
 
-        {/* Final CTA */}
-        <div className="fm-cta-band">
+      {/* CTA Band */}
+      <section className="fm-cta-band">
+        <div className="fm-wrap">
           <h2>Ready to shortlist your Finance Management MBA?</h2>
-          <p>Talk to a CollegeNCourses counsellor. We'll match you to three programmes based on your target function, existing credentials (CA, CFA, engineering), budget, and timeline. Free, 30 minutes.</p>
+          <p>Talk to a CollegeNCourses counsellor. We&apos;ll match you to three programmes based on your target function, existing credentials (CA, CFA, engineering), budget, and timeline. Free, 30 minutes.</p>
           <button onClick={() => setModalOpen(true)}>Get free counselling →</button>
         </div>
-      </div>
+      </section>
 
       <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} source="spec-guide-finance" />
     </>
