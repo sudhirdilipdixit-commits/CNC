@@ -6,7 +6,6 @@ const BLOCK_TYPES = [
   { type: "pathBlock" },
   { type: "programmesBlock" },
   { type: "whyUsBlock" },
-  { type: "aiCounsellorBlock" },
   { type: "howItWorksBlock" },
   { type: "trustStripBlock" },
   { type: "blogBlock" },
