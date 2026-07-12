@@ -274,14 +274,10 @@ export default function BankingFinanceGuideClient() {
         .bf-takeaway-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.75rem}
         .bf-takeaway-list li{background:var(--pale-navy,#f0f4ff);border-left:4px solid var(--yellow);padding:.9rem 1rem .9rem 1.25rem;border-radius:0 6px 6px 0;font-size:.95rem;line-height:1.5}
         .bf-takeaway-list li strong{color:var(--navy)}
-        .bf-snapshot-grid{display:grid;grid-template-columns:1fr 280px;gap:2rem}
-        @media(max-width:700px){.bf-snapshot-grid{grid-template-columns:1fr}}
-        .bf-snapshot-body{font-size:.95rem;line-height:1.65;color:var(--charcoal)}
-        .bf-snapshot-body p{margin:0 0 .9rem}
-        .bf-snapshot-card{background:var(--pale-navy,#f0f4ff);border-radius:8px;overflow:hidden}
-        .bf-snapshot-card table{width:100%;border-collapse:collapse;font-size:.87rem}
-        .bf-snapshot-card td{padding:.6rem .9rem;border-bottom:1px solid #dde3ef;vertical-align:top}
-        .bf-snapshot-card td:first-child{font-weight:600;color:var(--navy);width:40%}
+        .bf-facts-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:1.5rem;overflow:hidden;border-radius:8px;border:1.5px solid var(--pale-navy)}
+        .bf-facts-table td{padding:.65rem .85rem;border-bottom:1px solid var(--pale-navy);vertical-align:top}
+        .bf-facts-table tr:last-child td{border-bottom:none}
+        .bf-facts-table td:first-child{font-weight:600;color:var(--navy);background:var(--pale-navy);width:35%}
         .bf-callout{border-left:4px solid var(--yellow);background:var(--pale-navy,#f0f4ff);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin:1.5rem 0;font-size:.9rem;line-height:1.55;font-style:italic}
         .bf-callout-navy{border-left:4px solid var(--yellow);background:var(--pale-navy,#f0f4ff);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin:1.5rem 0;font-size:.9rem;line-height:1.55;font-style:italic}
         .bf-profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
@@ -408,21 +404,15 @@ export default function BankingFinanceGuideClient() {
             {/* Snapshot */}
             <section id="snapshot" className="bf-section">
               <h2>Banking &amp; Finance Management MBA, in 90 seconds</h2>
-              <div className="bf-snapshot-grid">
-                <div className="bf-snapshot-body">
-                  <p>An MBA in Banking &amp; Finance Management trains you to work inside banks, NBFCs, insurance firms, and financial services companies. Curriculum covers retail and corporate banking operations, credit analysis, wealth management, banking regulations (RBI, Basel III), insurance, and digital banking. As of 2025-26, it's the fastest single MBA route to AVP-level promotion for existing bank employees.</p>
-                  <p>Fees range from ₹1.2 lakh (ICFAI Distance) to ₹15 lakh (IIM Executive with BFS specialization), with the mainstream Online MBA median at ₹1.85 lakh. Median entry-level salary in 2025-26 stands at ₹6 lakh per annum for freshers, ₹14 lakh for mid-level (3-7 years' experience), and ₹28 lakh for senior roles (8-15 years). Bank branch head, cluster head, and VP roles at Tier-1 private banks push ₹35-70 LPA.</p>
-                </div>
-                <div className="bf-snapshot-card">
-                  <table>
-                    <tbody>
-                      {QUICK_FACTS.map((f) => (
-                        <tr key={f.label}><td>{f.label}</td><td>{f.value}</td></tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <p style={{ fontSize: ".93rem", color: "var(--charcoal)", lineHeight: 1.75, marginBottom: "1rem" }}>An MBA in Banking &amp; Finance Management trains you to work inside banks, NBFCs, insurance firms, and financial services companies. Curriculum covers retail and corporate banking operations, credit analysis, wealth management, banking regulations (RBI, Basel III), insurance, and digital banking. As of 2025-26, it&apos;s the fastest single MBA route to AVP-level promotion for existing bank employees.</p>
+              <p style={{ fontSize: ".93rem", color: "var(--charcoal)", lineHeight: 1.75, marginBottom: "1.25rem" }}>Fees range from ₹1.2 lakh (ICFAI Distance) to ₹15 lakh (IIM Executive with BFS specialization), with the mainstream Online MBA median at ₹1.85 lakh. Median entry-level salary in 2025-26 stands at ₹6 lakh per annum for freshers, ₹14 lakh for mid-level (3-7 years&apos; experience), and ₹28 lakh for senior roles (8-15 years). Bank branch head, cluster head, and VP roles at Tier-1 private banks push ₹35-70 LPA.</p>
+              <table className="bf-facts-table">
+                <tbody>
+                  {QUICK_FACTS.map((f, i) => (
+                    <tr key={i}><td>{f.label}</td><td>{f.value}</td></tr>
+                  ))}
+                </tbody>
+              </table>
             </section>
 
             {/* What it is */}

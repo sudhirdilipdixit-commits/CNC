@@ -265,14 +265,10 @@ export default function OperationsGuideClient() {
         .om-section h2{font-family:var(--font-serif);font-size:clamp(1.3rem,2.5vw,1.75rem);color:var(--navy);margin-bottom:1.25rem;text-wrap:balance}
         .om-takeaway-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.75rem}
         .om-takeaway-list li{background:var(--pale-navy,#f0f4ff);border-left:4px solid var(--yellow);padding:.9rem 1rem .9rem 1.25rem;border-radius:0 6px 6px 0;font-size:.95rem;line-height:1.5}
-        .om-snapshot-grid{display:grid;grid-template-columns:1fr 280px;gap:2rem}
-        @media(max-width:700px){.om-snapshot-grid{grid-template-columns:1fr}}
-        .om-snapshot-body{font-size:.95rem;line-height:1.65;color:var(--charcoal)}
-        .om-snapshot-body p{margin:0 0 .9rem}
-        .om-snapshot-card{background:var(--pale-navy,#f0f4ff);border-radius:8px;overflow:hidden}
-        .om-snapshot-card table{width:100%;border-collapse:collapse;font-size:.87rem}
-        .om-snapshot-card td{padding:.6rem .9rem;border-bottom:1px solid #dde3ef;vertical-align:top}
-        .om-snapshot-card td:first-child{font-weight:600;color:var(--navy);width:40%}
+        .om-facts-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:1.5rem;overflow:hidden;border-radius:8px;border:1.5px solid var(--pale-navy)}
+        .om-facts-table td{padding:.65rem .85rem;border-bottom:1px solid var(--pale-navy);vertical-align:top}
+        .om-facts-table tr:last-child td{border-bottom:none}
+        .om-facts-table td:first-child{font-weight:600;color:var(--navy);background:var(--pale-navy);width:35%}
         .om-callout{border-left:4px solid var(--yellow);background:var(--pale-navy,#f0f4ff);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin:1.5rem 0;font-size:.9rem;line-height:1.55;font-style:italic}
         .om-profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
         .om-profile-card{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:1.25rem}
@@ -397,21 +393,15 @@ export default function OperationsGuideClient() {
             {/* Snapshot */}
             <section id="snapshot" className="om-section">
               <h2>Operations Management MBA, in 90 seconds</h2>
-              <div className="om-snapshot-grid">
-                <div className="om-snapshot-body">
-                  <p>An MBA in Operations Management trains you to run business operations — manufacturing, service delivery, quality management, supply chain, project execution, and process improvement. As of 2025-26, it's the highest transition-value MBA for manufacturing engineers moving into management. Curriculum covers Lean, Six Sigma, TQM, operations analytics, and Industry 4.0 applications.</p>
-                  <p>Fees range from ₹1.2 lakh (ICFAI Distance) to ₹22 lakh (IIM Kozhikode Executive Ops track), with the mainstream Online MBA median at ₹1.85 lakh. Median entry-level salary for an Operations MBA graduate in 2025-26 stands at ₹6.5 lakh per annum for freshers, ₹15 lakh for mid-level (3-7 years' experience), and ₹30 lakh for senior roles (8-15 years). COO track at 15+ years pushes ₹75 LPA+.</p>
-                </div>
-                <div className="om-snapshot-card">
-                  <table>
-                    <tbody>
-                      {QUICK_FACTS.map((f) => (
-                        <tr key={f.label}><td>{f.label}</td><td>{f.value}</td></tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <p style={{ fontSize: ".93rem", color: "var(--charcoal)", lineHeight: 1.75, marginBottom: "1rem" }}>An MBA in Operations Management trains you to run business operations — manufacturing, service delivery, quality management, supply chain, project execution, and process improvement. As of 2025-26, it&apos;s the highest transition-value MBA for manufacturing engineers moving into management. Curriculum covers Lean, Six Sigma, TQM, operations analytics, and Industry 4.0 applications.</p>
+              <p style={{ fontSize: ".93rem", color: "var(--charcoal)", lineHeight: 1.75, marginBottom: "1.25rem" }}>Fees range from ₹1.2 lakh (ICFAI Distance) to ₹22 lakh (IIM Kozhikode Executive Ops track), with the mainstream Online MBA median at ₹1.85 lakh. Median entry-level salary for an Operations MBA graduate in 2025-26 stands at ₹6.5 lakh per annum for freshers, ₹15 lakh for mid-level (3-7 years&apos; experience), and ₹30 lakh for senior roles (8-15 years). COO track at 15+ years pushes ₹75 LPA+.</p>
+              <table className="om-facts-table">
+                <tbody>
+                  {QUICK_FACTS.map((f, i) => (
+                    <tr key={i}><td>{f.label}</td><td>{f.value}</td></tr>
+                  ))}
+                </tbody>
+              </table>
             </section>
 
             {/* What it is */}

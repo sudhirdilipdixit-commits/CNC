@@ -266,14 +266,10 @@ export default function FinanceGuideClient() {
         .fm-section h2{font-family:var(--font-serif);font-size:clamp(1.3rem,2.5vw,1.75rem);color:var(--navy);margin-bottom:1.25rem;text-wrap:balance}
         .fm-takeaway-list{list-style:none;padding:0;display:flex;flex-direction:column;gap:.75rem}
         .fm-takeaway-list li{background:var(--pale-navy,#f0f4ff);border-left:4px solid var(--yellow);padding:.9rem 1rem .9rem 1.25rem;border-radius:0 6px 6px 0;font-size:.95rem;line-height:1.5}
-        .fm-snapshot-grid{display:grid;grid-template-columns:1fr 280px;gap:2rem}
-        @media(max-width:700px){.fm-snapshot-grid{grid-template-columns:1fr}}
-        .fm-snapshot-body{font-size:.95rem;line-height:1.65;color:var(--charcoal)}
-        .fm-snapshot-body p{margin:0 0 .9rem}
-        .fm-snapshot-card{background:var(--pale-navy,#f0f4ff);border-radius:8px;overflow:hidden}
-        .fm-snapshot-card table{width:100%;border-collapse:collapse;font-size:.87rem}
-        .fm-snapshot-card td{padding:.6rem .9rem;border-bottom:1px solid #dde3ef;vertical-align:top}
-        .fm-snapshot-card td:first-child{font-weight:600;color:var(--navy);width:40%}
+        .fm-facts-table{width:100%;border-collapse:collapse;font-size:.88rem;margin-bottom:1.5rem;overflow:hidden;border-radius:8px;border:1.5px solid var(--pale-navy)}
+        .fm-facts-table td{padding:.65rem .85rem;border-bottom:1px solid var(--pale-navy);vertical-align:top}
+        .fm-facts-table tr:last-child td{border-bottom:none}
+        .fm-facts-table td:first-child{font-weight:600;color:var(--navy);background:var(--pale-navy);width:35%}
         .fm-callout{border-left:4px solid var(--yellow);background:var(--pale-navy,#f0f4ff);padding:1rem 1.25rem;border-radius:0 6px 6px 0;margin:1.5rem 0;font-size:.9rem;line-height:1.55;font-style:italic}
         .fm-profile-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
         .fm-profile-card{background:#fff;border:1px solid #e2e8f0;border-radius:8px;padding:1.25rem}
@@ -399,21 +395,15 @@ export default function FinanceGuideClient() {
             {/* Snapshot */}
             <section id="snapshot" className="fm-section">
               <h2>Finance Management MBA, in 90 seconds</h2>
-              <div className="fm-snapshot-grid">
-                <div className="fm-snapshot-body">
-                  <p>An MBA in Finance Management trains you to manage financial decisions at any organisation — corporate finance, financial planning and analysis (FP&amp;A), investment analysis, treasury, mergers and acquisitions, and finance consulting. As of 2025-26, it's the MBA specialization with the strongest lifetime-earnings compounding — the CFO track at 15+ years regularly reaches ₹1 crore base.</p>
-                  <p>Fees range from ₹1.3 lakh (ICFAI Distance) to ₹40 lakh (ISB PGPMAX Executive), with the mainstream Online MBA median at ₹1.95 lakh. Median entry-level salary for a Finance MBA graduate in 2025-26 stands at ₹7 lakh per annum for freshers, ₹16 lakh for mid-level (3-7 years' experience), and ₹32 lakh for senior roles (8-15 years). CFO-track roles at 15+ years push ₹75 LPA to ₹1.5 crore.</p>
-                </div>
-                <div className="fm-snapshot-card">
-                  <table>
-                    <tbody>
-                      {QUICK_FACTS.map((f) => (
-                        <tr key={f.label}><td>{f.label}</td><td>{f.value}</td></tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </div>
+              <p style={{ fontSize: ".93rem", color: "var(--charcoal)", lineHeight: 1.75, marginBottom: "1rem" }}>An MBA in Finance Management trains you to manage financial decisions at any organisation — corporate finance, financial planning and analysis (FP&amp;A), investment analysis, treasury, mergers and acquisitions, and finance consulting. As of 2025-26, it&apos;s the MBA specialization with the strongest lifetime-earnings compounding — the CFO track at 15+ years regularly reaches ₹1 crore base.</p>
+              <p style={{ fontSize: ".93rem", color: "var(--charcoal)", lineHeight: 1.75, marginBottom: "1.25rem" }}>Fees range from ₹1.3 lakh (ICFAI Distance) to ₹40 lakh (ISB PGPMAX Executive), with the mainstream Online MBA median at ₹1.95 lakh. Median entry-level salary for a Finance MBA graduate in 2025-26 stands at ₹7 lakh per annum for freshers, ₹16 lakh for mid-level (3-7 years&apos; experience), and ₹32 lakh for senior roles (8-15 years). CFO-track roles at 15+ years push ₹75 LPA to ₹1.5 crore.</p>
+              <table className="fm-facts-table">
+                <tbody>
+                  {QUICK_FACTS.map((f, i) => (
+                    <tr key={i}><td>{f.label}</td><td>{f.value}</td></tr>
+                  ))}
+                </tbody>
+              </table>
             </section>
 
             {/* What it is */}
