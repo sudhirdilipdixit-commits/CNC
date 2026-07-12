@@ -20,7 +20,7 @@ const DEFAULTS: Required<HeroData> = {
   subheadline:
     "Online MBA, Distance MBA, and Executive MBA programmes from UGC-DEB and AICTE approved universities, compared honestly and explained by real counsellors.",
   primaryCTA: "Get Free Counselling",
-  secondaryCTA: "Talk to a Counsellor",
+  secondaryCTA: "Contact Us",
   trustStrip: [
     "UGC-DEB & AICTE approved programmes",
     "30-minute counsellor callback",
@@ -51,7 +51,7 @@ export default function HeroSection({ onOpenLeadForm, hero }: HeroSectionProps) 
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
             </button>
-            <a href="/counselling" className="btn btn-secondary">{secondaryCTA}</a>
+            <a href="/contact-us" className="btn btn-secondary">{secondaryCTA}</a>
           </div>
 
           <div className="trust-strip" aria-label="Trust signals">

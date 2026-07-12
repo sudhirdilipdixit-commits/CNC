@@ -313,10 +313,10 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
                           Ready to take the next step?
                         </p>
                         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                          <a href="/counselling" className="btn btn-primary btn-sm" style={{ justifyContent: "center" }}>
+                          <a href="/contact-us" className="btn btn-primary btn-sm" style={{ justifyContent: "center" }}>
                             Book a Free Counselling Call
                           </a>
-                          <a href="/counselling" style={{ textAlign: "center", fontSize: 13, color: "var(--navy)", fontWeight: 600 }}>
+                          <a href="/contact-us" style={{ textAlign: "center", fontSize: 13, color: "var(--navy)", fontWeight: 600 }}>
                             Talk to a senior counsellor →
                           </a>
                         </div>
@@ -370,7 +370,7 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
             Book a free 30-minute call. We&apos;ll cover your specific profile, the guide findings, and what makes sense for you.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="/counselling" className="btn btn-inverted">
+            <a href="/contact-us" className="btn btn-inverted">
               Book a Free Call
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M13 5l7 7-7 7" />

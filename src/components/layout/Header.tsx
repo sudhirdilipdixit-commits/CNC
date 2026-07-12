@@ -80,7 +80,6 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
             </div>
 
             <a href="/specializations-guide" className={isActive("/specializations-guide") ? "cur" : ""}>Specializations</a>
-            <a href="/counselling" className={isActive("/counselling") ? "cur" : ""}>Counselling</a>
             <a href="/resources" className={isActive("/resources") ? "cur" : ""}>Resources</a>
             <a href="/blog" className={isActive("/blog") ? "cur" : ""}>Blogs</a>
             <a href="/contact-us" className={isActive("/contact-us") ? "cur" : ""}>Contact</a>
@@ -126,7 +125,6 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
           )}
 
           <a href="/specializations-guide" onClick={closeMenu}>Specializations</a>
-          <a href="/counselling" onClick={closeMenu}>Counselling</a>
           <a href="/resources" onClick={closeMenu}>Resources</a>
           <a href="/blog" onClick={closeMenu}>Blogs</a>
           <a href="/contact-us" onClick={closeMenu}>Contact</a>

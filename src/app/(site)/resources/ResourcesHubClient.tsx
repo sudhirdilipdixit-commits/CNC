@@ -255,11 +255,11 @@ export default function ResourcesHubClient({ resources }: { resources: ResourceI
             Our counsellors will tell you exactly which guide is relevant for your situation — in a free 15-minute call.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="/counselling" className="btn btn-inverted">
+            <a href="/contact-us" className="btn btn-inverted">
               Talk to a Counsellor
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
             </a>
-            <a href="/counselling" className="btn btn-secondary">
+            <a href="/contact-us" className="btn btn-secondary">
               Book a Free Call
             </a>
           </div>

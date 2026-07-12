@@ -61,7 +61,7 @@ export default function PathSection() {
             </span>
           </a>
 
-          <a href="/counselling" className="path-card">
+          <a href="/contact-us" className="path-card">
             <div className="path-card-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
                 <circle cx="12" cy="12" r="9" />
