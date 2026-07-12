@@ -84,7 +84,7 @@ p:last-child { margin-bottom: 0; }
 
 .skip-link {
   position: absolute;
-  top: -40px;
+  top: -60px;
   left: 8px;
   background: var(--navy);
   color: var(--ivory);
