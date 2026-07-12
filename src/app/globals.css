@@ -334,6 +334,7 @@ section { padding: 64px 0; }
   gap: 16px;
 }
 .mobile-menu.open { transform: translateX(0); }
+.site-header.scrolled .mobile-menu { inset-block-start: var(--header-h-scrolled); }
 .mobile-menu a {
   font-size: 18px;
   font-weight: 500;
