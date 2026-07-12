@@ -44,17 +44,6 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>Programmes</h4>
-            <ul className="footer-list">
-              <li><a href="#">Online MBA</a></li>
-              <li><a href="#">Distance MBA</a></li>
-              <li><a href="#">Executive MBA</a></li>
-              <li><a href="#">Design Programmes</a></li>
-              <li><a href="#">Compare on Portal</a></li>
-            </ul>
-          </div>
-
-          <div className="footer-col">
             <h4>Specializations</h4>
             <ul className="footer-list">
               <li><a href="#">Marketing</a></li>
@@ -67,12 +56,9 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>About &amp; Legal</h4>
+            <h4>About</h4>
             <ul className="footer-list">
               <li><a href="/about">About Us</a></li>
-              <li><a href="#">Blog</a></li>
-              <li><a href="/top-10-distance-mba-universities-colleges-north-zone/">University LP</a></li>
-              <li><a href="/top-distance-mba-business-management">Course LP</a></li>
               <li><a href="/privacy-policy">Privacy Policy</a></li>
               <li><a href="/terms-conditions">Terms &amp; Conditions</a></li>
               <li><a href="/cookie-policy">Cookie Policy</a></li>
