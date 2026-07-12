@@ -12,7 +12,7 @@ import specializationsPage from "./specializationsPage";
 import specializationDetail from "./specializationDetail";
 import {
   heroBlock, promiseBlock, pathBlock, programmesBlock,
-  whyUsBlock, aiCounsellorBlock, howItWorksBlock, trustStripBlock,
+  whyUsBlock, howItWorksBlock, trustStripBlock,
   blogBlock, faqBlock, ctaBandBlock,
 } from "./blocks";
 
@@ -31,6 +31,6 @@ export const schemaTypes = [
   specializationDetail,
   // Page builder blocks
   heroBlock, promiseBlock, pathBlock, programmesBlock,
-  whyUsBlock, aiCounsellorBlock, howItWorksBlock, trustStripBlock,
+  whyUsBlock, howItWorksBlock, trustStripBlock,
   blogBlock, faqBlock, ctaBandBlock,
 ];

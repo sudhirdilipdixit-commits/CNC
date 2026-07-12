@@ -6,7 +6,6 @@ import PromiseSection from "./PromiseSection";
 import PathSection from "./PathSection";
 import ProgrammesSection from "./ProgrammesSection";
 import WhyUsSection from "./WhyUsSection";
-import AICounsellorSection from "./AICounsellorSection";
 import HowItWorksSection from "./HowItWorksSection";
 import TrustStripSection from "./TrustStripSection";
 import BlogSection from "./BlogSection";
@@ -41,7 +40,6 @@ export default function HomePageClient({ cmsData }: HomePageClientProps) {
           <PathSection />
           <ProgrammesSection onOpenLeadForm={() => openLeadForm("programmes")} />
           <WhyUsSection />
-          <AICounsellorSection />
           <HowItWorksSection />
           <TrustStripSection />
           <BlogSection />

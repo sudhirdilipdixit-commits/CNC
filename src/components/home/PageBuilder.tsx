@@ -3,7 +3,6 @@ import PromiseSection from "./PromiseSection";
 import PathSection from "./PathSection";
 import ProgrammesSection from "./ProgrammesSection";
 import WhyUsSection from "./WhyUsSection";
-import AICounsellorSection from "./AICounsellorSection";
 import HowItWorksSection from "./HowItWorksSection";
 import TrustStripSection from "./TrustStripSection";
 import BlogSection from "./BlogSection";
@@ -61,9 +60,6 @@ export default function PageBuilder({ sections, onOpenLeadForm }: PageBuilderPro
 
           case "whyUsBlock":
             return <WhyUsSection key={key} />;
-
-          case "aiCounsellorBlock":
-            return <AICounsellorSection key={key} />;
 
           case "howItWorksBlock":
             return <HowItWorksSection key={key} />;

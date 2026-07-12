@@ -73,17 +73,6 @@ export const whyUsBlock = defineType({
   preview: { prepare: () => ({ title: "Why Us Section" }) },
 });
 
-export const aiCounsellorBlock = defineType({
-  name: "aiCounsellorBlock",
-  title: "AI Counsellor Section",
-  type: "object",
-  fields: [
-    defineField({ name: "note", title: "Note", type: "string", readOnly: true,
-      description: "This section renders the fixed AI Counsellor widget." }),
-  ],
-  preview: { prepare: () => ({ title: "AI Counsellor Section" }) },
-});
-
 export const howItWorksBlock = defineType({
   name: "howItWorksBlock",
   title: "How It Works Section",

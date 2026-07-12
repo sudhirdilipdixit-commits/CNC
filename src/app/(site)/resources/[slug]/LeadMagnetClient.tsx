@@ -313,8 +313,8 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
                           Ready to take the next step?
                         </p>
                         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                          <a href="/ai-counsellor" className="btn btn-primary btn-sm" style={{ justifyContent: "center" }}>
-                            Get AI Programme Recommendations
+                          <a href="/counselling" className="btn btn-primary btn-sm" style={{ justifyContent: "center" }}>
+                            Book a Free Counselling Call
                           </a>
                           <a href="/counselling" style={{ textAlign: "center", fontSize: 13, color: "var(--navy)", fontWeight: 600 }}>
                             Talk to a senior counsellor →

@@ -15,7 +15,6 @@ export async function POST(request: NextRequest) {
   } else {
     revalidatePath("/");
     revalidatePath("/resources");
-    revalidatePath("/ai-counsellor");
   }
 
   return NextResponse.json({ revalidated: true, path: path ?? "all", at: new Date().toISOString() });
