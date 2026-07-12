@@ -1065,7 +1065,7 @@ section { padding: 64px 0; }
   margin-bottom: 16px;
   font-weight: 400;
 }
-.footer-brand .logo { background: var(--ivory); padding: 8px 12px; border-radius: 6px; display: inline-block; }
+.footer-brand .logo { background: var(--ivory); padding: 8px 12px; border-radius: 6px; display: inline-block; height: auto; }
 .footer-tagline { font-family: var(--font-serif); font-style: italic; color: var(--yellow); font-size: 18px; margin: 16px 0; }
 .footer-address { font-size: 13px; color: var(--pale-navy); line-height: 1.6; }
 .footer-list { list-style: none; }
