@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 
@@ -9,7 +9,7 @@ interface HeaderProps {
 }
 
 export default function Header({ onOpenLeadForm }: HeaderProps) {
-  const [scrolled,  setScrolled]  = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
   const [menuOpen,  setMenuOpen]  = useState(false);
   const pathname = usePathname();
 
@@ -19,7 +19,11 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
   };
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 16);
+    const el = headerRef.current;
+    if (!el) return;
+    const onScroll = () => el.classList.toggle("scrolled", window.scrollY > 16);
+    // Apply immediately in case page loads mid-scroll
+    onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
@@ -39,7 +43,7 @@ export default function Header({ onOpenLeadForm }: HeaderProps) {
     <>
       <a href="#main" className="skip-link">Skip to main content</a>
 
-      <header className={`site-header${scrolled ? " scrolled" : ""}`} id="siteHeader">
+      <header ref={headerRef} className="site-header" id="siteHeader">
         <div className="container header-inner">
           <a href="/" className="logo" aria-label="CollegeNCourses Home">
             <Image src="/logo.webp" alt="CollegeNCourses logo" width={360} height={90} priority style={{ height: "100%", width: "auto" }} />
