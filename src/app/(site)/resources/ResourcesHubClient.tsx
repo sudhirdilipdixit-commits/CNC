@@ -196,7 +196,7 @@ export default function ResourcesHubClient({ resources }: { resources: ResourceI
       </section>
 
       {/* ══ FILTER CHIPS ═════════════════════════════════════════════════════ */}
-      <div style={{ background: "var(--white)", borderBottom: "2px solid var(--mist)", position: "sticky", top: 64, zIndex: 90 }}>
+      <div style={{ background: "var(--white)", borderBottom: "2px solid var(--mist)", position: "sticky", top: 80, zIndex: 90 }}>
         <div className="container">
           <div style={{ display: "flex", overflowX: "auto", gap: 4, padding: "12px 0", scrollbarWidth: "none" }}>
             {FILTER_CHIPS.map(chip => {

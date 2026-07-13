@@ -161,7 +161,8 @@ export default function AboutPage() {
 
               {/* Stats */}
               <div
-                style={{
+                className="about-stats-grid"
+              style={{
                   display: "grid",
                   gridTemplateColumns: "repeat(3,1fr)",
                   gap: 20,
@@ -714,6 +715,9 @@ export default function AboutPage() {
             gap: 64px !important;
             align-items: center !important;
           }
+        }
+        @media (max-width: 420px) {
+          .about-stats-grid { grid-template-columns: repeat(2, 1fr) !important; }
         }
       `}</style>
     </>

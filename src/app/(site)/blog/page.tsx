@@ -123,7 +123,7 @@ export default async function BlogIndexPage() {
           background: var(--white);
           border-bottom: 2px solid var(--mist);
           position: sticky;
-          top: 64px;
+          top: var(--header-h);
           z-index: 90;
           box-shadow: 0 1px 3px rgba(36,48,72,.06);
         }

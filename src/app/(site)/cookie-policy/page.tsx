@@ -392,7 +392,7 @@ export default function CookiePolicyPage() {
           .legal-toc {
             display: block;
             position: sticky;
-            top: calc(37px + 64px + 20px);
+            top: calc(var(--header-h) + 20px);
           }
         }
         .legal-toc-inner {
