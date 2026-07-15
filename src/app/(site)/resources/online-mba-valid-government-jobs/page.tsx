@@ -4,13 +4,13 @@ import GovtJobsGuideClient from "./GovtJobsGuideClient";
 export const metadata: Metadata = {
   title: "Is Online MBA Valid for Government Jobs in India? 2025-26 Answer | CollegeNCourses",
   description:
-    "The honest, regulation-backed answer — plus how to verify your specific case before you enrol or apply. UGC rules explained for 2025-26.",
+    "The honest, regulation-backed answer, plus how to verify your specific case before you enrol or apply. UGC rules explained for 2025-26.",
   alternates: {
     canonical: "https://collegencourses.com/resources/online-mba-valid-government-jobs/",
   },
   openGraph: {
     type: "article",
-    title: "Is Online MBA Valid for Government Jobs in India? — 2025-26 Answer",
+    title: "Is Online MBA Valid for Government Jobs in India? 2025-26 Answer",
     description:
       "The honest, regulation-backed answer, plus how to verify your specific case before you commit.",
     url: "https://collegencourses.com/resources/online-mba-valid-government-jobs/",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Is Online MBA Valid for Government Jobs in India? — 2025-26 Answer",
+    title: "Is Online MBA Valid for Government Jobs in India? 2025-26 Answer",
     description: "The honest, regulation-backed answer, plus how to verify your specific case.",
     images: ["https://collegencourses.com/og/resources-online-mba-government-jobs.webp"],
   },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 export default function GovtJobsGuidePage() {
   return (
     <>
-      {/* Schema 1 — Article */}
+      {/* Schema 1: Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -42,7 +42,7 @@ export default function GovtJobsGuidePage() {
             "@type": "Article",
             headline: "Is Online MBA Valid for Government Jobs in India? 2025-26 Answer",
             description:
-              "The honest, regulation-backed answer — plus how to verify your specific case before you enrol or apply. UGC rules explained for 2025-26.",
+              "The honest, regulation-backed answer, plus how to verify your specific case before you enrol or apply. UGC rules explained for 2025-26.",
             datePublished: "2025-12-15T09:00:00+05:30",
             dateModified: "2025-12-15T09:00:00+05:30",
             author: {
@@ -68,7 +68,7 @@ export default function GovtJobsGuidePage() {
           }),
         }}
       />
-      {/* Schema 2 — BreadcrumbList */}
+      {/* Schema 2: BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -88,7 +88,7 @@ export default function GovtJobsGuidePage() {
           }),
         }}
       />
-      {/* Schema 3 — FAQPage */}
+      {/* Schema 3: FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -99,11 +99,11 @@ export default function GovtJobsGuidePage() {
               { "@type": "Question", name: "Is an Online MBA valid for government jobs in India?", acceptedAnswer: { "@type": "Answer", text: "Yes, generally. A UGC-DEB approved Online MBA is legally equivalent to a regular MBA for government job eligibility, per UGC's ODL and Online Regulations 2020. The one important condition: always verify the specific job notification's eligibility clause, since individual recruiting bodies can add their own specific requirements." } },
               { "@type": "Question", name: "Is a UGC-DEB approved online MBA the same as a regular MBA for government job purposes?", acceptedAnswer: { "@type": "Answer", text: "Yes, in legal standing. UGC has stated that degrees from UGC-DEB approved Online or Distance programmes carry the same legal standing as conventional-mode degrees for all purposes, including employment. This equivalence requires the specific programme to have held current UGC-DEB approval for your enrolment year." } },
               { "@type": "Question", name: "Do public-sector banks accept online MBAs for promotion?", acceptedAnswer: { "@type": "Answer", text: "Generally yes. Most large public-sector banks recognise UGC-DEB approved Online and Distance MBAs for internal promotion eligibility (Scale I-IV and specialist tracks), particularly following HR policy updates after the 2020 Regulations. Always confirm against your specific bank's current internal promotion policy document." } },
-              { "@type": "Question", name: "Are PSU jobs open to online MBA holders?", acceptedAnswer: { "@type": "Answer", text: "It depends on the specific PSU and specific notification. Internal promotion within a PSU generally accepts UGC-DEB approved Online MBAs. Fresh external recruitment varies — some notifications explicitly welcome any UGC-recognised postgraduate qualification, others use full-time language that requires closer reading." } },
+              { "@type": "Question", name: "Are PSU jobs open to online MBA holders?", acceptedAnswer: { "@type": "Answer", text: "It depends on the specific PSU and specific notification. Internal promotion within a PSU generally accepts UGC-DEB approved Online MBAs. Fresh external recruitment varies; some notifications explicitly welcome any UGC-recognised postgraduate qualification, others use full-time language that requires closer reading." } },
               { "@type": "Question", name: "Is an online MBA valid for UPSC or State PSC recruitment?", acceptedAnswer: { "@type": "Answer", text: "For roles where a postgraduate management qualification is part of the eligibility criteria, a UGC-DEB approved Online MBA is generally accepted on the same equivalence basis as any UGC-recognised postgraduate degree. Most UPSC and State PSC notifications reference recognised university rather than mode-specific exclusions." } },
               { "@type": "Question", name: "What is the difference between AICTE and UGC-DEB approval for government job eligibility?", acceptedAnswer: { "@type": "Answer", text: "UGC-DEB approval establishes the degree's general legal equivalence and is the primary requirement for most government job eligibility. AICTE approval is relevant only when a specific job notification explicitly names it as a requirement, which happens for certain technical-management roles but is not the default expectation." } },
               { "@type": "Question", name: "Can I use an online MBA for a teaching or academic government position?", acceptedAnswer: { "@type": "Answer", text: "No, not on the basis of the MBA alone. Faculty eligibility for management subjects requires UGC-NET qualification or a PhD, regardless of how any MBA was obtained. This is a fundamentally different eligibility track." } },
-              { "@type": "Question", name: "Do I need an equivalence certificate from AIU for my online MBA?", acceptedAnswer: { "@type": "Answer", text: "Generally no, for domestically UGC-DEB approved Online MBAs — UGC's own regulation already establishes the equivalence, which is what most Indian government recruiting bodies rely on. AIU equivalence certification is more commonly relevant for foreign degrees or specific cases." } },
+              { "@type": "Question", name: "Do I need an equivalence certificate from AIU for my online MBA?", acceptedAnswer: { "@type": "Answer", text: "Generally no, for domestically UGC-DEB approved Online MBAs: UGC's own regulation already establishes the equivalence, which is what most Indian government recruiting bodies rely on. AIU equivalence certification is more commonly relevant for foreign degrees or specific cases." } },
               { "@type": "Question", name: "What if a specific government job notification says full-time MBA only?", acceptedAnswer: { "@type": "Answer", text: "Read the exact wording carefully and, if genuinely ambiguous, write to the recruiting body directly for written clarification before applying. Some notifications use full-time language inherited from older templates without intending to exclude UGC-DEB approved programmes; others may genuinely intend the restriction." } },
               { "@type": "Question", name: "How do I verify if my specific online MBA qualifies for a specific government job?", acceptedAnswer: { "@type": "Answer", text: "Six steps: confirm current-year UGC-DEB approval for your specific programme, find the exact current notification for your target role, read the eligibility clause word for word for mode-specific language, check whether AICTE approval is separately required, request written clarification if language is ambiguous, and for promotion-based eligibility, check your employer's specific internal HR policy directly." } },
               { "@type": "Question", name: "Has any government recruiting body explicitly rejected online MBA candidates?", acceptedAnswer: { "@type": "Answer", text: "We're not aware of any blanket, category-wide rejection of UGC-DEB approved Online MBAs by a major recruiting body. The friction we see in our counselling records is notification-specific and documentation-specific rather than a systemic rejection of Online MBAs as a category." } },
@@ -116,7 +116,7 @@ export default function GovtJobsGuidePage() {
           }),
         }}
       />
-      {/* Schema 4 — HowTo */}
+      {/* Schema 4: HowTo */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -137,7 +137,7 @@ export default function GovtJobsGuidePage() {
           }),
         }}
       />
-      {/* Schema 5 — ItemList (6 government job categories) */}
+      {/* Schema 5: ItemList (6 government job categories) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

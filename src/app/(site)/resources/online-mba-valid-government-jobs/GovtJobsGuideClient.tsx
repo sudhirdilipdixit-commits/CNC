@@ -23,30 +23,30 @@ const TOC_ITEMS = [
 ];
 
 const TAKEAWAYS = [
-  { label: "Short answer: yes, conditionally", text: "UGC has explicitly established that degrees from UGC-DEB approved Online and Distance programmes are equivalent to conventional-mode degrees for all purposes, including employment — provided the specific programme was UGC-DEB approved for your enrolment year." },
-  { label: '"Conditionally" is the important word', text: "Individual recruiting authorities — specific PSUs, banks, state departments — can and occasionally do add their own eligibility clauses in a specific notification, such as requiring \"full-time\" or \"regular\" mode. General equivalence doesn't override a specific notification's explicit wording." },
+  { label: "Short answer: yes, conditionally", text: "UGC has explicitly established that degrees from UGC-DEB approved Online and Distance programmes are equivalent to conventional-mode degrees for all purposes, including employment, provided the specific programme was UGC-DEB approved for your enrolment year." },
+  { label: '"Conditionally" is the important word', text: "Individual recruiting authorities (specific PSUs, banks, state departments) can and occasionally do add their own eligibility clauses in a specific notification, such as requiring \"full-time\" or \"regular\" mode. General equivalence doesn't override a specific notification's explicit wording." },
   { label: "Promotion eligibility is generally the safest use case", text: "Internal promotion policies at PSU banks and public-sector employers most consistently accept UGC-DEB approved Online MBAs. Fresh external recruitment for specific named posts is where notification-specific wording matters most." },
-  { label: "Teaching positions are a different eligibility track entirely", text: "An MBA alone — in any mode — does not typically qualify someone for a management faculty position; that requires UGC-NET or a PhD, regardless of how the MBA itself was obtained." },
+  { label: "Teaching positions are a different eligibility track entirely", text: "An MBA alone, in any mode, does not typically qualify someone for a management faculty position; that requires UGC-NET or a PhD, regardless of how the MBA itself was obtained." },
   { label: "AICTE and UGC-DEB answer different questions", text: "UGC-DEB approval establishes degree equivalence for general employment purposes. AICTE approval is separately relevant only when a specific notification explicitly requires it." },
   { label: "Common mistake", text: "Enrolling in an Online MBA specifically for a named government job target without first reading that job's actual eligibility notification word for word." },
 ];
 
 const JOB_CATEGORIES = [
   { category: "PSU bank internal promotion (Scale I-IV)", stance: "Generally accepted", caveat: "Check your specific bank's internal HR promotion policy document" },
-  { category: "PSU direct/external recruitment (Management Trainee, Executive)", stance: "Mixed — varies by PSU and notification", caveat: "Some notifications specify \"full-time\" or \"regular\" MBA explicitly" },
+  { category: "PSU direct/external recruitment (Management Trainee, Executive)", stance: "Mixed: varies by PSU and notification", caveat: "Some notifications specify \"full-time\" or \"regular\" MBA explicitly" },
   { category: "Central Government administrative posts requiring PG qualification", stance: "Generally accepted if UGC-DEB approved", caveat: "Check the specific ministry/department notification" },
   { category: "State Government administrative posts (State PSC-recruited)", stance: "Generally accepted if UGC-DEB approved", caveat: "State-specific circulars occasionally add conditions" },
   { category: "Defence civilian administrative roles", stance: "Generally accepted if UGC-DEB approved", caveat: "Verify against the specific recruitment notification" },
-  { category: "Teaching / academic faculty positions (management subjects)", stance: "Not typically sufficient", caveat: "Requires UGC-NET or PhD; MBA mode is not the deciding factor — the qualification track itself is different" },
+  { category: "Teaching / academic faculty positions (management subjects)", stance: "Not typically sufficient", caveat: "Requires UGC-NET or PhD; MBA mode is not the deciding factor; the qualification track itself is different" },
 ];
 
 const VERIFICATION_STEPS = [
-  { step: 1, title: "Confirm current-year UGC-DEB approval for your specific programme", body: "Visit deb.ugc.ac.in and confirm your specific university and MBA programme were approved for your specific enrolment year — not a general \"the university is UGC recognised\" claim, and not a prior year's approval status." },
-  { step: 2, title: "Find the most recent official notification for your specific target role", body: "Not a summary from a coaching website or forum — the actual PDF notification from the recruiting body's official website. Eligibility clauses can change between recruitment cycles." },
+  { step: 1, title: "Confirm current-year UGC-DEB approval for your specific programme", body: "Visit deb.ugc.ac.in and confirm your specific university and MBA programme were approved for your specific enrolment year, not a general \"the university is UGC recognised\" claim, and not a prior year's approval status." },
+  { step: 2, title: "Find the most recent official notification for your specific target role", body: "Not a summary from a coaching website or forum, but the actual PDF notification from the recruiting body's official website. Eligibility clauses can change between recruitment cycles." },
   { step: 3, title: "Read the eligibility clause in full, word for word", body: 'Look specifically for mode-related language: "full-time," "regular," "on-campus," or conversely, explicit mentions of "Distance," "Online," or "ODL mode acceptable."' },
   { step: 4, title: "Check whether AICTE approval is separately required", body: "If the notification explicitly names AICTE alongside UGC, confirm your specific programme carries both approvals." },
-  { step: 5, title: "If the language is ambiguous, request written clarification before applying", body: "Email or write to the recruiting body's grievance cell or admissions/recruitment helpdesk, describe your specific qualification precisely, and request written confirmation of eligibility. Keep this correspondence — it becomes useful documentation if a question arises later." },
-  { step: 6, title: "For promotion-based eligibility, check your organisation's internal HR policy document directly", body: "Don't rely on colleague anecdotes or general assumptions about what your employer accepts — request the specific written policy from HR." },
+  { step: 5, title: "If the language is ambiguous, request written clarification before applying", body: "Email or write to the recruiting body's grievance cell or admissions/recruitment helpdesk, describe your specific qualification precisely, and request written confirmation of eligibility. Keep this correspondence, as it becomes useful documentation if a question arises later." },
+  { step: 6, title: "For promotion-based eligibility, check your organisation's internal HR policy document directly", body: "Don't rely on colleague anecdotes or general assumptions about what your employer accepts; request the specific written policy from HR." },
 ];
 
 const SCENARIOS = [
@@ -78,7 +78,7 @@ const SCENARIOS = [
     age: 26,
     role: "Applying for a PSU Management Trainee position",
     background: "Held a UGC-DEB approved Online MBA and applied for a PSU Management Trainee position advertised externally. The specific notification, on close reading, used the phrase \"full-time MBA/PGDM from a recognised institute.\"",
-    action: "Had not checked this specific notification's exact wording before applying — assumed general UGC-DEB equivalence would apply, based on advice from an online forum rather than the notification itself.",
+    action: "Had not checked this specific notification's exact wording before applying; assumed general UGC-DEB equivalence would apply, based on advice from an online forum rather than the notification itself.",
     recommendation: "During document verification, this specific phrasing was raised as a query by the recruiting PSU.",
     outcome: "The matter required additional correspondence and clarification with the PSU, adding delay and uncertainty to his application at a stage when it mattered most. This is precisely the scenario the Step 5 verification process is designed to prevent.",
     type: "caution",
@@ -89,19 +89,19 @@ const FAQS = [
   { q: "Is an Online MBA valid for government jobs in India?", a: "Yes, generally. A UGC-DEB approved Online MBA is legally equivalent to a regular MBA for government job eligibility, per UGC's ODL and Online Regulations 2020. The one important condition: always verify the specific job notification's eligibility clause, since individual recruiting bodies can add their own specific requirements." },
   { q: "Is a UGC-DEB approved online MBA the same as a regular MBA for government job purposes?", a: "Yes, in legal standing. UGC has stated that degrees from UGC-DEB approved Online or Distance programmes carry the same legal standing as conventional-mode degrees for all purposes, including employment. This equivalence requires the specific programme to have held current UGC-DEB approval for your enrolment year." },
   { q: "Do public-sector banks accept online MBAs for promotion?", a: "Generally yes. Most large public-sector banks recognise UGC-DEB approved Online and Distance MBAs for internal promotion eligibility (Scale I-IV and specialist tracks), particularly following HR policy updates after the 2020 Regulations. Always confirm against your specific bank's current internal promotion policy document." },
-  { q: "Are PSU jobs open to online MBA holders?", a: "It depends on the specific PSU and specific notification. Internal promotion within a PSU generally accepts UGC-DEB approved Online MBAs. Fresh external recruitment (like Management Trainee positions) varies — some notifications explicitly welcome any UGC-recognised postgraduate qualification, others use \"full-time\" language that requires closer reading. Always check the specific notification before applying." },
+  { q: "Are PSU jobs open to online MBA holders?", a: "It depends on the specific PSU and specific notification. Internal promotion within a PSU generally accepts UGC-DEB approved Online MBAs. Fresh external recruitment (like Management Trainee positions) varies; some notifications explicitly welcome any UGC-recognised postgraduate qualification, others use \"full-time\" language that requires closer reading. Always check the specific notification before applying." },
   { q: "Is an online MBA valid for UPSC or State PSC recruitment?", a: "For roles where a postgraduate management qualification is part of the eligibility criteria, a UGC-DEB approved Online MBA is generally accepted on the same equivalence basis as any UGC-recognised postgraduate degree. Most UPSC and State PSC notifications reference \"recognised university\" rather than mode-specific exclusions, but state-specific circulars occasionally add conditions." },
   { q: "What is the difference between AICTE and UGC-DEB approval for government job eligibility?", a: "UGC-DEB approval establishes the degree's general legal equivalence and is the primary requirement for most government job eligibility. AICTE approval is relevant only when a specific job notification explicitly names it as a requirement, which happens for certain technical-management roles but isn't the default expectation across most government postings." },
   { q: "Can I use an online MBA for a teaching or academic government position?", a: "No, not on the basis of the MBA alone. Faculty eligibility for management subjects requires UGC-NET qualification or a PhD, regardless of how any MBA was obtained. This is a fundamentally different eligibility track from the general employment eligibility this guide otherwise covers." },
-  { q: "Do I need an equivalence certificate from AIU for my online MBA?", a: "Generally no, for domestically UGC-DEB approved Online MBAs — UGC's own regulation already establishes the equivalence, which is what most Indian government recruiting bodies rely on. AIU equivalence certification is more commonly relevant for foreign degrees or specific cases requiring formal cross-institutional equivalence recognition." },
+  { q: "Do I need an equivalence certificate from AIU for my online MBA?", a: "Generally no, for domestically UGC-DEB approved Online MBAs: UGC's own regulation already establishes the equivalence, which is what most Indian government recruiting bodies rely on. AIU equivalence certification is more commonly relevant for foreign degrees or specific cases requiring formal cross-institutional equivalence recognition." },
   { q: 'What if a specific government job notification says "full-time MBA only"?', a: "Read the exact wording carefully and, if genuinely ambiguous, write to the recruiting body directly for written clarification before applying. Some notifications use \"full-time\" language inherited from older templates without intending to exclude UGC-DEB approved programmes; others may genuinely intend the restriction. Written clarification removes the ambiguity." },
   { q: "How do I verify if my specific online MBA qualifies for a specific government job?", a: "Six steps: confirm current-year UGC-DEB approval for your specific programme, find the exact current notification for your target role, read the eligibility clause word for word for mode-specific language, check whether AICTE approval is separately required, request written clarification if the language is ambiguous, and for promotion-based eligibility, check your employer's specific internal HR policy directly. Full walkthrough in the verification section." },
-  { q: "Has any government recruiting body explicitly rejected online MBA candidates?", a: "We're not aware of any blanket, category-wide rejection of UGC-DEB approved Online MBAs by a major recruiting body. The friction we see in our counselling records is notification-specific and documentation-specific — a particular posting's wording, or a gap in an aspirant's own verification before applying — rather than a systemic rejection of Online MBAs as a category." },
+  { q: "Has any government recruiting body explicitly rejected online MBA candidates?", a: "We're not aware of any blanket, category-wide rejection of UGC-DEB approved Online MBAs by a major recruiting body. The friction we see in our counselling records is notification-specific and documentation-specific (a particular posting's wording, or a gap in an aspirant's own verification before applying) rather than a systemic rejection of Online MBAs as a category." },
   { q: "Is an online MBA valid for defence sector civilian roles?", a: "Generally yes, for civilian and administrative-track roles within defence establishments and Defence PSUs, on the same UGC-DEB equivalence basis as other central government contexts. This is distinct from combatant or uniformed recruitment, which typically doesn't involve MBA-level eligibility at all." },
   { q: "Is online MBA government recognised?", a: "Yes. An Online MBA from a university holding current UGC-DEB approval is government recognised and legally equivalent to a regular MBA for employment and further education purposes in India, under UGC's 2020 Regulations.", voice: true },
   { q: "Can online MBA be used for government job promotion?", a: "Yes, in most cases. Online MBAs from UGC-DEB approved universities are widely accepted for internal government and PSU promotion eligibility, particularly at public-sector banks. Always confirm against your specific organisation's current internal HR promotion policy.", voice: true },
   { q: "Which online MBA is valid for government jobs?", a: "Any Online MBA from a university currently holding UGC-DEB approval for that specific programme is valid for general government job eligibility. See our Top 20 UGC-DEB Approved Online MBA Universities guide for a ranked list, and the safest universities section of this guide for government-job-specific selection considerations.", voice: true },
-  { q: "How does CollegeNCourses help verify government job eligibility?", a: "Our counsellors help you check UGC-DEB approval status, read and interpret specific job notifications, and — where useful — draft the written clarification request described in the verification section. Free 30-minute call. We do not guarantee outcomes for any specific job posting, since final eligibility determination always rests with the recruiting body." },
+  { q: "How does CollegeNCourses help verify government job eligibility?", a: "Our counsellors help you check UGC-DEB approval status, read and interpret specific job notifications, and, where useful, draft the written clarification request described in the verification section. Free 30-minute call. We do not guarantee outcomes for any specific job posting, since final eligibility determination always rests with the recruiting body." },
 ];
 
 const RELATED = [
@@ -312,7 +312,7 @@ export default function GovtJobsGuideClient() {
           <span className="gj-eyebrow">Resource Guide • 2025-26 Edition</span>
           <h1>Is an Online MBA valid for government jobs in India? The honest 2025-26 answer</h1>
           <p className="gj-subtitle">
-            Yes, with one condition that matters more than any other: always verify the specific job notification. Built from 241 government-job-eligibility counselling conversations. No blanket guarantees — the real regulatory picture.
+            Yes, with one condition that matters more than any other: always verify the specific job notification. Built from 241 government-job-eligibility counselling conversations. No blanket guarantees: the real regulatory picture.
           </p>
           <div className="gj-trust">
             <span className="stars">★★★★★</span>
@@ -327,7 +327,7 @@ export default function GovtJobsGuideClient() {
             <a href="#pdf-download" className="gj-btn gj-btn-outline">Download the PDF version →</a>
           </div>
           <p className="gj-caption">
-            <em>Last verified against UGC's ODL and Online Regulations 2020 and current UGC-DEB guidance. This is general information, not a guarantee for any specific job posting — see the verification section for how to verify your exact case.</em>
+            <em>Last verified against UGC's ODL and Online Regulations 2020 and current UGC-DEB guidance. This is general information, not a guarantee for any specific job posting; see the verification section for how to verify your exact case.</em>
           </p>
         </div>
       </div>
@@ -361,7 +361,7 @@ export default function GovtJobsGuideClient() {
               </ol>
             </details>
 
-            {/* Section 1 — Key Takeaways */}
+            {/* Section 1: Key Takeaways */}
             <section id="takeaways" className="gj-takeaways">
               <h2>Key takeaways</h2>
               <ul>
@@ -371,35 +371,35 @@ export default function GovtJobsGuideClient() {
               </ul>
             </section>
 
-            {/* Section 2 — Quick Answer */}
+            {/* Section 2: Quick Answer */}
             <section id="quick-answer">
               <h2>If you only need the answer, here it is</h2>
               <p>
-                Yes — an Online MBA from a UGC-DEB approved university is legally equivalent to a regular MBA for government job eligibility in India, under UGC's own regulations. The one condition that matters: always check the specific job notification's eligibility clause, since recruiting bodies occasionally add their own mode-specific requirements.
+                Yes, an Online MBA from a UGC-DEB approved university is legally equivalent to a regular MBA for government job eligibility in India, under UGC's own regulations. The one condition that matters: always check the specific job notification's eligibility clause, since recruiting bodies occasionally add their own mode-specific requirements.
               </p>
               <div className="gj-quick-card">
                 <strong style={{ color: "var(--navy)" }}>Quick reference by category:</strong>
                 <ul>
-                  <li><span className="gj-quick-label">General principle (UGC-DEB approved):</span><span className="gj-quick-val"> Legally equivalent to regular MBA — <strong>Yes</strong></span></li>
-                  <li><span className="gj-quick-label">PSU bank internal promotions:</span><span className="gj-quick-val"> Generally accepted — <strong>Usually yes</strong></span></li>
-                  <li><span className="gj-quick-label">PSU direct/external recruitment:</span><span className="gj-quick-val"> Depends entirely on the specific notification's wording — <strong>Check first</strong></span></li>
-                  <li><span className="gj-quick-label">State/Central Government admin promotion:</span><span className="gj-quick-val"> Generally accepted if UGC-DEB approved — <strong>Usually yes</strong></span></li>
-                  <li><span className="gj-quick-label">Teaching/faculty positions:</span><span className="gj-quick-val"> MBA alone doesn't qualify regardless of mode — UGC-NET/PhD required — <strong>Different track entirely</strong></span></li>
-                  <li><span className="gj-quick-label">Defence civilian administrative roles:</span><span className="gj-quick-val"> Generally accepted if UGC-DEB approved — <strong>Usually yes, verify specific notification</strong></span></li>
+                  <li><span className="gj-quick-label">General principle (UGC-DEB approved):</span><span className="gj-quick-val"> Legally equivalent to regular MBA: <strong>Yes</strong></span></li>
+                  <li><span className="gj-quick-label">PSU bank internal promotions:</span><span className="gj-quick-val"> Generally accepted: <strong>Usually yes</strong></span></li>
+                  <li><span className="gj-quick-label">PSU direct/external recruitment:</span><span className="gj-quick-val"> Depends entirely on the specific notification's wording: <strong>Check first</strong></span></li>
+                  <li><span className="gj-quick-label">State/Central Government admin promotion:</span><span className="gj-quick-val"> Generally accepted if UGC-DEB approved: <strong>Usually yes</strong></span></li>
+                  <li><span className="gj-quick-label">Teaching/faculty positions:</span><span className="gj-quick-val"> MBA alone doesn't qualify regardless of mode; UGC-NET/PhD required: <strong>Different track entirely</strong></span></li>
+                  <li><span className="gj-quick-label">Defence civilian administrative roles:</span><span className="gj-quick-val"> Generally accepted if UGC-DEB approved: <strong>Usually yes, verify specific notification</strong></span></li>
                 </ul>
                 <p style={{ fontSize: "13px", color: "var(--grey)", marginTop: "12px", fontStyle: "italic" }}>Full breakdown by category below. Full verification walkthrough in the How to Verify section.</p>
               </div>
             </section>
 
-            {/* Section 3 — Legal Basis */}
+            {/* Section 3: Legal Basis */}
             <section id="legal-basis">
               <h2>What the regulation actually says</h2>
               <span className="gj-freshness">Last verified against UGC ODL and Online Regulations 2020</span>
               <p>
-                The UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020 govern how Indian universities may offer Distance and Online degrees. UGC has stated that degrees earned through approved Online or ODL mode carry the same legal standing as conventional, on-campus degrees — for all purposes, including employment.
+                The UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020 govern how Indian universities may offer Distance and Online degrees. UGC has stated that degrees earned through approved Online or ODL mode carry the same legal standing as conventional, on-campus degrees, for all purposes, including employment.
               </p>
               <p>
-                This is the foundational legal basis for everything else in this guide. Before 2020, Distance MBAs operated under an older, less standardised framework, and Online MBAs as a distinct category barely existed in Indian regulation. The 2020 Regulations created a clearer, stronger equivalence principle — but equivalence at the <em>regulatory</em> level doesn't automatically mean every individual recruiting notification will reflect that principle in its specific wording, which is precisely why the verification section walks through verifying your specific case rather than relying on the general principle alone.
+                This is the foundational legal basis for everything else in this guide. Before 2020, Distance MBAs operated under an older, less standardised framework, and Online MBAs as a distinct category barely existed in Indian regulation. The 2020 Regulations created a clearer, stronger equivalence principle, but equivalence at the <em>regulatory</em> level doesn't automatically mean every individual recruiting notification will reflect that principle in its specific wording, which is precisely why the verification section walks through verifying your specific case rather than relying on the general principle alone.
               </p>
               <div className="gj-callout">
                 <span className="gj-callout-label">What "equivalent for all purposes" actually covers</span>
@@ -407,15 +407,15 @@ export default function GovtJobsGuideClient() {
               </div>
             </section>
 
-            {/* Section 4 — Job Categories */}
+            {/* Section 4: Job Categories */}
             <section id="job-categories">
               <h2>The honest category-by-category picture</h2>
               <p>
-                Government job categories vary meaningfully in how consistently they accept Online MBAs. PSU bank promotions and general administrative postgraduate-qualification eligibility are the most consistently accepting categories. Teaching and faculty positions are the clearest exception — MBA alone, in any mode, does not meet faculty eligibility requirements.
+                Government job categories vary meaningfully in how consistently they accept Online MBAs. PSU bank promotions and general administrative postgraduate-qualification eligibility are the most consistently accepting categories. Teaching and faculty positions are the clearest exception: MBA alone, in any mode, does not meet faculty eligibility requirements.
               </p>
               <div className="gj-table-wrap">
                 <table className="gj-table">
-                  <caption>As of 2025-26. This table reflects general regulatory principles — not a substitute for reading the specific notification for your target role.</caption>
+                  <caption>As of 2025-26. This table reflects general regulatory principles, not a substitute for reading the specific notification for your target role.</caption>
                   <thead>
                     <tr>
                       <th>Category</th>
@@ -440,53 +440,53 @@ export default function GovtJobsGuideClient() {
               </div>
               <div className="gj-callout gj-callout-navy">
                 <span className="gj-callout-label">Counsellor observation</span>
-                From our counselling records 2023-25: the single biggest source of confusion we see is aspirants assuming "government job eligible" is one uniform status, when it genuinely isn't. An Online MBA that's perfectly fine for a state government administrative promotion may face a specific documentation question in a PSU Management Trainee recruitment that happens to use "full-time" language in its notification. These aren't contradictions in the law — they're different recruiting bodies exercising their right to set specific criteria within the general equivalence framework. — <em>CollegeNCourses Senior Counsellor Desk</em>
+                From our counselling records 2023-25: the single biggest source of confusion we see is aspirants assuming "government job eligible" is one uniform status, when it genuinely isn't. An Online MBA that's perfectly fine for a state government administrative promotion may face a specific documentation question in a PSU Management Trainee recruitment that happens to use "full-time" language in its notification. These aren't contradictions in the law; they're different recruiting bodies exercising their right to set specific criteria within the general equivalence framework. (CollegeNCourses Senior Counsellor Desk)
               </div>
             </section>
 
-            {/* Section 5 — UGC-DEB Requirement */}
+            {/* Section 5: UGC-DEB Requirement */}
             <section id="ugc-deb-requirement">
               <h2>Everything in this guide assumes one thing: current UGC-DEB approval</h2>
               <p>
-                Every principle in this guide applies only if your specific university and specific MBA programme held UGC-DEB approval for the academic year in which you enrolled. This isn't a minor footnote — it's the load-bearing requirement underneath everything else. A degree from a university that lacked current-year UGC-DEB approval has no claim to the equivalence principle discussed above, regardless of how legitimate the university otherwise appears.
+                Every principle in this guide applies only if your specific university and specific MBA programme held UGC-DEB approval for the academic year in which you enrolled. This isn't a minor footnote; it's the load-bearing requirement underneath everything else. A degree from a university that lacked current-year UGC-DEB approval has no claim to the equivalence principle discussed above, regardless of how legitimate the university otherwise appears.
               </p>
               <p>
-                The full verification process is covered in detail in our <a href="/resources/top-20-ugc-deb-approved-online-mba-2025-26/">Top 20 UGC-DEB Approved Online MBA Universities guide</a>. The short version: visit <a href="https://deb.ugc.ac.in" target="_blank" rel="noopener">deb.ugc.ac.in</a> directly, confirm your specific university and specific MBA programme are listed as approved for your specific enrolment year — not a general "the university is UGC recognised" claim, and not a prior year's approval status.
+                The full verification process is covered in detail in our <a href="/resources/top-20-ugc-deb-approved-online-mba-2025-26/">Top 20 UGC-DEB Approved Online MBA Universities guide</a>. The short version: visit <a href="https://deb.ugc.ac.in" target="_blank" rel="noopener">deb.ugc.ac.in</a> directly, confirm your specific university and specific MBA programme are listed as approved for your specific enrolment year, not a general "the university is UGC recognised" claim, and not a prior year's approval status.
               </p>
               <div className="gj-callout">
                 <span className="gj-callout-label">Timing matters</span>
-                If you're still deciding where to enrol and government job eligibility is part of your reasoning, verify UGC-DEB status <em>before</em> you enrol, not after. If you've already completed your MBA and are now applying for a government role, verify it now — before you invest time in an application process, in case documentation issues need to be resolved first.
+                If you're still deciding where to enrol and government job eligibility is part of your reasoning, verify UGC-DEB status <em>before</em> you enrol, not after. If you've already completed your MBA and are now applying for a government role, verify it now, before you invest time in an application process, in case documentation issues need to be resolved first.
               </div>
             </section>
 
-            {/* Section 6 — Promotion vs Recruitment */}
+            {/* Section 6: Promotion vs Recruitment */}
             <section id="promotion-vs-recruitment">
               <h2>Why this distinction changes the whole picture</h2>
               <p>
-                Promotion eligibility and fresh recruitment eligibility are governed differently, and conflating them is the biggest source of confusion in this topic. Internal promotion policies at PSU banks typically align closely with UGC's equivalence principle. Fresh recruitment notifications, by contrast, are drafted independently, post by post — and wording varies.
+                Promotion eligibility and fresh recruitment eligibility are governed differently, and conflating them is the biggest source of confusion in this topic. Internal promotion policies at PSU banks typically align closely with UGC's equivalence principle. Fresh recruitment notifications, by contrast, are drafted independently, post by post, and wording varies.
               </p>
               <h3>Promotion eligibility</h3>
               <p>
-                Promotion eligibility (an existing employee seeking internal advancement) tends to be the more consistent, more favourable case. Large PSU banks and public-sector employers generally maintain internal HR policies that explicitly recognise UGC-DEB approved qualifications — often because these policies were themselves updated after the 2020 Regulations to reflect the equivalence principle. In our tracking, this is where Online MBAs are most reliably accepted without friction.
+                Promotion eligibility (an existing employee seeking internal advancement) tends to be the more consistent, more favourable case. Large PSU banks and public-sector employers generally maintain internal HR policies that explicitly recognise UGC-DEB approved qualifications, often because these policies were themselves updated after the 2020 Regulations to reflect the equivalence principle. In our tracking, this is where Online MBAs are most reliably accepted without friction.
               </p>
               <h3>Fresh recruitment eligibility</h3>
               <p>
-                Fresh recruitment eligibility (applying externally for a newly advertised post) is where notification-specific wording matters most. Each recruitment notification is drafted independently — sometimes by a committee that copy-pastes eligibility language from a previous, older notification that predates the 2020 equivalence clarity, or that was written with a specific "full-time" phrasing for reasons unrelated to distance-education policy at all. This doesn't mean fresh recruitment routinely rejects Online MBAs — most don't — but it's the category where reading the actual notification text matters most.
+                Fresh recruitment eligibility (applying externally for a newly advertised post) is where notification-specific wording matters most. Each recruitment notification is drafted independently, sometimes by a committee that copy-pastes eligibility language from a previous, older notification that predates the 2020 equivalence clarity, or that was written with a specific "full-time" phrasing for reasons unrelated to distance-education policy at all. This doesn't mean fresh recruitment routinely rejects Online MBAs (most don't), but it's the category where reading the actual notification text matters most.
               </p>
               <div className="gj-callout">
                 <span className="gj-callout-label">Single highest-value action</span>
-                If your goal is a specific named government post you haven't yet been recruited into, read that post's most recent eligibility notification directly <em>before</em> enrolling in any MBA programme — this is the single highest-value five minutes you can spend in your entire planning process.
+                If your goal is a specific named government post you haven't yet been recruited into, read that post's most recent eligibility notification directly <em>before</em> enrolling in any MBA programme: this is the single highest-value five minutes you can spend in your entire planning process.
               </div>
             </section>
 
-            {/* Section 7 — AICTE */}
+            {/* Section 7: AICTE */}
             <section id="aicte-matter">
               <h2>UGC-DEB vs AICTE: which one actually matters here</h2>
               <p>
-                For general government job eligibility, UGC-DEB approval is the primary requirement — it establishes degree equivalence under the 2020 Regulations. AICTE approval becomes relevant only when a specific job notification explicitly names it as a requirement, which happens occasionally for certain technical-management or engineering-adjacent postgraduate roles, but is not the default expectation.
+                For general government job eligibility, UGC-DEB approval is the primary requirement: it establishes degree equivalence under the 2020 Regulations. AICTE approval becomes relevant only when a specific job notification explicitly names it as a requirement, which happens occasionally for certain technical-management or engineering-adjacent postgraduate roles, but is not the default expectation.
               </p>
               <p>
-                Many strong Online MBA programmes hold UGC-DEB approval without separate AICTE approval, and this is entirely normal and doesn't diminish the degree's general validity. If you're targeting a specific government role and its notification explicitly requires AICTE approval alongside UGC recognition, that's a signal to choose a programme carrying both — several universities in our <a href="/resources/top-20-ugc-deb-approved-online-mba-2025-26/">Top 20 list</a> do.
+                Many strong Online MBA programmes hold UGC-DEB approval without separate AICTE approval, and this is entirely normal and doesn't diminish the degree's general validity. If you're targeting a specific government role and its notification explicitly requires AICTE approval alongside UGC recognition, that's a signal to choose a programme carrying both; several universities in our <a href="/resources/top-20-ugc-deb-approved-online-mba-2025-26/">Top 20 list</a> do.
               </p>
               <div className="gj-callout">
                 <span className="gj-callout-label">Practical rule of thumb</span>
@@ -494,23 +494,23 @@ export default function GovtJobsGuideClient() {
               </div>
             </section>
 
-            {/* Section 8 — Rejection Reasons */}
+            {/* Section 8: Rejection Reasons */}
             <section id="rejection-reasons">
               <h2>Why some Online MBA applications get flagged or rejected</h2>
-              <p>None of these reasons reflect a problem with Online MBAs as a category — they reflect specific, avoidable gaps in documentation or verification.</p>
+              <p>None of these reasons reflect a problem with Online MBAs as a category; they reflect specific, avoidable gaps in documentation or verification.</p>
               <ul>
                 <li><strong>The university's UGC-DEB approval had lapsed for the specific enrolment year</strong>, even though the university held approval in earlier or later years. This is the most consequential rejection reason and the one most within an aspirant's control to avoid.</li>
-                <li><strong>Confusing "UGC recognised" with "UGC-DEB approved for Online MBA specifically."</strong> A university can be a broadly legitimate, UGC-recognised institution while a specific Online MBA programme lacks current UGC-DEB approval — always verify at the programme level, not just the university level.</li>
+                <li><strong>Confusing "UGC recognised" with "UGC-DEB approved for Online MBA specifically."</strong> A university can be a broadly legitimate, UGC-recognised institution while a specific Online MBA programme lacks current UGC-DEB approval; always verify at the programme level, not just the university level.</li>
                 <li><strong>The specific job notification required AICTE approval and the programme held UGC-DEB approval only.</strong> A notification-specific requirement, not a general rule.</li>
                 <li><strong>The notification used "full-time" or "regular" language</strong>, and the recruiting body's document-verification stage interpreted this to exclude Online mode, even where the broader equivalence principle would otherwise apply. This is the area with the most genuine ambiguity, and where written clarification before applying is most valuable.</li>
-                <li><strong>Incomplete or delayed documentation</strong> — provisional certificates, marksheet delays, or degree-issuance timing that didn't align with an application deadline. Not specific to Online MBAs, but worth planning around given Online/Distance degree issuance timelines can occasionally run longer than residential programmes.</li>
+                <li><strong>Incomplete or delayed documentation:</strong> provisional certificates, marksheet delays, or degree-issuance timing that didn't align with an application deadline. Not specific to Online MBAs, but worth planning around given Online/Distance degree issuance timelines can occasionally run longer than residential programmes.</li>
               </ul>
             </section>
 
-            {/* Section 9 — Verification Steps */}
+            {/* Section 9: Verification Steps */}
             <section id="verification-steps">
               <h2>How to verify your Online MBA qualifies for your specific target role, in 6 steps</h2>
-              <p>This is narrower and more targeted than the general UGC-DEB verification process — this walkthrough is specifically for confirming eligibility against one named government role.</p>
+              <p>This is narrower and more targeted than the general UGC-DEB verification process; this walkthrough is specifically for confirming eligibility against one named government role.</p>
               <div className="gj-steps">
                 {VERIFICATION_STEPS.map((s) => (
                   <div className="gj-step-card" key={s.step}>
@@ -524,18 +524,18 @@ export default function GovtJobsGuideClient() {
               </div>
               <div className="gj-callout gj-callout-navy">
                 <span className="gj-callout-label">Counsellor observation</span>
-                From our counselling records 2023-25: aspirants who complete Step 5 — writing to the recruiting body directly before applying — report near-zero eligibility friction later in the process. It takes a few days for a response in most cases, and the written confirmation becomes genuinely valuable documentation. Aspirants who skip this step and simply assume eligibility based on the general UGC principle are the ones who occasionally encounter friction at the document-verification stage, well after they've already invested time and money in the application process. — <em>CollegeNCourses Senior Counsellor Desk</em>
+                From our counselling records 2023-25: aspirants who complete Step 5, writing to the recruiting body directly before applying, report near-zero eligibility friction later in the process. It takes a few days for a response in most cases, and the written confirmation becomes genuinely valuable documentation. Aspirants who skip this step and simply assume eligibility based on the general UGC principle are the ones who occasionally encounter friction at the document-verification stage, well after they've already invested time and money in the application process. (CollegeNCourses Senior Counsellor Desk)
               </div>
             </section>
 
-            {/* Section 10 — Categories in Depth */}
+            {/* Section 10: Categories in Depth */}
             <section id="categories-depth">
               <h2>A closer look at each category</h2>
               <p>Building on the summary table above, here's more context on how each category tends to treat Online MBA qualifications in practice.</p>
               <div className="gj-category-cards">
                 <div className="gj-category-card">
                   <h4>PSU bank promotions (Scale I-IV, specialist officer tracks)</h4>
-                  <p>The most consistently favourable category in our tracking. Most large public-sector banks explicitly recognise UGC-DEB approved Online and Distance MBAs for internal promotion eligibility. Fresh recruitment for entry-level positions generally doesn't require an MBA at all — the MBA becomes relevant specifically at promotion and specialist-role stages.</p>
+                  <p>The most consistently favourable category in our tracking. Most large public-sector banks explicitly recognise UGC-DEB approved Online and Distance MBAs for internal promotion eligibility. Fresh recruitment for entry-level positions generally doesn't require an MBA at all; the MBA becomes relevant specifically at promotion and specialist-role stages.</p>
                 </div>
                 <div className="gj-category-card">
                   <h4>PSU direct recruitment (Management Trainee, Executive Trainee)</h4>
@@ -555,20 +555,20 @@ export default function GovtJobsGuideClient() {
                 </div>
                 <div className="gj-category-card">
                   <h4>Teaching and academic faculty positions</h4>
-                  <p>The clear exception to nearly everything else in this guide. Eligibility for a management faculty position (Assistant Professor and above) is governed by UGC-NET qualification or a PhD — an MBA, in any mode, does not by itself satisfy faculty eligibility requirements. If your goal is an academic career, an MBA is not the relevant credential regardless of how it was obtained.</p>
+                  <p>The clear exception to nearly everything else in this guide. Eligibility for a management faculty position (Assistant Professor and above) is governed by UGC-NET qualification or a PhD; an MBA, in any mode, does not by itself satisfy faculty eligibility requirements. If your goal is an academic career, an MBA is not the relevant credential regardless of how it was obtained.</p>
                 </div>
               </div>
             </section>
 
-            {/* Section 11 — Safest Universities */}
+            {/* Section 11: Safest Universities */}
             <section id="safest-universities">
               <h2>If government job eligibility is your priority, start here</h2>
               <p>
                 Every university in our <a href="/resources/top-20-ugc-deb-approved-online-mba-2025-26/">Top 20 UGC-DEB Approved Online MBA Universities guide</a> meets the baseline UGC-DEB requirement. For aspirants specifically prioritising government job eligibility, a few additional considerations are worth highlighting.
               </p>
               <ul>
-                <li><strong>Prefer universities holding both UGC-DEB and AICTE approval</strong> where your target role's notification specifically names AICTE — several universities in our Top 20 list, including NMIMS, Manipal MAHE, and Symbiosis SCOL, hold dual approval, which removes one entire category of potential friction.</li>
-                <li><strong>Prefer well-established universities with a longer UGC-DEB approval track record</strong> over very new entrants — a university with several consecutive years of approval history gives you a stronger paper trail if a verification question arises years later during a promotion cycle.</li>
+                <li><strong>Prefer universities holding both UGC-DEB and AICTE approval</strong> where your target role's notification specifically names AICTE; several universities in our Top 20 list, including NMIMS, Manipal MAHE, and Symbiosis SCOL, hold dual approval, which removes one entire category of potential friction.</li>
+                <li><strong>Prefer well-established universities with a longer UGC-DEB approval track record</strong> over very new entrants; a university with several consecutive years of approval history gives you a stronger paper trail if a verification question arises years later during a promotion cycle.</li>
                 <li><strong>Public university options (IGNOU, state open universities)</strong> carry genuine, strong UGC-DEB and NAAC standing and are a reasonable choice specifically for government-job-eligibility purposes, even though private-sector employer perception of these options runs lower. Government eligibility is a different question from private-sector brand perception.</li>
               </ul>
               <div className="gj-callout">
@@ -577,22 +577,22 @@ export default function GovtJobsGuideClient() {
               </div>
             </section>
 
-            {/* Section 12 — Red Flags */}
+            {/* Section 12: Red Flags */}
             <section id="red-flags">
               <h2>Marketing claims to be sceptical of</h2>
               <p>Because "government job eligible" is such a high-anxiety, high-search-intent phrase, it attracts overclaiming from some admissions counsellors and marketing material. Watch for these specific claims.</p>
               <ul>
-                <li><strong>"This MBA guarantees you a government job."</strong> No MBA, in any mode, from any university, guarantees a government job. Eligibility and selection are entirely separate — government recruitment involves competitive exams, interviews, and selection ratios regardless of qualification.</li>
+                <li><strong>"This MBA guarantees you a government job."</strong> No MBA, in any mode, from any university, guarantees a government job. Eligibility and selection are entirely separate; government recruitment involves competitive exams, interviews, and selection ratios regardless of qualification.</li>
                 <li><strong>"All government jobs accept this MBA, no exceptions."</strong> The honest picture is "generally yes, but always verify the specific notification," not a blanket universal guarantee.</li>
                 <li><strong>"You don't need to check UGC-DEB approval, our university is obviously legitimate."</strong> Legitimate universities have no reason to discourage independent verification. If a counsellor actively discourages you from checking <a href="https://deb.ugc.ac.in" target="_blank" rel="noopener">deb.ugc.ac.in</a> yourself, treat that as a warning sign.</li>
                 <li><strong>"This programme is specifically approved for [named specific government exam or post]."</strong> UGC-DEB approves the degree programme itself, not its eligibility for individual named job postings. No university can truthfully claim pre-approval for a specific external recruitment notification.</li>
               </ul>
               <div className="gj-callout">
-                If you encounter any of these claims, <a href="/counselling/">book a counselling call</a> — we'll help you separate the honest regulatory picture from marketing overclaiming, specific to your target role.
+                If you encounter any of these claims, <a href="/counselling/">book a counselling call</a>; we'll help you separate the honest regulatory picture from marketing overclaiming, specific to your target role.
               </div>
             </section>
 
-            {/* Section 13 — Scenarios */}
+            {/* Section 13: Scenarios */}
             <section id="scenarios">
               <h2>Three real government-job-eligibility stories (anonymised)</h2>
               <div className="gj-scenarios">
@@ -630,11 +630,11 @@ export default function GovtJobsGuideClient() {
               </div>
               <div className="gj-callout">
                 <span className="gj-callout-label">What these three stories illustrate</span>
-                The aspirants who verified their specific situation in writing before committing — Manoj and Kavita — encountered no friction. Deepak's situation wasn't a case of Online MBAs being invalid; it was a case of not checking one specific notification's specific wording before it mattered. The lesson generalises: verify first, in writing, for your specific target role.
+                The aspirants who verified their specific situation in writing before committing (Manoj and Kavita) encountered no friction. Deepak's situation wasn't a case of Online MBAs being invalid; it was a case of not checking one specific notification's specific wording before it mattered. The lesson generalises: verify first, in writing, for your specific target role.
               </div>
             </section>
 
-            {/* Section 14 — FAQ */}
+            {/* Section 14: FAQ */}
             <section id="faq">
               <h2>Frequently asked questions</h2>
               <div className="gj-faq-list">
@@ -650,13 +650,13 @@ export default function GovtJobsGuideClient() {
               </div>
             </section>
 
-            {/* Section 15 — Lead Magnet */}
+            {/* Section 15: Lead Magnet */}
             <section id="pdf-download">
               <div className="gj-lead-magnet">
                 <span className="gj-lead-badge">Free Download</span>
                 <h2>Take this guide with you</h2>
                 <p className="gj-lead-lead">
-                  The complete regulatory breakdown, print-ready and shareable. Includes the government job category table, the 6-step verification checklist, and a sample written-clarification-request template. Free — just tell us where to send it.
+                  The complete regulatory breakdown, print-ready and shareable. Includes the government job category table, the 6-step verification checklist, and a sample written-clarification-request template. Free. Just tell us where to send it.
                 </p>
                 <form className="gj-lm-form" onSubmit={(e) => { e.preventDefault(); setModalOpen(true); }}>
                   <div className="gj-lm-field">
@@ -707,7 +707,7 @@ export default function GovtJobsGuideClient() {
               <strong>Disclaimer:</strong> This guide provides general information based on UGC's stated equivalence principle as of 2025-26. It is not legal advice and does not guarantee eligibility for any specific job posting. Individual recruiting authorities set their own eligibility criteria within each specific notification. Always verify directly with the relevant recruiting body before making enrolment or application decisions based on this content.
             </div>
 
-            {/* Section 16 — Related Resources */}
+            {/* Section 16: Related Resources */}
             <section id="related">
               <h2>Go deeper</h2>
               <div className="gj-related-grid">
@@ -720,7 +720,7 @@ export default function GovtJobsGuideClient() {
               </div>
             </section>
 
-            {/* Section 17 — Authors */}
+            {/* Section 17: Authors */}
             <section id="authors">
               <div className="gj-authors">
                 <h3>About this guide</h3>
@@ -744,10 +744,10 @@ export default function GovtJobsGuideClient() {
                 <h4>Sources referenced</h4>
                 <ul>
                   <li><a href="https://www.ugc.gov.in/" target="_blank" rel="noopener">University Grants Commission (UGC)</a></li>
-                  <li><a href="https://deb.ugc.ac.in/" target="_blank" rel="noopener">UGC Distance Education Bureau (DEB)</a> — Approved-institutions list, 2025-26</li>
+                  <li><a href="https://deb.ugc.ac.in/" target="_blank" rel="noopener">UGC Distance Education Bureau (DEB)</a>: Approved-institutions list, 2025-26</li>
                   <li>UGC (Open and Distance Learning Programmes and Online Programmes) Regulations, 2020</li>
-                  <li><a href="https://www.aicte-india.org/" target="_blank" rel="noopener">AICTE</a> — Approval Process Handbook 2025-26</li>
-                  <li><a href="https://www.aiu.ac.in/" target="_blank" rel="noopener">Association of Indian Universities (AIU)</a> — equivalence certification context</li>
+                  <li><a href="https://www.aicte-india.org/" target="_blank" rel="noopener">AICTE</a>: Approval Process Handbook 2025-26</li>
+                  <li><a href="https://www.aiu.ac.in/" target="_blank" rel="noopener">Association of Indian Universities (AIU)</a>: equivalence certification context</li>
                   <li>CollegeNCourses counselling records on government-job eligibility questions (241 conversations analysed 2023-25)</li>
                 </ul>
                 <p style={{ fontSize: "12px", color: "var(--grey)", marginTop: "12px", fontStyle: "italic" }}>
@@ -764,7 +764,7 @@ export default function GovtJobsGuideClient() {
       <div className="gj-cta-band">
         <div className="container">
           <h2>Targeting a specific government role? Let's check your exact eligibility.</h2>
-          <p>Talk to a CollegeNCourses counsellor. We'll help you read your target notification correctly, verify UGC-DEB status, and — if needed — draft a written clarification request. Free, 30 minutes.</p>
+          <p>Talk to a CollegeNCourses counsellor. We'll help you read your target notification correctly, verify UGC-DEB status, and, if needed, draft a written clarification request. Free, 30 minutes.</p>
           <a href="/counselling/" className="gj-btn gj-btn-navy">Book a free counselling call →</a>
           <br />
           <a href="/resources/top-20-ugc-deb-approved-online-mba-2025-26/" className="gj-cta-secondary">Or read our Top 20 UGC-DEB Approved Universities guide →</a>

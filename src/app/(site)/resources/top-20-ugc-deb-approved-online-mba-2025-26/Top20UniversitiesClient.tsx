@@ -64,9 +64,9 @@ const TOP10_PROFILES = [
     naac: "A+ (2023)",
     ugcDeb: "Since 2020",
     aicte: "Yes",
-    specializations: "12 — including Business Analytics, International Business, Data Science, Retail, and a dual-specialization option",
-    platform: "Amity Online Learning Portal — synchronous weekly live sessions, recorded library, mobile app available",
-    placement: "Amity Online Placement Support Cell — average reported starting salary for MBA completers varies widely by specialization and prior experience",
+    specializations: "12, including Business Analytics, International Business, Data Science, Retail, and a dual-specialization option",
+    platform: "Amity Online Learning Portal: synchronous weekly live sessions, recorded library, mobile app available",
+    placement: "Amity Online Placement Support Cell: average reported starting salary for MBA completers varies widely by specialization and prior experience",
     bestFor: "Aspirants prioritising private-sector brand recognition, a wide specialization menu, and access to the Amity alumni network.",
     notBestFor: "Aspirants primarily targeting government-job promotion where AICTE approval specifics matter; aspirants for whom fee is the primary filter (other strong options cost less).",
     counsellorNote: "Most commonly shortlisted by aspirants targeting marketing, international business, and analytics roles at mid-to-large private firms. The Amity brand is widely recognised by HR at Indian private companies.",
@@ -79,11 +79,11 @@ const TOP10_PROFILES = [
     naac: "A++ (2023)",
     ugcDeb: "Since 2016",
     aicte: "Yes",
-    specializations: "10 — Finance, Marketing, HR, Operations, Business Analytics, among others",
-    platform: "NMIMS Global Access — live interactive sessions, case-method pedagogy, structured cohort model",
-    placement: "NMIMS Online Career Services — placement outcomes influenced significantly by specialization and prior work experience",
+    specializations: "10, including Finance, Marketing, HR, Operations, Business Analytics, among others",
+    platform: "NMIMS Global Access: live interactive sessions, case-method pedagogy, structured cohort model",
+    placement: "NMIMS Online Career Services: placement outcomes influenced significantly by specialization and prior work experience",
     bestFor: "Aspirants with a strong finance or marketing career target, willing to pay the premium for a top-tier brand, expecting the brand to be recognised by financial services and FMCG employers.",
-    notBestFor: "Budget-conscious aspirants — the NMIMS fee bracket is 50-100% higher than equivalent UGC-DEB approved options.",
+    notBestFor: "Budget-conscious aspirants: the NMIMS fee bracket is 50-100% higher than equivalent UGC-DEB approved options.",
     counsellorNote: "The NMIMS brand carries genuine recognition in banking, BFSI, and FMCG recruitment circles. For aspirants targeting these sectors, the fee premium often makes sense. For other tracks, the return on the premium is less clear.",
   },
   {
@@ -94,9 +94,9 @@ const TOP10_PROFILES = [
     naac: "A++ (2024)",
     ugcDeb: "Since 2019",
     aicte: "Yes",
-    specializations: "9 — including specializations in IT & Systems, Business Analytics, and Project Management alongside standard tracks",
-    platform: "Manipal Online — well-developed LMS, strong mobile experience, asynchronous + synchronous mix",
-    placement: "Manipal Career Services — strong IT-sector connection consistent with Manipal's broader engineering and technology reputation",
+    specializations: "9, including specializations in IT & Systems, Business Analytics, and Project Management alongside standard tracks",
+    platform: "Manipal Online: well-developed LMS, strong mobile experience, asynchronous + synchronous mix",
+    placement: "Manipal Career Services: strong IT-sector connection consistent with Manipal's broader engineering and technology reputation",
     bestFor: "IT professionals, engineers, and tech-adjacent aspirants targeting management roles who want a brand with both technology credibility and management standing.",
     notBestFor: "Aspirants for whom brand recognition in non-tech sectors (retail, manufacturing, FMCG) is the primary driver.",
     counsellorNote: "Consistently the top pick among our IT and engineering background aspirants. The MAHE brand's technology credibility transfers meaningfully to tech-management roles.",
@@ -109,9 +109,9 @@ const TOP10_PROFILES = [
     naac: "A++",
     ugcDeb: "Since 2020",
     aicte: "No (UGC-DEB only)",
-    specializations: "10 — broad menu including Entrepreneurship and Family Business Management, which few other Online MBA providers offer",
-    platform: "JainOnline — live + recorded, reasonably well-rated mobile experience",
-    placement: "JainOnline placement support — strong Bangalore-region connections consistent with parent university's base",
+    specializations: "10, with a broad menu including Entrepreneurship and Family Business Management, which few other Online MBA providers offer",
+    platform: "JainOnline: live + recorded, reasonably well-rated mobile experience",
+    placement: "JainOnline placement support: strong Bangalore-region connections consistent with parent university's base",
     bestFor: "Aspirants balancing brand quality with budget, entrepreneurs, and aspirants targeting Bangalore-centric employers.",
     notBestFor: "Aspirants for whom dual AICTE approval is specifically required for a target role.",
     counsellorNote: "Jain's A++ NAAC grade at a fee bracket well below NMIMS and Amity is genuinely unusual. The Entrepreneurship and Family Business MBA is the only strong Online MBA option for that profile in our tracking.",
@@ -124,9 +124,9 @@ const TOP10_PROFILES = [
     naac: "A+",
     ugcDeb: "Since 2021",
     aicte: "No (UGC-DEB only)",
-    specializations: "8 — including HR Management (consistently rated strong) and standard business tracks",
-    platform: "CU iConnect — synchronous live sessions, decent LMS",
-    placement: "CU Placement Cell — strong North India connections, particularly in manufacturing and PSU-adjacent sectors",
+    specializations: "8, including HR Management (consistently rated strong) and standard business tracks",
+    platform: "CU iConnect: synchronous live sessions, decent LMS",
+    placement: "CU Placement Cell: strong North India connections, particularly in manufacturing and PSU-adjacent sectors",
     bestFor: "North India-based aspirants targeting PSU, banking, or manufacturing employers for whom brand-name budget matters more than premium-brand pricing.",
     notBestFor: "Aspirants targeting premium BFSI or IT-management roles where Amity/NMIMS/Manipal brand recognition gives a meaningful edge.",
     counsellorNote: "The most common recommendation for aspirants who ask for 'a branded Online MBA that doesn't cost Rs 2+ lakh.'",
@@ -139,9 +139,9 @@ const TOP10_PROFILES = [
     naac: "A+",
     ugcDeb: "Since 2018",
     aicte: "Yes",
-    specializations: "7 — HR, Marketing, Finance, Operations, and a Project Management track",
-    platform: "SCOL LMS — synchronous live sessions, structured programme with defined cohorts",
-    placement: "Symbiosis Career Services — strong Pune-region and West India connections",
+    specializations: "7: HR, Marketing, Finance, Operations, and a Project Management track",
+    platform: "SCOL LMS: synchronous live sessions, structured programme with defined cohorts",
+    placement: "Symbiosis Career Services: strong Pune-region and West India connections",
     bestFor: "Aspirants targeting HR or Operations roles, and those where Symbiosis brand recognition is already known to their target employer.",
     notBestFor: "Aspirants outside West/South India where Symbiosis carries less inherent name recognition.",
     counsellorNote: "The HR Management MBA here is consistently one of the strongest Online options for that specialization in our tracking.",
@@ -154,9 +154,9 @@ const TOP10_PROFILES = [
     naac: "A+",
     ugcDeb: "Since 2020",
     aicte: "No (UGC-DEB only)",
-    specializations: "9 — including Logistics and Supply Chain Management which is a less common Online option",
-    platform: "LPU Online — synchronous live sessions, large cohort model",
-    placement: "LPU Career Services — wide industry connections across North India",
+    specializations: "9, including Logistics and Supply Chain Management which is a less common Online option",
+    platform: "LPU Online: synchronous live sessions, large cohort model",
+    placement: "LPU Career Services: wide industry connections across North India",
     bestFor: "Aspirants with a supply chain or logistics background, those needing flexible EMI, and North India-based aspirants.",
     notBestFor: "Aspirants for whom premium brand recognition in BFSI or IT-management sectors is the primary driver.",
     counsellorNote: "The Supply Chain and Logistics MBA is one of the few genuinely Online options for that specialization at this fee bracket.",
@@ -169,23 +169,23 @@ const TOP10_PROFILES = [
     naac: "A",
     ugcDeb: "Since 2021",
     aicte: "No (UGC-DEB only)",
-    specializations: "6 — including Healthcare Management which is a distinctive specialization here",
-    platform: "DY Patil Online — moderate platform, synchronous + asynchronous mix",
-    placement: "DY Patil Career Support — Maharashtra hospital and healthcare sector connections",
+    specializations: "6, including Healthcare Management which is a distinctive specialization here",
+    platform: "DY Patil Online: moderate platform, synchronous + asynchronous mix",
+    placement: "DY Patil Career Support: Maharashtra hospital and healthcare sector connections",
     bestFor: "Healthcare professionals in Maharashtra seeking a management qualification that aligns with their sector, and aspirants targeting Maharashtra-based employers generally.",
     notBestFor: "Aspirants outside Maharashtra, or those for whom the platform experience and live-session quality are primary criteria.",
     counsellorNote: "The Healthcare Management MBA here is consistently the pick for healthcare professionals who want an Online option without relocating.",
   },
   {
     rank: 9,
-    name: "Sikkim Manipal University — Distance Education (SMU-DE)",
+    name: "Sikkim Manipal University - Distance Education (SMU-DE)",
     headline: "Longest-standing private Distance MBA with the strongest government-job track record",
     fee: "Rs 0.8–1.2 lakh",
     naac: "B++",
     ugcDeb: "Since 2001",
     aicte: "No",
-    specializations: "8 — standard Distance MBA tracks",
-    platform: "SMU-DE study centre model — primarily self-paced with regional support centre access",
+    specializations: "8: standard Distance MBA tracks",
+    platform: "SMU-DE study centre model: primarily self-paced with regional support centre access",
     placement: "Limited centralised placement support compared to Online MBA providers",
     bestFor: "Aspirants primarily targeting government-job eligibility or promotion, for whom the long UGC-DEB approval track record is meaningful, and who prefer a lower fee bracket.",
     notBestFor: "Aspirants expecting a structured online platform experience, live sessions, or strong private-sector placement support.",
@@ -199,9 +199,9 @@ const TOP10_PROFILES = [
     naac: "A",
     ugcDeb: "Since 2002",
     aicte: "No",
-    specializations: "7 — Finance, Banking, HR, Marketing, Operations, among others",
-    platform: "ICFAI Distance — primarily self-paced, minimal live sessions",
-    placement: "ICFAI Career Services — stronger for Finance specialization aspirants",
+    specializations: "7: Finance, Banking, HR, Marketing, Operations, among others",
+    platform: "ICFAI Distance: primarily self-paced, minimal live sessions",
+    placement: "ICFAI Career Services: stronger for Finance specialization aspirants",
     bestFor: "Aspirants targeting a Finance MBA who prefer self-paced study and value ICFAI's long track record in finance education.",
     notBestFor: "Aspirants expecting structured live sessions or an active cohort experience.",
     counsellorNote: "ICFAI's distance programme is one of the most consistently recommended for Finance specialization aspirants who prefer self-paced study.",
@@ -231,7 +231,7 @@ const SCENARIOS = [
     role: "IT Engineer at a Pune-based IT services firm",
     background: "5 years of experience as a software engineer, targeting a shift into Product Management or a Business Analyst role at a technology company. Budget: up to Rs 2.5 lakh. Company's HR recognises both technical and management credentials equally.",
     shortlist: ["Manipal MAHE (Business Analytics)", "Amity Online (Business Analytics)", "NMIMS (Business Analytics at the upper budget edge)"],
-    recommendation: "Manipal MAHE — Business Analytics",
+    recommendation: "Manipal MAHE: Business Analytics",
     rationale: "Manipal's technology credibility transfers meaningfully to tech-management roles, its Business Analytics MBA is one of the stronger offerings in this space, and the Rs 1.6-2.2 lakh fee leaves budget headroom compared to NMIMS. The MAHE A++ NAAC grade is also a durable credential on a long CV.",
     type: "success",
   },
@@ -260,22 +260,22 @@ const SCENARIOS = [
 ];
 
 const FAQS = [
-  { q: "Which is the best Online MBA university in India in 2025-26?", a: "There's no single answer — 'best' depends on your career target, budget, and location. For private-sector brand recognition: Amity Online, NMIMS, or Manipal MAHE depending on your specialization. For government-job eligibility with a strong track record: SMU-DE or IGNOU. For the best value-for-money branded option: Jain University Online (A++ NAAC) or Chandigarh University Online. Full analysis in the profiles and which-university-fits-which-profile sections." },
+  { q: "Which is the best Online MBA university in India in 2025-26?", a: "There's no single answer: 'best' depends on your career target, budget, and location. For private-sector brand recognition: Amity Online, NMIMS, or Manipal MAHE depending on your specialization. For government-job eligibility with a strong track record: SMU-DE or IGNOU. For the best value-for-money branded option: Jain University Online (A++ NAAC) or Chandigarh University Online. Full analysis in the profiles and which-university-fits-which-profile sections." },
   { q: "Is UGC-DEB approval the same as UGC approval?", a: "UGC-DEB (Distance Education Bureau) specifically governs Distance and Online programme approvals and is distinct from general UGC recognition. A university can be broadly UGC-recognised (as a legitimate institution) without holding current UGC-DEB approval for a specific Online MBA programme. Always verify approval at the programme level on deb.ugc.ac.in, not just the university's general UGC standing." },
   { q: "Does NAAC grade affect the value of an Online MBA?", a: "Yes, meaningfully. A higher NAAC grade (A++ > A+ > A) reflects a broader quality assessment of the entire institution and is a credential indicator that HR and recruiting bodies recognise, independent of the specific Online MBA programme. All other things equal, an A++ NAAC university's Online MBA carries a stronger credential signal than a B-grade university's, even if both are equally UGC-DEB approved." },
   { q: "Can I get an Online MBA from IIM or IIT?", a: "IIM and IIT offer specific Online/Executive programmes, but these are typically Executive Education programmes at a significantly different fee bracket (Rs 8-40+ lakh), not the UGC-DEB approved full Online MBA programmes discussed in this guide. Confirm the specific programme's status directly with the institution." },
   { q: "How long does an Online MBA take to complete?", a: "Typically 2 years (24 months, 4 semesters) for a standard Online or Distance MBA. Some universities offer a 3-year option for working professionals with lower semester intensity. Part-time and lateral entry options exist at some universities but are less common in Online mode." },
   { q: "Is IGNOU's MBA a good option?", a: "IGNOU is a genuinely strong choice specifically for aspirants prioritising government-job eligibility, the lowest possible fee (Rs 0.4-0.6 lakh), and a central government university credential. Its brand recognition in private-sector employment is lower than the private-university options ranked 1-8. The choice depends on what you're using the MBA for." },
-  { q: "What is the difference between an Online MBA and a Distance MBA?", a: "Online MBA programmes are delivered primarily through a structured online learning platform with live or synchronous elements. Distance MBA programmes are primarily self-paced, typically using physical study materials with regional centre support. The distinction matters for learning experience — both can hold equivalent UGC-DEB approval status. Our full comparison guide covers this in detail." },
+  { q: "What is the difference between an Online MBA and a Distance MBA?", a: "Online MBA programmes are delivered primarily through a structured online learning platform with live or synchronous elements. Distance MBA programmes are primarily self-paced, typically using physical study materials with regional centre support. The distinction matters for learning experience: both can hold equivalent UGC-DEB approval status. Our full comparison guide covers this in detail." },
   { q: "How do I verify if a university is UGC-DEB approved?", a: "Visit deb.ugc.ac.in directly, navigate to the approved-institutions list, and confirm your specific university's name appears with your specific programme (Online MBA or MBA through Distance) listed as approved for the current academic year. Screenshots of this page are useful documentation to keep alongside your admission documents." },
   { q: "Which Online MBA is best for banking and finance careers?", a: "NMIMS Global Access (Finance specialization), ICFAI (Finance/Banking), SMU-DE (Banking & Finance), and Symbiosis SCOL (Finance) are consistently the top picks for banking and finance career tracks in our counselling. NMIMS carries the strongest brand recognition in the BFSI sector; ICFAI's long finance education track record also carries weight." },
   { q: "Which Online MBA is best for government jobs?", a: "For government-job eligibility specifically, the UGC-DEB track record length matters alongside current approval. SMU-DE (since 2001), IGNOU (since 1985), Annamalai (since 2004), and the state DDE universities have the longest track records. Among private Online MBAs, Amity, NMIMS, and Symbiosis SCOL all hold dual UGC-DEB and AICTE approval which removes one eligibility question. Full analysis in our Government Jobs guide." },
-  { q: "Can I study Online MBA while working full-time?", a: "Yes — this is explicitly the design intent of both Online and Distance MBA programmes at all 20 universities in this guide. Workload varies between synchronous (live-session-heavy) and asynchronous (fully self-paced) models. See individual profiles for live session frequency." },
-  { q: "What specializations are available in Online MBA?", a: "The full menu spans 12 major specializations across providers in the top 20: Marketing, Digital Marketing, Finance, Banking & Finance, Human Resource Management, Operations, Supply Chain, Business Analytics, IT & Systems, Project Management, International Business, and Healthcare Management. Not every university offers every specialization — the specialization cross-reference table matches your target specialization to the strongest universities offering it." },
+  { q: "Can I study Online MBA while working full-time?", a: "Yes: this is explicitly the design intent of both Online and Distance MBA programmes at all 20 universities in this guide. Workload varies between synchronous (live-session-heavy) and asynchronous (fully self-paced) models. See individual profiles for live session frequency." },
+  { q: "What specializations are available in Online MBA?", a: "The full menu spans 12 major specializations across providers in the top 20: Marketing, Digital Marketing, Finance, Banking & Finance, Human Resource Management, Operations, Supply Chain, Business Analytics, IT & Systems, Project Management, International Business, and Healthcare Management. Not every university offers every specialization: the specialization cross-reference table matches your target specialization to the strongest universities offering it." },
   { q: "Which is the best Online MBA for a working professional?", a: "All 20 universities in this guide are explicitly designed for working professionals. The distinction is in platform experience and scheduling: if you need maximum flexibility, self-paced Distance options (ICFAI, SMU-DE, state DDE universities) give you study-at-your-own-pace freedom. If you learn better in structured cohorts with live faculty interaction, Amity, NMIMS, Manipal, and Symbiosis SCOL offer stronger synchronous models." },
   { q: "How much does an Online MBA cost in India?", a: "Within the top 20 UGC-DEB approved universities: Rs 0.25-0.6 lakh for state open universities and classic Distance options; Rs 0.8-1.5 lakh for mid-tier Distance providers; Rs 1.2-2.2 lakh for branded private Online MBAs; Rs 2.5-3.75 lakh for the premium tier (NMIMS). The Fee Guide covers the full true-cost breakdown." },
   { q: "Is it worth doing an Online MBA in India?", a: "It depends on what return you're measuring. For promotion-based salary acceleration, our salary data shows an average 18-35% increment in the first post-MBA promotion cycle. For career-track shift, it depends heavily on which track you're targeting. For government-job eligibility as a qualification, it resolves a specific credential requirement. The ROI case is strongest when there's a specific, named career outcome the MBA enables." },
-  { q: "How does CollegeNCourses select universities for this ranking?", a: "Six factors weighted across career outcomes (25%), UGC-DEB standing (25%), learning experience (20%), industry recognition (15%), fee-to-value ratio (10%), and student support (5%). We are not paid by universities to include or rank them — our full methodology is in the ranking section." },
+  { q: "How does CollegeNCourses select universities for this ranking?", a: "Six factors weighted across career outcomes (25%), UGC-DEB standing (25%), learning experience (20%), industry recognition (15%), fee-to-value ratio (10%), and student support (5%). We are not paid by universities to include or rank them: our full methodology is in the ranking section." },
 ];
 
 const RELATED = [
@@ -298,7 +298,7 @@ const FEE_TIERS = [
     tier: "Mid-range Online MBA",
     range: "Rs 1.2–2.2 lakh",
     universities: "Amity, Manipal MAHE, Jain, Chandigarh, Symbiosis SCOL, LPU, DY Patil",
-    who: "Most working professionals — best value concentration of strong credentials",
+    who: "Most working professionals: best value concentration of strong credentials",
   },
   {
     tier: "Distance MBA (private)",
@@ -324,10 +324,10 @@ const PLACEMENT_TABLE = [
 
 const VERIFICATION_STEPS = [
   { step: 1, title: "Go directly to deb.ugc.ac.in", body: "This is the only authoritative source for UGC-DEB approval status. University websites, aggregator sites, and even advertisements frequently contain approval claims that are either inaccurate, outdated, or describe a different approval type." },
-  { step: 2, title: "Search for the specific university by name", body: "Navigate to the approved-institutions list. Find your specific university — confirm the spelling matches exactly, since some universities operate multiple entities with similar names and only some may hold UGC-DEB approval." },
-  { step: 3, title: "Confirm programme-level approval, not just institution-level", body: "A university may hold UGC-DEB approval for Distance mode only, Online mode only, or both. Confirm your specific programme (Online MBA or MBA via Distance) is explicitly listed as approved — general institutional approval is insufficient for this purpose." },
+  { step: 2, title: "Search for the specific university by name", body: "Navigate to the approved-institutions list. Find your specific university. Confirm the spelling matches exactly, since some universities operate multiple entities with similar names and only some may hold UGC-DEB approval." },
+  { step: 3, title: "Confirm programme-level approval, not just institution-level", body: "A university may hold UGC-DEB approval for Distance mode only, Online mode only, or both. Confirm your specific programme (Online MBA or MBA via Distance) is explicitly listed as approved: general institutional approval is insufficient for this purpose." },
   { step: 4, title: "Confirm the approval year covers your intended enrolment year", body: "UGC-DEB approval must be active for your specific enrolment year. A university that held approval 3 years ago but hasn't maintained it since does not confer the same equivalence for programmes enrolled in today." },
-  { step: 5, title: "Take and store a screenshot with the date", body: "A dated screenshot of the DEB approved-institutions list showing your specific university and programme is meaningful documentation. Store it alongside your admission documents — you may need to reference it years later in a promotion cycle or background check." },
+  { step: 5, title: "Take and store a screenshot with the date", body: "A dated screenshot of the DEB approved-institutions list showing your specific university and programme is meaningful documentation. Store it alongside your admission documents: you may need to reference it years later in a promotion cycle or background check." },
   { step: 6, title: "Check AICTE approval separately if your target role requires it", body: "Visit aicte-india.org and confirm AICTE approval status for the specific programme if your target job notification explicitly requires AICTE approval. This step is only needed if dual AICTE approval is a specific eligibility requirement for your context." },
 ];
 
@@ -588,7 +588,7 @@ export default function Top20UniversitiesClient() {
       <div className="t2-hero">
         <div className="container">
           <span className="t2-eyebrow">Ranking Guide • 2025-26 Edition</span>
-          <h1>Top 20 UGC-DEB Approved Online MBA Universities in India — 2025-26</h1>
+          <h1>Top 20 UGC-DEB Approved Online MBA Universities in India: 2025-26</h1>
           <p className="t2-subtitle">
             Every university here holds current UGC-DEB approval. Ranked by career outcomes, learning experience, recognition, and fee-to-value ratio. Updated for 2025-26 enrolment.
           </p>
@@ -672,7 +672,7 @@ export default function Top20UniversitiesClient() {
               <div className="t2-ugc-deb-cards">
                 <div className="t2-ugc-deb-card">
                   <h4>Legal equivalence</h4>
-                  <p>A degree from a UGC-DEB approved Online or Distance programme carries the same legal standing as a conventional, on-campus degree — for employment, further education, and any other purpose — under UGC's 2020 Regulations.</p>
+                  <p>A degree from a UGC-DEB approved Online or Distance programme carries the same legal standing as a conventional, on-campus degree (for employment, further education, and any other purpose) under UGC's 2020 Regulations.</p>
                 </div>
                 <div className="t2-ugc-deb-card">
                   <h4>Programme-level approval, not just institutional</h4>
@@ -680,7 +680,7 @@ export default function Top20UniversitiesClient() {
                 </div>
                 <div className="t2-ugc-deb-card">
                   <h4>Must be current for your enrolment year</h4>
-                  <p>Approval must be active specifically for the year you enrol. A prior year's approval status doesn't carry over automatically. Verify before you pay any fees — even if you've seen this page recently.</p>
+                  <p>Approval must be active specifically for the year you enrol. A prior year's approval status doesn't carry over automatically. Verify before you pay any fees, even if you've seen this page recently.</p>
                 </div>
               </div>
             </section>
@@ -688,7 +688,7 @@ export default function Top20UniversitiesClient() {
             {/* Methodology */}
             <section id="methodology">
               <h2>How we ranked these 20 universities</h2>
-              <p>Six weighted factors, assessed by CollegeNCourses counsellors from student feedback, employer interviews, programme data, and publicly available information. We are not paid by universities — no university can buy a higher ranking here.</p>
+              <p>Six weighted factors, assessed by CollegeNCourses counsellors from student feedback, employer interviews, programme data, and publicly available information. We are not paid by universities: no university can buy a higher ranking here.</p>
               <div className="t2-methodology-grid">
                 <div className="t2-method-card">
                   <div className="t2-method-weight">25%</div>
@@ -748,7 +748,7 @@ export default function Top20UniversitiesClient() {
                         <td>Rs {u.fee}</td>
                         <td>{u.mode}</td>
                         <td>{u.ugcDeb}</td>
-                        <td className={u.dualApproval ? "t2-dual" : ""}>{u.dualApproval ? "Yes" : "—"}</td>
+                        <td className={u.dualApproval ? "t2-dual" : ""}>{u.dualApproval ? "Yes" : "No"}</td>
                         <td style={{ textAlign: "center" }}>{u.specializations}</td>
                       </tr>
                     ))}
@@ -761,7 +761,7 @@ export default function Top20UniversitiesClient() {
             {/* Top 10 detailed profiles */}
             <section id="top10-profiles">
               <h2>Detailed profiles: Top 10 universities</h2>
-              <p>What our counsellors know about each from advising thousands of aspirants — not marketing copy from the universities themselves.</p>
+              <p>What our counsellors know about each from advising thousands of aspirants, not marketing copy from the universities themselves.</p>
               {TOP10_PROFILES.map((p) => (
                 <div className="t2-profile-card" key={p.rank}>
                   <div className="t2-profile-header">
@@ -867,7 +867,7 @@ export default function Top20UniversitiesClient() {
                   </div>
                 ))}
               </div>
-              <p>Full true-cost breakdown — including hidden fees, EMI, and Section 80E tax benefits — in the <a href="/resources/mba-fee-guide-2025-26/">Complete MBA Fee Guide</a>.</p>
+              <p>Full true-cost breakdown, including hidden fees, EMI, and Section 80E tax benefits, in the <a href="/resources/mba-fee-guide-2025-26/">Complete MBA Fee Guide</a>.</p>
             </section>
 
             {/* Placement & salary */}
@@ -921,8 +921,8 @@ export default function Top20UniversitiesClient() {
                 <ul>
                   <li><strong>Cannot produce the current-year DEB approval letter or equivalent documentation when asked directly.</strong> Any legitimate UGC-DEB approved university's admissions office should be able to provide this or direct you to deb.ugc.ac.in to verify it yourself.</li>
                   <li><strong>Claims AICTE approval cannot be independently verified.</strong> AICTE approval is publicly verifiable on aicte-india.org. If a university claims approval but the AICTE website doesn't show it for the specific programme, trust the AICTE website.</li>
-                  <li><strong>Advertises programme completion timelines shorter than 24 months for a full 2-year MBA.</strong> A full UGC-DEB approved Online MBA requires a minimum study period — typically 2 years. Offers promising 12-month or 18-month full MBA completions warrant close scrutiny.</li>
-                  <li><strong>Fee significantly below the market rate with no explanation.</strong> Quality programmes have real costs — faculty, platform, support. A fee that's dramatically lower than even the state-university options may indicate an unapproved programme with a misleading credential.</li>
+                  <li><strong>Advertises programme completion timelines shorter than 24 months for a full 2-year MBA.</strong> A full UGC-DEB approved Online MBA requires a minimum study period, typically 2 years. Offers promising 12-month or 18-month full MBA completions warrant close scrutiny.</li>
+                  <li><strong>Fee significantly below the market rate with no explanation.</strong> Quality programmes have real costs: faculty, platform, support. A fee that's dramatically lower than even the state-university options may indicate an unapproved programme with a misleading credential.</li>
                   <li><strong>Marketing materials that don't specify which approval body or year.</strong> "University recognised" is not the same as "UGC-DEB approved for Online MBA, 2025-26." Vague approvals claims in marketing are a signal to ask for specifics.</li>
                 </ul>
               </div>
@@ -1030,7 +1030,7 @@ export default function Top20UniversitiesClient() {
                 <span className="t2-lead-badge">Free Download</span>
                 <h2>Get the complete ranked list as a PDF</h2>
                 <p className="t2-lead-lead">
-                  All 20 universities, full comparison table, specialization cross-reference, and the verification checklist — printable and shareable. Free. Tell us where to send it, and which specialization you're considering, so we can include the relevant specialization data.
+                  All 20 universities, full comparison table, specialization cross-reference, and the verification checklist, printable and shareable. Free. Tell us where to send it, and which specialization you're considering, so we can include the relevant specialization data.
                 </p>
                 <form className="t2-lm-form" onSubmit={(e) => { e.preventDefault(); setModalOpen(true); }}>
                   <div className="t2-lm-field">
@@ -1081,7 +1081,7 @@ export default function Top20UniversitiesClient() {
             </section>
 
             <div className="t2-disclaimer">
-              <strong>Disclaimer:</strong> Rankings reflect CollegeNCourses counsellor assessments based on multiple factors as described in the methodology section. They are not a guarantee of career outcomes. UGC-DEB approval statuses change — always verify on deb.ugc.ac.in before enrolling. We are not paid by universities to include or rank them.
+              <strong>Disclaimer:</strong> Rankings reflect CollegeNCourses counsellor assessments based on multiple factors as described in the methodology section. They are not a guarantee of career outcomes. UGC-DEB approval statuses change: always verify on deb.ugc.ac.in before enrolling. We are not paid by universities to include or rank them.
             </div>
 
             {/* Related resources */}
@@ -1120,10 +1120,10 @@ export default function Top20UniversitiesClient() {
               <div className="t2-sources">
                 <h4>Sources referenced</h4>
                 <ul>
-                  <li><a href="https://deb.ugc.ac.in/" target="_blank" rel="noopener">UGC Distance Education Bureau (DEB)</a> — Approved-institutions list, 2025-26</li>
+                  <li><a href="https://deb.ugc.ac.in/" target="_blank" rel="noopener">UGC Distance Education Bureau (DEB)</a>: Approved-institutions list, 2025-26</li>
                   <li><a href="https://www.ugc.gov.in/" target="_blank" rel="noopener">University Grants Commission (UGC)</a></li>
-                  <li><a href="https://www.naac.gov.in/" target="_blank" rel="noopener">NAAC</a> — Institutional grade listings</li>
-                  <li><a href="https://www.aicte-india.org/" target="_blank" rel="noopener">AICTE</a> — Approval Process Handbook 2025-26</li>
+                  <li><a href="https://www.naac.gov.in/" target="_blank" rel="noopener">NAAC</a>: Institutional grade listings</li>
+                  <li><a href="https://www.aicte-india.org/" target="_blank" rel="noopener">AICTE</a>: Approval Process Handbook 2025-26</li>
                   <li>CollegeNCourses counselling records: university shortlisting conversations 2022-25</li>
                   <li>Student feedback surveys: 847 responses collected 2023-25 across 15+ universities</li>
                 </ul>

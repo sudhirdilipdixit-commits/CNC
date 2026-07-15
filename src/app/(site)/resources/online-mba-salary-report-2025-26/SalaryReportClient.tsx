@@ -25,7 +25,7 @@ const TOC_ITEMS = [
 const TAKEAWAYS = [
   {
     label: "Business Analytics and IT & Systems Management lead at entry level",
-    text: "Both specializations post entry-level salaries of ₹6.5–10 lakh — the two most quantitatively-driven specializations command the steepest starting premium.",
+    text: "Both specializations post entry-level salaries of ₹6.5–10 lakh; the two most quantitatively-driven specializations command the steepest starting premium.",
   },
   {
     label: "Finance Management and IT & Systems Management lead at leadership level",
@@ -37,7 +37,7 @@ const TAKEAWAYS = [
   },
   {
     label: "Executive MBA delivers roughly 1.8–2x the leadership-level pay",
-    text: "But at 8–15x the upfront cost — a pattern consistent with the ROI analysis in our Mode Comparison Guide.",
+    text: "But at 8–15x the upfront cost, a pattern consistent with the ROI analysis in our Mode Comparison Guide.",
   },
   {
     label: "Operations Management shows the single sharpest documented transition",
@@ -45,7 +45,7 @@ const TAKEAWAYS = [
   },
   {
     label: "Common mistake",
-    text: "Benchmarking a job offer against a specialization's overall salary range instead of the specific employer-type band it actually falls into — the employer-type section shows why this matters more than the specialization choice itself.",
+    text: "Benchmarking a job offer against a specialization's overall salary range instead of the specific employer-type band it actually falls into; the employer-type section shows why this matters more than the specialization choice itself.",
   },
 ];
 
@@ -156,17 +156,17 @@ const HOWTO_STEPS = [
   {
     step: 1,
     title: "Find your specialization's band in the complete salary table",
-    body: "Identify your specific experience band (entry, mid, senior, or leadership) — not the specialization's full range, which spans a 15-year career.",
+    body: "Identify your specific experience band (entry, mid, senior, or leadership), not the specialization's full range, which spans a 15-year career.",
   },
   {
     step: 2,
     title: "Identify your employer's type from the employer-type section",
-    body: "D2C, product-tech, consulting, BFSI, IT services, or manufacturing — this typically moves your expected salary more than the specialization band itself.",
+    body: "D2C, product-tech, consulting, BFSI, IT services, or manufacturing: this typically moves your expected salary more than the specialization band itself.",
   },
   {
     step: 3,
     title: "Adjust for your city using the directional city tiers",
-    body: "A metro offer should be benchmarked against metro data; a Tier-2 offer against Tier-2 expectations — comparing across tiers without adjustment produces a misleading read.",
+    body: "A metro offer should be benchmarked against metro data; a Tier-2 offer against Tier-2 expectations, as comparing across tiers without adjustment produces a misleading read.",
   },
   {
     step: 4,
@@ -176,12 +176,12 @@ const HOWTO_STEPS = [
   {
     step: 5,
     title: "Ask for the full compensation breakdown, not just base",
-    body: "Especially at product companies and D2C brands, RSUs or ESOPs can materially change total compensation — a lower base with meaningful equity can outperform a higher all-cash offer over 3–5 years, or vice versa if the equity is illiquid or high-risk.",
+    body: "Especially at product companies and D2C brands, RSUs or ESOPs can materially change total compensation; a lower base with meaningful equity can outperform a higher all-cash offer over 3–5 years, or vice versa if the equity is illiquid or high-risk.",
   },
   {
     step: 6,
     title: "Bring the specific comparison, not just a general 'I think I deserve more'",
-    body: "\"Based on CollegeNCourses' 2025–26 salary data, [specialization] professionals with [X years] at [employer type] companies typically earn ₹[Y]–₹[Z] lakh\" is a concrete, defensible opening line — vague requests are easier to deflect than specific, sourced ones.",
+    body: "\"Based on CollegeNCourses' 2025–26 salary data, [specialization] professionals with [X years] at [employer type] companies typically earn ₹[Y]–₹[Z] lakh\" is a concrete, defensible opening line; vague requests are easier to deflect than specific, sourced ones.",
   },
 ];
 
@@ -192,7 +192,7 @@ const SCENARIOS = [
     age: 28,
     role: "Business Analyst offer from a Bangalore product company",
     background: "Completed an Online MBA in Business Analytics. Received an offer of ₹9 LPA from a mid-stage SaaS product company in Bangalore, her first offer post-graduation.",
-    action: "Used the Business Analytics entry-level band (₹6–10 L) alongside the product-company positioning (30–70% above IT services) to confirm her offer sat roughly at the median for a product company specifically — not merely 'within range' for the specialization broadly.",
+    action: "Used the Business Analytics entry-level band (₹6–10 L) alongside the product-company positioning (30–70% above IT services) to confirm her offer sat roughly at the median for a product company specifically, not merely 'within range' for the specialization broadly.",
     outcome: "Negotiated the offer up to ₹10.5 LPA by referencing the product-company-specific band rather than the specialization's general range, and by requesting the full RSU breakdown, which the initial offer had not clearly itemised.",
     type: "success",
   },
@@ -212,7 +212,7 @@ const SCENARIOS = [
     age: 31,
     role: "Comparing an Executive MBA investment against her current Online MBA plan",
     background: "Already enrolled in an Online MBA in Finance Management, considering whether to switch to a ₹22 lakh Executive MBA at a Tier-1 institute instead, specifically for a Big-4 consulting reset.",
-    action: "Used the Executive premium table to see that Finance Management's Executive leadership-level band (₹75 L–1.5 Cr) genuinely justified the cost if the Big-4 consulting reset was a realistic, specific goal — and confirmed with target firms' recruiting pages that entry was realistically Executive-MBA-gated for the practice she wanted.",
+    action: "Used the Executive premium table to see that Finance Management's Executive leadership-level band (₹75 L–1.5 Cr) genuinely justified the cost if the Big-4 consulting reset was a realistic, specific goal, and confirmed with target firms' recruiting pages that entry was realistically Executive-MBA-gated for the practice she wanted.",
     outcome: "Proceeded with the Executive MBA switch, financed via education loan with the Section 80E tax benefit factored in (per our Fee Guide), and secured a Senior Consultant offer at a Big-4 firm's finance advisory practice within 4 months of graduation.",
     type: "success",
   },
@@ -233,11 +233,11 @@ const FAQS: { q: string; a: string; voice?: boolean }[] = [
   },
   {
     q: "What is the lowest-paying MBA specialization?",
-    a: "HR Management, International Business Management, and Retail Management post the lowest entry-level salaries among the 12 specializations we track, at ₹4–7 lakh. This doesn't mean these are poor career choices — HR and International Business have strong leadership-level ceilings (₹32–55 lakh) that partially close the gap by mid-to-senior career.",
+    a: "HR Management, International Business Management, and Retail Management post the lowest entry-level salaries among the 12 specializations we track, at ₹4–7 lakh. This doesn't mean these are poor career choices; HR and International Business have strong leadership-level ceilings (₹32–55 lakh) that partially close the gap by mid-to-senior career.",
   },
   {
     q: "Which specialization has the fastest salary growth?",
-    a: "Operations Management shows the single sharpest documented transition — manufacturing engineers moving into management report median progression from ₹6 lakh to ₹18 lakh over 4 years. IT & Systems Management and Digital Marketing show comparably steep transitions. Full detail in the growth trajectory section.",
+    a: "Operations Management shows the single sharpest documented transition: manufacturing engineers moving into management report median progression from ₹6 lakh to ₹18 lakh over 4 years. IT & Systems Management and Digital Marketing show comparably steep transitions. Full detail in the growth trajectory section.",
   },
   {
     q: "How much does salary vary by city for MBA graduates?",
@@ -257,15 +257,15 @@ const FAQS: { q: string; a: string; voice?: boolean }[] = [
   },
   {
     q: "How can I use this data to negotiate my job offer?",
-    a: "Identify your specialization's experience-band salary in the complete table, adjust for your specific employer type, adjust for your city, then compare your actual offer against that specific combination — not the specialization's overall range. Full 6-step framework in the negotiation section.",
+    a: "Identify your specialization's experience-band salary in the complete table, adjust for your specific employer type, adjust for your city, then compare your actual offer against that specific combination, not the specialization's overall range. Full 6-step framework in the negotiation section.",
   },
   {
     q: "Do Business Analytics and IT & Systems Management really pay the same at entry level?",
-    a: "Both post directionally similar entry-level bands (₹6–10 lakh) in our tracking, reflecting comparable demand for quantitative and technical-management skills at entry level. Their trajectories diverge more at senior and leadership levels — see the career-stage ranking section for the fuller picture.",
+    a: "Both post directionally similar entry-level bands (₹6–10 lakh) in our tracking, reflecting comparable demand for quantitative and technical-management skills at entry level. Their trajectories diverge more at senior and leadership levels; see the career-stage ranking section for the fuller picture.",
   },
   {
     q: "What is the highest MBA salary achievable in India?",
-    a: "At the very top of the range — CFO, CIO/CTO, or Chief Supply Chain Officer roles at large Indian conglomerates or MNCs — total compensation (including RSUs and bonuses) can exceed ₹1.5 crore. These are top-5% outcomes at 15+ years' experience, not typical or median figures.",
+    a: "At the very top of the range (CFO, CIO/CTO, or Chief Supply Chain Officer roles at large Indian conglomerates or MNCs), total compensation (including RSUs and bonuses) can exceed ₹1.5 crore. These are top-5% outcomes at 15+ years' experience, not typical or median figures.",
   },
   {
     q: "Which MBA specialization has the highest salary?",
@@ -279,7 +279,7 @@ const FAQS: { q: string; a: string; voice?: boolean }[] = [
   },
   {
     q: "What is the average salary after MBA in India 2025?",
-    a: "Average post-MBA salary in India in 2025–26 varies significantly by specialization, mode, and experience — ranging from roughly ₹4–10 lakh at entry level to ₹32–75 lakh at leadership level across the 12 specializations CollegeNCourses tracks. See the complete salary table for the full breakdown.",
+    a: "Average post-MBA salary in India in 2025–26 varies significantly by specialization, mode, and experience, ranging from roughly ₹4–10 lakh at entry level to ₹32–75 lakh at leadership level across the 12 specializations CollegeNCourses tracks. See the complete salary table for the full breakdown.",
     voice: true,
   },
   {
@@ -600,7 +600,7 @@ export default function SalaryReportClient() {
               <div className="sr-quick-card">
                 <div className="sr-ranking-grid">
                   <div className="sr-ranking-card">
-                    <div className="sr-ranking-card-head">Highest paying — entry level (0–2 yrs)</div>
+                    <div className="sr-ranking-card-head">Highest paying: entry level (0–2 yrs)</div>
                     <div className="sr-ranking-card-body">
                       {ENTRY_RANKING.map((r, i) => (
                         <div key={i} className="sr-ranking-row">
@@ -612,7 +612,7 @@ export default function SalaryReportClient() {
                     </div>
                   </div>
                   <div className="sr-ranking-card">
-                    <div className="sr-ranking-card-head">Highest paying — leadership level (15+ yrs)</div>
+                    <div className="sr-ranking-card-head">Highest paying: leadership level (15+ yrs)</div>
                     <div className="sr-ranking-card-body">
                       {LEADERSHIP_RANKING.map((r, i) => (
                         <div key={i} className="sr-ranking-row">
@@ -674,7 +674,7 @@ export default function SalaryReportClient() {
               </p>
               <div className="sr-callout">
                 <span className="sr-callout-label">Why this table sorts by entry-level salary, not leadership-level</span>
-                Most aspirants comparing specializations are early in their decision process and want to know what changes first — the leadership-level ranking, which tells a meaningfully different story, is in the next section.
+                Most aspirants comparing specializations are early in their decision process and want to know what changes first: the leadership-level ranking, which tells a meaningfully different story, is in the next section.
               </div>
             </section>
 
@@ -712,7 +712,7 @@ export default function SalaryReportClient() {
               </div>
               <div className="sr-callout sr-callout-navy">
                 <span className="sr-callout-label">Counsellor observation</span>
-                From our counselling records across all 12 specializations: aspirants who choose purely on the entry-level number sometimes overlook that Finance Management — which starts in the middle of the pack, not the top — has the single highest leadership-level ceiling of any specialization we track. If you&apos;re planning a 15–20 year career horizon rather than optimising for your first job offer, the entry-level ranking in isolation can be genuinely misleading. — CollegeNCourses Senior Counsellor Desk
+                From our counselling records across all 12 specializations: aspirants who choose purely on the entry-level number sometimes overlook that Finance Management (which starts in the middle of the pack, not the top) has the single highest leadership-level ceiling of any specialization we track. If you&apos;re planning a 15–20 year career horizon rather than optimising for your first job offer, the entry-level ranking in isolation can be genuinely misleading. (CollegeNCourses Senior Counsellor Desk)
               </div>
             </section>
 
@@ -739,7 +739,7 @@ export default function SalaryReportClient() {
               </div>
               <div className="sr-callout">
                 <span className="sr-callout-label">Important distinction</span>
-                These are specific, named transitions within a specialization — not the specialization&apos;s overall salary band. An Operations Management MBA doesn&apos;t guarantee the ₹6L-to-₹18L jump; that figure describes a specific, common transition (manufacturing engineer to plant/ops management) within the broader specialization. See each linked guide&apos;s &quot;Career Paths&quot; section for the full range of role families.
+                These are specific, named transitions within a specialization, not the specialization&apos;s overall salary band. An Operations Management MBA doesn&apos;t guarantee the ₹6L-to-₹18L jump; that figure describes a specific, common transition (manufacturing engineer to plant/ops management) within the broader specialization. See each linked guide&apos;s &quot;Career Paths&quot; section for the full range of role families.
               </div>
             </section>
 
@@ -772,11 +772,11 @@ export default function SalaryReportClient() {
                 </table>
               </div>
               <p className="sr-caption">
-                Premium is a derived calculation (midpoint of Executive Tier-1 leadership band ÷ midpoint of Online/Distance leadership band for the same specialization), not a figure independently published elsewhere — shown for directional comparison only. Full fee comparison is in our <a href="/resources/mba-fee-guide-2025-26/">Fee Guide</a>.
+                Premium is a derived calculation (midpoint of Executive Tier-1 leadership band ÷ midpoint of Online/Distance leadership band for the same specialization), not a figure independently published elsewhere, shown for directional comparison only. Full fee comparison is in our <a href="/resources/mba-fee-guide-2025-26/">Fee Guide</a>.
               </p>
               <div className="sr-callout">
                 <span className="sr-callout-label">From our Mode Comparison Guide</span>
-                Online/Distance MBAs deliver the higher <em>return multiple</em> per rupee spent; Executive MBAs deliver the higher <em>absolute</em> leadership-level income, at substantially higher upfront cost. Neither is universally better — it depends on whether your constraint is available capital or maximum absolute outcome, and whether you have a specific Tier-1 reset opportunity in view.
+                Online/Distance MBAs deliver the higher <em>return multiple</em> per rupee spent; Executive MBAs deliver the higher <em>absolute</em> leadership-level income, at substantially higher upfront cost. Neither is universally better: it depends on whether your constraint is available capital or maximum absolute outcome, and whether you have a specific Tier-1 reset opportunity in view.
               </div>
             </section>
 
@@ -811,7 +811,7 @@ export default function SalaryReportClient() {
               </p>
               <div className="sr-callout sr-callout-navy">
                 <span className="sr-callout-label">Counsellor observation</span>
-                From our counselling records across all 12 specializations: the single most common benchmarking mistake we see is an aspirant comparing their job offer against a specialization&apos;s overall salary range, when the more useful comparison is against the specific employer-type band their offer actually falls into. A ₹9 LPA offer from a D2C brand and a ₹9 LPA offer from an IT services firm aren&apos;t equally competitive — one is below-median for its employer type, the other is above. The negotiation section walks through exactly how to make this comparison correctly. — CollegeNCourses Senior Counsellor Desk
+                From our counselling records across all 12 specializations: the single most common benchmarking mistake we see is an aspirant comparing their job offer against a specialization&apos;s overall salary range, when the more useful comparison is against the specific employer-type band their offer actually falls into. A ₹9 LPA offer from a D2C brand and a ₹9 LPA offer from an IT services firm aren&apos;t equally competitive: one is below-median for its employer type, the other is above. The negotiation section walks through exactly how to make this comparison correctly. (CollegeNCourses Senior Counsellor Desk)
               </div>
             </section>
 
@@ -837,7 +837,7 @@ export default function SalaryReportClient() {
               </div>
               <div className="sr-callout">
                 <span className="sr-callout-label">A note on granularity</span>
-                This is a directional pattern, not a precise city-by-city dataset — we don&apos;t yet have sufficiently granular city-level data across all 12 specializations to publish exact figures per city. If location-specific benchmarking matters for your decision, a counselling call lets us pull the most relevant comparison we have for your specific target city and specialization.
+                This is a directional pattern, not a precise city-by-city dataset; we don&apos;t yet have sufficiently granular city-level data across all 12 specializations to publish exact figures per city. If location-specific benchmarking matters for your decision, a counselling call lets us pull the most relevant comparison we have for your specific target city and specialization.
               </div>
             </section>
 
@@ -868,19 +868,19 @@ export default function SalaryReportClient() {
             <section id="methodology">
               <h2>How these numbers were compiled</h2>
               <p>
-                Every figure in the complete salary table is sourced directly from the &quot;Salary Data 2025-26&quot; section of the corresponding CollegeNCourses specialization guide — not recalculated or estimated independently for this report. Each of those 12 guides, in turn, draws on CollegeNCourses internal alumni tracking (3,842 salary outcomes analysed in aggregate across all 12 specializations, 2023–25), cross-referenced with <a href="https://www.ambitionbox.com/" rel="noopener">AmbitionBox</a> salary benchmarks, <a href="https://www.naukri.com/jobspeak" rel="noopener">Naukri.com JobSpeak</a> reports, and the <a href="https://www.linkedin.com/salary/" rel="noopener">LinkedIn Salary India Dataset</a>.
+                Every figure in the complete salary table is sourced directly from the &quot;Salary Data 2025-26&quot; section of the corresponding CollegeNCourses specialization guide, not recalculated or estimated independently for this report. Each of those 12 guides, in turn, draws on CollegeNCourses internal alumni tracking (3,842 salary outcomes analysed in aggregate across all 12 specializations, 2023–25), cross-referenced with <a href="https://www.ambitionbox.com/" rel="noopener">AmbitionBox</a> salary benchmarks, <a href="https://www.naukri.com/jobspeak" rel="noopener">Naukri.com JobSpeak</a> reports, and the <a href="https://www.linkedin.com/salary/" rel="noopener">LinkedIn Salary India Dataset</a>.
               </p>
               <div className="sr-methodology-box">
                 <h3>What this guide adds beyond the 12 individual specialization guides</h3>
                 <ul>
-                  <li><strong>Cross-specialization ranking</strong> — no individual specialization guide can tell you how it ranks against the other 11.</li>
-                  <li><strong>The Executive premium calculation</strong> — a derived analysis explicitly labelled as such, using the underlying published bands as inputs.</li>
-                  <li><strong>The employer-type and city syntheses</strong> — patterns that recur across individual guides but aren&apos;t assembled into one comparison anywhere else.</li>
+                  <li><strong>Cross-specialization ranking:</strong> no individual specialization guide can tell you how it ranks against the other 11.</li>
+                  <li><strong>The Executive premium calculation:</strong> a derived analysis explicitly labelled as such, using the underlying published bands as inputs.</li>
+                  <li><strong>The employer-type and city syntheses:</strong> patterns that recur across individual guides but aren&apos;t assembled into one comparison anywhere else.</li>
                 </ul>
               </div>
               <div className="sr-callout">
                 <span className="sr-callout-label">What we do NOT do</span>
-                We do not adjust any specialization&apos;s figures upward or downward to make a more compelling headline ranking. Every band in the complete salary table matches its source specialization guide exactly. If you cross-check a figure in this report against its linked specialization guide and find a discrepancy, please flag it to our editorial desk — it should not exist, and if it does, it&apos;s an error to correct, not a rounding choice to defend.
+                We do not adjust any specialization&apos;s figures upward or downward to make a more compelling headline ranking. Every band in the complete salary table matches its source specialization guide exactly. If you cross-check a figure in this report against its linked specialization guide and find a discrepancy, please flag it to our editorial desk; it should not exist, and if it does, it&apos;s an error to correct, not a rounding choice to defend.
               </div>
             </section>
 
@@ -888,14 +888,14 @@ export default function SalaryReportClient() {
             <section id="salary-alone">
               <h2>The honest answer: no, and here&apos;s why</h2>
               <p>
-                We publish this report because salary data is genuinely useful input — but it&apos;s one input, not the whole decision. Every one of our 12 specialization guides includes a &quot;Who This Specialization Does NOT Fit&quot; section for a reason: the highest-paid graduate in a specialization that bores or drains them will very likely underperform, both in wellbeing and in eventual compensation, compared to a strong-fit aspirant in a &quot;lower-paying&quot; specialization who compounds steadily because they&apos;re genuinely good at the work.
+                We publish this report because salary data is genuinely useful input, but it&apos;s one input, not the whole decision. Every one of our 12 specialization guides includes a &quot;Who This Specialization Does NOT Fit&quot; section for a reason: the highest-paid graduate in a specialization that bores or drains them will very likely underperform, both in wellbeing and in eventual compensation, compared to a strong-fit aspirant in a &quot;lower-paying&quot; specialization who compounds steadily because they&apos;re genuinely good at the work.
               </p>
               <p>
-                Consider the entry-to-leadership pattern above: Business Analytics leads early, Finance overtakes by leadership level. If you&apos;re quantitatively inclined but find corporate finance&apos;s decision-making style tedious, chasing Finance&apos;s higher ceiling on salary data alone is a genuine mismatch risk — Business Analytics or a related specialization might compound better for you specifically, even at a technically lower ceiling on paper.
+                Consider the entry-to-leadership pattern above: Business Analytics leads early, Finance overtakes by leadership level. If you&apos;re quantitatively inclined but find corporate finance&apos;s decision-making style tedious, chasing Finance&apos;s higher ceiling on salary data alone is a genuine mismatch risk; Business Analytics or a related specialization might compound better for you specifically, even at a technically lower ceiling on paper.
               </p>
               <div className="sr-callout">
                 <span className="sr-callout-label">Our honest recommendation</span>
-                Use this report to rule out specializations that are financially unworkable for your situation, and to set realistic expectations for the specializations you&apos;re genuinely drawn to — not to rank-order every option purely by the numbers in the salary table. A <a href="/counselling/">counselling call</a> is specifically designed to weigh salary data against fit, interest, and your specific career goal together.
+                Use this report to rule out specializations that are financially unworkable for your situation, and to set realistic expectations for the specializations you&apos;re genuinely drawn to, not to rank-order every option purely by the numbers in the salary table. A <a href="/counselling/">counselling call</a> is specifically designed to weigh salary data against fit, interest, and your specific career goal together.
               </div>
             </section>
 
@@ -911,7 +911,7 @@ export default function SalaryReportClient() {
                     text: (
                       <>
                         <strong>&quot;Guaranteed ₹X LPA package.&quot;</strong>
-                        No university or programme can guarantee a specific salary outcome — placement support and career services are legitimate claims; guaranteed compensation figures are not.
+                        No university or programme can guarantee a specific salary outcome: placement support and career services are legitimate claims; guaranteed compensation figures are not.
                       </>
                     ),
                   },
@@ -919,7 +919,7 @@ export default function SalaryReportClient() {
                     text: (
                       <>
                         <strong>A single, cherry-picked outlier presented as typical.</strong>
-                        &quot;Our alumnus earns ₹80 LPA&quot; may be a genuine, real outcome — and also a 95th-percentile outlier presented without that context. Ask specifically for median or 25th–75th percentile figures, not the single best story.
+                        &quot;Our alumnus earns ₹80 LPA&quot; may be a genuine, real outcome, and also a 95th-percentile outlier presented without that context. Ask specifically for median or 25th–75th percentile figures, not the single best story.
                       </>
                     ),
                   },
@@ -927,7 +927,7 @@ export default function SalaryReportClient() {
                     text: (
                       <>
                         <strong>CTC (Cost to Company) presented as take-home pay.</strong>
-                        CTC includes employer PF contributions, insurance, and other non-cash components that meaningfully differ from actual monthly take-home — a ₹12 LPA CTC offer is not ₹1 lakh per month in hand.
+                        CTC includes employer PF contributions, insurance, and other non-cash components that meaningfully differ from actual monthly take-home: a ₹12 LPA CTC offer is not ₹1 lakh per month in hand.
                       </>
                     ),
                   },
@@ -935,7 +935,7 @@ export default function SalaryReportClient() {
                     text: (
                       <>
                         <strong>Stipend or training-period pay presented as the ongoing salary.</strong>
-                        Some roles, particularly at large consulting and IT services firms, pay a lower stipend during an initial training period before transitioning to the full post-training salary band — confirm which figure you&apos;re being quoted.
+                        Some roles, particularly at large consulting and IT services firms, pay a lower stipend during an initial training period before transitioning to the full post-training salary band; confirm which figure you&apos;re being quoted.
                       </>
                     ),
                   },
@@ -994,7 +994,7 @@ export default function SalaryReportClient() {
               </div>
               <div className="sr-callout">
                 <span className="sr-callout-label">What these three stories illustrate</span>
-                The aspirants who used specific, sourced data — not general salary awareness — in their negotiation or decision conversation got measurably better outcomes than a generic &quot;I think I&apos;m underpaid&quot; approach would have produced. This is exactly what the 6-step negotiation framework is built to enable.
+                The aspirants who used specific, sourced data (not general salary awareness) in their negotiation or decision conversation got measurably better outcomes than a generic &quot;I think I&apos;m underpaid&quot; approach would have produced. This is exactly what the 6-step negotiation framework is built to enable.
               </div>
             </section>
 
@@ -1023,7 +1023,7 @@ export default function SalaryReportClient() {
                 <span className="sr-lead-badge">Free Download</span>
                 <h2>Take this salary report with you</h2>
                 <p className="sr-lead-lead">
-                  Prefer to keep this offline? Download the full PDF — the complete salary comparison, print-ready and shareable. Includes the 12-specialization table, the Executive premium analysis, the employer-type breakdown, and the 6-step negotiation worksheet.
+                  Prefer to keep this offline? Download the full PDF: the complete salary comparison, print-ready and shareable. Includes the 12-specialization table, the Executive premium analysis, the employer-type breakdown, and the 6-step negotiation worksheet.
                 </p>
                 <div className="sr-lm-form">
                   <div className="sr-lm-field">
@@ -1061,9 +1061,9 @@ export default function SalaryReportClient() {
                     <label htmlFor="sr-offer">Do you currently have a job offer to benchmark?</label>
                     <select id="sr-offer">
                       <option value="">Select one</option>
-                      <option>Yes — I have a live offer to benchmark</option>
-                      <option>No — still deciding on a specialization</option>
-                      <option>No — planning ahead for future offers</option>
+                      <option>Yes: I have a live offer to benchmark</option>
+                      <option>No: still deciding on a specialization</option>
+                      <option>No: planning ahead for future offers</option>
                     </select>
                   </div>
                 </div>
@@ -1113,13 +1113,13 @@ export default function SalaryReportClient() {
                 <h4>Sources referenced</h4>
                 <ul>
                   <li>
-                    <a href="https://www.ambitionbox.com/" rel="noopener">AmbitionBox</a> — Salary Benchmarks Q3 2025
+                    <a href="https://www.ambitionbox.com/" rel="noopener">AmbitionBox</a>: Salary Benchmarks Q3 2025
                   </li>
                   <li>
-                    <a href="https://www.naukri.com/jobspeak" rel="noopener">Naukri.com JobSpeak Report</a> — October 2025
+                    <a href="https://www.naukri.com/jobspeak" rel="noopener">Naukri.com JobSpeak Report</a>: October 2025
                   </li>
                   <li>
-                    <a href="https://www.linkedin.com/salary/" rel="noopener">LinkedIn Salary India Dataset</a> — 2025
+                    <a href="https://www.linkedin.com/salary/" rel="noopener">LinkedIn Salary India Dataset</a>: 2025
                   </li>
                   <li>
                     CollegeNCourses alumni tracking across all 12 specializations (3,842 salary outcomes analysed in aggregate, 2023–25)
@@ -1143,7 +1143,7 @@ export default function SalaryReportClient() {
         <div className="container">
           <h2>Want your specific salary potential benchmarked?</h2>
           <p>
-            Talk to a CollegeNCourses counsellor. We&apos;ll walk through your target specialization, employer type, and city — and if you already have an offer, help you build a data-backed negotiation conversation. Free, 30 minutes.
+            Talk to a CollegeNCourses counsellor. We&apos;ll walk through your target specialization, employer type, and city, and if you already have an offer, help you build a data-backed negotiation conversation. Free, 30 minutes.
           </p>
           <button className="sr-btn sr-btn-navy" onClick={() => setModalOpen(true)}>
             Book a free counselling call →

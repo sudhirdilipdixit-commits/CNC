@@ -252,7 +252,7 @@ export default function ResourcesHubClient({ resources }: { resources: ResourceI
             Not sure which resource to start with?
           </h2>
           <p style={{ color: "var(--navy)", fontSize: 17, marginBottom: 28, lineHeight: 1.6 }}>
-            Our counsellors will tell you exactly which guide is relevant for your situation — in a free 15-minute call.
+            Our counsellors will tell you exactly which guide is relevant for your situation, in a free 15-minute call.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
             <a href="/contact-us" className="btn btn-inverted">

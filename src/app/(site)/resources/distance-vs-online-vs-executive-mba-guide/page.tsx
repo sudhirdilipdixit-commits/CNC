@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "article",
-    title: "Distance vs Online vs Executive MBA 2025-26 — The Honest Comparison",
+    title: "Distance vs Online vs Executive MBA 2025-26: The Honest Comparison",
     description:
       "Fees, duration, salary, placement, and employer acceptance compared side by side across three MBA modes.",
     url: "https://collegencourses.com/resources/distance-vs-online-vs-executive-mba-guide/",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Distance vs Online vs Executive MBA 2025-26 — The Honest Comparison",
+    title: "Distance vs Online vs Executive MBA 2025-26: The Honest Comparison",
     description:
       "Fees, duration, salary, placement, and employer acceptance compared side by side.",
     images: ["https://collegencourses.com/og/resources-distance-vs-online-vs-executive-mba.webp"],
@@ -34,7 +34,7 @@ export const metadata: Metadata = {
 export default function MBAModeComparisonPage() {
   return (
     <>
-      {/* Schema 1 — Article */}
+      {/* Schema 1: Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -70,7 +70,7 @@ export default function MBAModeComparisonPage() {
           }),
         }}
       />
-      {/* Schema 2 — BreadcrumbList */}
+      {/* Schema 2: BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -90,7 +90,7 @@ export default function MBAModeComparisonPage() {
           }),
         }}
       />
-      {/* Schema 3 — FAQPage */}
+      {/* Schema 3: FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -105,20 +105,20 @@ export default function MBAModeComparisonPage() {
               { "@type": "Question", name: "How much does each MBA mode cost in India in 2025-26?", acceptedAnswer: { "@type": "Answer", text: "Distance MBA: Rs 1.2-2 lakh. Online MBA: Rs 1.5-3.5 lakh. Executive MBA: Rs 8 lakh (Tier-2) to Rs 25 lakh (IIM Indore residential). ISB PGPMAX and international programmes can go up to Rs 40 lakh." } },
               { "@type": "Question", name: "What is the salary difference between Distance, Online, and Executive MBA graduates?", acceptedAnswer: { "@type": "Answer", text: "In 2025-26, median entry-level salary bumps are: Distance MBA graduates Rs 2-4 lakh, Online MBA graduates Rs 3-5 lakh, Executive MBA graduates from Tier-1 institutes Rs 6-14 lakh. Executive delivers the biggest absolute jump but requires 5-15x the investment." } },
               { "@type": "Question", name: "Are Distance and Online MBA valid for government jobs?", acceptedAnswer: { "@type": "Answer", text: "Yes. UGC-DEB approved Distance and Online MBAs are legally equivalent to regular MBAs for all government job eligibility, per current UGC notifications (2020-2025). Confirm the specific university is on the UGC-DEB current approved-institutions list before enrolling." } },
-              { "@type": "Question", name: "Do employers actually accept Distance and Online MBAs in 2025-26?", acceptedAnswer: { "@type": "Answer", text: "Most Indian employers — especially IT, SaaS, D2C, fintech, services, and mid-to-large private companies — accept Distance and Online MBAs from UGC-DEB approved universities at parity with regular MBAs. Tier-1 consulting, PE, and investment banking still prefer residential Tier-1 MBAs." } },
+              { "@type": "Question", name: "Do employers actually accept Distance and Online MBAs in 2025-26?", acceptedAnswer: { "@type": "Answer", text: "Most Indian employers, especially IT, SaaS, D2C, fintech, services, and mid-to-large private companies, accept Distance and Online MBAs from UGC-DEB approved universities at parity with regular MBAs. Tier-1 consulting, PE, and investment banking still prefer residential Tier-1 MBAs." } },
               { "@type": "Question", name: "What is the dropout rate for each mode?", acceptedAnswer: { "@type": "Answer", text: "As of 2025-26, Distance MBAs see 40%+ non-completion, Online MBAs 25-35%, and Executive MBAs under 10%. The completion gap is driven primarily by cohort presence and live faculty interaction, not by ability." } },
               { "@type": "Question", name: "Can I get education loans for all three modes?", acceptedAnswer: { "@type": "Answer", text: "Yes. Standard education-loan providers (SBI, HDFC Credila, ICICI Bank, Avanse) cover all UGC-DEB and AICTE approved programmes. Distance and Online MBAs typically use short-tenure personal loans or salary EMIs; Executive MBAs use full education loans. Interest rates in 2025-26 range 9.5-12.5%." } },
               { "@type": "Question", name: "Can I convert from Distance to Online MBA mid-programme?", acceptedAnswer: { "@type": "Answer", text: "Formally, no. Once enrolled, mode is fixed at the same university. However, you can enrol in a new Online MBA at a different university if career priorities change, though you lose progress. The better strategy is to choose the right mode at enrolment." } },
               { "@type": "Question", name: "What is the difference between AICTE and UGC-DEB approval?", acceptedAnswer: { "@type": "Answer", text: "UGC-DEB approves Distance and Online MBAs under UGC's remit. AICTE approves technical management education. Some Online MBAs carry both. Executive MBAs typically operate under AICTE, or for IIMs, under the IIM Act 2017. All three approval bodies confer legally equivalent degrees." } },
               { "@type": "Question", name: "Which mode is best for working professionals?", acceptedAnswer: { "@type": "Answer", text: "For most working professionals in India in 2025-26, Online MBA is the best mode. It balances cost, time commitment, live faculty interaction, and placement support. Distance suits only budget-tight self-directed learners. Executive suits only Tier-1 industry-reset moments." } },
-              { "@type": "Question", name: "Is online MBA equal to regular MBA?", acceptedAnswer: { "@type": "Answer", text: "Yes. As of 2025-26, an Online MBA from a UGC-DEB approved university is legally equivalent to a regular MBA for all purposes — government jobs, further education, and private-sector employment. Employer acceptance is high in most sectors." } },
+              { "@type": "Question", name: "Is online MBA equal to regular MBA?", acceptedAnswer: { "@type": "Answer", text: "Yes. As of 2025-26, an Online MBA from a UGC-DEB approved university is legally equivalent to a regular MBA for all purposes: government jobs, further education, and private-sector employment. Employer acceptance is high in most sectors." } },
               { "@type": "Question", name: "How to choose the right MBA in India?", acceptedAnswer: { "@type": "Answer", text: "Choose based on six factors: budget ceiling, weekly time availability, target role two years post-MBA, current employer's stated position on Online and Distance MBAs, your dropout risk profile, and whether you need international recognition." } },
               { "@type": "Question", name: "How does CollegeNCourses help me choose the right mode?", acceptedAnswer: { "@type": "Answer", text: "Our counsellors run a structured 30-minute free call in which we walk you through the six-question decision framework, understand your role, income, career goal, budget, and timeline, and shortlist three specific programmes across the right mode. We have no referral deal that affects our recommendation." } },
             ],
           }),
         }}
       />
-      {/* Schema 4 — HowTo */}
+      {/* Schema 4: HowTo */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -139,7 +139,7 @@ export default function MBAModeComparisonPage() {
           }),
         }}
       />
-      {/* Schema 5 — ItemList */}
+      {/* Schema 5: ItemList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

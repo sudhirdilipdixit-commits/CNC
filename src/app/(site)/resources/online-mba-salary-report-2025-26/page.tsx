@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "article",
-    title: "2025-26 Online MBA Salary Report — All 12 Specializations Compared",
+    title: "2025-26 Online MBA Salary Report: All 12 Specializations Compared",
     description:
       "Entry to leadership salary, Executive premium, and what actually moves your offer. Built from 3,842 alumni salary outcomes tracked across all 12 specializations.",
     url: "https://collegencourses.com/resources/online-mba-salary-report-2025-26/",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "2025-26 Online MBA Salary Report — All 12 Specializations Compared",
+    title: "2025-26 Online MBA Salary Report: All 12 Specializations Compared",
     description: "Which specialization pays most, at which career stage? The full 2025-26 data.",
     images: ["https://collegencourses.com/og/resources-online-mba-salary-report.webp"],
   },
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
 export default function SalaryReportPage() {
   return (
     <>
-      {/* Schema 1 — Article */}
+      {/* Schema 1: Article */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -68,7 +68,7 @@ export default function SalaryReportPage() {
           }),
         }}
       />
-      {/* Schema 2 — BreadcrumbList */}
+      {/* Schema 2: BreadcrumbList */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -93,7 +93,7 @@ export default function SalaryReportPage() {
           }),
         }}
       />
-      {/* Schema 3 — FAQPage */}
+      {/* Schema 3: FAQPage */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -138,7 +138,7 @@ export default function SalaryReportPage() {
                 name: "Which specialization has the fastest salary growth?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Operations Management shows the single sharpest documented transition — manufacturing engineers moving into management report median progression from ₹6 lakh to ₹18 lakh over 4 years. IT & Systems Management and Digital Marketing show comparably steep documented transitions.",
+                  text: "Operations Management shows the single sharpest documented transition, with manufacturing engineers moving into management reporting median progression from ₹6 lakh to ₹18 lakh over 4 years. IT & Systems Management and Digital Marketing show comparably steep documented transitions.",
                 },
               },
               {
@@ -178,7 +178,7 @@ export default function SalaryReportPage() {
                 name: "How can I use this data to negotiate my job offer?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Identify your specialization's experience-band salary in the complete table, adjust for your specific employer type, adjust for your city, then compare your actual offer against that specific combination — not the specialization's overall range. Full 6-step framework in the negotiation section.",
+                  text: "Identify your specialization's experience-band salary in the complete table, adjust for your specific employer type, adjust for your city, then compare your actual offer against that specific combination, not the specialization's overall range. Full 6-step framework in the negotiation section.",
                 },
               },
               {
@@ -194,7 +194,7 @@ export default function SalaryReportPage() {
                 name: "What is the highest MBA salary achievable in India?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "At the very top — CFO, CIO/CTO, or Chief Supply Chain Officer roles at large conglomerates or MNCs — total compensation including RSUs and bonuses can exceed ₹1.5 crore. These are top-5% outcomes at 15+ years' experience.",
+                  text: "At the very top (CFO, CIO/CTO, or Chief Supply Chain Officer roles at large conglomerates or MNCs), total compensation including RSUs and bonuses can exceed ₹1.5 crore. These are top-5% outcomes at 15+ years' experience.",
                 },
               },
               {
@@ -233,7 +233,7 @@ export default function SalaryReportPage() {
           }),
         }}
       />
-      {/* Schema 4 — HowTo */}
+      {/* Schema 4: HowTo */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -248,19 +248,19 @@ export default function SalaryReportPage() {
                 "@type": "HowToStep",
                 position: 1,
                 name: "Find your specialization's band",
-                text: "Identify your specific experience band (entry, mid, senior, or leadership) — not the specialization's full career-long range.",
+                text: "Identify your specific experience band (entry, mid, senior, or leadership), not the specialization's full career-long range.",
               },
               {
                 "@type": "HowToStep",
                 position: 2,
                 name: "Identify your employer's type",
-                text: "D2C, product-tech, consulting, BFSI, IT services, or manufacturing — this typically moves expected salary more than specialization alone.",
+                text: "D2C, product-tech, consulting, BFSI, IT services, or manufacturing: this typically moves expected salary more than specialization alone.",
               },
               {
                 "@type": "HowToStep",
                 position: 3,
                 name: "Adjust for your city",
-                text: "Benchmark a metro offer against metro data and a Tier-2 offer against Tier-2 expectations — comparing across tiers without adjustment produces a misleading read.",
+                text: "Benchmark a metro offer against metro data and a Tier-2 offer against Tier-2 expectations; comparing across tiers without adjustment produces a misleading read.",
               },
               {
                 "@type": "HowToStep",
@@ -284,7 +284,7 @@ export default function SalaryReportPage() {
           }),
         }}
       />
-      {/* Schema 5 — ItemList (Occupation/estimatedSalary, all 12 specializations) */}
+      {/* Schema 5: ItemList (Occupation/estimatedSalary, all 12 specializations) */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{

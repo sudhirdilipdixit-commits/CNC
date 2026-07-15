@@ -28,7 +28,7 @@ const TAKEAWAYS = [
   { label: "The 3x fee spread within the top-20 is real but not matched by a 3x outcome difference", text: "An NMIMS Online MBA at Rs 3.75 lakh is not guaranteed to produce outcomes three times better than a Chandigarh University Online MBA at Rs 1.2 lakh. The right fee bracket depends on your specific career target and employer ecosystem." },
   { label: "Interest-free university EMI is widely available and often the best financing option", text: "Most universities in the Rs 1–2.5 lakh range offer interest-free monthly EMI directly, making formal education loans with interest often unnecessary in this bracket." },
   { label: "Section 80E deduction is real and worth calculating", text: "If you do take an education loan for a larger fee, the Section 80E interest deduction from taxable income (no upper limit, for up to 8 years) can materially reduce the effective net cost." },
-  { label: "Employer sponsorship is asked for less than 30% of the time", text: "In our counselling records, fewer than 30% of eligible aspirants ask their employer about sponsorship before enrolling. Many employers — particularly PSU banks, large IT firms, and consulting houses — offer 40–100% fee sponsorship against a service commitment." },
+  { label: "Employer sponsorship is asked for less than 30% of the time", text: "In our counselling records, fewer than 30% of eligible aspirants ask their employer about sponsorship before enrolling. Many employers, particularly PSU banks, large IT firms, and consulting houses, offer 40–100% fee sponsorship against a service commitment." },
 ];
 
 const MODE_FEE_CARDS = [
@@ -79,11 +79,11 @@ const FEE_BY_SPEC = [
 const HIDDEN_COSTS = [
   { item: "Registration / application fee", typical: "Rs 1,000–3,000", notes: "Paid once at application. Often non-refundable even if you don't join." },
   { item: "Semester examination fees", typical: "Rs 2,000–5,000 per semester × 4", notes: "Most significant hidden cost. Multiply per-semester fee by all 4 semesters. Some universities charge per-paper." },
-  { item: "Study material / book pack fee", typical: "Rs 0–15,000 (if not bundled)", notes: "Distance programmes often charge separately. Online MBAs vary — some bundle, some add per-semester." },
+  { item: "Study material / book pack fee", typical: "Rs 0–15,000 (if not bundled)", notes: "Distance programmes often charge separately. Online MBAs vary: some bundle, some add per-semester." },
   { item: "Software / tool licence fees", typical: "Rs 0–10,000 (specialization-dependent)", notes: "Analytics, IT, and Project Management MBAs may require paid software (e.g. SPSS, MS Project) not bundled in tuition." },
   { item: "Placement cell / alumni membership fee", typical: "Rs 0–5,000", notes: "Some universities charge an annual or one-time fee for placement cell access. Not always disclosed upfront." },
   { item: "Convocation and certificate fee", typical: "Rs 2,000–5,000", notes: "Charged at programme completion, 18-24 months after enrolment. Easy to forget in the initial budget." },
-  { item: "Re-exam / back-paper fees", typical: "Rs 500–2,000 per paper", notes: "Contingent cost — not budgeted by most aspirants. Relevant for working professionals with demanding travel schedules." },
+  { item: "Re-exam / back-paper fees", typical: "Rs 500–2,000 per paper", notes: "Contingent cost: not budgeted by most aspirants. Relevant for working professionals with demanding travel schedules." },
 ];
 
 const EMI_OPTIONS = [
@@ -99,7 +99,7 @@ const EMI_OPTIONS = [
     who: "SBI (State Bank of India)",
     terms: "Up to Rs 40 lakh for Distance/Online at eligible institutions; tenure up to 15 years; interest currently ~11.15% p.a.",
     bestFor: "Aspirants targeting a higher-fee EMBA or Online MBA at a UGC-DEB approved institution who cannot fund the fee from savings.",
-    watch: "SBI's list of eligible institutions for education loans is separate from UGC-DEB approval — confirm your specific university is on their approved list before applying.",
+    watch: "SBI's list of eligible institutions for education loans is separate from UGC-DEB approval. Confirm your specific university is on their approved list before applying.",
   },
   {
     title: "HDFC Credila / ICICI Bank education loan",
@@ -112,7 +112,7 @@ const EMI_OPTIONS = [
     title: "Employer sponsorship / reimbursement",
     who: "PSU banks, large IT firms, consulting firms, some manufacturing PSUs",
     terms: "40–100% fee coverage against 2–3 year service-back commitment. Sometimes structured as annual salary supplement with conditional clawback.",
-    bestFor: "Any aspirant currently employed in an organisation with a tuition reimbursement policy — more common than most aspirants realise.",
+    bestFor: "Any aspirant currently employed in an organisation with a tuition reimbursement policy (more common than most aspirants realise).",
     watch: "Get the terms in writing before enrolment. Understand what happens to the benefit if you're made redundant vs. if you resign voluntarily.",
   },
 ];
@@ -133,9 +133,9 @@ const SCENARIOS = [
     age: 32,
     role: "Marketing Manager at a Bangalore e-commerce startup",
     background: "5 years of digital marketing experience. Wanted to formalise her management skills and move into a Marketing Director track. Budget: Rs 2 lakh. Employer expressed willingness to discuss, but she hadn't formalised the conversation.",
-    approach: "Counsellor recommended she formalise the employer conversation before comparing universities — specifically, to ask her HR team in writing what MBA fee support the company offered. Her employer confirmed a Rs 1 lakh reimbursement against a 2-year service commitment.",
+    approach: "Counsellor recommended she formalise the employer conversation before comparing universities, specifically to ask her HR team in writing what MBA fee support the company offered. Her employer confirmed a Rs 1 lakh reimbursement against a 2-year service commitment.",
     financingOutcome: "With Rs 1 lakh employer reimbursement, her effective out-of-pocket cost for Amity Online (Rs 1.8 lakh) was Rs 0.8 lakh, paid in 18 interest-free monthly instalments of Rs 4,400.",
-    recommendation: "Amity University Online — Marketing specialization",
+    recommendation: "Amity University Online: Marketing specialization",
     type: "success",
   },
   {
@@ -145,8 +145,8 @@ const SCENARIOS = [
     role: "Senior Operations Manager at a Chennai manufacturing PSU",
     background: "18 years' operations experience. Targeting an EMBA to qualify for a General Manager role. Original shortlist included three EMBA programmes at Rs 12–18 lakh.",
     approach: "Counsellor walked through the true-cost calculation including hidden costs (Rs 1.8 lakh in residential modules, case materials, and platform fees beyond headline tuition) and the Section 80E tax benefit on a bank loan. At his tax bracket (30% marginal rate), the effective post-tax net cost of a bank loan dropped to approximately 7.8% p.a., meaningfully lower than the sticker rate.",
-    financingOutcome: "Enrolled in a Rs 14.5 lakh EMBA. Total loan with hidden costs: Rs 16.3 lakh. Estimated Section 80E saving over 8 years: Rs 3.6 lakh. Net effective cost: Rs 12.7 lakh — Rs 3.6 lakh less than he had initially budgeted for.",
-    recommendation: "Symbiosis EMBA — Operations and Supply Chain track",
+    financingOutcome: "Enrolled in a Rs 14.5 lakh EMBA. Total loan with hidden costs: Rs 16.3 lakh. Estimated Section 80E saving over 8 years: Rs 3.6 lakh. Net effective cost: Rs 12.7 lakh (Rs 3.6 lakh less than he had initially budgeted for).",
+    recommendation: "Symbiosis EMBA: Operations and Supply Chain track",
     type: "success",
   },
   {
@@ -154,10 +154,10 @@ const SCENARIOS = [
     initial: "A",
     age: 27,
     role: "HR Executive at a Delhi NGO",
-    background: "4 years' HR experience. First job in the NGO sector. Budget: 'Whatever I can afford.' Came to counselling after finding a university advertising an Online MBA at Rs 52,000 total — significantly below market rate for the category.",
+    background: "4 years' HR experience. First job in the NGO sector. Budget: 'Whatever I can afford.' Came to counselling after finding a university advertising an Online MBA at Rs 52,000 total (significantly below market rate for the category).",
     approach: "The Rs 52,000 price point triggered a verification check. The programme was offered by an institution that was UGC-recognised in the general sense but did not hold current UGC-DEB approval for an Online MBA programme. The degree would not have carried the legal equivalence discussed in our Government Jobs guide.",
-    financingOutcome: "Avoided enrolling in an unapproved programme. Redirected to IGNOU's distance MBA at Rs 0.45 lakh — genuinely the lowest-cost UGC-DEB approved option that met her government-job-eligibility goal, with a 40-year track record.",
-    recommendation: "IGNOU Distance MBA — HR specialization",
+    financingOutcome: "Avoided enrolling in an unapproved programme. Redirected to IGNOU's distance MBA at Rs 0.45 lakh, the lowest-cost UGC-DEB approved option that met her government-job-eligibility goal, with a 40-year track record.",
+    recommendation: "IGNOU Distance MBA: HR specialization",
     type: "caution",
   },
 ];
@@ -166,15 +166,15 @@ const FAQS = [
   { q: "How much does a Distance or Online MBA actually cost in India in 2025-26, including hidden fees?", a: "Total all-in cost, including typical hidden fees, is approximately Rs 0.35–0.75 lakh for state-university Distance MBAs, Rs 0.95–1.7 lakh for private Distance MBAs, Rs 1.35–2.5 lakh for mid-range Online MBAs, and Rs 2.8–4.2 lakh for premium Online MBAs. The advertised tuition figure alone typically understates the true cost by Rs 15,000–40,000." },
   { q: "What hidden costs should I budget for beyond tuition?", a: "The four most commonly missed costs are: registration/application fee (Rs 1,000–3,000), semester examination fees (Rs 8,000–20,000 across the full programme), study material or tool licence fees (Rs 0–25,000, specialization-dependent), and convocation/certificate fee (Rs 2,000–5,000). Total these from the university's own fee structure document before budgeting." },
   { q: "Does the MBA specialization I choose affect the fee?", a: "Only modestly at the Distance and Online level, where fees cluster within a broad range regardless of specialization within a given university. At Executive MBA level, specialization matters significantly because different specializations have different leading institutes with very different fee brackets." },
-  { q: "Can I get an education loan for a Distance or Online MBA?", a: "Yes. Standard providers including SBI, HDFC Credila, ICICI Bank, and Avanse extend education loans for UGC-DEB approved Distance and Online MBA programmes. SBI's education loan for Distance/Online higher education covers programmes at UGC-approved institutions. Confirm your specific university is on the lender's approved list — it's separate from UGC-DEB approval." },
-  { q: "What is Section 80E and how does it reduce MBA fees?", a: "Section 80E of the Income Tax Act allows a full deduction of interest paid on an education loan from your taxable income, with no upper limit, for up to 8 years. It applies to loans from recognised financial institutions. Only interest is deductible, not principal. If your marginal tax rate is 30%, Section 80E can reduce your effective loan cost by 30% of the interest — a meaningful saving on an EMBA loan." },
-  { q: "Are there scholarships available for Distance or Online MBA programmes?", a: "Yes, though less publicised than for full-time residential programmes. Categories include: merit-based waivers (typically 10–25% off tuition for early applicants or high-scoring candidates), need-based concessions (means-tested at some universities), women-in-management scholarships at Symbiosis, Jain, and Amity, and defence/veteran quotas at several universities. Always ask the university's admissions office directly what's available — scholarships are rarely listed prominently on the public website." },
-  { q: "Is it cheaper to pay MBA fees upfront or take an education loan?", a: "It depends on your tax bracket and the opportunity cost of your capital. For lower fee brackets (under Rs 2 lakh) where interest-free university EMI is available, financing carries zero extra cost — use the EMI and preserve your cash. For Executive MBA brackets with bank loans, Section 80E can make a loan effective cost lower than its headline rate, sometimes making financing smarter than a lump-sum cash payment if you're in a higher tax bracket with better uses for that capital." },
-  { q: "What is the Central Sector Interest Subsidy (CSIS) Scheme?", a: "A Government of India scheme providing interest subsidy during the loan moratorium period on education loans for students from economically weaker sections (parental income below Rs 4.5 lakh per annum). Applies to professional and technical courses at recognised institutions. Eligibility for specific Distance/Online MBA programmes varies by lender — verify directly with your bank." },
+  { q: "Can I get an education loan for a Distance or Online MBA?", a: "Yes. Standard providers including SBI, HDFC Credila, ICICI Bank, and Avanse extend education loans for UGC-DEB approved Distance and Online MBA programmes. SBI's education loan for Distance/Online higher education covers programmes at UGC-approved institutions. Confirm your specific university is on the lender's approved list. It is separate from UGC-DEB approval." },
+  { q: "What is Section 80E and how does it reduce MBA fees?", a: "Section 80E of the Income Tax Act allows a full deduction of interest paid on an education loan from your taxable income, with no upper limit, for up to 8 years. It applies to loans from recognised financial institutions. Only interest is deductible, not principal. If your marginal tax rate is 30%, Section 80E can reduce your effective loan cost by 30% of the interest (a meaningful saving on an EMBA loan)." },
+  { q: "Are there scholarships available for Distance or Online MBA programmes?", a: "Yes, though less publicised than for full-time residential programmes. Categories include: merit-based waivers (typically 10–25% off tuition for early applicants or high-scoring candidates), need-based concessions (means-tested at some universities), women-in-management scholarships at Symbiosis, Jain, and Amity, and defence/veteran quotas at several universities. Always ask the university's admissions office directly what's available. Scholarships are rarely listed prominently on the public website." },
+  { q: "Is it cheaper to pay MBA fees upfront or take an education loan?", a: "It depends on your tax bracket and the opportunity cost of your capital. For lower fee brackets (under Rs 2 lakh) where interest-free university EMI is available, financing carries zero extra cost. Use the EMI and preserve your cash. For Executive MBA brackets with bank loans, Section 80E can make a loan effective cost lower than its headline rate, sometimes making financing smarter than a lump-sum cash payment if you're in a higher tax bracket with better uses for that capital." },
+  { q: "What is the Central Sector Interest Subsidy (CSIS) Scheme?", a: "A Government of India scheme providing interest subsidy during the loan moratorium period on education loans for students from economically weaker sections (parental income below Rs 4.5 lakh per annum). Applies to professional and technical courses at recognised institutions. Eligibility for specific Distance/Online MBA programmes varies by lender. Verify directly with your bank." },
   { q: "Will a university increase fees mid-programme?", a: "Legitimate universities specify in the admission offer letter whether fees are fixed for your entire programme duration or subject to annual revision. Always confirm this in writing before you enrol. If the offer letter doesn't address this explicitly, ask directly and get it in writing." },
-  { q: "Do I have to pay GST on MBA tuition fees?", a: "No. Core tuition fees for a recognised degree programme offered by an educational institution as defined under Indian GST law are exempt from GST. If you see GST charged on tuition, ask for a detailed fee breakdown and clarification — this is a red flag." },
-  { q: "Can my employer pay for my MBA?", a: "Many employers — particularly large public-sector banks, IT services firms, consulting firms, and some large manufacturing PSUs — offer 40–100% fee sponsorship against a 2–3 year service-back commitment. Fewer than 30% of eligible aspirants ask their employer directly before enrolling. It's worth a written email to HR asking about the company's tuition reimbursement policy before committing to any university or financing arrangement." },
-  { q: "What is the ROI of a Distance or Online MBA?", a: "In our counselling data, the most consistent return is salary acceleration in a first post-MBA promotion cycle — typically 18–35% increment in that cycle for PSU bank employees, and 15–30% for private-sector employees depending on specialization. The ROI is strongest when the MBA enables a specific, named career outcome (a promotion eligibility threshold, a specialization-track shift) rather than being a general credential exercise." },
+  { q: "Do I have to pay GST on MBA tuition fees?", a: "No. Core tuition fees for a recognised degree programme offered by an educational institution as defined under Indian GST law are exempt from GST. If you see GST charged on tuition, ask for a detailed fee breakdown and clarification. This is a red flag." },
+  { q: "Can my employer pay for my MBA?", a: "Many employers, particularly large public-sector banks, IT services firms, consulting firms, and some large manufacturing PSUs, offer 40–100% fee sponsorship against a 2–3 year service-back commitment. Fewer than 30% of eligible aspirants ask their employer directly before enrolling. It's worth a written email to HR asking about the company's tuition reimbursement policy before committing to any university or financing arrangement." },
+  { q: "What is the ROI of a Distance or Online MBA?", a: "In our counselling data, the most consistent return is salary acceleration in a first post-MBA promotion cycle, typically 18–35% increment in that cycle for PSU bank employees, and 15–30% for private-sector employees depending on specialization. The ROI is strongest when the MBA enables a specific, named career outcome (a promotion eligibility threshold, a specialization-track shift) rather than being a general credential exercise." },
   { q: "How much does an online MBA cost in India?", a: "Total all-in cost for an Online MBA in India in 2025-26, including typical hidden fees: Rs 1.35–2.5 lakh for mid-range branded options; Rs 2.8–4.2 lakh for premium (NMIMS). The advertised tuition figure ranges Rs 1.2–3.75 lakh for the top 20 UGC-DEB approved universities." },
   { q: "What is the cheapest online MBA in India?", a: "IGNOU, at approximately Rs 0.4–0.6 lakh all-in, is the most affordable genuinely UGC-DEB approved option (Distance mode). Among branded private Online MBA programmes with live sessions, Chandigarh University Online at Rs 1.2–1.6 lakh is the lowest-cost option in our top-20 list." },
   { q: "How can I reduce the cost of my MBA?", a: "Four levers: (1) Check for merit-based or need-based scholarships directly with the university's admissions office before enrolling. (2) Ask your employer about fee sponsorship or tuition reimbursement in writing, before you commit to any university. (3) Use interest-free university EMI instead of a bank loan where the fee bracket allows. (4) If you take a bank loan, claim the Section 80E interest deduction on your income tax return every year it applies." },
@@ -420,7 +420,7 @@ export default function FeeGuideClient() {
       <div className="fg-hero">
         <div className="container">
           <span className="fg-eyebrow">Fee Guide • 2025-26 Edition</span>
-          <h1>Complete Distance &amp; Online MBA Fee Guide — True Cost Breakdown 2025-26</h1>
+          <h1>Complete Distance &amp; Online MBA Fee Guide: True Cost Breakdown 2025-26</h1>
           <p className="fg-subtitle">
             Tuition, hidden costs, EMI options, scholarships, and Section 80E tax benefits explained. The full true-cost picture, not just the advertised number. Built from 1,200+ fee consultations.
           </p>
@@ -551,13 +551,13 @@ export default function FeeGuideClient() {
                   </div>
                 ))}
               </div>
-              <p>For a complete mode comparison beyond fees — learning experience, career outcomes, recognition — see the <a href="/resources/distance-vs-online-vs-executive-mba-guide/">Distance vs Online vs Executive MBA guide</a>.</p>
+              <p>For a complete mode comparison beyond fees (learning experience, career outcomes, recognition), see the <a href="/resources/distance-vs-online-vs-executive-mba-guide/">Distance vs Online vs Executive MBA guide</a>.</p>
             </section>
 
             {/* Fee by specialization */}
             <section id="fee-by-spec">
               <h2>Fee by specialization</h2>
-              <p>Specialization affects fee less than mode at the Distance/Online level. The table below shows the range across the top universities for each specialization — the difference within a given mode is typically under Rs 30,000.</p>
+              <p>Specialization affects fee less than mode at the Distance/Online level. The table below shows the range across the top universities for each specialization (the difference within a given mode is typically under Rs 30,000).</p>
               <div className="fg-table-wrap">
                 <table className="fg-table">
                   <thead>
@@ -572,7 +572,7 @@ export default function FeeGuideClient() {
                     {FEE_BY_SPEC.map((row, i) => (
                       <tr key={i}>
                         <td><strong>{row.spec}</strong></td>
-                        <td className="fg-em">{row.distanceLow !== "—" ? `Rs ${row.distanceLow}–${row.distanceHigh}L` : "—"}</td>
+                        <td className="fg-em">{row.distanceLow !== "—" ? `Rs ${row.distanceLow}–${row.distanceHigh}L` : "Not offered"}</td>
                         <td className="fg-em">Rs {row.onlineLow}–{row.onlineHigh}L</td>
                         <td>{row.notes}</td>
                       </tr>
@@ -586,7 +586,7 @@ export default function FeeGuideClient() {
             {/* Fee by university tier */}
             <section id="fee-by-university">
               <h2>Fee by university tier</h2>
-              <p>Universities condense into roughly four fee tiers. The tier reflects the combination of mode, brand positioning, and platform investment — not necessarily a proportional difference in educational quality or career outcome.</p>
+              <p>Universities condense into roughly four fee tiers. The tier reflects the combination of mode, brand positioning, and platform investment (not necessarily a proportional difference in educational quality or career outcome).</p>
               <div className="fg-table-wrap">
                 <table className="fg-table">
                   <thead>
@@ -608,7 +608,7 @@ export default function FeeGuideClient() {
                       <td><strong>Mid-range Online</strong></td>
                       <td className="fg-em">Rs 1.35–2.5L</td>
                       <td>Amity, Manipal MAHE, Symbiosis SCOL, Jain, LPU, Chandigarh, DY Patil</td>
-                      <td>Best value concentration — strong brand, live sessions, good platform</td>
+                      <td>Best value concentration: strong brand, live sessions, good platform</td>
                     </tr>
                     <tr>
                       <td><strong>Private Distance</strong></td>
@@ -630,7 +630,7 @@ export default function FeeGuideClient() {
             {/* Hidden costs */}
             <section id="hidden-costs">
               <h2>The hidden costs most aspirants miss</h2>
-              <p>These are not unusual or unexpected charges — they're standard parts of the fee structure at most universities, simply not prominently displayed in marketing materials alongside the headline tuition figure.</p>
+              <p>These are not unusual or unexpected charges. They are standard parts of the fee structure at most universities, simply not prominently displayed in marketing materials alongside the headline tuition figure.</p>
               <div className="fg-table-wrap">
                 <table className="fg-table">
                   <thead>
@@ -653,7 +653,7 @@ export default function FeeGuideClient() {
               </div>
               <div className="fg-callout fg-callout-navy">
                 <span className="fg-callout-label">Counsellor observation</span>
-                In our counselling conversations 2023-25, semester examination fees are the most consistently missed hidden cost — particularly for aspirants who have only seen the university's homepage or a recruitment aggregator listing. A university advertising an Online MBA at Rs 1.6 lakh may have Rs 20,000+ in examination fees spread across four semesters, bringing the true total to Rs 1.8 lakh. Always ask for the complete fee breakup document, not just the headline tuition. — <em>CollegeNCourses Senior Counsellor Desk</em>
+                In our counselling conversations 2023-25, semester examination fees are the most consistently missed hidden cost, particularly for aspirants who have only seen the university&#39;s homepage or a recruitment aggregator listing. A university advertising an Online MBA at Rs 1.6 lakh may have Rs 20,000+ in examination fees spread across four semesters, bringing the true total to Rs 1.8 lakh. Always ask for the complete fee breakup document, not just the headline tuition. (CollegeNCourses Senior Counsellor Desk)
               </div>
             </section>
 
@@ -682,10 +682,10 @@ export default function FeeGuideClient() {
               <div className="fg-section-80e">
                 <h3>What Section 80E does</h3>
                 <p>
-                  Section 80E of the Income Tax Act allows you to deduct the full interest paid on an education loan from your taxable income — with no upper limit — for up to 8 consecutive years from the year you begin repayment. The loan must be from a recognised financial institution (not a personal loan or credit card). Only the interest component is deductible, not the principal.
+                  Section 80E of the Income Tax Act allows you to deduct the full interest paid on an education loan from your taxable income, with no upper limit, for up to 8 consecutive years from the year you begin repayment. The loan must be from a recognised financial institution (not a personal loan or credit card). Only the interest component is deductible, not the principal.
                 </p>
                 <p>
-                  In practical terms: if your marginal tax rate is 30% and you pay Rs 1.5 lakh in interest in a year, your tax saving from Section 80E is Rs 45,000 — reducing the effective cost of that interest to Rs 1.05 lakh.
+                  In practical terms: if your marginal tax rate is 30% and you pay Rs 1.5 lakh in interest in a year, your tax saving from Section 80E is Rs 45,000, reducing the effective cost of that interest to Rs 1.05 lakh.
                 </p>
                 <div className="fg-80e-calc">
                   <div style={{ fontWeight: 700, color: "var(--navy)", marginBottom: "8px", fontSize: "14px" }}>Example: EMBA loan, 30% tax bracket</div>
@@ -726,11 +726,11 @@ export default function FeeGuideClient() {
                 </div>
                 <div className="fg-scholarship-card">
                   <h4>Women-in-management scholarships</h4>
-                  <p>Amity Online, Jain University Online, Symbiosis SCOL, and several other providers run dedicated scholarships for women applicants — typically 10–20% fee waiver with a minimum academic eligibility. Under-claimed relative to the number of women applicants who qualify.</p>
+                  <p>Amity Online, Jain University Online, Symbiosis SCOL, and several other providers run dedicated scholarships for women applicants, typically with a 10–20% fee waiver and a minimum academic eligibility requirement. Under-claimed relative to the number of women applicants who qualify.</p>
                 </div>
                 <div className="fg-scholarship-card">
                   <h4>Defence / veteran / disability concessions</h4>
-                  <p>Several universities — including state open universities and IGNOU — offer significant fee concessions for defence personnel, veterans, and persons with disabilities. IGNOU in particular has structured concessions across multiple categories. Requires documentation from the relevant authority.</p>
+                  <p>Several universities, including state open universities and IGNOU, offer significant fee concessions for defence personnel, veterans, and persons with disabilities. IGNOU in particular has structured concessions across multiple categories. Requires documentation from the relevant authority.</p>
                 </div>
               </div>
               <div className="fg-callout">
@@ -744,8 +744,8 @@ export default function FeeGuideClient() {
               <h2>Fee-related red flags that should make you pause</h2>
               <div className="fg-red-flags">
                 <ul>
-                  <li><strong>Fee significantly below the lowest legitimate benchmark (under Rs 25,000 for a "full MBA").</strong> Genuine UGC-DEB approved MBA programmes have real delivery costs — faculty, platform, examination infrastructure. Sub-Rs 25,000 "MBA" fees likely indicate an unapproved qualification.</li>
-                  <li><strong>Refusal to provide a complete, itemised fee structure document before you pay any application fee.</strong> Every legitimate university will provide a full fee breakdown — tuition, examination fees, study material fees, certification fees — in writing before you formally commit.</li>
+                  <li><strong>Fee significantly below the lowest legitimate benchmark (under Rs 25,000 for a "full MBA").</strong> Genuine UGC-DEB approved MBA programmes have real delivery costs: faculty, platform, examination infrastructure. Sub-Rs 25,000 "MBA" fees likely indicate an unapproved qualification.</li>
+                  <li><strong>Refusal to provide a complete, itemised fee structure document before you pay any application fee.</strong> Every legitimate university will provide a full fee breakdown (tuition, examination fees, study material fees, certification fees) in writing before you formally commit.</li>
                   <li><strong>Pressure to pay immediately to "lock in" a price or batch.</strong> Ethical enrolment practice involves giving you time to read the offer document, complete your own verification, and make an informed decision. High-pressure urgency tactics are a red flag.</li>
                   <li><strong>GST charged on core tuition fees.</strong> Core degree-programme tuition is GST-exempt. If you're shown a fee breakdown with GST on tuition, ask for clarification.</li>
                   <li><strong>Mid-programme fee revision with no clause in the original offer letter.</strong> Ask before enrolling: is the fee fixed for the full programme duration, or subject to revision? Get the answer in writing.</li>
@@ -799,7 +799,7 @@ export default function FeeGuideClient() {
               </div>
               <div className="fg-callout">
                 <span className="fg-callout-label">The ROI framing that matters most</span>
-                ROI calculations often focus on salary uplift, but the most consistent use case in our data is access-based: the MBA enables a promotion, role, or career track that was otherwise inaccessible — not just a salary increment in the same role. That shift in access is often worth more than a simple salary-delta calculation captures.
+                ROI calculations often focus on salary uplift, but the most consistent use case in our data is access-based: the MBA enables a promotion, role, or career track that was otherwise inaccessible, not just a salary increment in the same role. That shift in access is often worth more than a simple salary-delta calculation captures.
               </div>
             </section>
 
@@ -863,7 +863,7 @@ export default function FeeGuideClient() {
                 <span className="fg-lead-badge">Free Download</span>
                 <h2>Get the fee comparison sheet + true-cost calculator</h2>
                 <p className="fg-lead-lead">
-                  A printable one-page fee comparison across the top 20 universities, the 6-step true-cost worksheet, the Section 80E tax benefit calculator, and a refund-policy checklist template. Free — just tell us which specialization and financing preference we should tailor it to.
+                  A printable one-page fee comparison across the top 20 universities, the 6-step true-cost worksheet, the Section 80E tax benefit calculator, and a refund-policy checklist template. Free. Just tell us which specialization and financing preference we should tailor it to.
                 </p>
                 <form className="fg-lm-form" onSubmit={(e) => { e.preventDefault(); setModalOpen(true); }}>
                   <div className="fg-lm-field">
@@ -914,7 +914,7 @@ export default function FeeGuideClient() {
             </section>
 
             <div className="fg-disclaimer">
-              <strong>Disclaimer:</strong> Fee figures are collected from university official portals and admissions offices and are indicative for the 2025-26 academic year. They may change without notice. Always verify the complete, itemised fee structure directly with your shortlisted university before paying any fee. This guide does not constitute financial advice. Section 80E illustrations are for informational purposes only — consult a qualified tax professional for advice specific to your situation.
+              <strong>Disclaimer:</strong> Fee figures are collected from university official portals and admissions offices and are indicative for the 2025-26 academic year. They may change without notice. Always verify the complete, itemised fee structure directly with your shortlisted university before paying any fee. This guide does not constitute financial advice. Section 80E illustrations are for informational purposes only. Consult a qualified tax professional for advice specific to your situation.
             </div>
 
             {/* Related resources */}
@@ -954,8 +954,8 @@ export default function FeeGuideClient() {
                 <h4>Sources referenced</h4>
                 <ul>
                   <li>University official fee structure documents (20 universities), collected January 2026</li>
-                  <li><a href="https://deb.ugc.ac.in/" target="_blank" rel="noopener">UGC Distance Education Bureau (DEB)</a> — approved institution list</li>
-                  <li><a href="https://www.incometax.gov.in/" target="_blank" rel="noopener">Income Tax Act, Section 80E</a> — education loan interest deduction provisions</li>
+                  <li><a href="https://deb.ugc.ac.in/" target="_blank" rel="noopener">UGC Distance Education Bureau (DEB)</a>: approved institution list</li>
+                  <li><a href="https://www.incometax.gov.in/" target="_blank" rel="noopener">Income Tax Act, Section 80E</a>: education loan interest deduction provisions</li>
                   <li><a href="https://www.sbi.co.in/" target="_blank" rel="noopener">SBI Education Loan guidelines</a>, January 2026</li>
                   <li>Central Sector Interest Subsidy (CSIS) Scheme documentation, Ministry of Education</li>
                   <li>CollegeNCourses counselling records: fee planning conversations 2022-25 (1,200+ records analysed)</li>

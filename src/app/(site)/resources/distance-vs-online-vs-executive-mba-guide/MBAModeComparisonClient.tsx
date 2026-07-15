@@ -28,7 +28,7 @@ const TOC_ITEMS = [
 
 const TAKEAWAYS = [
   { label: "Fastest 3-second answer", text: "Working professionals wanting a promotion → Online MBA. Budget-tight self-learners → Distance MBA. Tier-1 industry reset or consulting-track → Executive MBA." },
-  { label: "Fee reality", text: "Distance ₹1.2–2 L, Online ₹1.5–3.5 L, Executive ₹8–25 L. The gap between Distance and Online is ₹50,000–1,00,000 — smaller than most aspirants assume." },
+  { label: "Fee reality", text: "Distance ₹1.2–2 L, Online ₹1.5–3.5 L, Executive ₹8–25 L. The gap between Distance and Online is ₹50,000–1,00,000, smaller than most aspirants assume." },
   { label: "Salary reality (2025-26)", text: "Median entry-level 3-year salary bump is ₹3–5 L for Distance/Online, ₹6–14 L for Executive Tier-1. Executive delivers a bigger absolute jump but takes 2–3x longer to pay back." },
   { label: "Dropout risk", text: "Distance MBAs see 40%+ non-completion. Online 25–35%. Executive under 10%. Live faculty interaction is the biggest predictor of completion." },
   { label: "Recognition parity", text: "All three modes are UGC-approved and legally equivalent when the university is on the current UGC-DEB or AICTE list. Employer perception varies more than legal validity." },
@@ -219,7 +219,7 @@ const NOT_FIT = {
   ],
   executive: [
     "You cannot afford ₹8–25 lakh and don't have employer sponsorship.",
-    "Your career objective is a within-industry promotion — Distance or Online is a better ROI.",
+    "Your career objective is a within-industry promotion: Distance or Online is a better ROI.",
     "You have under 3 years' work experience (most Executive programmes require 3+).",
     "You are stretching financially to fund it without a clear reset opportunity in view.",
   ],
@@ -229,27 +229,27 @@ const FRAMEWORK_STEPS = [
   {
     step: 1,
     title: "How much can you actually spend?",
-    body: `Set a walk-away number before you research programmes. If under ₹2 lakh — Distance or lower-end Online. If ₹1.5–3.5 lakh — Online. If ₹8+ lakh with no employer sponsorship — do a hard-nosed ROI calculation before committing to Executive.`,
+    body: `Set a walk-away number before you research programmes. If under ₹2 lakh: Distance or lower-end Online. If ₹1.5–3.5 lakh: Online. If ₹8+ lakh with no employer sponsorship: do a hard-nosed ROI calculation before committing to Executive.`,
   },
   {
     step: 2,
     title: "How many hours per week can you realistically commit?",
-    body: "Block your actual calendar for two typical weeks. If 8–10 hours max — Distance. If 12–15 hours — Online. If 20+ hours or full-time — Executive (in-person or intensive online).",
+    body: "Block your actual calendar for two typical weeks. If 8–10 hours max: Distance. If 12–15 hours: Online. If 20+ hours or full-time: Executive (in-person or intensive online).",
   },
   {
     step: 3,
     title: `What's your target role two years post-MBA?`,
-    body: `Name it specifically. "Manager" is too vague — Manager of what, where? If the target is a promotion in your current company — Distance or Online. If it's an industry switch — Online (moderate reset) or Executive (aggressive reset). If it's Tier-1 consulting — Executive at IIM/ISB.`,
+    body: `Name it specifically. "Manager" is too vague: Manager of what, where? If the target is a promotion in your current company: Distance or Online. If it's an industry switch: Online (moderate reset) or Executive (aggressive reset). If it's Tier-1 consulting: Executive at IIM/ISB.`,
   },
   {
     step: 4,
     title: `What does your employer actually think about Distance and Online MBAs?`,
-    body: `Not what LinkedIn says — what your reporting manager and HR say. Have the conversation before you enrol. If they say "we prefer regular MBA" and your promotion clock matters, calibrate accordingly.`,
+    body: `Not what LinkedIn says: what your reporting manager and HR say. Have the conversation before you enrol. If they say "we prefer regular MBA" and your promotion clock matters, calibrate accordingly.`,
   },
   {
     step: 5,
     title: `What's your dropout risk profile?`,
-    body: "Be honest. Distance MBA has 40%+ dropout in India. If you've historically struggled with self-paced learning, choose Online or Executive despite the higher fee — the completion probability is worth it.",
+    body: "Be honest. Distance MBA has 40%+ dropout in India. If you've historically struggled with self-paced learning, choose Online or Executive despite the higher fee: the completion probability is worth it.",
   },
   {
     step: 6,
@@ -309,14 +309,14 @@ const FAQS = [
   { q: "How much does each MBA mode cost in India in 2025-26?", a: "Distance MBA: ₹1.2–2 lakh. Online MBA: ₹1.5–3.5 lakh. Executive MBA: ₹8 lakh (Tier-2) to ₹25 lakh (IIM Indore residential). ISB PGPMAX and international programmes can go up to ₹40 lakh." },
   { q: "What is the salary difference between Distance, Online, and Executive MBA graduates?", a: "In 2025-26, median entry-level salary bumps are: Distance MBA graduates ₹2–4 lakh, Online MBA graduates ₹3–5 lakh, Executive MBA graduates from Tier-1 institutes ₹6–14 lakh. Executive delivers the biggest absolute jump but requires 5–15x the investment." },
   { q: "Are Distance and Online MBA valid for government jobs?", a: "Yes. UGC-DEB approved Distance and Online MBAs are legally equivalent to regular MBAs for all government job eligibility, per current UGC notifications (2020–2025). Confirm the specific university is on the UGC-DEB current approved-institutions list before enrolling." },
-  { q: "Do employers actually accept Distance and Online MBAs in 2025-26?", a: "Most Indian employers — especially IT, SaaS, D2C, fintech, services, and mid-to-large private companies — accept Distance and Online MBAs from UGC-DEB approved universities at parity with regular MBAs. Tier-1 consulting, PE, and investment banking still prefer residential Tier-1 MBAs." },
+  { q: "Do employers actually accept Distance and Online MBAs in 2025-26?", a: "Most Indian employers, especially IT, SaaS, D2C, fintech, services, and mid-to-large private companies, accept Distance and Online MBAs from UGC-DEB approved universities at parity with regular MBAs. Tier-1 consulting, PE, and investment banking still prefer residential Tier-1 MBAs." },
   { q: "What is the dropout rate for each mode?", a: "As of 2025-26, Distance MBAs see 40%+ non-completion, Online MBAs 25–35%, and Executive MBAs under 10%. The completion gap is driven primarily by cohort presence and live faculty interaction, not by ability." },
   { q: "Can I get education loans for all three modes?", a: "Yes. Standard education-loan providers (SBI, HDFC Credila, ICICI Bank, Avanse) cover all UGC-DEB and AICTE approved programmes. Distance and Online MBAs typically use short-tenure personal loans or salary EMIs; Executive MBAs use full education loans. Interest rates in 2025-26 range 9.5–12.5%." },
   { q: "Can I convert from Distance to Online MBA mid-programme?", a: "Formally, no. Once enrolled, mode is fixed at the same university. However, you can enrol in a new Online MBA at a different university if career priorities change, though you lose progress. The better strategy is to choose the right mode at enrolment." },
   { q: "What is the difference between AICTE and UGC-DEB approval?", a: "UGC-DEB (Distance Education Bureau) approves Distance and Online MBAs under UGC's remit. AICTE approves technical management education. Some Online MBAs carry both UGC-DEB and AICTE approval. Executive MBAs typically operate under AICTE, or for IIMs, under the IIM Act 2017. All three approval bodies confer legally equivalent degrees." },
   { q: "Which mode is best for working professionals?", a: "For most working professionals in India in 2025-26, Online MBA is the best mode. It balances cost (₹1.5–3.5 lakh), time commitment (12–15 hours per week), live faculty interaction, and placement support. Distance suits only budget-tight self-directed learners. Executive suits only Tier-1 industry-reset moments.", voice: true },
-  { q: "Is online MBA equal to regular MBA?", a: "Yes. As of 2025-26, an Online MBA from a UGC-DEB approved university is legally equivalent to a regular MBA for all purposes — government jobs, further education, and private-sector employment. Employer acceptance is high in most sectors, though Tier-1 consulting and investment banking still prefer residential MBAs.", voice: true },
-  { q: "How to choose the right MBA in India?", a: "Choose based on six factors: budget ceiling, weekly time availability, target role two years post-MBA, current employer's stated position on Online and Distance MBAs, your dropout risk profile, and whether you need international recognition. If under ₹3 lakh with a promotion target — Online MBA. Under ₹2 lakh, self-directed — Distance. Above ₹8 lakh, Tier-1 reset — Executive.", voice: true },
+  { q: "Is online MBA equal to regular MBA?", a: "Yes. As of 2025-26, an Online MBA from a UGC-DEB approved university is legally equivalent to a regular MBA for all purposes: government jobs, further education, and private-sector employment. Employer acceptance is high in most sectors, though Tier-1 consulting and investment banking still prefer residential MBAs.", voice: true },
+  { q: "How to choose the right MBA in India?", a: "Choose based on six factors: budget ceiling, weekly time availability, target role two years post-MBA, current employer's stated position on Online and Distance MBAs, your dropout risk profile, and whether you need international recognition. If under ₹3 lakh with a promotion target: Online MBA. Under ₹2 lakh, self-directed: Distance. Above ₹8 lakh, Tier-1 reset: Executive.", voice: true },
   { q: "How does CollegeNCourses help me choose the right mode?", a: "Our counsellors run a structured 30-minute free call in which we understand your role, income, career goal, budget, and timeline; walk you through the six-question decision framework; and shortlist three specific programmes across the right mode for your profile. We have no referral deal that affects our recommendation." },
 ];
 
@@ -617,7 +617,7 @@ export default function MBAModeComparisonClient() {
           <span className="mc-eyebrow">Resource Guide • 2025-26 Edition</span>
           <h1>Distance MBA vs Online MBA vs Executive MBA: the honest 2025-26 comparison</h1>
           <p className="mc-subtitle">
-            Fees, duration, salary, placement, and employer acceptance — all three modes compared side by side. Built from 412 alumni interviews and 2,000+ counselling conversations. No paid rankings. No sales pitch.
+            Fees, duration, salary, placement, and employer acceptance: all three modes compared side by side. Built from 412 alumni interviews and 2,000+ counselling conversations. No paid rankings. No sales pitch.
           </p>
           <div className="mc-trust">
             <span><span className="stars">★★★★★</span> 4.8 / 5 counselling rating</span>
@@ -669,7 +669,7 @@ export default function MBAModeComparisonClient() {
               </ol>
             </details>
 
-            {/* SECTION 2 — Key Takeaways */}
+            {/* SECTION 2: Key Takeaways */}
             <section id="takeaways" className="mc-takeaways">
               <h2>Key takeaways</h2>
               <ul>
@@ -679,7 +679,7 @@ export default function MBAModeComparisonClient() {
               </ul>
             </section>
 
-            {/* SECTION 3 — Quick Decision Matrix */}
+            {/* SECTION 3: Quick Decision Matrix */}
             <section id="decision-matrix">
               <h2>The 3-second answer for most aspirants</h2>
               <p><strong>Choose an Online MBA if you&apos;re a working professional with 2-10 years&apos; experience wanting a promotion.</strong> Choose a Distance MBA if your budget ceiling is under ₹2 lakh and you&apos;re self-disciplined. Choose an Executive MBA if you&apos;re targeting a Tier-1 industry reset, consulting career, or senior strategy role and can invest ₹15–25 lakh.</p>
@@ -696,7 +696,7 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 4 — What Each Mode Is */}
+            {/* SECTION 4: What Each Mode Is */}
             <section id="mode-defs">
               <h2>What each mode really means (before the jargon)</h2>
               <p><strong>Distance MBA is self-paced study with minimal live interaction</strong>, delivered largely through recorded content and printed material. Online MBA is scheduled live-class instruction with faculty interaction, recorded playback, and structured cohorts. Executive MBA is a full or part-time postgraduate programme designed for working professionals with 3+ years&apos; experience, delivered in-person or intensive interactive online.</p>
@@ -713,7 +713,7 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 5 — Complete Comparison Table */}
+            {/* SECTION 5: Complete Comparison Table */}
             <section id="comparison">
               <h2>The complete comparison, 13 dimensions</h2>
               <p>This is the master comparison table. Every dimension aspirants actually ask about, side by side.</p>
@@ -744,7 +744,7 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 6 — Fees & Financing */}
+            {/* SECTION 6: Fees & Financing */}
             <section id="fees">
               <span className="mc-freshness">Last verified 15 December 2025 · University official pages</span>
               <h2>What you&apos;ll actually pay across the three modes</h2>
@@ -769,11 +769,11 @@ export default function MBAModeComparisonClient() {
               </div>
               <div className="mc-callout">
                 <span className="mc-callout-label">The Distance–Online fee gap is smaller than it looks</span>
-                The mainstream Distance-to-Online fee gap is ₹50,000–1,00,000. Spread over 24 months, that&apos;s ₹2,000–4,000 per month — often less than the aspirant&apos;s monthly Uber or Zomato spend. Choosing the wrong mode to save ₹80,000 is the most common financial mis-optimisation we see in counselling calls.
+                The mainstream Distance-to-Online fee gap is ₹50,000–1,00,000. Spread over 24 months, that&apos;s ₹2,000–4,000 per month, often less than the aspirant&apos;s monthly Uber or Zomato spend. Choosing the wrong mode to save ₹80,000 is the most common financial mis-optimisation we see in counselling calls.
               </div>
             </section>
 
-            {/* SECTION 7 — Duration */}
+            {/* SECTION 7: Duration */}
             <section id="duration">
               <h2>How much time each mode actually demands</h2>
               <p>Duration and weekly time are the two dimensions aspirants underestimate most. Total programme duration is comparable across the three modes for the standard 24-month formats, but weekly time and cognitive load differ substantially.</p>
@@ -797,7 +797,7 @@ export default function MBAModeComparisonClient() {
               <p>A useful mental model: <strong>total study effort across a 24-month MBA is roughly 850 hours for Distance, 1,200 hours for Online, and 1,600 hours for a part-time Executive MBA.</strong> That difference explains the dropout gap and the outcome gap.</p>
             </section>
 
-            {/* SECTION 8 — Curriculum */}
+            {/* SECTION 8: Curriculum */}
             <section id="curriculum">
               <h2>What learning actually looks like across the three modes</h2>
               <p>Curricula are 70–80% overlapping across the three modes for the core management subjects. What differs is delivery format, depth of specialisation, and cohort learning.</p>
@@ -821,9 +821,9 @@ export default function MBAModeComparisonClient() {
               <p>The single biggest curriculum shift across all three modes in 2024-25 has been the introduction of &quot;AI for Managers&quot; electives at nearly every UGC-DEB approved university. See our <a href="/specializations-guide/marketing/">Marketing Management specialization guide</a> for a deeper look at curriculum changes.</p>
             </section>
 
-            {/* SECTION 9 — Faculty */}
+            {/* SECTION 9: Faculty */}
             <section id="faculty">
-              <h2>Who you learn from — and with</h2>
+              <h2>Who you learn from and with</h2>
               <p>Faculty quality and peer network are two of the most under-discussed dimensions in the mode-choice conversation, and often the ones that make the biggest difference to long-term career outcomes.</p>
               <div className="mc-table-wrap">
                 <table className="mc-table">
@@ -844,11 +844,11 @@ export default function MBAModeComparisonClient() {
               </div>
               <div className="mc-callout mc-callout-navy">
                 <span className="mc-callout-label">Counsellor observation</span>
-                The single biggest predictor of MBA completion and career outcome in our tracking is not fee, brand, or curriculum — it&apos;s live faculty interaction and cohort presence. Aspirants who reported &quot;regular live sessions with faculty&quot; had completion rates of 78% (Online) and 92% (Executive). Aspirants who chose pure self-paced Distance reported 58% completion. — CollegeNCourses Senior Counsellor Desk
+                The single biggest predictor of MBA completion and career outcome in our tracking is not fee, brand, or curriculum: it&apos;s live faculty interaction and cohort presence. Aspirants who reported &quot;regular live sessions with faculty&quot; had completion rates of 78% (Online) and 92% (Executive). Aspirants who chose pure self-paced Distance reported 58% completion. (CollegeNCourses Senior Counsellor Desk)
               </div>
             </section>
 
-            {/* SECTION 10 — Placement */}
+            {/* SECTION 10: Placement */}
             <section id="placement">
               <span className="mc-freshness">Last verified · 412 alumni surveyed 2024-25</span>
               <h2>What placement support looks like in each mode</h2>
@@ -874,7 +874,7 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 11 — Salary */}
+            {/* SECTION 11: Salary */}
             <section id="salary">
               <span className="mc-freshness">Cross-referenced with AmbitionBox, Naukri JobSpeak, LinkedIn Salary India Dataset Q3 2025</span>
               <h2>Salary outcomes across the three modes</h2>
@@ -906,7 +906,7 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 12 — Approval */}
+            {/* SECTION 12: Approval */}
             <section id="approval">
               <h2>Regulatory approval and employer recognition</h2>
               <p>All three MBA modes are legally recognised in India when the awarding university holds the correct approval. Distance and Online MBAs require UGC-DEB approval under the 2020 Online Regulations. Executive MBAs require AICTE approval or, for IIMs, coverage under the IIM Act 2017. Employer acceptance varies more than legal validity.</p>
@@ -929,11 +929,11 @@ export default function MBAModeComparisonClient() {
               </div>
               <div className="mc-callout">
                 <span className="mc-callout-label">Common misconception</span>
-                &quot;Online MBA degrees are second-class.&quot; As of 2025-26, UGC has been explicit that Online MBA degrees from approved universities carry identical legal standing to regular MBAs. Employer acceptance has followed. What varies is employer preference in premium hiring segments (consulting, PE, investment banking), where residential Tier-1 MBAs retain an edge. For the mainstream Indian job market — IT, SaaS, FMCG, D2C, banking, insurance — Distance and Online MBAs from UGC-DEB approved universities are hired at parity.
+                &quot;Online MBA degrees are second-class.&quot; As of 2025-26, UGC has been explicit that Online MBA degrees from approved universities carry identical legal standing to regular MBAs. Employer acceptance has followed. What varies is employer preference in premium hiring segments (consulting, PE, investment banking), where residential Tier-1 MBAs retain an edge. For the mainstream Indian job market (IT, SaaS, FMCG, D2C, banking, insurance), Distance and Online MBAs from UGC-DEB approved universities are hired at parity.
               </div>
             </section>
 
-            {/* SECTION 13 — Who Each Mode Fits */}
+            {/* SECTION 13: Who Each Mode Fits */}
             <section id="who-fits">
               <h2>Who each mode is genuinely built for</h2>
               <p>Three profile cards per mode. If you recognise yourself in one, that mode is worth serious consideration.</p>
@@ -968,25 +968,25 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 14 — Who Should NOT Pick Each Mode */}
+            {/* SECTION 14: Who Should NOT Pick Each Mode */}
             <section id="not-fit">
               <h2>Who should NOT pick each mode</h2>
               <p>Every mode has anti-fit signals. If two or more of the below describe you for a given mode, choose a different one.</p>
               <div className="mc-not-fit">
                 <div className="mc-not-col">
-                  <h4>Distance MBA — don&apos;t pick if:</h4>
+                  <h4>Distance MBA: don&apos;t pick if</h4>
                   <ul>
                     {NOT_FIT.distance.map((item, i) => <li key={i}>{item}</li>)}
                   </ul>
                 </div>
                 <div className="mc-not-col">
-                  <h4>Online MBA — don&apos;t pick if:</h4>
+                  <h4>Online MBA: don&apos;t pick if</h4>
                   <ul>
                     {NOT_FIT.online.map((item, i) => <li key={i}>{item}</li>)}
                   </ul>
                 </div>
                 <div className="mc-not-col">
-                  <h4>Executive MBA — don&apos;t pick if:</h4>
+                  <h4>Executive MBA: don&apos;t pick if</h4>
                   <ul>
                     {NOT_FIT.executive.map((item, i) => <li key={i}>{item}</li>)}
                   </ul>
@@ -994,11 +994,11 @@ export default function MBAModeComparisonClient() {
               </div>
               <div className="mc-callout mc-callout-navy">
                 <span className="mc-callout-label">Counsellor observation</span>
-                The most expensive regret we see is aspirants who fund a ₹15–25 lakh Executive MBA without a specific industry-reset plan. They complete the programme, return to the same role, and take 4–5 years to recover the investment. Executive MBA works best when there&apos;s a specific Tier-1 opportunity — consulting, PE, MNC senior strategy — in clear view before enrolment. — CollegeNCourses Senior Counsellor Desk
+                The most expensive regret we see is aspirants who fund a ₹15–25 lakh Executive MBA without a specific industry-reset plan. They complete the programme, return to the same role, and take 4–5 years to recover the investment. Executive MBA works best when there&apos;s a specific Tier-1 opportunity (consulting, PE, MNC senior strategy) in clear view before enrolment. (CollegeNCourses Senior Counsellor Desk)
               </div>
             </section>
 
-            {/* SECTION 15 — 6-Question Framework */}
+            {/* SECTION 15: 6-Question Framework */}
             <section id="framework">
               <h2>How to decide which MBA mode is right for you: 6 questions</h2>
               <p>Every mode-choice regret we hear in follow-up counselling calls comes back to one or more of the six questions below going unanswered at the time of enrolment. Work through each honestly. Book a free counselling call if you get stuck on any.</p>
@@ -1020,7 +1020,7 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 16 — Real Aspirant Scenarios */}
+            {/* SECTION 16: Real Aspirant Scenarios */}
             <section id="scenarios">
               <h2>Three real aspirant stories (anonymised)</h2>
               <div className="mc-scenarios">
@@ -1060,7 +1060,7 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 17 — ROI */}
+            {/* SECTION 17: ROI */}
             <section id="roi">
               <h2>The 5-year ROI picture</h2>
               <p>Every MBA is an investment. This section compares 5-year total return across the three modes for a representative aspirant: 5 years&apos; current experience, ₹9 LPA current salary, marketing specialization.</p>
@@ -1097,11 +1097,11 @@ export default function MBAModeComparisonClient() {
               </div>
               <div className="mc-callout">
                 <span className="mc-callout-label">What the ROI numbers reveal</span>
-                Distance and Online MBAs deliver the highest ROI <em>multiples</em> (return per rupee invested) because the investment is small. Executive MBAs deliver the highest <em>absolute</em> return but require a much higher upfront commitment. Which matters more to you — the multiple or the absolute — is the question that decides your mode.
+                Distance and Online MBAs deliver the highest ROI <em>multiples</em> (return per rupee invested) because the investment is small. Executive MBAs deliver the highest <em>absolute</em> return but require a much higher upfront commitment. Which matters more to you, the multiple or the absolute, is the question that decides your mode.
               </div>
             </section>
 
-            {/* SECTION 18 — FAQ */}
+            {/* SECTION 18: FAQ */}
             <section id="faq">
               <h2>Frequently asked questions</h2>
               <div className="mc-faq-list">
@@ -1120,13 +1120,13 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 19 — Lead Magnet / PDF Download */}
+            {/* SECTION 19: Lead Magnet / PDF Download */}
             <section id="pdf-download">
               <div className="mc-lead-magnet">
                 <span className="mc-lead-badge">Free Download</span>
                 <h2>Take this guide with you</h2>
                 <p className="mc-lead-lead">
-                  The full 2025-26 comparison guide, print-ready and shareable. Includes the complete comparison table, decision framework worksheet, and cost-benefit calculator. Free — just tell us where to send it.
+                  The full 2025-26 comparison guide, print-ready and shareable. Includes the complete comparison table, decision framework worksheet, and cost-benefit calculator. Free. Just tell us where to send it.
                 </p>
                 <div className="mc-lm-form">
                   <div className="mc-lm-field">
@@ -1170,7 +1170,7 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 20 — Related Resources */}
+            {/* SECTION 20: Related Resources */}
             <section id="related">
               <h2>Go deeper</h2>
               <div className="mc-related-grid">
@@ -1183,7 +1183,7 @@ export default function MBAModeComparisonClient() {
               </div>
             </section>
 
-            {/* SECTION 21 — Authors & Sources */}
+            {/* SECTION 21: Authors & Sources */}
             <section id="authors">
               <div className="mc-authors">
                 <h3>About this guide</h3>
@@ -1207,16 +1207,16 @@ export default function MBAModeComparisonClient() {
                 <h4>Sources referenced</h4>
                 <p style={{ fontWeight: 600, color: "var(--navy)", marginBottom: 4 }}>Regulatory</p>
                 <ul>
-                  <li>University Grants Commission (UGC) — ugc.gov.in</li>
-                  <li>UGC Distance Education Bureau (DEB) — deb.ugc.ac.in — Approved-institutions list, 2025-26</li>
-                  <li>AICTE Approval Process Handbook 2025-26 — aicte-india.org</li>
+                  <li>University Grants Commission (UGC): ugc.gov.in</li>
+                  <li>UGC Distance Education Bureau (DEB): deb.ugc.ac.in, Approved-institutions list, 2025-26</li>
+                  <li>AICTE Approval Process Handbook 2025-26: aicte-india.org</li>
                   <li>IIM Act 2017 (Ministry of Education, Government of India)</li>
                 </ul>
                 <p style={{ fontWeight: 600, color: "var(--navy)", marginBottom: 4, marginTop: 12 }}>Salary & market data</p>
                 <ul>
-                  <li>AmbitionBox — Salary Benchmarks Q3 2025</li>
-                  <li>Naukri.com JobSpeak Report — October 2025</li>
-                  <li>LinkedIn Salary India Dataset — 2025</li>
+                  <li>AmbitionBox: Salary Benchmarks Q3 2025</li>
+                  <li>Naukri.com JobSpeak Report: October 2025</li>
+                  <li>LinkedIn Salary India Dataset: 2025</li>
                 </ul>
                 <p style={{ fontWeight: 600, color: "var(--navy)", marginBottom: 4, marginTop: 12 }}>Internal</p>
                 <ul>
