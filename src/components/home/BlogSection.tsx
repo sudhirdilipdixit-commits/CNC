@@ -17,27 +17,27 @@ interface BlogSectionProps {
 
 const DEFAULT_POSTS: BlogPost[] = [
   {
-    tag: "AI in Education",
-    title: "AI Specializations in MBA: The Five Programmes Worth Considering in 2026",
+    tag: "Study Abroad",
+    title: "MBA in the USA vs UK: Which Makes More Sense for Indian Students in 2026?",
     excerpt:
-      "Symbiosis, IIM Indore, and Amity now offer dedicated AI tracks. Which ones are actually substantive, and which are repackaging?",
-    readTime: "6 min read",
-    publishedAt: "2026-04-15",
+      "Cost, visa requirements, GMAT expectations, and post-study work rights compared across both destinations. The answer depends on your budget and career goal.",
+    readTime: "8 min read",
+    publishedAt: "2026-06-10",
   },
   {
     tag: "Regulatory Update",
     title: "UGC-DEB Approved List 2026-27: What Changed and Why It Matters to You",
     excerpt:
-      "Three programmes lost approval this year. Five new ones joined. Here's the current list, cross-checked with UGC.",
-    readTime: "8 min read",
+      "Three programmes lost approval this year. Five new ones joined. Here is the current list, cross-checked with UGC.",
+    readTime: "7 min read",
     publishedAt: "2026-05-02",
   },
   {
     tag: "Programme Choice",
-    title: "One-Year Online MBA: Is the Accelerated Format Right for You?",
+    title: "Online MBA vs Distance MBA in 2026: A Plain-Language Comparison",
     excerpt:
-      "Twelve-month programmes are gaining traction with experienced professionals. The tradeoffs are real. Read before you commit.",
-    readTime: "7 min read",
+      "The modes have blurred. Here is what the difference actually means for your schedule, exams, and degree certificate.",
+    readTime: "6 min read",
     publishedAt: "2026-05-28",
   },
 ];
@@ -56,8 +56,8 @@ export default function BlogSection({ blogPosts }: BlogSectionProps) {
       <div className="container">
         <div className="section-head">
           <div className="eyebrow">FRESH PERSPECTIVES</div>
-          <h2 className="h-display h2">From our 2026 desk</h2>
-          <p>AI in MBA programmes, NEP rollout, and what employers are really looking for.</p>
+          <h2 className="h-display h2">From our desk</h2>
+          <p>Study in India, Study Abroad, programme choices, and what employers are really looking for.</p>
         </div>
 
         <div className="blog-grid">

@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import HomePageClient from "@/components/home/HomePageClient";
-import { sanityFetch } from "@/sanity/lib/client";
-import { homepageQuery } from "@/sanity/lib/queries";
 
 export const metadata: Metadata = {
   title:
-    "CollegeNCourses | Compare Online & Distance MBA Programmes in India 2026-27",
+    "CollegeNCourses | Study in India and Abroad - Compare. Choose. Begin.",
   description:
-    "Compare Online MBA, Distance MBA, and Executive MBA programmes from 150+ UGC-DEB and AICTE approved universities. Honest counselling, transparent fees, no sales pressure. Talk to a real counsellor in 30 minutes.",
+    "Compare Online MBA, Distance MBA, Executive MBA, and Study Abroad programmes from 150+ UGC-DEB approved universities and top global institutions. AI-powered guidance, transparent fees, no spam.",
   alternates: { canonical: "https://collegencourses.com/" },
   openGraph: {
     url: "https://collegencourses.com/",
@@ -15,7 +13,6 @@ export const metadata: Metadata = {
   },
 };
 
-// JSON-LD Schemas
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "EducationalOrganization",
@@ -24,7 +21,7 @@ const organizationSchema = {
   url: "https://collegencourses.com",
   logo: "https://collegencourses.com/logo.webp",
   description:
-    "India's trusted compass for higher-education decisions. We compare Online MBA, Distance MBA, and Executive MBA programmes from 150+ UGC-DEB approved universities.",
+    "India's trusted compass for higher-education decisions. Compare Online MBA, Distance MBA, Executive MBA, and Study Abroad programmes from 150+ UGC-DEB approved universities and top global institutions.",
   founder: { "@type": "Person", name: "Nikhita Pradeep Deshmukh" },
   foundingDate: "2023-04-29",
   parentOrganization: {
@@ -62,15 +59,23 @@ const faqSchema = {
       name: "How much does an Online MBA cost in India in 2026?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Total programme fees range from ₹50,000 at entry-level state universities to ₹6.5 lakh at IIMs for executive formats. The mainstream band sits between ₹1.5 lakh and ₹2.5 lakh for two-year programmes from Symbiosis, Amity, NMIMS, Manipal, ICFAI, and Welingkar.",
+        text: "Total programme fees range from Rs 50,000 at entry-level state universities to Rs 6.5 lakh at IIMs for executive formats. The mainstream band sits between Rs 1.5 lakh and Rs 2.5 lakh for two-year programmes from Symbiosis, Amity, NMIMS, Manipal, ICFAI, and Welingkar.",
       },
     },
     {
       "@type": "Question",
-      name: "Do employers in India accept Online and Distance MBAs?",
+      name: "Does CollegeNCourses help with Study Abroad options?",
       acceptedAnswer: {
         "@type": "Answer",
-        text: "Major MNCs and Indian corporates including TCS, Infosys, Reliance, Asian Paints, Mahindra, and HDFC treat Online and Distance MBAs from UGC-DEB approved universities at parity with regular MBAs in their HR policies.",
+        text: "Yes. CollegeNCourses covers both Study in India and Study Abroad. The AI Counsellor has two tracks: India (Online, Distance, Executive MBA) and Abroad (MBA, MS, MIM, Bachelors at global universities). The Profile Evaluator assesses your academics and budget to suggest Ambitious, Target, and Safe universities across 7 or more countries.",
+      },
+    },
+    {
+      "@type": "Question",
+      name: "How does guidance work at CollegeNCourses?",
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: "Use the AI Counsellor - answer 6 short questions about your goals, budget, and timeline and get a personalised programme shortlist instantly. For Study Abroad, the Profile Evaluator assesses your academics, test scores, and target country to suggest Ambitious, Target, and Safe universities.",
       },
     },
   ],
@@ -88,9 +93,7 @@ const websiteSchema = {
   },
 };
 
-export default async function HomePage() {
-  const cmsData = await sanityFetch<Record<string, unknown>>({ query: homepageQuery, revalidate: 300 }).catch(() => null);
-
+export default function HomePage() {
   return (
     <>
       <script
@@ -105,7 +108,7 @@ export default async function HomePage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(websiteSchema) }}
       />
-      <HomePageClient cmsData={cmsData} />
+      <HomePageClient />
     </>
   );
 }

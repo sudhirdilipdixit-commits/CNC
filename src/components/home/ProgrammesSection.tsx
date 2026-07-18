@@ -29,7 +29,7 @@ const FALLBACK_COURSES: FeaturedCourse[] = [
   },
   {
     _id: "f2",
-    courseName: "Distance MBA in HR",
+    courseName: "Distance MBA in Finance",
     universityName: "NMIMS Global Access",
     mode: "Distance",
     duration: "24 months",
@@ -55,8 +55,8 @@ export default function ProgrammesSection({ onOpenLeadForm, featuredCourses }: P
       <div className="container">
         <div className="section-head">
           <div className="eyebrow">FEATURED PROGRAMMES</div>
-          <h2 className="h-display h2">Programmes Indian aspirants are choosing in 2026</h2>
-          <p>Curated from the most-applied-to programmes on our portal this quarter.</p>
+          <h2 className="h-display h2">Programmes aspirants are choosing in 2026</h2>
+          <p>Curated from the most-applied-to programmes on our portal this quarter. Fees and accreditation verified.</p>
         </div>
 
         <div className="programme-grid">
@@ -109,7 +109,7 @@ export default function ProgrammesSection({ onOpenLeadForm, featuredCourses }: P
 
               <div className="fp-card-actions">
                 <button type="button" className="fp-btn-primary" onClick={onOpenLeadForm}>
-                  Get Free Career Counselling
+                  Get Free Guidance
                 </button>
               </div>
             </article>
@@ -117,7 +117,7 @@ export default function ProgrammesSection({ onOpenLeadForm, featuredCourses }: P
         </div>
 
         <div className="programme-grid-more">
-          <a href="#programmes">See all programmes on our portal &rarr;</a>
+          <a href="/online-mba/">Browse all Study in India programmes &rarr;</a>
         </div>
       </div>
     </section>

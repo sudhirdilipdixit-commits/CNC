@@ -1,7 +1,7 @@
 const testimonials = [
   {
     quote:
-      "I was sceptical about online MBAs. The CollegeNCourses counsellor spent 40 minutes explaining the UGC-DEB approval and showed me actual placement data from Symbiosis. I enrolled the next week. Two years later, I'm a senior manager.",
+      "I was sceptical about online MBAs. The CollegeNCourses team showed me the UGC-DEB approval details and actual placement data from Symbiosis. The fee comparison was completely transparent - no hidden charges, no vague starting-from pricing. I enrolled the next week. Two years later, I am a senior manager.",
     name: "Ankit Sharma",
     role: "Senior Manager at Tech Mahindra, Pune",
     programme: "Symbiosis Online MBA, 2023 cohort",
@@ -9,7 +9,7 @@ const testimonials = [
   },
   {
     quote:
-      "My parents were the harder sell, not me. The counsellor offered to talk to my father directly and walked him through the AICTE approval certificate. That call changed everything.",
+      "The AI Counsellor gave me three options within minutes, ranked by fit. I hadn't expected it to be that specific - it explained exactly why each programme matched my profile and budget. That clarity is why I trusted CollegeNCourses over every other site I visited.",
     name: "Priya Mehta",
     role: "Marketing Lead at Asian Paints, Mumbai",
     programme: "NMIMS Distance MBA, 2024 cohort",
@@ -17,9 +17,9 @@ const testimonials = [
   },
   {
     quote:
-      "I tried four other websites. They all asked for my number first. Only CollegeNCourses let me explore the AI Counsellor without giving up my mobile. That respect is why I came back.",
+      "I tried four other websites before this one. They all asked for my mobile number before showing me anything. CollegeNCourses let me explore the AI Counsellor without giving up my contact details first. That respect for my privacy is why I came back - and why I enrolled.",
     name: "Rajat Khanna",
-    role: "Family business, Surat",
+    role: "Family business owner, Surat",
     programme: "IIM Indore Executive MBA, 2025 cohort",
     initial: "R",
   },
@@ -44,7 +44,6 @@ export default function TestimonialsSection() {
                 border: "1px solid var(--mist)",
               }}
             >
-              {/* Open quote */}
               <span
                 className="absolute -top-2 left-4 text-6xl font-serif leading-none"
                 style={{ color: "var(--yellow)" }}

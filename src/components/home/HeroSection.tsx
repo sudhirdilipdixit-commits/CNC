@@ -18,12 +18,12 @@ const DEFAULTS: Required<HeroData> = {
   eyebrow: "INDIA'S TRUSTED HIGHER-EDUCATION COMPASS",
   headline: "Compare. Choose. Begin.",
   subheadline:
-    "Online MBA, Distance MBA, and Executive MBA programmes from UGC-DEB and AICTE approved universities, compared honestly and explained by real counsellors.",
-  primaryCTA: "Get Free Counselling",
+    "Online MBA, Distance MBA, Executive MBA, and Study Abroad programmes from 150+ UGC-DEB approved universities and top global institutions - compared honestly, explained clearly.",
+  primaryCTA: "Get Free Guidance",
   secondaryCTA: "Contact Us",
   trustStrip: [
-    "UGC-DEB & AICTE approved programmes",
-    "30-minute counsellor callback",
+    "150+ UGC-DEB approved universities",
+    "Study in India and Abroad",
     "No spam. No obligation.",
   ],
 };
@@ -66,29 +66,29 @@ export default function HeroSection({ onOpenLeadForm, hero }: HeroSectionProps) 
 
         <aside className="hero-visual" aria-hidden="true">
           <span className="hero-visual-label">AI Counsellor preview</span>
-          <h3 className="hero-visual-title">3 programmes recommended for you</h3>
+          <h3 className="hero-visual-title">3 programmes matched for you</h3>
 
           <div className="mini-card featured">
             <div className="mini-card-icon">S</div>
             <div className="mini-card-body">
               <div className="mini-card-name">Online MBA in Marketing</div>
-              <div className="mini-card-meta">Symbiosis · 24 months · ₹1.8 L</div>
+              <div className="mini-card-meta">Symbiosis · 24 months · Rs 1.8 L</div>
             </div>
           </div>
 
           <div className="mini-card">
             <div className="mini-card-icon">N</div>
             <div className="mini-card-body">
-              <div className="mini-card-name">Distance MBA in HR</div>
-              <div className="mini-card-meta">NMIMS · 24 months · ₹1.5 L</div>
+              <div className="mini-card-name">Distance MBA in Finance</div>
+              <div className="mini-card-meta">NMIMS · 24 months · Rs 1.5 L</div>
             </div>
           </div>
 
           <div className="mini-card">
-            <div className="mini-card-icon">A</div>
+            <div className="mini-card-icon">U</div>
             <div className="mini-card-body">
-              <div className="mini-card-name">Online MBA Digital Marketing</div>
-              <div className="mini-card-meta">Amity · 24 months · ₹1.4 L</div>
+              <div className="mini-card-name">MBA - University of Birmingham</div>
+              <div className="mini-card-meta">Study Abroad · 12 months · ~Rs 35 L</div>
             </div>
           </div>
         </aside>

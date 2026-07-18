@@ -18,14 +18,14 @@ export default function WhyUsSection() {
             </thead>
             <tbody>
               <tr>
-                <td>Counsellor</td>
-                <td>Commission-driven sales agent</td>
-                <td>MBA alumni &amp; industry mentors</td>
+                <td>Guidance</td>
+                <td>Commission-driven sales call</td>
+                <td>AI Counsellor - instant, unbiased shortlist</td>
               </tr>
               <tr>
                 <td>Programme list</td>
-                <td>500+ unverified</td>
-                <td>150+ UGC-DEB approved</td>
+                <td>500+ unverified listings</td>
+                <td>150+ UGC-DEB approved + global universities</td>
               </tr>
               <tr>
                 <td>Fees disclosure</td>
@@ -35,17 +35,17 @@ export default function WhyUsSection() {
               <tr>
                 <td>Sales follow-up</td>
                 <td>Multiple calls per day</td>
-                <td>One call, one WhatsApp, no spam</td>
+                <td>One email, no spam</td>
               </tr>
               <tr>
                 <td>Recommendation tool</td>
                 <td>None</td>
-                <td>AI Counsellor + human review</td>
+                <td>AI Counsellor + Profile Evaluator</td>
               </tr>
               <tr>
-                <td>Time to first counsellor call</td>
-                <td>1, 2 days</td>
-                <td>30 minutes</td>
+                <td>Study Abroad support</td>
+                <td>Not available</td>
+                <td>7+ countries, Ambitious/Target/Safe shortlist</td>
               </tr>
             </tbody>
           </table>

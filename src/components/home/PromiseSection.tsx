@@ -6,8 +6,8 @@ export default function PromiseSection() {
           <div className="eyebrow">OUR PROMISE</div>
           <h2 className="h-display h2">You&#39;ll leave more clear than you arrived.</h2>
           <p>
-            Whether you choose us, choose elsewhere, or choose to wait, you&#39;ll know your options,
-            you&#39;ll know yourself, and you&#39;ll move forward with confidence.
+            Whether you choose India or abroad, whether you enrol now or later, you&#39;ll know your real options
+            and move forward with confidence.
           </p>
         </div>
 
@@ -18,11 +18,11 @@ export default function PromiseSection() {
           </div>
           <div className="pillar">
             <span className="pillar-check" aria-hidden="true">✓</span>
-            <span className="pillar-text">Free Counselling. No Hidden Charges.</span>
+            <span className="pillar-text">Free AI Guidance. No Hidden Charges.</span>
           </div>
           <div className="pillar">
             <span className="pillar-check" aria-hidden="true">✓</span>
-            <span className="pillar-text">Counsellors are Alumni &amp; Industry Mentors</span>
+            <span className="pillar-text">Transparent Fees on Every Programme</span>
           </div>
         </div>
       </div>
