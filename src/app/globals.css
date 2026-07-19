@@ -371,14 +371,14 @@ section { padding: 64px 0; }
 
 .nav-dropdown {
   position: absolute;
-  top: calc(100% + 14px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
   background: #fff;
   border: 1px solid #dde2ec;
   border-radius: 8px;
   min-width: 192px;
-  padding: 6px 0;
+  padding: 20px 0 6px;
   box-shadow: 0 8px 28px rgba(14, 31, 61, 0.11);
   opacity: 0;
   pointer-events: none;
