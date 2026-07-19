@@ -44,21 +44,28 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>About</h4>
+            <h4>Study in India</h4>
             <ul className="footer-list">
-              <li><a href="/about">About Us</a></li>
+              <li><a href="#">Online MBA</a></li>
+              <li><a href="#">Distance MBA</a></li>
+              <li><a href="#">Executive MBA</a></li>
+              <li><a href="#">Regular MBA</a></li>
+              <li><a href="#">Design Programmes</a></li>
+              <li><a href="#">Specializations Guide</a></li>
+              <li><a href="#">Universities and Courses</a></li>
             </ul>
           </div>
 
           <div className="footer-col">
-            <h4>Specializations</h4>
+            <h4>Study Abroad</h4>
             <ul className="footer-list">
-              <li><a href="#">Marketing</a></li>
-              <li><a href="#">Finance</a></li>
-              <li><a href="#">HR</a></li>
-              <li><a href="#">Operations</a></li>
-              <li><a href="#">IT &amp; Project Management</a></li>
-              <li><a href="#">Healthcare</a></li>
+              <li><a href="#">By Destination</a></li>
+              <li><a href="#">By Programme</a></li>
+              <li><a href="#">Profile Evaluation</a></li>
+              <li><a href="#">Education Loans Abroad</a></li>
+              <li><a href="#">Scholarships</a></li>
+              <li><a href="#">Visa Guides</a></li>
+              <li><a href="#">Cost Calculator</a></li>
             </ul>
           </div>
 
