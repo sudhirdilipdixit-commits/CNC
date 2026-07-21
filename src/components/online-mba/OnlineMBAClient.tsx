@@ -477,7 +477,7 @@ export default function OnlineMBAClient() {
                   >
                     <button
                       type="button"
-                      className="faq-q"
+                      className="faq-question"
                       onClick={() => toggleFaq(i)}
                       aria-expanded={openFaq === i}
                     >
@@ -485,7 +485,7 @@ export default function OnlineMBAClient() {
                       <span className="faq-icon" aria-hidden="true">{openFaq === i ? '-' : '+'}</span>
                     </button>
                     {openFaq === i && (
-                      <div className="faq-a">{item.a}</div>
+                      <div className="faq-answer">{item.a}</div>
                     )}
                   </div>
                 ))}
