@@ -1360,3 +1360,223 @@ section { padding: 64px 0; }
   from { opacity: 0; }
   to { opacity: 1; }
 }
+
+/* =====================================================================
+   SPECIALIZATION LANDING PAGES (Online MBA, Distance MBA, Executive MBA)
+   ===================================================================== */
+
+/* Breadcrumb */
+.breadcrumb {
+  font-size: 12px;
+  color: var(--grey);
+  padding: 12px 0;
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.breadcrumb a { color: var(--grey); }
+.breadcrumb a:hover { color: var(--navy); }
+.breadcrumb .sep { color: var(--pale-navy); }
+.crumb-current { color: var(--navy); font-weight: 500; }
+
+/* Two-column layout: main content + sidebar */
+.sp-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  align-items: start;
+}
+@media (min-width: 1024px) {
+  .sp-layout { grid-template-columns: 1fr 340px; gap: 56px; }
+}
+
+/* Hero */
+.sp-hero { padding: 40px 0 0; background: var(--ivory); }
+.sp-hero-content { padding-bottom: 40px; }
+.sp-hero-content h1 { margin: 12px 0 20px; }
+.sp-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+
+/* Answer capsule (AEO) */
+.answer-capsule {
+  background: var(--white);
+  border-left: 4px solid var(--yellow);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 16px 20px;
+  margin-bottom: 24px;
+  font-size: 15px;
+  color: var(--charcoal);
+  line-height: 1.65;
+}
+
+/* Sticky sidebar */
+.sp-sidebar { display: none; }
+@media (min-width: 1024px) {
+  .sp-sidebar {
+    display: block;
+    position: sticky;
+    top: calc(64px + 24px);
+    background: var(--white);
+    border: 1px solid var(--mist);
+    border-top: 4px solid var(--yellow);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+  }
+}
+.sp-sidebar-header { background: var(--navy); padding: 20px; }
+.sp-sidebar-header h3 {
+  font-family: var(--font-serif);
+  font-size: 20px;
+  color: var(--ivory);
+  margin-bottom: 6px;
+  line-height: 1.2;
+}
+.sp-sidebar-header p { font-size: 13px; color: var(--yellow); }
+.sp-sidebar-body { padding: 20px; }
+.sp-sidebar-note { font-size: 11px; color: var(--grey); text-align: center; margin-top: 12px; line-height: 1.5; }
+.sp-sidebar-stats { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+.sp-sidebar-stat { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--charcoal); }
+.sp-sidebar-stat strong { color: var(--navy); }
+
+/* Table of contents */
+.toc-box {
+  background: var(--pale-navy);
+  border-radius: var(--radius-md);
+  padding: 20px 24px;
+  margin-bottom: 40px;
+}
+.toc-box h4 { color: var(--navy); margin-bottom: 12px; font-size: 15px; font-weight: 700; }
+.toc-box ol { list-style: none; display: flex; flex-direction: column; gap: 8px; counter-reset: toc; }
+.toc-box li { font-size: 14px; display: flex; gap: 8px; align-items: baseline; counter-increment: toc; }
+.toc-box li::before { content: counter(toc) "."; color: var(--navy); font-weight: 700; flex-shrink: 0; min-width: 16px; }
+.toc-box a { color: var(--navy); font-weight: 500; }
+.toc-box a:hover { text-decoration: underline; }
+
+/* Section divider rule */
+.section-rule { width: 48px; height: 3px; background: var(--yellow); margin: 16px 0 24px; border: none; }
+
+/* Landing page sections */
+.section-lp { padding: 56px 0; }
+@media (min-width: 1024px) { .section-lp { padding: 72px 0; } }
+.section-lp-alt { background: var(--white); }
+
+/* Info card */
+.info-card {
+  background: var(--pale-navy);
+  border-left: 4px solid var(--yellow);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  padding: 18px 20px;
+  margin-top: 24px;
+}
+.info-card-title { font-weight: 700; color: var(--navy); font-size: 15px; margin-bottom: 6px; }
+
+/* Comparison table */
+.comp-table-wrap {
+  overflow-x: auto;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--mist);
+  box-shadow: 0 1px 3px rgba(36,48,72,.06);
+  margin-bottom: 8px;
+}
+.comp-table { width: 100%; border-collapse: collapse; min-width: 640px; font-size: 13px; }
+.comp-table thead th {
+  background: var(--navy);
+  color: var(--ivory);
+  padding: 12px 14px;
+  text-align: left;
+  font-size: 12px;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.comp-table thead th:first-child { color: var(--pale-navy); }
+.comp-table tbody tr { transition: background .12s; }
+.comp-table tbody tr:nth-child(odd) td { background: var(--ivory); }
+.comp-table tbody tr:nth-child(even) td { background: var(--white); }
+.comp-table tbody tr:hover td { background: var(--pale-navy) !important; }
+.comp-table td { padding: 12px 14px; vertical-align: middle; border-bottom: 1px solid var(--mist); }
+.comp-table .rank { width: 36px; font-weight: 800; color: var(--yellow); font-family: var(--font-serif); font-size: 18px; }
+.comp-table .uni-name { font-weight: 700; color: var(--navy); display: block; margin-bottom: 2px; }
+.comp-table .prog-label { font-size: 11px; color: var(--grey); display: block; }
+.comp-table .stars-sm { color: var(--yellow); font-size: 11px; }
+.comp-table .fee { font-weight: 700; color: var(--navy); white-space: nowrap; }
+.comp-table-note { font-size: 12px; color: var(--grey); margin-top: 8px; line-height: 1.6; }
+.mode-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: var(--mist);
+  color: var(--navy);
+}
+.accred-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: 3px;
+  background: #E8F5EA;
+  color: #1B5E20;
+  border: 1px solid #A5D6A7;
+}
+
+/* Salary chart */
+.salary-chart { display: flex; flex-direction: column; gap: 16px; margin: 24px 0; }
+.salary-row { display: grid; grid-template-columns: 180px 1fr 80px; gap: 12px; align-items: center; }
+@media (max-width: 600px) { .salary-row { grid-template-columns: 1fr; gap: 4px; } }
+.salary-label { font-size: 13px; font-weight: 600; color: var(--navy); }
+.salary-bar-wrap { background: var(--mist); border-radius: var(--radius-pill); height: 28px; overflow: hidden; }
+.salary-bar { height: 100%; border-radius: var(--radius-pill); background: linear-gradient(90deg, var(--navy), #2E4A7C); display: flex; align-items: center; padding-left: 10px; }
+.salary-bar span { font-size: 11px; font-weight: 700; color: #fff; }
+.salary-range { font-size: 12px; color: var(--grey); font-weight: 600; }
+
+/* Fits / Doesn't fit */
+.fit-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
+@media (min-width: 640px) { .fit-grid { grid-template-columns: 1fr 1fr; } }
+.fit-box { padding: 20px 24px; border-radius: var(--radius-md); }
+.fit-box.fit-yes { background: #E8F5EA; border-left: 4px solid #2A7A3A; }
+.fit-box.fit-no { background: #FFF3E0; border-left: 4px solid #E65100; }
+.fit-box h4 { margin-bottom: 12px; font-weight: 700; font-size: 15px; }
+.fit-box.fit-yes h4 { color: #1B5E20; }
+.fit-box.fit-no h4 { color: #BF360C; }
+.fit-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.fit-list li { font-size: 14px; display: flex; gap: 8px; align-items: baseline; }
+.fit-list li::before { content: ''; flex: 0 0 6px; height: 6px; border-radius: 50%; margin-top: 6px; flex-shrink: 0; }
+.fit-box.fit-yes .fit-list li::before { background: #2A7A3A; }
+.fit-box.fit-no .fit-list li::before { background: #E65100; }
+
+/* Numbered question items */
+.questions-list { display: flex; flex-direction: column; gap: 24px; }
+.q-item { display: flex; gap: 16px; align-items: flex-start; }
+.q-num {
+  flex: 0 0 36px; width: 36px; height: 36px;
+  background: var(--yellow); color: var(--navy);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif); font-size: 18px; font-weight: 700;
+}
+.q-body h4 { margin-bottom: 6px; font-size: 16px; color: var(--navy); font-weight: 700; }
+.q-body p { font-size: 14px; color: var(--charcoal); line-height: 1.65; }
+
+/* Landing page CTA band */
+.lp-cta-band {
+  background: var(--yellow);
+  padding: 56px 0;
+  text-align: center;
+  border-top: 4px solid var(--navy);
+}
+.lp-cta-band h2 {
+  font-family: var(--font-serif);
+  color: var(--navy);
+  font-size: clamp(24px, 3.5vw, 36px);
+  margin-bottom: 12px;
+}
+.lp-cta-band p { color: var(--navy); font-size: 16px; margin-bottom: 28px; }
