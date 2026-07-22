@@ -124,7 +124,7 @@ export default function OnlineMBAClient() {
             <aside className="sp-sidebar" aria-label="Quick enquiry">
               <div className="sp-sidebar-header">
                 <h3>Find the right Online MBA for you</h3>
-                <p>Free. No pressure. No spam.</p>
+                <p>Free. Takes 2 minutes. Personalised to your profile.</p>
               </div>
               <div className="sp-sidebar-body">
                 <div className="sp-sidebar-stats">
@@ -500,7 +500,7 @@ export default function OnlineMBAClient() {
       <section className="lp-cta-band">
         <div className="container">
           <h2>Ready to find your Online MBA?</h2>
-          <p>Get a personalised shortlist of UGC-DEB approved programmes matched to your profile, goals, and budget. Free. No pressure.</p>
+          <p>Get a personalised shortlist of UGC-DEB approved programmes matched to your profile, goals, and budget. Free. Takes 2 minutes.</p>
           <button type="button" className="btn btn-inverted" onClick={() => openModal('online-mba-cta-band')}>
             Get Free Guidance {ARROW}
           </button>

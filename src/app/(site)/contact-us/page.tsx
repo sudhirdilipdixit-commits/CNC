@@ -62,7 +62,7 @@ export default function ContactPage() {
             </h1>
             <p className="lede">
               Call us, WhatsApp us, or fill the form below. A senior counsellor reaches you within
-              30 minutes during working hours. No call centre. No pressure.
+              30 minutes during working hours. Direct line, no call centre.
             </p>
           </div>
         </div>
@@ -134,7 +134,7 @@ export default function ContactPage() {
           <div className="contact-form-card">
             <div className="contact-form-header">
               <h2>Or fill the form and we&apos;ll call you</h2>
-              <p>Within 30 minutes during working hours. No spam, no obligations.</p>
+              <p>Within 30 minutes during working hours. A senior counsellor will call you back.</p>
             </div>
             <div className="contact-form-body">
               <ContactForm />

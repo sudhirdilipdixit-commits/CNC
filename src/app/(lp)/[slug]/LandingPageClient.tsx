@@ -754,7 +754,7 @@ export default function LandingPageClient({
                   >
                     Talk to a Counsellor
                   </button>
-                  <p className="lp-sidebar-note">Free · No spam · 30 min</p>
+                  <p className="lp-sidebar-note">Free · Takes 30 min · Results in your inbox</p>
                 </div>
               )}
             </aside>}

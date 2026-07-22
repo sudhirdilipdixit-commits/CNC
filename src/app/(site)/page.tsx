@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title:
     "CollegeNCourses | Study in India and Abroad - Compare. Choose. Begin.",
   description:
-    "Compare Online MBA, Distance MBA, Executive MBA, and Study Abroad programmes from 150+ UGC-DEB approved universities and top global institutions. AI-powered guidance, transparent fees, no spam.",
+    "Compare Online MBA, Distance MBA, Executive MBA, and Study Abroad programmes from 150+ UGC-DEB approved universities and top global institutions. AI-powered guidance and transparent fees.",
   alternates: { canonical: "https://collegencourses.com/" },
   openGraph: {
     url: "https://collegencourses.com/",

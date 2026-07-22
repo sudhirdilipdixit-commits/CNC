@@ -145,7 +145,7 @@ const DEFAULT: CMSData = {
   faqsHeading: "Frequently Asked Questions",
   ctaBand: {
     heading: "Not sure Marketing is right for you?",
-    body: "Our AI Counsellor compares all 8 specializations against your profile and recommends the best fit in 2 minutes. No spam, no follow-up calls unless you ask.",
+    body: "Our AI Counsellor compares all 8 specializations against your profile and recommends the best fit in 2 minutes.",
     primaryCtaLabel: "Try the AI Counsellor",
     secondaryCtaLabel: "Talk to a Counsellor",
     secondaryCtaHref: "tel:+917350460393",

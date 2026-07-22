@@ -391,7 +391,7 @@ export default function LeadModal({
             ×
           </button>
           <h2 id="modalTitle">{title}</h2>
-          <p>Free, no spam, no obligations.</p>
+          <p>Free. Takes 2 minutes.</p>
         </div>
 
         {/* Duplicate message */}

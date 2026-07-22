@@ -65,7 +65,7 @@ function MidCaptureForm() {
     <div className="bi-mid-capture">
       <div className="bi-mid-body">
         <h3>Skip the research. Get expert guidance.</h3>
-        <p>Speak with a counsellor who knows India&apos;s online MBA landscape. Free, no pressure, 15 minutes.</p>
+        <p>Speak with a counsellor who knows India&apos;s online MBA landscape. Free. Takes 15 minutes.</p>
       </div>
       <form className="bi-mid-form" onSubmit={handleSubmit} noValidate>
         <input

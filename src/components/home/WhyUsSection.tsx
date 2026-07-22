@@ -35,7 +35,7 @@ export default function WhyUsSection() {
               <tr>
                 <td>Sales follow-up</td>
                 <td>Multiple calls per day</td>
-                <td>One email, no spam</td>
+                <td>Matched shortlist in your inbox</td>
               </tr>
               <tr>
                 <td>Recommendation tool</td>

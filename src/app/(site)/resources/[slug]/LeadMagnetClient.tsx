@@ -192,7 +192,7 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
                         {data.formTitle ?? "Get the Guide. Free."}
                       </h3>
                       <p style={{ color: "var(--yellow)", fontSize: 13 }}>
-                        {data.formSubtitle ?? "In your inbox in 60 seconds. No spam."}
+                        {data.formSubtitle ?? "In your inbox in 60 seconds."}
                       </p>
                     </div>
 

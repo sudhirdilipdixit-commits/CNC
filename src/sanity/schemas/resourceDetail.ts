@@ -99,13 +99,13 @@ export default defineType({
       name: "formSubtitle",
       title: "Form Subtitle",
       type: "string",
-      initialValue: "In your inbox in 60 seconds. No spam.",
+      initialValue: "In your inbox in 60 seconds.",
     }),
     defineField({
       name: "formFooterNote",
       title: "Form Footer Note",
       type: "string",
-      initialValue: "No call unless you ask for one. Seriously.",
+      initialValue: "Your details are handled as per our Privacy Policy.",
     }),
 
     // ── Guide meta ──────────────────────────────────────────────────────────

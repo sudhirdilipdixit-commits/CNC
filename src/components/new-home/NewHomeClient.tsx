@@ -90,7 +90,7 @@ export default function NewHomeClient() {
               <span className="sep">·</span>
               <span>Study in India and Abroad</span>
               <span className="sep">·</span>
-              <span>No spam. No obligation.</span>
+              <span>Guidance matched to your profile.</span>
             </div>
           </div>
 
@@ -341,7 +341,7 @@ export default function NewHomeClient() {
                 <tr>
                   <td>Sales follow-up</td>
                   <td>Multiple calls per day</td>
-                  <td>One email at most, no spam</td>
+                  <td>Matched shortlist in your inbox</td>
                 </tr>
                 <tr>
                   <td>Recommendation tool</td>

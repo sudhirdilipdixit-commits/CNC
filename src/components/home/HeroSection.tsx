@@ -24,7 +24,7 @@ const DEFAULTS: Required<HeroData> = {
   trustStrip: [
     "150+ UGC-DEB approved universities",
     "Study in India and Abroad",
-    "No spam. No obligation.",
+    "Guidance matched to your profile.",
   ],
 };
 
