@@ -205,7 +205,7 @@ export default function StudyInIndiaClient() {
             <aside className="sp-sidebar" aria-label="Quick enquiry">
               <div className="sp-sidebar-header">
                 <h3>Find the right programme for you</h3>
-                <p>Free. Takes 2 minutes. Personalised to your profile.</p>
+                <p>Takes 2 minutes. Personalised to your profile.</p>
               </div>
               <div className="sp-sidebar-body">
                 <div className="sp-sidebar-stats">
@@ -234,9 +234,6 @@ export default function StudyInIndiaClient() {
                 >
                   Get Free Guidance {ARROW}
                 </button>
-                <p className="sp-sidebar-note">
-                  Answer 3 questions and get a matched shortlist suited to your profile and budget.
-                </p>
               </div>
             </aside>
           </div>
