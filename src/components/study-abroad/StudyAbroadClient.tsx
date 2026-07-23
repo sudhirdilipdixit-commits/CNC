@@ -123,21 +123,21 @@ const TOOLS = [
     title: 'Profile Evaluation',
     desc: 'Enter your academics, test scores, target country, and budget. Get a shortlist of Ambitious, Target, and Safe universities with indicative admit-likelihood and estimated costs. Free. Takes 5 minutes.',
     cta: 'Start Profile Evaluation',
-    source: 'study-abroad-profile-eval',
+    href: '/study-abroad/profile-evaluation',
     featured: true,
   },
   {
     title: 'Cost Calculator',
     desc: 'Estimate the total cost of studying abroad by country and city: tuition, living expenses, visa fees, health insurance, and travel. Compare countries side by side.',
     cta: 'Calculate Your Cost',
-    source: 'study-abroad-cost-calc',
+    href: '/study-abroad/cost-calculator',
     featured: false,
   },
   {
     title: 'Test Prep Guides',
     desc: 'GRE, GMAT, IELTS, TOEFL, PTE, and Duolingo - which test is needed, what score is competitive, and how long to prepare. Country and programme specific.',
     cta: 'View Test Prep Guides',
-    source: 'study-abroad-test-prep',
+    href: '/study-abroad/test-prep',
     featured: false,
   },
 ]
@@ -401,14 +401,13 @@ export default function StudyAbroadClient() {
                 )}
                 <div className="tool-card-title">{tool.title}</div>
                 <div className="tool-card-desc">{tool.desc}</div>
-                <button
-                  type="button"
+                <a
+                  href={tool.href}
                   className={tool.featured ? 'btn btn-inverted' : 'btn btn-secondary'}
                   style={{ marginTop: 8, alignSelf: 'flex-start' }}
-                  onClick={() => openModal(tool.source)}
                 >
                   {tool.cta} {ARROW}
-                </button>
+                </a>
               </div>
             ))}
           </div>
