@@ -30,7 +30,7 @@ const NAV_ITEMS = [
   },
   {
     label: "Study Abroad",
-    href: "#",
+    href: "/study-abroad",
     children: [
       { label: "By Destination", href: "#" },
       { label: "By Programme", href: "#" },

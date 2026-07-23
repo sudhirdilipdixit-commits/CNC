@@ -57,7 +57,7 @@ export default function Footer() {
           </div>
 
           <div className="footer-col">
-            <h4>Study Abroad</h4>
+            <h4><a href="/study-abroad" style={{ color: 'inherit', textDecoration: 'none' }}>Study Abroad</a></h4>
             <ul className="footer-list">
               <li><a href="#">By Destination</a></li>
               <li><a href="#">By Programme</a></li>
