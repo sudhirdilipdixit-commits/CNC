@@ -17,9 +17,9 @@ const CHEVRON = (
 const NAV_ITEMS = [
   {
     label: "Study in India",
-    href: "#",
+    href: "/study-in-india",
     children: [
-      { label: "Online MBA", href: "#" },
+      { label: "Online MBA", href: "/online-mba" },
       { label: "Distance MBA", href: "#" },
       { label: "Executive MBA", href: "#" },
       { label: "Regular MBA", href: "#" },

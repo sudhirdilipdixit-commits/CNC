@@ -79,7 +79,7 @@ export default function OnlineMBAClient() {
           <nav className="breadcrumb" aria-label="Breadcrumb">
             <a href="/">Home</a>
             <span className="sep">/</span>
-            <a href="/online-mba">Study in India</a>
+            <a href="/study-in-india">Study in India</a>
             <span className="sep">/</span>
             <span className="crumb-current">Online MBA</span>
           </nav>
