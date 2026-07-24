@@ -170,7 +170,7 @@ export default function ContactForm() {
             <label style={label}>Mobile <span style={{ color: "#B83A2A" }}>*</span></label>
             <input style={inp("mobile")} type="tel" value={form.mobile} placeholder="98XXX XXXXX"
               onChange={(e) => set("mobile", e.target.value)} />
-            <div style={hint}>We&apos;ll call you on this number.</div>
+            <div style={hint}>Used to reach you about your enquiry.</div>
             {err("mobile")}
           </div>
           <div style={ff}>
@@ -264,7 +264,7 @@ export default function ContactForm() {
       {step === 3 && (
         <div>
           <div style={ff}>
-            <label style={label}>When should we call?</label>
+            <label style={label}>When&apos;s a good time to reach you?</label>
             <select style={input} value={form.callTime} onChange={(e) => set("callTime", e.target.value)}>
               <option>As soon as possible</option>
               <option>Today evening (after 6 pm)</option>
@@ -289,7 +289,12 @@ export default function ContactForm() {
           <label style={{ display: "flex", gap: 8, alignItems: "flex-start", fontSize: 12, color: "var(--grey)", marginBottom: 14, lineHeight: 1.5, cursor: "pointer" }}>
             <input type="checkbox" checked={form.consent} onChange={(e) => set("consent", e.target.checked)}
               style={{ marginTop: 3, flexShrink: 0, accentColor: "var(--navy)" }} />
-            <span>I agree to be contacted by CollegeNCourses about my enquiry. We never sell or share your data.</span>
+            <span>
+              I agree that CollegeNCourses and the university or institution I am enquiring about
+              may contact me by call, WhatsApp, SMS, and email regarding my enquiry, including on
+              numbers registered with DND/NDNC, and that my details may be shared with that
+              institution&apos;s admissions team so they can assist me.
+            </span>
           </label>
           {err("consent")}
           <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: 20, gap: 12 }}>

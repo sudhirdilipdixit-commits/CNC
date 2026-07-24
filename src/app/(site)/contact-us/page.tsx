@@ -5,11 +5,10 @@ import ContactForm from "@/components/contact/ContactForm";
 export const metadata: Metadata = {
   title: "Contact Us | CollegeNCourses",
   description:
-    "Speak to a senior counsellor by phone, WhatsApp, or email. Three ways to get personalised guidance on online MBA and distance programmes.",
+    "Call, WhatsApp, or email CollegeNCourses directly for guidance on online, distance, and executive MBA programmes. No call centre, no hold music.",
   openGraph: {
     title: "Contact CollegeNCourses",
-    description:
-      "Call, WhatsApp, or email us. A senior counsellor will reach you within 30 minutes.",
+    description: "Call, WhatsApp, or email us directly. No call centre, no hold music.",
   },
 };
 
@@ -18,23 +17,23 @@ export const metadata: Metadata = {
 const NEXT_STEPS = [
   {
     n: "1",
-    title: "We call you",
-    body: "A senior counsellor calls within 30 minutes (Mon–Sat, 9 am–7 pm).",
+    title: "Your enquiry is logged",
+    body: "The moment you submit, your details are securely recorded against your enquiry.",
   },
   {
     n: "2",
-    title: "We listen first",
-    body: "We understand your goals, timeline, and budget before recommending anything.",
+    title: "We match it to the right team",
+    body: "Your enquiry is matched to the university or programme team best placed to help, based on what you shared.",
   },
   {
     n: "3",
-    title: "Shortlist in 48 hours",
-    body: "You get a personalised PDF shortlist of programmes matched to your profile.",
+    title: "They reach out to help",
+    body: "With your consent, that admissions team contacts you directly — no call centre in between.",
   },
   {
     n: "4",
-    title: "Guided application",
-    body: "We help with forms, documents, and deadlines — at no cost to you.",
+    title: "Guided from there",
+    body: "They help with forms, documents, and deadlines through to enrolment.",
   },
 ];
 
@@ -58,11 +57,11 @@ export default function ContactPage() {
           <div style={{ maxWidth: 760 }}>
             <div className="eyebrow">GET IN TOUCH</div>
             <h1 className="h-display h1" style={{ margin: "12px 0 16px" }}>
-              Three ways to talk to a real counsellor.
+              Three ways to reach us directly.
             </h1>
             <p className="lede">
-              Call us, WhatsApp us, or fill the form below. A senior counsellor reaches you within
-              30 minutes during working hours. Direct line, no call centre.
+              Call us, WhatsApp us, or fill the form below. Direct line, no call centre, no
+              automated queue.
             </p>
           </div>
         </div>
@@ -133,8 +132,8 @@ export default function ContactPage() {
           {/* LEFT: Form card */}
           <div className="contact-form-card">
             <div className="contact-form-header">
-              <h2>Or fill the form and we&apos;ll call you</h2>
-              <p>Within 30 minutes during working hours. A senior counsellor will call you back.</p>
+              <h2>Or send us your details</h2>
+              <p>Share a few details below and we&apos;ll match your enquiry to the right programme team.</p>
             </div>
             <div className="contact-form-body">
               <ContactForm />
