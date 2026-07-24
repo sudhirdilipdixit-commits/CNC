@@ -9,11 +9,6 @@ const ARROW = (
   </svg>
 )
 
-const LINKEDIN_ICON = (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-    <path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.3 6.5a1.78 1.78 0 01-1.8 1.75zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.86 3.36 3.66z" />
-  </svg>
-)
 
 const STATS = [
   { value: '12,000+', label: 'Learners helped since 2023' },
@@ -54,16 +49,6 @@ const COMMITMENTS = [
   '"Our team will call you back." We route enquiries; we do not promise to call.',
 ]
 
-const EXPERTS = [
-  {
-    initials: 'NP',
-    name: 'Nikhita Pradeep Deshmukh',
-    title: 'Founder and Lead Education Expert',
-    bio: 'Nikhita built CollegeNCourses in 2023 after a decade in higher-education advisory work. She leads content strategy and quality, ensures every programme comparison is accurate, and reviews the guidance frameworks used across the platform. She is not a bookable counsellor - she is the education expert whose perspective and standards shape everything you read here.',
-    expertise: ['Online MBA', 'Distance MBA', 'Executive MBA', 'IIM-tier', 'Study Abroad strategy'],
-    linkedin: 'https://www.linkedin.com/company/college-n-courses/',
-  },
-]
 
 const LEGAL_CARDS = [
   {
@@ -134,54 +119,27 @@ export default function AboutClient() {
       {/* Hero */}
       <section className="section-lp" id="hero" style={{ background: 'var(--ivory)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr', gap: 48, maxWidth: 960 }} className="about-hero-grid">
+          <div style={{ maxWidth: 820 }}>
+            <div className="eyebrow">ABOUT COLLEGENCOURSES</div>
+            <h1 className="h-display h1" style={{ margin: '12px 0 20px' }}>
+              Honest programme comparisons for Indian aspirants. Study in India and Study Abroad.
+            </h1>
 
-            {/* Left */}
-            <div>
-              <div className="eyebrow">ABOUT COLLEGENCOURSES</div>
-              <h1 className="h-display h1" style={{ margin: '12px 0 20px' }}>
-                Honest programme comparisons for Indian aspirants. Study in India and Study Abroad.
-              </h1>
-
-              <div className="answer-capsule">
-                CollegeNCourses is an education comparison platform helping Indian aspirants choose Online MBA, Distance MBA, Executive MBA, and Study Abroad programmes from UGC-approved private universities. Founded in 2023 in Pune by Nikhita Pradeep Deshmukh, the platform has helped over 12,000 learners compare programmes across Study in India and Study Abroad.
-              </div>
-
-              <p className="lede" style={{ marginBottom: 32 }}>
-                India produces millions of graduates every year. The choice of what and where to study is one of the most consequential decisions a person makes - and one of the most poorly supported. Glossy brochures, conflicting rankings, and aggressive sales calls have replaced honest guidance. CollegeNCourses was built to fix that.
-              </p>
-
-              <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
-                <button type="button" className="btn btn-primary" onClick={() => openModal('about-hero-cta')}>
-                  Get Free Guidance {ARROW}
-                </button>
-                <a href="/study-in-india" className="btn btn-secondary">
-                  Explore Programmes {ARROW}
-                </a>
-              </div>
+            <div className="answer-capsule">
+              CollegeNCourses is an education comparison platform helping Indian aspirants choose Online MBA, Distance MBA, Executive MBA, and Study Abroad programmes from UGC-approved private universities. Founded in 2023 in Pune by Nikhita Pradeep Deshmukh, the platform has helped over 12,000 learners compare programmes across Study in India and Study Abroad.
             </div>
 
-            {/* Founder card */}
-            <div style={{ background: 'var(--white)', borderRadius: 14, overflow: 'hidden', boxShadow: '0 8px 32px rgba(36,48,72,.10)' }}>
-              <div style={{ background: 'linear-gradient(135deg, var(--navy), #1A2336)', height: 180, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <div style={{ width: 88, height: 88, borderRadius: '50%', background: 'var(--yellow)', color: 'var(--navy)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-serif)', fontSize: 32, border: '4px solid #fff', fontWeight: 700 }}>
-                  NP
-                </div>
-              </div>
-              <div style={{ padding: 28 }}>
-                <div style={{ fontFamily: 'var(--font-serif)', color: 'var(--navy)', fontSize: 20, marginBottom: 4 }}>
-                  Nikhita Pradeep Deshmukh
-                </div>
-                <div style={{ fontSize: 13, color: 'var(--grey)', marginBottom: 14 }}>
-                  Founder and Lead Education Expert, CollegeNCourses
-                </div>
-                <p style={{ fontSize: 14, color: 'var(--charcoal)', lineHeight: 1.65 }}>
-                  A decade in higher-education advisory. Built CollegeNCourses to bring clarity to a space that had too much noise and too little honesty. Leads content quality and programme review standards across the platform.
-                </p>
-                <a href="https://www.linkedin.com/company/college-n-courses/" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: 'var(--navy)', marginTop: 16, textDecoration: 'none' }}>
-                  {LINKEDIN_ICON} Connect on LinkedIn
-                </a>
-              </div>
+            <p className="lede" style={{ marginBottom: 32 }}>
+              India produces millions of graduates every year. The choice of what and where to study is one of the most consequential decisions a person makes - and one of the most poorly supported. Glossy brochures, conflicting rankings, and aggressive sales calls have replaced honest guidance. CollegeNCourses was built to fix that.
+            </p>
+
+            <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap' }}>
+              <button type="button" className="btn btn-primary" onClick={() => openModal('about-hero-cta')}>
+                Get Free Guidance {ARROW}
+              </button>
+              <a href="/study-in-india" className="btn btn-secondary">
+                Explore Programmes {ARROW}
+              </a>
             </div>
           </div>
 
@@ -255,47 +213,6 @@ export default function AboutClient() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* The People Behind */}
-      <section className="section-lp" id="people" style={{ background: 'var(--white)' }}>
-        <div className="container">
-          <div className="eyebrow">THE PEOPLE BEHIND COLLEGENCOURSES</div>
-          <h2 className="h-display h2">Education experts, not salespeople</h2>
-          <hr className="section-rule" />
-          <p style={{ fontSize: 15, color: 'var(--charcoal)', lineHeight: 1.7, maxWidth: 720, marginBottom: 32 }}>
-            Every programme comparison, salary figure, university profile, and guidance framework on this platform is written and reviewed by people with real education advisory experience. Author and reviewer bylines appear on every content page so you know who is behind the claim - and can judge their credentials.
-          </p>
-
-          {EXPERTS.map(expert => (
-            <div key={expert.name} style={{ background: 'var(--ivory)', border: '1px solid var(--mist)', borderRadius: 'var(--radius-md)', padding: 32, maxWidth: 720, display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'flex-start' }}>
-              <div style={{ width: 72, height: 72, borderRadius: '50%', background: 'var(--navy)', color: 'var(--yellow)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'var(--font-serif)', fontSize: 24, fontWeight: 700, flexShrink: 0, border: '3px solid var(--yellow)' }}>
-                {expert.initials}
-              </div>
-              <div style={{ flex: 1, minWidth: 240 }}>
-                <div style={{ fontFamily: 'var(--font-serif)', fontSize: 20, color: 'var(--navy)', marginBottom: 4 }}>
-                  {expert.name}
-                </div>
-                <div style={{ fontSize: 13, color: 'var(--grey)', marginBottom: 14, fontWeight: 600 }}>
-                  {expert.title}
-                </div>
-                <p style={{ fontSize: 14, color: 'var(--charcoal)', lineHeight: 1.65, marginBottom: 16 }}>
-                  {expert.bio}
-                </p>
-                <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 16 }}>
-                  {expert.expertise.map(e => (
-                    <span key={e} style={{ fontSize: 12, background: 'var(--pale-navy)', color: 'var(--navy)', padding: '3px 10px', borderRadius: 'var(--radius-pill)', fontWeight: 600 }}>
-                      {e}
-                    </span>
-                  ))}
-                </div>
-                <a href={expert.linkedin} target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex', alignItems: 'center', gap: 6, fontSize: 13, fontWeight: 600, color: 'var(--navy)', textDecoration: 'none' }}>
-                  {LINKEDIN_ICON} Connect on LinkedIn
-                </a>
-              </div>
-            </div>
-          ))}
         </div>
       </section>
 
@@ -386,15 +303,6 @@ export default function AboutClient() {
           </div>
         </div>
       </section>
-
-      <style>{`
-        @media (min-width: 900px) {
-          .about-hero-grid {
-            grid-template-columns: 1fr 400px !important;
-            align-items: start !important;
-          }
-        }
-      `}</style>
 
       <LeadModal open={modalOpen} onClose={closeModal} source={modalSource} />
     </main>
