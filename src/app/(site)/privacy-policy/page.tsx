@@ -3,30 +3,35 @@ import Link from "next/link";
 import LegalToc from "@/components/legal/LegalToc";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | CollegeNCourses",
+  title: "Privacy Policy — CollegeNCourses",
   description:
-    "How CollegeNCourses (DNYANAL EDUCON PRIVATE LIMITED) collects, uses, stores, and protects your personal data. DPDP Act 2023 compliant.",
+    "How CollegeNCourses (Dnyanal Educon Pvt Ltd) collects, uses, and protects your personal data. DPDP Act aligned. Plain-language summary included.",
+  alternates: { canonical: "https://collegencourses.com/privacy-policy/" },
   openGraph: {
-    title: "Privacy Policy | CollegeNCourses",
+    title: "Privacy Policy — CollegeNCourses",
     description:
       "Our commitment to your privacy — written in plain language, not legal jargon.",
   },
 };
 
 const TOC = [
-  { id: "overview",       label: "Overview" },
+  { id: "overview",        label: "Overview" },
+  { id: "scope",           label: "Scope of this policy" },
+  { id: "key-terms",       label: "Key terms" },
   { id: "what-we-collect", label: "What we collect" },
-  { id: "how-we-use",    label: "How we use your data" },
-  { id: "cookies",       label: "Cookies & tracking" },
-  { id: "third-party",   label: "Third-party services" },
-  { id: "sharing",       label: "Data sharing" },
-  { id: "retention",     label: "Data retention" },
-  { id: "your-rights",   label: "Your rights" },
-  { id: "security",      label: "Security" },
-  { id: "social-media",  label: "Social media" },
-  { id: "children",      label: "Age requirements" },
-  { id: "changes",       label: "Policy changes" },
-  { id: "disclaimer",    label: "Disclaimer" },
+  { id: "how-we-collect",  label: "How we collect it" },
+  { id: "why-we-process",  label: "Why we process it" },
+  { id: "sharing",         label: "Who we share it with" },
+  { id: "cross-border",    label: "Cross-border transfer" },
+  { id: "retention",       label: "Data retention" },
+  { id: "security",        label: "How we protect it" },
+  { id: "your-rights",     label: "Your rights" },
+  { id: "cookies",         label: "Cookies" },
+  { id: "children",        label: "Children's data" },
+  { id: "grievance",       label: "Grievance Officer" },
+  { id: "third-party-links", label: "Third-party links" },
+  { id: "changes",         label: "Policy changes" },
+  { id: "governing-law",   label: "Governing law" },
   { id: "contact-privacy", label: "Contact us" },
 ];
 
@@ -56,19 +61,19 @@ export default function PrivacyPolicyPage() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
                 </svg>
-                Published: <strong>1 May 2023</strong>
+                Effective date: <strong>15 July 2026</strong>
               </div>
               <div className="legal-meta-item">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M23 4v6h-6M1 20v-6h6" /><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
                 </svg>
-                Last updated: <strong>1 June 2026</strong>
+                Last updated: <strong>15 July 2026</strong>
               </div>
-              <span className="legal-updated-badge">
+              <span className="legal-updated-badge legal-updated-badge-draft">
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M9 11l3 3L22 4" />
+                  <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
                 </svg>
-                Current version
+                Draft — pending legal review
               </span>
             </div>
           </div>
@@ -84,394 +89,357 @@ export default function PrivacyPolicyPage() {
           {/* Main content */}
           <article className="legal-content">
 
-            {/* 1. Overview */}
+            {/* Overview */}
             <div className="legal-section" id="overview">
               <h2>Overview</h2>
               <p>
-                We, at Dnyanal Educon Pvt Ltd (herein referred to as DEPL) and our affiliated companies
-                worldwide, are committed to respecting your online privacy and recognise your need for
-                appropriate protection and management of personally identifiable information
-                (&ldquo;Personal Information&rdquo;) you share with us, in line with applicable data
-                protection laws and regulations.
+                CollegeNCourses is operated by <strong>DNYANAL EDUCON PRIVATE LIMITED</strong>
+                {" "}(&ldquo;DEPL&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;), a
+                company incorporated in India (CIN:{" "}
+                <mark className="legal-placeholder">Insert CIN Number</mark>), with its registered
+                office at FLNO A-603, Utsav Homes, Patil Nagar, Bavdhan BK, Pune &ndash; 411021,
+                Maharashtra, India.
               </p>
               <p>
-                This Policy is subject to the Terms of Use of collegencourses.com and applies to those who
-                register on the Platform, use our services, or whose information CollegeNCourses otherwise
-                receives in connection with its services (including contact information of individuals
-                associated with partner colleges and educational institutes).
-              </p>
-              <p>
-                <strong>Personal Information (PI)</strong> means any information relating to an identified
-                or identifiable living person — including a name, identification number, location data, an
-                online identifier, or factors specific to the physical, physiological, genetic, mental,
-                economic, cultural, or social identity of that person, as per applicable laws.
+                This Privacy Policy explains what personal data we collect when you use
+                collegencourses.com and our related services (together, the &ldquo;Platform&rdquo;),
+                why we collect it, who we share it with, and the rights you have over it. We&apos;ve
+                written it as clearly as we know how &mdash; the fine print, in plain language, as we
+                say elsewhere on this site.
               </p>
               <div className="legal-highlight">
-                <p>
-                  <strong>Short version:</strong> We collect the information you give us to provide
-                  counselling services. We never sell it to third parties. You can delete it at any time
-                  by writing to{" "}
-                  <a href="mailto:privacy@collegencourses.com">privacy@collegencourses.com</a>.
-                </p>
+                <p style={{ marginBottom: 6 }}><strong>In plain language</strong> (this box is a friendly summary only &mdash; the numbered sections below are what actually governs):</p>
+                <ul style={{ margin: "8px 0 0 18px" }}>
+                  <li>We collect your name, contact details, and information about the programmes and specializations you&apos;re interested in, so our counsellors can help you.</li>
+                  <li>If you express interest in a specific university or programme, we share your contact details with that specific institution so they can follow up with you &mdash; this is core to how the Platform works, and we tell you this plainly rather than burying it.</li>
+                  <li>We never sell your data to unrelated third parties for their own marketing purposes.</li>
+                  <li>We keep your data on India-hosted systems.</li>
+                  <li>You can ask us what we hold about you, ask us to correct it, or ask us to delete it, at any time.</li>
+                  <li>We have a named Grievance Officer you can contact if anything about this policy or our data practices concerns you &mdash; see our <Link href="/grievances">Grievances</Link> page.</li>
+                </ul>
               </div>
             </div>
 
-            {/* 2. What we collect */}
+            {/* 1. Scope */}
+            <div className="legal-section" id="scope">
+              <h2>1. Scope of this policy</h2>
+              <p>This Policy applies to personal data collected through:</p>
+              <ul>
+                <li>The collegencourses.com website and any subdomains (including our AI Counsellor tool and comparison portal);</li>
+                <li>Enquiry forms, callback requests, and lead-magnet downloads on the Platform;</li>
+                <li>WhatsApp, SMS, phone, and email communications you have with our counselling team as a result of using the Platform;</li>
+                <li>Our official social media pages, to the extent we collect information through them (e.g., direct messages).</li>
+              </ul>
+              <p>It does not govern the privacy practices of:</p>
+              <ul>
+                <li>Partner universities, colleges, or educational institutions once your data has been shared with them at your request (see Section 6);</li>
+                <li>Third-party websites we may link to;</li>
+                <li>Any offline interactions not connected to the Platform.</li>
+              </ul>
+            </div>
+
+            {/* 2. Key terms */}
+            <div className="legal-section" id="key-terms">
+              <h2>2. Key terms</h2>
+              <p>We use a few terms from India&apos;s Digital Personal Data Protection Act, 2023 (&ldquo;DPDP Act&rdquo;) throughout this Policy:</p>
+              <ul>
+                <li><strong>Data Principal</strong> &mdash; the individual the personal data is about. That&apos;s you, if you&apos;re using our Platform.</li>
+                <li><strong>Data Fiduciary</strong> &mdash; the entity that decides why and how personal data is processed. That&apos;s us, DEPL.</li>
+                <li><strong>Data Processor</strong> &mdash; any entity that processes personal data on our behalf (for example, our CRM provider). Processors act under our instructions and are contractually bound to protect your data.</li>
+                <li><strong>Personal Data</strong> &mdash; any data about you by which you are or can be identified.</li>
+                <li><strong>Consent</strong> &mdash; your free, specific, informed, and unambiguous agreement to a particular processing activity, given by clear affirmative action.</li>
+              </ul>
+            </div>
+
+            {/* 3. What we collect */}
             <div className="legal-section" id="what-we-collect">
-              <h2>What we collect</h2>
-              <p>We collect information about you or your usage to provide better services. We collect information in the following ways:</p>
+              <h2>3. What personal data we collect</h2>
+              <p>
+                <strong>3.1 Identity and contact data.</strong> Name, email address, mobile number,
+                and city/location, typically collected when you fill out an enquiry form, request a
+                callback, or download a resource.
+              </p>
+              <p>
+                <strong>3.2 Academic and career data.</strong> Your current qualification, work
+                experience, target programme and specialization interest, preferred mode of study
+                (Distance/Online/Executive), budget range, and similar information you share with us
+                or with our AI Counsellor tool, so that our counsellors &mdash; and the AI Counsellor
+                &mdash; can give you relevant guidance.
+              </p>
+              <p>
+                <strong>3.3 Communication data.</strong> Records of calls, WhatsApp messages, emails,
+                and chat or AI Counsellor conversation transcripts between you and CollegeNCourses,
+                kept so our counselling team has context across follow-up conversations.
+              </p>
+              <p>
+                <strong>3.4 Technical and usage data.</strong> IP address, device and browser type,
+                pages visited, referral source, and campaign identifiers (such as gclid or fbclid
+                from Google or Meta ad clicks), collected automatically when you visit the Platform.
+                See our <Link href="/cookie-policy">Cookie Policy</Link> for detail on how this is
+                collected.
+              </p>
+              <p>
+                <strong>3.5 Verification data.</strong> A one-time password (OTP) sent to your
+                mobile number to verify it&apos;s genuinely yours before we act on an enquiry. We do
+                not store the OTP itself beyond the verification window.
+              </p>
+              <p>
+                <strong>3.6 Sensitive data (Study Abroad services only).</strong> If and when you
+                engage our Study Abroad counselling services specifically, we may collect passport
+                details, academic transcripts, and other documents needed to support letters of
+                recommendation, visa applications, and university applications on your behalf. This
+                category of data is collected only in the context of that specific service, only
+                with your explicit consent, and is handled with additional care as outlined in
+                Section 9.
+              </p>
+              <p>
+                We do not knowingly collect financial account details, health data, or biometric
+                data through the general counselling Platform.
+              </p>
+            </div>
+
+            {/* 4. How we collect it */}
+            <div className="legal-section" id="how-we-collect">
+              <h2>4. How we collect your data</h2>
               <ul>
-                <li>
-                  Many of our services require you to register for an account on CollegeNCourses. When
-                  you do, we ask for personal information such as your name, email address, and telephone
-                  number to create or update your account.
-                </li>
-                <li>
-                  To provide additional services, we may collect profile information such as education
-                  background, work experience, and date of birth.
-                </li>
-                <li>
-                  We collect information about the services that you use and how you use them, including
-                  log information and location information.
-                </li>
-                <li>
-                  We may collect personal information such as bank details and passport details to assist
-                  with study-abroad programmes, including Letter of Recommendation, aspirant profile,
-                  aspirant visa, and application to university programmes.
-                </li>
-                <li>
-                  When you communicate with CollegeNCourses or use our platform to communicate with other
-                  members (such as advertisers, colleges, or institutes), we collect information about
-                  your communication and any additional information you choose to provide.
-                </li>
+                <li>Directly from you, when you fill in a form, call us, message us on WhatsApp, or use the AI Counsellor tool.</li>
+                <li>Automatically, through cookies and similar technologies when you browse the Platform (see our <Link href="/cookie-policy">Cookie Policy</Link>).</li>
+                <li>From our OTP verification provider, to confirm your mobile number.</li>
+                <li>From advertising platforms (Google Ads, Meta), in the form of click identifiers that help us understand which campaign brought you to us &mdash; not additional personal data from those platforms themselves.</li>
               </ul>
             </div>
 
-            {/* 3. How we use your data */}
-            <div className="legal-section" id="how-we-use">
-              <h2>How we use your data</h2>
-              <p>CollegeNCourses may process your Personal Information for the following purposes:</p>
+            {/* 5. Why we process it */}
+            <div className="legal-section" id="why-we-process">
+              <h2>5. Why we process your data</h2>
+              <p>
+                We process your personal data for the following purposes, each grounded in your
+                consent (given when you submit a form or otherwise engage with the Platform) or in
+                our legitimate interest in operating a functioning counselling service:
+              </p>
               <ul>
-                <li>
-                  We use information collected from cookies and other technologies to improve your user
-                  experience and the overall quality of our services. When showing tailored ads, we will
-                  not associate identifiers with sensitive categories such as race, religion, sexual
-                  orientation, or health.
-                </li>
-                <li>
-                  Our automated systems analyse your content to provide customised search results,
-                  recommendations, and specific promotions.
-                </li>
-                <li>
-                  Send alerts and newsletters to you (you may unsubscribe at any time via your account
-                  settings).
-                </li>
-                <li>Improving our website and its content to provide better features and services.</li>
-                <li>Conducting market research and surveys to improve our products and services.</li>
-                <li>Sending you information about our products and services for marketing purposes and promotions.</li>
-                <li>
-                  Preventing, detecting, investigating, and prosecuting crimes (including fraud and
-                  financial crimes), identity verification, government sanctions screening, and due
-                  diligence checks.
-                </li>
-                <li>
-                  Establishing, exercising, or defending legal rights in connection with legal
-                  proceedings and seeking professional or legal advice.
-                </li>
+                <li>To respond to your enquiry and connect you with a counsellor;</li>
+                <li>To assess which programmes and universities may fit your stated goals, budget, and background;</li>
+                <li>To share your enquiry, with your knowledge, with the specific partner institution(s) you&apos;ve expressed interest in (Section 6);</li>
+                <li>To send you confirmation messages (SMS, WhatsApp, email) about your enquiry;</li>
+                <li>To improve our Platform, tools, and content based on aggregate usage patterns;</li>
+                <li>To send you further information about programmes or services, where you haven&apos;t opted out;</li>
+                <li>To meet our legal, regulatory, and accounting obligations;</li>
+                <li>To detect and prevent fraud, abuse, or misuse of the Platform.</li>
               </ul>
-              <h3>Personalisation of services</h3>
-              <p>
-                To the extent permitted by law, CollegeNCourses may record and monitor your
-                communications with us to ensure compliance with our legal and regulatory obligations and
-                our internal policies. This may include the recording of telephone conversations.
-              </p>
             </div>
 
-            {/* 4. Cookies */}
-            <div className="legal-section" id="cookies">
-              <h2>Cookies &amp; tracking technologies</h2>
-              <p>
-                Some of our web pages utilise &ldquo;cookies&rdquo; and other tracking technologies. A
-                &ldquo;cookie&rdquo; is a small text file that may be used, for example, to collect
-                information about website activity. Some cookies and other technologies may serve to recall
-                Personal Information previously indicated by a web user. Most browsers allow you to
-                control cookies, including whether or not to accept them and how to remove them.
-              </p>
-              <p>
-                You may set most browsers to notify you if you receive a cookie, or you may choose to
-                block cookies with your browser. Please note that if you choose to erase or block your
-                cookies, you will need to re-enter your original user ID and password to gain access to
-                certain parts of the website, and some features may not work.
-              </p>
-              <p>
-                Tracking technologies may record information such as internet domain and host names,
-                internet protocol (IP) addresses, browser software and operating system types, clickstream
-                patterns, and dates and times that our site has been accessed.
-              </p>
-              <p>
-                Our use of cookies and other tracking technologies allows us to improve our website and
-                your experience. We may also analyse information that does not contain Personal Information
-                for trends and statistics.
-              </p>
-              <p>
-                For more information about our use of cookies please refer to our{" "}
-                <Link href="/cookie-policy">Cookie Policy</Link>.
-              </p>
-            </div>
-
-            {/* 5. Third-party services */}
-            <div className="legal-section" id="third-party">
-              <h2>Third-party services</h2>
-              <p>
-                Third parties provide certain services available on CollegeNCourses on DEPL&rsquo;s
-                behalf. CollegeNCourses may provide information, including Personal Information, to
-                third-party service providers to help us deliver programmes, products, information, and
-                services. CollegeNCourses will take reasonable steps to ensure that these third-party
-                service providers are obligated to protect Personal Information on our behalf.
-              </p>
-              <p>
-                CollegeNCourses does not intend to transfer Personal Information without your consent to
-                third parties, unless such transfer is required for providing relevant services or for
-                legal purposes.
-              </p>
-              <p>
-                When you are in a relationship with CollegeNCourses, your personal information may be
-                transferred to geographies outside India for the purposes mentioned in this policy or to
-                their local service providers. Transfers outside India are covered by standard data
-                protection laws.
-              </p>
-              <p>
-                Please be aware that CollegeNCourses sometimes contains links to other sites not governed
-                by this privacy policy. CollegeNCourses makes no representations or warranties regarding
-                how your information is stored or used on third-party servers. We recommend that you
-                review the privacy statement of each third-party site to determine their use of your
-                personal information.
-              </p>
-            </div>
-
-            {/* 6. Data sharing */}
+            {/* 6. Who we share it with */}
             <div className="legal-section" id="sharing">
-              <h2>Data sharing</h2>
+              <h2>6. Who we share your data with</h2>
+              <p>This is the section we think deserves the most plain speaking, because it&apos;s central to how a counselling platform like ours works.</p>
               <p>
-                We restrict access to your Personal Information to employees who reasonably need to know
-                that information to fulfil their jobs in providing, operating, developing, or improving our
-                products or services.
+                <strong>6.1 Partner educational institutions.</strong> When you express interest in
+                a specific programme or university through the Platform &mdash; for example, by
+                requesting more information about a specific institution, or by asking a counsellor
+                to connect you &mdash; we share your relevant contact and enquiry details (typically
+                name, mobile number, and email address) with that specific institution, so they can
+                follow up with you directly regarding admissions, further information, or enrolment.
+                We only do this in connection with programmes or institutions you&apos;ve actually
+                shown interest in &mdash; we do not blanket-share your details with every institution
+                on our Platform.
               </p>
-              <p>CollegeNCourses does not rent, sell, or share personal information about you with other people or non-affiliated companies except:</p>
-              <ul>
-                <li>To provide products or services you have requested.</li>
-                <li>When we have your permission.</li>
-                <li>
-                  We provide the information to trusted partners who work on behalf of or with DEPL under
-                  confidentiality agreements. These companies may use your personal information to help
-                  CollegeNCourses communicate with you about offers, but do not have any independent right
-                  to share this information.
-                </li>
-                <li>
-                  We respond to subpoenas, court orders, or legal process, or to establish or exercise
-                  our legal rights or defend against legal claims.
-                </li>
-                <li>
-                  We believe it is necessary to share information in order to investigate, prevent, or
-                  take action regarding illegal activities, suspected fraud, or situations involving
-                  potential threats to physical safety.
-                </li>
-                <li>
-                  We transfer information about you if CollegeNCourses is acquired by or merged with
-                  another company.
-                </li>
-                <li>
-                  We share your personal information with colleges or educational institutions based on
-                  your browsing behaviour or expression of interest regarding courses, specialisations,
-                  and institutions. These institutions may further contact you and process your
-                  information for the said purposes. How these educational institutions use this data is
-                  not governed by our privacy policy.
-                </li>
-              </ul>
+              <p>
+                We require partner institutions not to use your data for any purpose beyond the one
+                you engaged with them for. That said, once your data is shared with a partner
+                institution, their own privacy practices govern how they handle it from that point
+                on &mdash; we are not responsible for a partner institution&apos;s separate data
+                practices, and we encourage you to review their privacy policy directly.
+              </p>
+              <p>
+                <strong>6.2 Service providers (Data Processors).</strong> We use third-party
+                providers to run parts of the Platform &mdash; for example, our CRM system
+                (India-hosted), our OTP/SMS/WhatsApp messaging provider, and our website hosting and
+                analytics providers. These providers process data only on our instructions and only
+                for the purposes we&apos;ve engaged them for.
+              </p>
+              <p>
+                <strong>6.3 Legal and regulatory disclosure.</strong> We may disclose personal data
+                where required to comply with a legal obligation, court order, or lawful request
+                from a government or regulatory authority.
+              </p>
+              <p>
+                <strong>6.4 Business transfers.</strong> If DEPL is ever involved in a merger,
+                acquisition, or sale of assets, personal data may be transferred as part of that
+                transaction, subject to this Policy continuing to apply (or you being notified of
+                any material change).
+              </p>
               <div className="legal-highlight">
                 <p>
-                  CollegeNCourses displays targeted advertisements based on personal information.
-                  When you interact with or view a targeted ad, you are consenting to the possibility that
-                  the advertiser will make the assumption that you meet the targeting criteria used to
-                  display the ad. CollegeNCourses does not provide any personal information to the
-                  advertiser when you interact with an ad.
+                  We do not sell your personal data to third parties for their own independent
+                  marketing purposes. Sharing with partner institutions under Section 6.1, at your
+                  expressed interest, is not a sale of your data &mdash; it&apos;s core to the
+                  service you&apos;ve asked us for.
                 </p>
               </div>
             </div>
 
-            {/* 7. Data retention */}
+            {/* 7. Cross-border transfer */}
+            <div className="legal-section" id="cross-border">
+              <h2>7. Cross-border data transfer</h2>
+              <p>
+                CollegeNCourses primarily stores and processes data on India-hosted systems. Where
+                any processing occurs outside India &mdash; for example, through a cloud or software
+                provider with servers abroad &mdash; this is done consistent with the DPDP
+                Act&apos;s approach to cross-border transfer, which currently permits transfers
+                except to countries the Central Government specifically restricts by notification.
+                We do not currently transfer personal data to any country subject to such a
+                restriction.
+              </p>
+            </div>
+
+            {/* 8. Data retention */}
             <div className="legal-section" id="retention">
-              <h2>Data retention</h2>
+              <h2>8. Data retention</h2>
               <p>
-                Your personal information processed by CollegeNCourses is kept in a form that permits
-                your identification for no longer than is necessary for the purposes for which the personal
-                information is processed, in line with legal, regulatory, contractual, or statutory
-                obligations as applicable.
+                We retain personal data for as long as reasonably necessary to fulfil the purposes
+                described in Section 5, and thereafter for any additional period required by
+                applicable law (for example, accounting or regulatory retention requirements).
+                Communication and enquiry records are typically retained for the duration of our
+                relationship with you plus a reasonable follow-up period, after which they are
+                deleted or anonymised, unless you&apos;ve asked us to delete them sooner (see Section
+                10).
               </p>
-              <p>
-                At the expiry of such periods, your personal information will be archived to comply with
-                legal and contractual retention obligations or in accordance with applicable statutory
-                limitation periods.
-              </p>
-            </div>
-
-            {/* 8. Your rights */}
-            <div className="legal-section" id="your-rights">
-              <h2>Your rights</h2>
-              <p>
-                You may have the right to invoke certain rights (as per applicable laws and regulations
-                such as GDPR) in relation to your personal information being processed by the Platform.
-              </p>
-              <p>
-                The Platform may be allowed by law, in particular in case of excessive or manifestly
-                unfounded requests, to charge a fee for fulfilling your request, subject to applicable
-                conditions.
-              </p>
-              <p>
-                You are legally entitled to request details of the personal information we may be holding
-                about you. The Company provides you the ability to keep your personal information accurate
-                and up-to-date. If at any time you would like to rectify, erase, or restrict the
-                processing of your personal information — or you would like to obtain confirmation
-                whether or not your personal information is processed, access your personal information,
-                exercise your right to data portability, or withdraw your consent to processing — please
-                contact us.
-              </p>
-              <p>
-                You are entitled to lodge a complaint with a competent Data Protection Authority where
-                existing, concerning the Platform&rsquo;s compliance with applicable data protection laws
-                and regulations.
-              </p>
-              <div className="legal-highlight">
-                <p>
-                  To exercise any of these rights, write to{" "}
-                  <a href="mailto:privacy@collegencourses.com">privacy@collegencourses.com</a>.
-                  We will respond within 30 days.
-                </p>
-              </div>
             </div>
 
             {/* 9. Security */}
             <div className="legal-section" id="security">
-              <h2>Confidentiality &amp; security</h2>
-              <p>
-                The security and confidentiality of your personal data is important to us and
-                CollegeNCourses has invested significant resources to protect the safekeeping and
-                confidentiality of your personal data. When using external service providers acting as
-                processors, we require that they adhere to the same standards as CollegeNCourses.
-                Regardless of where your personal information is transferred or stored, we take all steps
-                reasonably necessary to ensure that personal data is kept secure.
-              </p>
-              <p>
-                We have physical, electronic, and procedural safeguards that comply with the laws
-                prevalent in India to protect personal information about you. We seek to ensure compliance
-                with the requirements of the Information Technology Act, 2000 and Rules made thereunder,
-                to ensure the protection and preservation of your privacy.
-              </p>
-            </div>
-
-            {/* 10. Social media */}
-            <div className="legal-section" id="social-media">
-              <h2>Social media</h2>
-              <p>
-                CollegeNCourses operates channels, pages, and accounts on some social media sites to
-                inform, assist, and engage with you. CollegeNCourses monitors and records comments and
-                posts made on these channels about CollegeNCourses in order to improve its products and
-                services.
-              </p>
-              <p>Please note that you must not communicate with CollegeNCourses through social media sites the following information:</p>
+              <h2>9. How we protect your data</h2>
+              <p>We apply reasonable technical and organisational security measures appropriate to the sensitivity of the data involved, including:</p>
               <ul>
-                <li>
-                  Sensitive personal data including special categories of personal data — meaning any
-                  information revealing racial or ethnic origin, political opinions, religious or
-                  philosophical beliefs, or trade union membership, and the processing of genetic data,
-                  biometric data for the purpose of uniquely identifying a natural person, data concerning
-                  health or data concerning a natural person&rsquo;s sex life or sexual orientation, and
-                  other sensitive personal data such as criminal convictions and offences and national
-                  identification numbers.
-                </li>
-                <li>Excessive, inappropriate, offensive, or insulting information towards individuals.</li>
+                <li>Access controls limiting who within our team can view your data, based on role;</li>
+                <li>India-hosted storage for our primary CRM systems;</li>
+                <li>Encrypted transmission (HTTPS) across the Platform;</li>
+                <li>Additional handling care for the sensitive documents (passport, academic transcripts) collected specifically for Study Abroad services, including restricted access and secure storage.</li>
               </ul>
               <p>
-                CollegeNCourses is not responsible for any information posted on those sites other than
-                the information posted by its employees on its behalf, and is only responsible for its
-                own use of the personal data received through such sites.
+                No system is completely immune to risk. If we become aware of a data breach
+                affecting your personal data, we will notify you and take appropriate steps
+                consistent with applicable law.
               </p>
             </div>
 
-            {/* 11. Children */}
+            {/* 10. Your rights */}
+            <div className="legal-section" id="your-rights">
+              <h2>10. Your rights</h2>
+              <p>As a Data Principal, you have the right to:</p>
+              <ul>
+                <li><strong>Access</strong> &mdash; ask us what personal data we hold about you;</li>
+                <li><strong>Correction</strong> &mdash; ask us to correct inaccurate or outdated data;</li>
+                <li><strong>Erasure</strong> &mdash; ask us to delete your data, subject to any legal retention obligations;</li>
+                <li><strong>Withdraw consent</strong> &mdash; withdraw your consent to a specific processing activity at any time, without affecting the lawfulness of processing carried out before withdrawal;</li>
+                <li><strong>Grievance redressal</strong> &mdash; raise a complaint with our Grievance Officer if you&apos;re unhappy with how we&apos;ve handled your data (see Section 13 and our <Link href="/grievances">Grievances</Link> page);</li>
+                <li><strong>Nominate</strong> &mdash; nominate another individual to exercise these rights on your behalf in the event of your death or incapacity.</li>
+              </ul>
+              <div className="legal-highlight">
+                <p>
+                  To exercise any of these rights, email{" "}
+                  <a href="mailto:info@collegencourses.com">info@collegencourses.com</a>. We aim to
+                  respond within a reasonable time, and in any case consistent with the response
+                  timelines prescribed under applicable law.
+                </p>
+              </div>
+            </div>
+
+            {/* 11. Cookies */}
+            <div className="legal-section" id="cookies">
+              <h2>11. Cookies</h2>
+              <p>
+                The Platform uses cookies and similar technologies to remember your preferences,
+                understand how you use the site, and measure the effectiveness of our marketing.
+                Full detail is in our separate <Link href="/cookie-policy">Cookie Policy</Link>,
+                which forms part of this Privacy Policy by reference.
+              </p>
+            </div>
+
+            {/* 12. Children */}
             <div className="legal-section" id="children">
-              <h2>Age requirements</h2>
-              <p>To use the site you agree that you must be of minimum age or older.</p>
-              <ul>
-                <li>
-                  If you are a resident of the European Union, the minimum age is 16. However, if local
-                  laws require that you must be older in order for CollegeNCourses to lawfully provide
-                  the services to you, that older age shall apply as the applicable minimum age.
-                </li>
-                <li>
-                  In all jurisdictions outside the European Union, if you are under the age of 18 or the
-                  age of majority in your jurisdiction, you must use CollegeNCourses under the supervision
-                  of your parent, legal guardian, or responsible adult.
-                </li>
-              </ul>
-            </div>
-
-            {/* 12. Changes */}
-            <div className="legal-section" id="changes">
-              <h2>Policy changes</h2>
+              <h2>12. Children&apos;s data</h2>
               <p>
-                CollegeNCourses reserves the right to update, change, or modify this policy at any time.
-                The policy shall come into effect from the date of such update, change, or modification.
-                We will endeavour to notify registered users of material changes by email.
+                CollegeNCourses is intended for use by individuals capable of entering a binding
+                contract under Indian law (generally, 18 years or older). We do not knowingly
+                collect personal data from anyone under 18 without the involvement of a parent or
+                legal guardian. If you believe a minor has provided us with personal data without
+                appropriate consent, please contact us at{" "}
+                <a href="mailto:info@collegencourses.com">info@collegencourses.com</a> and we will
+                take appropriate action.
               </p>
             </div>
 
-            {/* 13. Disclaimer */}
-            <div className="legal-section" id="disclaimer">
-              <h2>Disclaimer</h2>
+            {/* 13. Grievance Officer */}
+            <div className="legal-section" id="grievance">
+              <h2>13. Grievance Officer</h2>
               <p>
-                CollegeNCourses shall not be liable for any loss or damage sustained by reason of any
-                disclosure (inadvertent or otherwise) of any information concerning the user&rsquo;s
-                account and/or information relating to or regarding online transactions using credit
-                cards/debit cards and/or their verification process and particulars, nor for any error,
-                omission or inaccuracy with respect to any information so disclosed and used, whether or
-                not in pursuance of a legal process or otherwise. CollegeNCourses does not store any
-                credit/debit card details.
-              </p>
-              <p>
-                Any other personal information shared by you which is not asked by CollegeNCourses during
-                registration, either mandatorily or optionally, accounts to wilful and intentional
-                furnishing, and CollegeNCourses will not be liable for breach of such information.
-              </p>
-            </div>
-
-            {/* 14. Contact */}
-            <div className="legal-section" id="contact-privacy">
-              <h2>Contact us</h2>
-              <p>
-                If you have any questions regarding this privacy policy or the protection of your personal
-                data, please contact our Data Protection Officer / Grievance Officer:
+                In accordance with applicable Indian law, we have appointed a Grievance Officer to
+                address concerns relating to this Privacy Policy and our data practices:
               </p>
               <div className="legal-highlight">
-                <p style={{ marginBottom: 6 }}>
-                  <strong>Data Protection Officer / Grievance Officer</strong>
+                <p style={{ marginBottom: 6 }}><strong>Grievance Officer:</strong> Mr. Sudhir Dixit</p>
+                <p style={{ marginBottom: 4 }}>
+                  Email:{" "}
+                  <a href="mailto:grievances@collegencourses.com">grievances@collegencourses.com</a>
                 </p>
+                <p style={{ margin: 0 }}>Contact number: +91 7350 460 393</p>
+              </div>
+              <p>
+                Full detail on our grievance redressal process is available on our{" "}
+                <Link href="/grievances">Grievances</Link> page.
+              </p>
+            </div>
+
+            {/* 14. Third-party links */}
+            <div className="legal-section" id="third-party-links">
+              <h2>14. Third-party links</h2>
+              <p>
+                The Platform may contain links to third-party websites, including partner
+                institution websites. This Policy does not apply to those websites. We encourage
+                you to read the privacy policy of any third-party site before sharing personal data
+                with it.
+              </p>
+            </div>
+
+            {/* 15. Changes */}
+            <div className="legal-section" id="changes">
+              <h2>15. Changes to this policy</h2>
+              <p>
+                We may update this Policy from time to time &mdash; to reflect changes in our
+                practices, our services, or applicable law. We&apos;ll update the &ldquo;Last
+                updated&rdquo; date at the top of this page when we do. Material changes will be
+                highlighted on this page or communicated to you directly where appropriate.
+              </p>
+            </div>
+
+            {/* 16. Governing law */}
+            <div className="legal-section" id="governing-law">
+              <h2>16. Governing law</h2>
+              <p>
+                This Policy is governed by the laws of India. Any disputes arising from it are
+                subject to the exclusive jurisdiction of the courts at Pune, Maharashtra.
+              </p>
+            </div>
+
+            {/* 17. Contact */}
+            <div className="legal-section" id="contact-privacy">
+              <h2>17. Contact us</h2>
+              <p>For any questions about this Privacy Policy or how we handle your data:</p>
+              <div className="legal-highlight">
                 <p style={{ marginBottom: 4 }}>
                   <strong>Dnyanal Educon Pvt Ltd</strong><br />
-                  Flat No. A-603, Utsav Homes, Patilnagar,<br />
+                  FLNO A-603, Utsav Homes, Patil Nagar,<br />
                   Bavdhan BK, Pune &ndash; 411021, Maharashtra, India
                 </p>
                 <p style={{ margin: 0 }}>
                   Email:{" "}
-                  <a href="mailto:grievances@collegencourses.com">
-                    grievances@collegencourses.com
-                  </a>
+                  <a href="mailto:info@collegencourses.com">info@collegencourses.com</a>
+                  {" "}| Phone:{" "}
+                  <a href="tel:+917350460393">+91 7350 460 393</a>
                 </p>
               </div>
-              <p>
-                For data deletion or privacy-specific requests, write to{" "}
-                <a href="mailto:privacy@collegencourses.com">privacy@collegencourses.com</a>.
-              </p>
             </div>
 
           </article>
@@ -503,6 +471,9 @@ export default function PrivacyPolicyPage() {
           background: #E8F5EA; color: #2A7A3A;
           font-size: 11px; font-weight: 700;
           padding: 4px 10px; border-radius: 999px;
+        }
+        .legal-updated-badge-draft {
+          background: #FFF3D6; color: #8A5A00;
         }
 
         .legal-layout {
@@ -626,6 +597,16 @@ export default function PrivacyPolicyPage() {
         }
         .legal-highlight p + p { margin-top: 8px; }
         .legal-highlight a { color: var(--navy); font-weight: 600; }
+        .legal-highlight ul { margin: 8px 0 0 18px; }
+        .legal-highlight li { font-size: 14px; color: var(--navy); line-height: 1.6; }
+
+        .legal-placeholder {
+          background: var(--yellow);
+          color: var(--navy);
+          font-weight: 700;
+          padding: 1px 6px;
+          border-radius: 4px;
+        }
       `}</style>
     </main>
   );
