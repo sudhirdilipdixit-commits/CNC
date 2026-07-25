@@ -167,6 +167,12 @@ p:last-child { margin-bottom: 0; }
 }
 .btn:active { transform: translateY(1px); }
 
+/* Long CTA labels shouldn't force the page wider than the viewport;
+   let them wrap to a second line on narrow phones instead. */
+@media (max-width: 480px) {
+  .btn { white-space: normal; }
+}
+
 .btn-primary {
   background: var(--yellow);
   color: var(--navy);
@@ -265,7 +271,7 @@ section { padding: 64px 0; }
 
 .primary-nav {
   display: none;
-  gap: 32px;
+  gap: 22px;
   align-items: center;
   flex: 1;
   justify-content: center;
@@ -315,6 +321,15 @@ section { padding: 64px 0; }
 @media (min-width: 1024px) {
   .primary-nav { display: flex; }
   .nav-toggle { display: none; }
+}
+
+/* Narrow phones: the header CTA button + hamburger can outgrow the
+   available width next to the logo, pushing the header into horizontal
+   overflow. Tighten the fit rather than dropping the CTA. */
+@media (max-width: 430px) {
+  .logo { height: 48px; }
+  .header-cta-group { gap: 8px; }
+  .header-cta-group .btn-pill { padding: 8px 14px; font-size: 13px; }
 }
 
 .mobile-menu {
@@ -1387,6 +1402,7 @@ section { padding: 64px 0; }
   gap: 40px;
   align-items: start;
 }
+.sp-layout > * { min-width: 0; }
 @media (min-width: 1024px) {
   .sp-layout { grid-template-columns: 1fr 340px; gap: 56px; }
 }
