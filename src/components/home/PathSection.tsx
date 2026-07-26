@@ -60,7 +60,7 @@ export default function PathSection() {
             </span>
           </a>
 
-          <a href="/contact-us" className="path-card">
+          <a href="/ai-counsellor" className="path-card">
             <div className="path-card-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75">
                 <circle cx="12" cy="12" r="9" />
@@ -70,7 +70,7 @@ export default function PathSection() {
             <h3>I am not sure yet</h3>
             <p>Answer 6 short questions and the AI Counsellor will suggest the programmes that best fit your profile, goals, and budget.</p>
             <span className="path-card-link">
-              Get free guidance{" "}
+              Start the AI Counsellor{" "}
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
