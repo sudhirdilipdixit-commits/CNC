@@ -6,6 +6,7 @@ import faq from "./faq";
 import landingPage from "./landingPage";
 import courseCard from "./courseCard";
 import universityCard from "./universityCard";
+import aiCounsellorSuggestion from "./aiCounsellorSuggestion";
 import resourceItem from "./resourceItem";
 import resourceDetail from "./resourceDetail";
 import specializationsPage from "./specializationsPage";
@@ -25,6 +26,7 @@ export const schemaTypes = [
   landingPage,
   courseCard,
   universityCard,
+  aiCounsellorSuggestion,
   resourceItem,
   resourceDetail,
   specializationsPage,

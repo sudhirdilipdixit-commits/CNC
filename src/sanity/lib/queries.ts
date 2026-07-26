@@ -159,6 +159,22 @@ export const resourcesPageQuery = groq`*[_type == "resourceItem"] | order(isFeat
   order,
 }`;
 
+export const aiCounsellorSuggestionsQuery = groq`*[_type == "aiCounsellorSuggestion"] | order(isFeatured desc, order asc){
+  _id,
+  courseName,
+  universityName,
+  mode,
+  duration,
+  fees,
+  feeBand,
+  nextBatch,
+  accreditations,
+  specializations,
+  targetProfiles,
+  studyHours,
+  careerGoals,
+}`;
+
 export const landingPageQuery = groq`*[_type == "landingPage" && slug.current == $slug][0]{
   title, campaign, pageType,
   showFullHeader, showFooter, hideSidebar, urgencyBanner, cardLoadMode,

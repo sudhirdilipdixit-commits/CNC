@@ -1,5 +1,7 @@
 import type { Metadata } from 'next'
-import AICounsellorClient from '@/components/ai-counsellor/AICounsellorClient'
+import { sanityFetch } from '@/sanity/lib/client'
+import { aiCounsellorSuggestionsQuery } from '@/sanity/lib/queries'
+import AICounsellorClient, { type SanityAICounsellorSuggestion } from '@/components/ai-counsellor/AICounsellorClient'
 
 export const metadata: Metadata = {
   title: 'AI Counsellor: 3 MBA Programme Matches in 2 Minutes | CollegeNCourses',
@@ -22,11 +24,17 @@ const breadcrumbSchema = {
   ],
 }
 
-export default function AICounsellorPage() {
+export default async function AICounsellorPage() {
+  const sanitySuggestions = await sanityFetch<SanityAICounsellorSuggestion[]>({
+    query: aiCounsellorSuggestionsQuery,
+    revalidate: 3600,
+    tags: ['aiCounsellorSuggestion'],
+  })
+
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }} />
-      <AICounsellorClient />
+      <AICounsellorClient sanitySuggestions={sanitySuggestions ?? []} />
     </>
   )
 }

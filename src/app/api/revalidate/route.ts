@@ -17,6 +17,7 @@ const TYPE_PATHS: Record<string, string[]> = {
   landingPage:         [],          // only the individual slug page matters
   courseCard:          ["/"],
   universityCard:      ["/"],
+  aiCounsellorSuggestion: ["/ai-counsellor"],
 };
 
 // Derives the individual slug URL for document types that have one.

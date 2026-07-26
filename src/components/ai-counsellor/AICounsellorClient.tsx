@@ -30,8 +30,43 @@ interface Programme {
   goals: string[];
 }
 
-// ─── Programme database (India track, source of truth for now) ───────────────
-const PROGRAMMES: Programme[] = [
+// ─── Sanity shape (see aiCounsellorSuggestionsQuery) ──────────────────────────
+export interface SanityAICounsellorSuggestion {
+  _id: string;
+  courseName: string;
+  universityName: string;
+  mode: string;
+  duration: string;
+  fees: string;
+  feeBand: string;
+  nextBatch: string | null;
+  accreditations: string[] | null;
+  specializations: string[] | null;
+  targetProfiles: string[] | null;
+  studyHours: string[] | null;
+  careerGoals: string[] | null;
+}
+
+function mapSanityToProgramme(sp: SanityAICounsellorSuggestion): Programme {
+  return {
+    id: sp._id,
+    name: sp.courseName,
+    uni: sp.universityName,
+    mode: sp.mode,
+    duration: sp.duration,
+    feeDisplay: sp.fees,
+    feeBand: sp.feeBand,
+    batch: sp.nextBatch ?? "Quarterly",
+    accreditations: sp.accreditations ?? [],
+    specs: sp.specializations ?? [],
+    profiles: sp.targetProfiles ?? [],
+    timeBands: sp.studyHours ?? [],
+    goals: sp.careerGoals ?? [],
+  };
+}
+
+// ─── Fallback programme database (used until Sanity has suggestions) ─────────
+const FALLBACK_PROGRAMMES: Programme[] = [
   { id: "hc-1", name: "Online MBA in Marketing", uni: "Symbiosis Centre for Distance Learning", mode: "online", duration: "24 months", feeDisplay: "Rs 1.8 L", feeBand: "1-2", batch: "Mar 2026", accreditations: ["UGC-DEB", "AICTE", "NAAC A++"], specs: ["marketing"], profiles: ["working_professional", "graduate"], timeBands: ["manageable", "committed", "intensive"], goals: ["promotion", "switch", "salary"] },
   { id: "hc-2", name: "Distance MBA in HR", uni: "NMIMS Global Access", mode: "distance", duration: "24 months", feeDisplay: "Rs 1.5 L", feeBand: "1-2", batch: "Apr 2026", accreditations: ["UGC-DEB", "AICTE"], specs: ["hr"], profiles: ["working_professional", "graduate"], timeBands: ["very_limited", "manageable", "committed"], goals: ["promotion", "switch"] },
   { id: "hc-3", name: "Executive Online MBA", uni: "IIM Indore", mode: "executive", duration: "12 months", feeDisplay: "Rs 6.5 L", feeBand: "5plus", batch: "Jul 2026", accreditations: ["UGC-DEB", "AICTE", "NAAC A++"], specs: ["general", "marketing", "finance"], profiles: ["entrepreneur", "working_professional"], timeBands: ["intensive", "committed"], goals: ["promotion", "business"] },
@@ -207,11 +242,16 @@ function useLoadingDots(active: boolean) {
 }
 
 // ─── Component ────────────────────────────────────────────────────────────────
-export default function AICounsellorClient() {
+export default function AICounsellorClient({ sanitySuggestions }: { sanitySuggestions: SanityAICounsellorSuggestion[] }) {
+  const PROGRAMMES: Programme[] = sanitySuggestions.length > 0
+    ? sanitySuggestions.map(mapSanityToProgramme)
+    : FALLBACK_PROGRAMMES;
+
   const [view, setView] = useState<View>("intro");
   const [currentQ, setCurrentQ] = useState(1);
   const [answers, setAnswers] = useState<Answers>({});
   const [results, setResults] = useState<{ prog: Programme; score: number }[]>([]);
+  const [answeredCount, setAnsweredCount] = useState(0);
   const [animKey, setAnimKey] = useState(0);
   const [enquiryId, setEnquiryId] = useState("");
 
@@ -278,6 +318,7 @@ export default function AICounsellorClient() {
 
   function computeResults(ans: Answers) {
     setView("loading");
+    setAnsweredCount(Object.keys(ans).length);
     setTimeout(() => {
       const scored = PROGRAMMES.map(p => ({ prog: p, score: scoreProgramme(p, ans) }));
       scored.sort((a, b) => b.score - a.score);
@@ -291,6 +332,7 @@ export default function AICounsellorClient() {
     setAnswers({});
     setCurrentQ(1);
     setResults([]);
+    setAnsweredCount(0);
     setHoName(""); setHoMobile(""); setHoEmail(""); setHoConsent(false); setHoError("");
     setView("intro");
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -541,9 +583,17 @@ export default function AICounsellorClient() {
         <div style={{ background: "var(--ivory)", padding: "48px 0 80px" }}>
 
           <div className="container" style={{ textAlign: "center", maxWidth: 660, marginBottom: 40 }}>
-            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--navy)", marginBottom: 12 }}>YOUR RECOMMENDATIONS</div>
-            <h2 style={{ fontFamily: "var(--font-serif)", color: "var(--navy)", fontSize: "clamp(26px,3.5vw,36px)", marginBottom: 12 }}>Your 3 personalised programme matches</h2>
-            <p style={{ color: "var(--grey)", fontSize: 16, marginBottom: 16 }}>Based on your answers, these programmes offer the best combination of fit, accreditation, fees, and career outcomes for your situation.</p>
+            <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--navy)", marginBottom: 12 }}>
+              {answeredCount > 0 ? "YOUR RECOMMENDATIONS" : "POPULAR PROGRAMMES"}
+            </div>
+            <h2 style={{ fontFamily: "var(--font-serif)", color: "var(--navy)", fontSize: "clamp(26px,3.5vw,36px)", marginBottom: 12 }}>
+              {answeredCount > 0 ? "Your 3 personalised programme matches" : "3 popular programmes to start exploring"}
+            </h2>
+            <p style={{ color: "var(--grey)", fontSize: 16, marginBottom: 16 }}>
+              {answeredCount > 0
+                ? "Based on your answers, these programmes offer the best combination of fit, accreditation, fees, and career outcomes for your situation."
+                : "You skipped every question, so these aren't personalised, just three widely-chosen programmes. Start again and answer a few questions for a shortlist matched to you."}
+            </p>
             <button onClick={restart} style={{ display: "inline-flex", alignItems: "center", gap: 6, fontSize: 13, color: "var(--grey)", background: "none", border: "none", cursor: "pointer" }}>
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M3 12a9 9 0 109-9 9.75 9.75 0 00-6.74 2.74L3 8" /><path d="M3 3v5h5" /></svg>
               Start again with different answers
@@ -552,8 +602,10 @@ export default function AICounsellorClient() {
 
           <div className="container" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))", gap: 20, maxWidth: 980 }}>
             {results.map(({ prog }, i) => {
-              const isBest = i === 0;
-              const rankLabels = ["Top Pick", "Strong Alternative", "Also Consider"];
+              const isBest = answeredCount > 0 && i === 0;
+              const rankLabels = answeredCount > 0
+                ? ["Top Pick", "Strong Alternative", "Also Consider"]
+                : ["Popular Pick", "Popular Pick", "Popular Pick"];
               return (
                 <article
                   key={prog.id}
@@ -594,9 +646,13 @@ export default function AICounsellorClient() {
                     <div style={{ background: "var(--pale-navy)", borderRadius: "var(--radius-md)", padding: 14, marginBottom: 16, flex: 1 }}>
                       <div style={{ fontSize: 10, fontWeight: 800, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--navy)", marginBottom: 6, display: "flex", alignItems: "center", gap: 6 }}>
                         <span style={{ width: 8, height: 8, borderRadius: "50%", background: "var(--yellow)", flexShrink: 0 }} />
-                        Why this fits you
+                        {answeredCount > 0 ? "Why this fits you" : "About this programme"}
                       </div>
-                      <div style={{ fontSize: 13, color: "var(--navy)", lineHeight: 1.5 }}>{whyFits(prog, answers)}</div>
+                      <div style={{ fontSize: 13, color: "var(--navy)", lineHeight: 1.5 }}>
+                        {answeredCount > 0
+                          ? whyFits(prog, answers)
+                          : `${prog.name} from ${prog.uni} is one of our widely-chosen programmes, with a total fee of ${prog.feeDisplay} over ${prog.duration}.`}
+                      </div>
                     </div>
 
                     <button onClick={() => handoffRef.current?.scrollIntoView({ behavior: "smooth" })} className="btn btn-primary btn-sm" style={{ width: "100%" }}>
