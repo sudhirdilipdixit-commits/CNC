@@ -757,7 +757,7 @@ export default function FeeGuideClient() {
             {/* True cost calculator */}
             <section id="true-cost-calculator">
               <h2>The 6-step true-cost calculator: know your all-in cost before you commit</h2>
-              <p>This is the worksheet CollegeNCourses counsellors use with every aspirant shortlisting multiple universities. It prevents the common experience of discovering the real cost only after paying an application or admission fee.</p>
+              <p>This is the worksheet our team uses with every aspirant shortlisting multiple universities. It prevents the common experience of discovering the real cost only after paying an application or admission fee.</p>
               <div className="fg-steps">
                 {TRUE_COST_STEPS.map((s) => (
                   <div className="fg-step-card" key={s.step}>

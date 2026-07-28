@@ -688,7 +688,7 @@ export default function Top20UniversitiesClient() {
             {/* Methodology */}
             <section id="methodology">
               <h2>How we ranked these 20 universities</h2>
-              <p>Six weighted factors, assessed by CollegeNCourses counsellors from student feedback, employer interviews, programme data, and publicly available information. We are not paid by universities: no university can buy a higher ranking here.</p>
+              <p>Six weighted factors, assessed by our team from student feedback, employer interviews, programme data, and publicly available information. We are not paid by universities: no university can buy a higher ranking here.</p>
               <div className="t2-methodology-grid">
                 <div className="t2-method-card">
                   <div className="t2-method-weight">25%</div>
@@ -761,7 +761,7 @@ export default function Top20UniversitiesClient() {
             {/* Top 10 detailed profiles */}
             <section id="top10-profiles">
               <h2>Detailed profiles: Top 10 universities</h2>
-              <p>What our counsellors know about each from advising thousands of aspirants, not marketing copy from the universities themselves.</p>
+              <p>What our team has learned about each from helping thousands of aspirants, not marketing copy from the universities themselves.</p>
               {TOP10_PROFILES.map((p) => (
                 <div className="t2-profile-card" key={p.rank}>
                   <div className="t2-profile-header">

@@ -284,7 +284,7 @@ const FAQS: { q: string; a: string; voice?: boolean }[] = [
   },
   {
     q: "How does CollegeNCourses help me understand my specific salary potential?",
-    a: "Our counsellors walk through your specific specialization, target employer type, and city to give you a realistic benchmark, and help you use that benchmark in an actual offer negotiation if you already have one. Free 30-minute call. No paid referral affects our recommendation.",
+    a: "Our AI Counsellor walks through your specific specialization, target employer type, and city to give you a realistic benchmark, and helps you use that benchmark in an actual offer negotiation if you already have one. Free, no call required. No paid referral affects our recommendation.",
   },
 ];
 
@@ -845,7 +845,7 @@ export default function SalaryReportClient() {
             <section id="negotiate-offer">
               <h2>How to use this salary data to negotiate your offer, in 6 steps</h2>
               <p>
-                This is the exact framework our counsellors walk through with aspirants who have a live offer in hand and want to know if it&apos;s fair.
+                This is the exact framework our team walks through with aspirants who have a live offer in hand and want to know if it&apos;s fair.
               </p>
               <div className="sr-steps">
                 {HOWTO_STEPS.map((s) => (
@@ -1143,7 +1143,7 @@ export default function SalaryReportClient() {
         <div className="container">
           <h2>Want your specific salary potential benchmarked?</h2>
           <p>
-            Talk to a CollegeNCourses counsellor. We&apos;ll walk through your target specialization, employer type, and city, and if you already have an offer, help you build a data-backed negotiation conversation. Free, 30 minutes.
+            Get a free shortlist from our AI Counsellor. We&apos;ll walk through your target specialization, employer type, and city, and if you already have an offer, help you build a data-backed negotiation conversation. Free, no call required.
           </p>
           <button className="sr-btn sr-btn-navy" onClick={() => setModalOpen(true)}>
             Book a free counselling call →

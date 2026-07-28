@@ -192,7 +192,7 @@ const FAQS = [
   { q: "How is AI affecting Digital Marketing careers in India?", a: "Substantially. Since late 2024, generative AI tools (ChatGPT, Jasper, Copy.ai, Midjourney) restructured content, ad copy, and creative production roles. Junior copywriting and static-content roles are contracting; strategic, analytical, and cross-channel roles are growing. Digital Marketing MBAs joining in 2025-27 will be evaluated on AI-tool fluency in interviews." },
   { q: "Can I switch to a growth marketing role at a D2C brand after this MBA?", a: "Yes — this is one of the most common outcomes. Aspirants with 2–5 years' prior digital or content experience who take a UGC-DEB approved Online MBA report ~65% transition rate to D2C/fintech growth roles within 18 months of graduation, based on our 2024-25 tracking." },
   { q: "What tools and platforms will I learn during the MBA?", a: "Standard 2025-26 curriculum covers Google Ads, Meta Ads Manager, LinkedIn Ads, GA4, Google Tag Manager, SEMrush or Ahrefs, HubSpot or Salesforce, Mailchimp, and basics of SQL and Excel. Executive tracks add Mixpanel or Amplitude, marketing mix modelling tools, and paid AI platforms." },
-  { q: "How does CollegeNCourses help me choose a Digital Marketing MBA?", a: "Our counsellors match you to programmes based on your target growth channel, employer type (D2C vs agency vs brand), budget, and timeline. We shortlist three programmes from UGC-DEB approved options only. Free 30-minute call. No paid rankings." },
+  { q: "How does CollegeNCourses help me choose a Digital Marketing MBA?", a: "We match you to programmes based on your target growth channel, employer type (D2C vs agency vs brand), budget, and timeline. We shortlist three programmes from UGC-DEB approved options only. Free, no call required. No paid rankings." },
   { q: "Is Digital Marketing MBA in demand in India?", a: "Yes, very. Digital Marketing became the highest-search-volume MBA specialization in India in Q3 2024 and continues to lead. D2C brand growth, fintech expansion, and SaaS scaling are driving demand for growth marketing and performance marketing talent, especially at 3–8 years' experience.", voice: true },
   { q: "How much does a Digital Marketing MBA pay?", a: "The median starting salary after an Online MBA in Digital Marketing is roughly ₹7 lakh per annum in India in 2025-26, scaling to ₹15 LPA at 3–7 years and ₹32 LPA at 8–15 years. Growth Marketing roles at D2C or fintech companies can push these numbers 30–45% higher.", voice: true },
   { q: "Which is the best online MBA for Digital Marketing?", a: "The three most-recommended Online MBAs for Digital Marketing in 2025-26 are Symbiosis Centre for Online Learning (highest placement conversion), NMIMS Global Access (strongest industry-tied projects), and Manipal Academy (best value in Tier-1 category).", voice: true },
@@ -648,9 +648,9 @@ export default function DigitalMarketingGuideClient() {
                 </table>
               </div>
               <div className="dg-callout">
-                Confused about which one fits your profile? Our counsellors shortlist three programmes matched to your role, budget, and timeline in a free 30-minute call.{" "}
+                Confused about which one fits your profile? Our AI Counsellor shortlists three programmes matched to your role, budget, and timeline.{" "}
                 <button style={{ background: "none", border: "none", color: "var(--navy)", fontWeight: 700, cursor: "pointer", padding: 0, textDecoration: "underline" }} onClick={() => setModalOpen(true)}>
-                  Book a free counselling call →
+                  Get Free Guidance →
                 </button>
               </div>
             </section>
@@ -831,7 +831,7 @@ export default function DigitalMarketingGuideClient() {
       <section className="dg-cta-band">
         <div className="container">
           <h2>Ready to shortlist your Digital Marketing MBA?</h2>
-          <p>Talk to a CollegeNCourses counsellor. We&apos;ll match you to three programmes based on your target growth channel, employer type, budget, and timeline. Free, 30 minutes.</p>
+          <p>Get a free shortlist from our AI Counsellor. We&apos;ll match you to three programmes based on your target growth channel, employer type, budget, and timeline. Free, no call required.</p>
           <button className="dg-btn dg-btn-navy" onClick={() => setModalOpen(true)}>
             Get free counselling →
           </button>

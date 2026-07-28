@@ -4,6 +4,7 @@ import { sanityFetch } from "@/sanity/lib/client";
 import { blogListQuery } from "@/sanity/lib/queries";
 import { urlFor } from "@/sanity/lib/image";
 import BlogIndexClient, { type BlogPostCard } from "./BlogIndexClient";
+import LeadCTAButton from "@/components/forms/LeadCTAButton";
 
 export const revalidate = 300;
 
@@ -71,12 +72,10 @@ export default async function BlogIndexPage() {
             Honest writing on Indian higher education.
           </h1>
           <p className="lede" style={{ color: "var(--pale-navy)", maxWidth: 600, marginBottom: 32 }}>
-            No clickbait. No paid rankings. Real data, written by counsellors who work with aspirants every day.
+            No clickbait. No paid rankings. Real data, written by a team that works with aspirants every day.
           </p>
           <div style={{ display: "flex", gap: 10, flexWrap: "wrap", paddingBottom: 40 }}>
-            <Link href="/contact-us" className="btn btn-primary btn-sm">
-              Speak to a Counsellor
-            </Link>
+            <LeadCTAButton label="Get Free Guidance" source="blog-hero" className="btn btn-primary btn-sm" />
             <Link
               href="/#programmes"
               className="btn btn-sm"
@@ -100,14 +99,12 @@ export default async function BlogIndexPage() {
         <div className="container" style={{ maxWidth: 560, textAlign: "center" }}>
           <div className="eyebrow" style={{ color: "var(--navy)" }}>NOT SURE WHERE TO START?</div>
           <h2 className="h-display h2" style={{ color: "var(--navy)", margin: "12px 0 16px" }}>
-            Talk to a counsellor
+            Get free guidance
           </h2>
           <p style={{ color: "var(--navy)", fontSize: 17, marginBottom: 28 }}>
             Skip the research rabbit hole. Get a personalised shortlist of programmes matched to your profile.
           </p>
-          <Link href="/contact-us" className="btn btn-inverted">
-            Get Expert Guidance
-          </Link>
+          <LeadCTAButton label="Get Free Guidance" source="blog-cta-band" className="btn btn-inverted" />
         </div>
       </section>
 

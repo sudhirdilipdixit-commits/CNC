@@ -226,7 +226,7 @@ export default function SalaryReportPage() {
                 name: "How does CollegeNCourses help me understand my specific salary potential?",
                 acceptedAnswer: {
                   "@type": "Answer",
-                  text: "Our counsellors walk through your specific specialization, target employer type, and city to give you a realistic benchmark, and help you use that benchmark in an actual offer negotiation if you already have one. Free 30-minute call. No paid referral affects our recommendation.",
+                  text: "Our AI Counsellor walks through your specific specialization, target employer type, and city to give you a realistic benchmark, and helps you use that benchmark in an actual offer negotiation if you already have one. Free, no call required. No paid referral affects our recommendation.",
                 },
               },
             ],
@@ -242,7 +242,7 @@ export default function SalaryReportPage() {
             "@type": "HowTo",
             name: "How to use MBA salary data to negotiate a job offer",
             description:
-              "A 6-step framework used by CollegeNCourses counsellors to help aspirants benchmark and negotiate a job offer using specialization, employer-type, and city salary data.",
+              "A 6-step framework used by CollegeNCourses to help aspirants benchmark and negotiate a job offer using specialization, employer-type, and city salary data.",
             step: [
               {
                 "@type": "HowToStep",

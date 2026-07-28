@@ -141,7 +141,7 @@ export default defineType({
             "Our AI Counsellor recommends a specialization and three matching programmes based on your profile in two minutes.",
         }),
         defineField({ name: "primaryCTA", title: "Primary Button Text", type: "string", initialValue: "Get Free Counselling" }),
-        defineField({ name: "secondaryCTA", title: "Secondary Button Text", type: "string", initialValue: "Talk to a Counsellor" }),
+        defineField({ name: "secondaryCTA", title: "Secondary Button Text", type: "string", initialValue: "Call Us" }),
       ],
     }),
   ],

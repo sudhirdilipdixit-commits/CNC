@@ -74,7 +74,7 @@ export default function LeadModal({
   open,
   onClose,
   source = "modal",
-  title = "Talk to a counsellor in 30 minutes",
+  title = "Get Free Guidance",
 }: LeadModalProps) {
   const router = useRouter();
   const nameRef = useRef<HTMLInputElement>(null);
@@ -400,7 +400,7 @@ export default function LeadModal({
             <div className="modal-step modal-success active">
               <div className="modal-success-icon" aria-hidden="true">✓</div>
               <h2>Already received!</h2>
-              <p>Your enquiry has already been received. Our counsellor will contact you shortly.</p>
+              <p>Your enquiry has already been received. The programme team will be in touch shortly.</p>
             </div>
           </div>
         ) : (

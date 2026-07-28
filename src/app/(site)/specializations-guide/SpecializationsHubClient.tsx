@@ -446,7 +446,7 @@ export default function SpecializationsHubClient({ data }: Props) {
               </svg>
             </button>
             <a href="tel:+917350460393" className="btn btn-secondary">
-              {ctaBand?.secondaryCTA || "Talk to a Counsellor"}
+              {ctaBand?.secondaryCTA || "Call Us"}
             </a>
           </div>
         </div>

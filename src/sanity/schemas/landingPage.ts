@@ -366,7 +366,7 @@ export default defineType({
           type: "text",
           rows: 2,
           initialValue:
-            "Our counsellors match you to the right programme based on your profile and budget.",
+            "Our AI Counsellor matches you to the right programme based on your profile and budget.",
         }),
       ],
     }),
@@ -523,12 +523,12 @@ export default defineType({
           type: "text",
           rows: 2,
           initialValue:
-            "Our counsellors recommend three programmes matched to your situation, budget, and timeline.",
+            "Our AI Counsellor recommends three programmes matched to your situation, budget, and timeline.",
         }),
         defineField({
           name: "ctaLabel",
           type: "string",
-          initialValue: "Talk to a Counsellor",
+          initialValue: "Get Free Guidance",
         }),
       ],
     }),

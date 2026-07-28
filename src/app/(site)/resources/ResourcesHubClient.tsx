@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import type { ResourceItem } from "./page";
+import LeadModal from "@/components/forms/LeadModal";
 
 // ─── Fallback seed data (used if no Sanity resourceItems exist yet) ───────────
 const SEED_RESOURCES: ResourceItem[] = [
@@ -119,7 +120,7 @@ const SEED_RESOURCES: ResourceItem[] = [
     checklistItems: [
       "How to frame your break in applications",
       "Which programmes work best for re-entry",
-      "Employer questions and how counsellors suggest you answer",
+      "Employer questions and how to answer them",
       "Case studies from our alumni",
     ],
     href: "/resources/returning-after-career-break-2026",
@@ -149,6 +150,7 @@ const TYPE_ICON: Record<string, string> = {
 export default function ResourcesHubClient({ resources }: { resources: ResourceItem[] }) {
   const items = resources.length > 0 ? resources : SEED_RESOURCES;
   const [activeFilter, setActiveFilter] = useState("all");
+  const [modalOpen, setModalOpen] = useState(false);
 
   const visible = activeFilter === "all"
     ? items
@@ -252,19 +254,21 @@ export default function ResourcesHubClient({ resources }: { resources: ResourceI
             Not sure which resource to start with?
           </h2>
           <p style={{ color: "var(--navy)", fontSize: 17, marginBottom: 28, lineHeight: 1.6 }}>
-            Our counsellors will tell you exactly which guide is relevant for your situation, in a free 15-minute call.
+            Get a personalised shortlist of the guides and tools relevant to your situation. Free, takes 2 minutes.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="/contact-us" className="btn btn-inverted">
-              Talk to a Counsellor
+            <button type="button" className="btn btn-inverted" onClick={() => setModalOpen(true)}>
+              Get Free Guidance
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
-            </a>
+            </button>
             <a href="/contact-us" className="btn btn-secondary">
-              Book a Free Call
+              Contact Us
             </a>
           </div>
         </div>
       </section>
+
+      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} source="resources-hub-cta" />
     </>
   );
 }

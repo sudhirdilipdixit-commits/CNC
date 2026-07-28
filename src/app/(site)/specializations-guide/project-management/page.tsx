@@ -53,7 +53,7 @@ export default function ProjectManagementGuidePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "HowTo",
         name: "How to decide if a Project Management MBA is right for you",
-        description: "A 5-question framework used by CollegeNCourses counsellors to help aspirants choose a Project Management MBA in 2025-26.",
+        description: "A 5-question framework used by CollegeNCourses to help aspirants choose a Project Management MBA in 2025-26.",
         step: [
           { "@type": "HowToStep", position: 1, name: "Name your target industry — IT, construction, consulting, or product", text: "Each has different economics, employer preferences, and dominant methodologies." },
           { "@type": "HowToStep", position: 2, name: "Plan your PMP or Scrum Master certification alongside the MBA", text: "The combination is genuinely more powerful than either alone. Budget Rs 40k-60k additionally for PMP; Rs 20k for Scrum Master." },

@@ -56,7 +56,7 @@ export default function RetailGuidePage() {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
         "@context": "https://schema.org", "@type": "HowTo",
         name: "How to decide if a Retail Management MBA is right for you",
-        description: "A 5-question framework used by CollegeNCourses counsellors to help aspirants choose a Retail Management MBA in 2025-26.",
+        description: "A 5-question framework used by CollegeNCourses to help aspirants choose a Retail Management MBA in 2025-26.",
         step: [
           { "@type": "HowToStep", position: 1, name: "Name your target segment — traditional retail, D2C, e-commerce retail, or quick commerce", text: "Each has fundamentally different economics, hiring criteria, and daily work." },
           { "@type": "HowToStep", position: 2, name: "Confirm your comfort with weekends and festival-peak schedules", text: "Retail is 24x7 during Diwali, EOSS periods, Black Friday, and end-of-quarter pushes." },

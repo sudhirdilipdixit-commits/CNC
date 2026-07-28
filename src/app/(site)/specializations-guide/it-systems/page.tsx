@@ -104,7 +104,7 @@ export default function ITSystemsGuidePage() {
             "@context": "https://schema.org",
             "@type": "HowTo",
             name: "How to decide if an IT & Systems Management MBA is right for you",
-            description: "A 5-question framework used by CollegeNCourses counsellors to help IT professionals choose the right MBA in 2025-26.",
+            description: "A 5-question framework used by CollegeNCourses to help IT professionals choose the right MBA in 2025-26.",
             step: [
               { "@type": "HowToStep", position: 1, name: "Name your target role", text: "Product Manager? IT Consulting? Enterprise Architect? IT Director/CIO? The programme structure, electives, and career strategy differ significantly across these. Vague targets produce vague outcomes." },
               { "@type": "HowToStep", position: 2, name: "Assess your existing technical depth", text: "If you have 5+ years of software engineering or IT services experience, you have the technical foundation. The IT & Systems MBA adds the management and business strategy layer. If you have less than 3 years of technical experience, focus on deepening technical skills before the MBA." },

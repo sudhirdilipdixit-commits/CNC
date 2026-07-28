@@ -215,7 +215,7 @@ const FIVE_QUESTIONS = [
     step: "05",
     title: "Set your hard financial ceiling",
     subtitle: "Then find the best programme within it",
-    body: "Rs 1.2 L to Rs 22 L is the range. Most working professionals fit Rs 1.85 L to Rs 3.75 L Online. Stretching to IIFT Executive without an MNC-track reset in view is a common regret pattern our counsellors see repeatedly.",
+    body: "Rs 1.2 L to Rs 22 L is the range. Most working professionals fit Rs 1.85 L to Rs 3.75 L Online. Stretching to IIFT Executive without an MNC-track reset in view is a common regret pattern we see repeatedly.",
   },
 ];
 
@@ -231,7 +231,7 @@ const FAQS = [
   { q: "How is the geopolitical environment affecting International Business careers in 2025-26?", a: `India's push to $2 trillion in exports by 2030, EU CBAM (in force 2026), US supply-chain compliance requirements, and India's participation in trade agreements are all creating structural demand for International Business talent.`, voice: false },
   { q: "Can I switch industries after an International Business MBA?", a: "Yes. International Business is industry-agnostic. Aspirants regularly move between FMCG, technology, pharmaceuticals, automotive, engineering goods, and services. Our alumni tracking shows 47% switch industries within 4 years of graduation.", voice: false },
   { q: "What are education loan options for IIFT and Executive International Business programmes?", a: "For Online MBAs at Rs 1.5–3.75 lakh, most working professionals pay from monthly salary. For IIFT Executive at Rs 18–22 lakh, education loans are available from SBI, HDFC Credila, ICICI, Avanse, and Auxilo at interest rates of 9.5–12.5% in 2025-26.", voice: false },
-  { q: "How does CollegeNCourses help me choose an International Business MBA?", a: "Our counsellors match you to programmes based on your target role type (MNC, export-import, family business), current experience, comfort with international travel, budget, and timeline. Free 30-minute call. No paid referral affects our recommendation.", voice: false },
+  { q: "How does CollegeNCourses help me choose an International Business MBA?", a: "We match you to programmes based on your target role type (MNC, export-import, family business), current experience, comfort with international travel, budget, and timeline. Free, no call required. No paid referral affects our recommendation.", voice: false },
   { q: "Is International Business MBA good career in India?", a: "Yes, especially in 2025-26. India's export push, GCC growth, and MNC expansion into Tier-2 Indian markets are creating structural demand. Country Manager and VP International roles offer some of the highest MBA-track compensation in India.", voice: true },
   { q: "How much salary after international business MBA?", a: "Median starting salary after an Online MBA in International Business is Rs 6 LPA in India in 2025-26, scaling to Rs 13 LPA at 3–7 years and Rs 28 LPA at 8–15 years. IIFT Executive graduates command 2–3x these bands.", voice: true },
   { q: "Which is the best MBA for international business in India?", a: "The most-recommended MBAs for International Business in 2025-26 are IIFT Executive/Residential (highest brand and placement), OP Jindal Global Online (AACSB accredited, best for international mobility), and Symbiosis SCOL Online (strong MNC placements).", voice: true },
@@ -489,7 +489,7 @@ export default function InternationalBusinessGuideClient() {
           <h1>MBA in International Business Management<br />The Honest 2025-26 Guide</h1>
           <p className="ib-hero-sub">
             Fees Rs 1.2 L to Rs 22 L, salary bands, top 10 UGC-DEB programmes across Distance,
-            Online, and Executive modes — written by counsellors, not sponsors.
+            Online, and Executive modes — written by our team, not sponsors.
           </p>
           <div className="ib-hero-meta">
             <span>📅 December 2025</span>
@@ -598,7 +598,7 @@ export default function InternationalBusinessGuideClient() {
             {/* Who fits */}
             <section id="who-fits" className="ib-section">
               <h2 className="ib-section-title">The three profiles who gain most from this MBA</h2>
-              <p className="ib-section-sub">Our counsellors see these patterns consistently</p>
+              <p className="ib-section-sub">Patterns we see consistently</p>
 
               <div className="ib-profile-grid">
                 {PROFILE_CARDS.map((c, i) => (
@@ -672,9 +672,9 @@ export default function InternationalBusinessGuideClient() {
 
               <div className="ib-counsel-callout">
                 <p>
-                  <strong>Not sure which role family fits your background?</strong> Our counsellors
-                  map your current experience to the most viable International Business career track
-                  in a free 30-minute call.
+                  <strong>Not sure which role family fits your background?</strong> Our AI Counsellor
+                  maps your current experience to the most viable International Business career track
+                  for you, free.
                 </p>
                 <button onClick={() => setModalOpen(true)}>Book free call</button>
               </div>
@@ -805,9 +805,9 @@ export default function InternationalBusinessGuideClient() {
 
               <div className="ib-counsel-callout">
                 <p>
-                  <strong>Your situation does not fit any of the above?</strong> Our counsellors
-                  handle edge cases — career breaks, non-traditional backgrounds, family business
-                  specifics — in the free 30-minute call.
+                  <strong>Your situation does not fit any of the above?</strong> Get free guidance
+                  that accounts for edge cases — career breaks, non-traditional backgrounds, family
+                  business specifics.
                 </p>
                 <button onClick={() => setModalOpen(true)}>Book free call</button>
               </div>
@@ -825,7 +825,7 @@ export default function InternationalBusinessGuideClient() {
 
             {/* 5-step framework */}
             <section id="how-to-decide" className="ib-section">
-              <h2 className="ib-section-title">The 5-question framework counsellors use</h2>
+              <h2 className="ib-section-title">The 5-question framework we use</h2>
               <p className="ib-section-sub">Walk through these before choosing a programme</p>
 
               <div className="ib-howto-grid">
@@ -896,10 +896,10 @@ export default function InternationalBusinessGuideClient() {
         <div className="ib-wrap">
           <h2>Ready to shortlist your International Business MBA?</h2>
           <p>
-            Our counsellors will match you to the right programme for your role, budget,
-            and travel comfort — in a free 30-minute call. No referral fees. No paid rankings.
+            Our AI Counsellor matches you to the right programme for your role, budget,
+            and travel comfort. No referral fees. No paid rankings.
           </p>
-          <button onClick={() => setModalOpen(true)}>Book free counselling call →</button>
+          <button onClick={() => setModalOpen(true)}>Get Free Guidance →</button>
         </div>
       </section>
 

@@ -4,7 +4,7 @@ import MBAModeComparisonClient from "./MBAModeComparisonClient";
 export const metadata: Metadata = {
   title: "Distance vs Online vs Executive MBA 2025-26: Full Guide | CollegeNCourses",
   description:
-    "Fees, duration, salary, placement, recognition compared. Which MBA fits working professionals? Honest 2025-26 guide by CollegeNCourses counsellors.",
+    "Fees, duration, salary, placement, recognition compared. Which MBA fits working professionals? Honest 2025-26 guide by CollegeNCourses.",
   alternates: {
     canonical: "https://collegencourses.com/resources/distance-vs-online-vs-executive-mba-guide/",
   },
@@ -113,7 +113,7 @@ export default function MBAModeComparisonPage() {
               { "@type": "Question", name: "Which mode is best for working professionals?", acceptedAnswer: { "@type": "Answer", text: "For most working professionals in India in 2025-26, Online MBA is the best mode. It balances cost, time commitment, live faculty interaction, and placement support. Distance suits only budget-tight self-directed learners. Executive suits only Tier-1 industry-reset moments." } },
               { "@type": "Question", name: "Is online MBA equal to regular MBA?", acceptedAnswer: { "@type": "Answer", text: "Yes. As of 2025-26, an Online MBA from a UGC-DEB approved university is legally equivalent to a regular MBA for all purposes: government jobs, further education, and private-sector employment. Employer acceptance is high in most sectors." } },
               { "@type": "Question", name: "How to choose the right MBA in India?", acceptedAnswer: { "@type": "Answer", text: "Choose based on six factors: budget ceiling, weekly time availability, target role two years post-MBA, current employer's stated position on Online and Distance MBAs, your dropout risk profile, and whether you need international recognition." } },
-              { "@type": "Question", name: "How does CollegeNCourses help me choose the right mode?", acceptedAnswer: { "@type": "Answer", text: "Our counsellors run a structured 30-minute free call in which we walk you through the six-question decision framework, understand your role, income, career goal, budget, and timeline, and shortlist three specific programmes across the right mode. We have no referral deal that affects our recommendation." } },
+              { "@type": "Question", name: "How does CollegeNCourses help me choose the right mode?", acceptedAnswer: { "@type": "Answer", text: "Our AI Counsellor walks you through the six-question decision framework, understands your role, income, career goal, budget, and timeline, and shortlists three specific programmes across the right mode. We have no referral deal that affects our recommendation." } },
             ],
           }),
         }}
@@ -127,7 +127,7 @@ export default function MBAModeComparisonPage() {
             "@type": "HowTo",
             name: "How to decide which MBA mode is right for you",
             description:
-              "A 6-question framework used by CollegeNCourses counsellors to help aspirants choose between Distance, Online, and Executive MBA in 2025-26.",
+              "A 6-question framework used by CollegeNCourses to help aspirants choose between Distance, Online, and Executive MBA in 2025-26.",
             step: [
               { "@type": "HowToStep", position: 1, name: "How much can you actually spend?", text: "Set a walk-away number before you research programmes. If under 2 lakh, Distance or lower-end Online. If 1.5-3.5 lakh, Online. If 8 lakh or more without employer sponsorship, do a hard-nosed ROI calculation." },
               { "@type": "HowToStep", position: 2, name: "How many hours per week can you realistically commit?", text: "Block your actual calendar for two typical weeks. If 8-10 hours max, Distance. If 12-15 hours, Online. If 20 or more hours or full-time, Executive." },

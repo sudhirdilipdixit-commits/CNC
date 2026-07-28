@@ -241,7 +241,7 @@ const FAQS = [
   { q: "How is AI affecting Business Analytics careers in India?", a: "AI is expanding the field rather than contracting it. Generative AI is augmenting analytics workflows — SQL query drafting, data cleaning, dashboard-narration — but the analytical judgment, business problem-framing, and stakeholder communication remain human. Analytics job postings in India grew 34% in 2024-25 per Naukri JobSpeak data.", voice: false },
   { q: "Can I switch industries after a Business Analytics MBA?", a: "Yes — one of the specialization's strongest features. Business Analytics is industry-agnostic. Aspirants moving from IT services to BFSI, e-commerce to healthcare, or manufacturing to consulting is common. Our alumni tracking shows 41% switch industries within 3 years of graduation.", voice: false },
   { q: "What are education loan and EMI options for a Business Analytics MBA?", a: "For Online MBAs at Rs 2–3 lakh, most working professionals pay from monthly salary. For Executive MBAs at Rs 15–28 lakh, education loans are widely available from SBI (up to Rs 1.5 crore), HDFC Credila, ICICI, Avanse, and Auxilo. Interest rates in 2025-26 range 9.5–12.5%.", voice: false },
-  { q: "How does CollegeNCourses help me choose?", a: "Our counsellors match you to programmes based on your target industry, tool comfort, career goal, budget, and Tier-1 consulting aspiration. Free 30-minute call. Shortlist three programmes from UGC-DEB approved options only. No paid referral affects our recommendation.", voice: false },
+  { q: "How does CollegeNCourses help me choose?", a: "We match you to programmes based on your target industry, tool comfort, career goal, budget, and Tier-1 consulting aspiration. Free, no call required. Shortlist three programmes from UGC-DEB approved options only. No paid referral affects our recommendation.", voice: false },
   { q: "Is Business Analytics MBA in demand in India?", a: "Yes, very much. Business Analytics is the second-fastest-growing MBA specialization in India by search volume in 2025-26. Analytics job postings grew 34% year-on-year in 2024-25 per Naukri data. Demand is broad-based across BFSI, IT services, consulting, e-commerce, and product-tech.", voice: true },
   { q: "How much does a Business Analytics MBA pay?", a: "The median starting salary after an Online MBA in Business Analytics is Rs 8.5 LPA in India in 2025-26 — the highest of any MBA specialization at entry-level. It scales to Rs 17 LPA at 3–7 years and Rs 34 LPA at 8–15 years.", voice: true },
   { q: "Which is the best MBA in Business Analytics in India?", a: "The three most-recommended MBAs for Business Analytics in 2025-26 are IIM Bangalore BAI (Executive, best for Tier-1 consulting reset), Great Lakes PGP-BABI (Executive, purely analytics-focused Tier-1 brand), and Symbiosis SCOL (Online, best value at Tier-1 university).", voice: true },
@@ -670,9 +670,9 @@ export default function BusinessAnalyticsGuideClient() {
 
               <div className="ba-counsel-callout">
                 <p>
-                  <strong>Not sure which role family fits your background?</strong> Our counsellors
-                  map your current experience to the most viable Business Analytics career track
-                  in a free 30-minute call.
+                  <strong>Not sure which role family fits your background?</strong> Our AI Counsellor
+                  maps your current experience to the most viable Business Analytics career track
+                  for you, free.
                 </p>
                 <button onClick={() => setModalOpen(true)}>Book free call</button>
               </div>
@@ -809,7 +809,7 @@ export default function BusinessAnalyticsGuideClient() {
             {/* 5-step framework */}
             <section id="how-to-decide" className="ba-section">
               <h2 className="ba-section-title">How to decide if a Business Analytics MBA is right for you</h2>
-              <p className="ba-section-sub">5 questions counsellors ask before shortlisting programmes</p>
+              <p className="ba-section-sub">5 questions we ask before shortlisting programmes</p>
 
               <div className="ba-howto-grid">
                 {FIVE_QUESTIONS.map((q, i) => (
@@ -881,7 +881,7 @@ export default function BusinessAnalyticsGuideClient() {
         <div className="ba-wrap">
           <h2>Ready to shortlist your Business Analytics MBA?</h2>
           <p>
-            Talk to a CollegeNCourses counsellor. We will match you to three programmes based on
+            Get a free shortlist from our AI Counsellor. We will match you to three programmes based on
             your target industry, tool background, budget, and Tier-1 consulting aspirations.
             Free, 30 minutes.
           </p>

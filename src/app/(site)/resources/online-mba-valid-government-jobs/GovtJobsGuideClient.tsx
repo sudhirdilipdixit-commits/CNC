@@ -101,7 +101,7 @@ const FAQS = [
   { q: "Is online MBA government recognised?", a: "Yes. An Online MBA from a university holding current UGC-DEB approval is government recognised and legally equivalent to a regular MBA for employment and further education purposes in India, under UGC's 2020 Regulations.", voice: true },
   { q: "Can online MBA be used for government job promotion?", a: "Yes, in most cases. Online MBAs from UGC-DEB approved universities are widely accepted for internal government and PSU promotion eligibility, particularly at public-sector banks. Always confirm against your specific organisation's current internal HR promotion policy.", voice: true },
   { q: "Which online MBA is valid for government jobs?", a: "Any Online MBA from a university currently holding UGC-DEB approval for that specific programme is valid for general government job eligibility. See our Top 20 UGC-DEB Approved Online MBA Universities guide for a ranked list, and the safest universities section of this guide for government-job-specific selection considerations.", voice: true },
-  { q: "How does CollegeNCourses help verify government job eligibility?", a: "Our counsellors help you check UGC-DEB approval status, read and interpret specific job notifications, and, where useful, draft the written clarification request described in the verification section. Free 30-minute call. We do not guarantee outcomes for any specific job posting, since final eligibility determination always rests with the recruiting body." },
+  { q: "How does CollegeNCourses help verify government job eligibility?", a: "Our team helps you check UGC-DEB approval status, read and interpret specific job notifications, and, where useful, draft the written clarification request described in the verification section. Free, no call required. We do not guarantee outcomes for any specific job posting, since final eligibility determination always rests with the recruiting body." },
 ];
 
 const RELATED = [
@@ -764,7 +764,7 @@ export default function GovtJobsGuideClient() {
       <div className="gj-cta-band">
         <div className="container">
           <h2>Targeting a specific government role? Let's check your exact eligibility.</h2>
-          <p>Talk to a CollegeNCourses counsellor. We'll help you read your target notification correctly, verify UGC-DEB status, and, if needed, draft a written clarification request. Free, 30 minutes.</p>
+          <p>Get a free shortlist from our AI Counsellor. We'll help you read your target notification correctly, verify UGC-DEB status, and, if needed, draft a written clarification request. Free, no call required.</p>
           <a href="/counselling/" className="gj-btn gj-btn-navy">Book a free counselling call →</a>
           <br />
           <a href="/resources/top-20-ugc-deb-approved-online-mba-2025-26/" className="gj-cta-secondary">Or read our Top 20 UGC-DEB Approved Universities guide →</a>

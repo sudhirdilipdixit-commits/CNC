@@ -65,7 +65,7 @@ function MidCaptureForm() {
     <div className="bi-mid-capture">
       <div className="bi-mid-body">
         <h3>Skip the research. Get expert guidance.</h3>
-        <p>Speak with a counsellor who knows India&apos;s online MBA landscape. Free. Takes 15 minutes.</p>
+        <p>Get a personalised programme shortlist matched to your profile. Free. Takes 2 minutes.</p>
       </div>
       <form className="bi-mid-form" onSubmit={handleSubmit} noValidate>
         <input
@@ -82,7 +82,7 @@ function MidCaptureForm() {
         />
         {error && <div style={{ fontSize: 12, color: "#B83A2A" }}>{error}</div>}
         <button type="submit" className="btn btn-primary btn-sm" disabled={submitting}>
-          {submitting ? "Sending…" : "Talk to a Counsellor"}
+          {submitting ? "Sending…" : "Get Free Guidance"}
         </button>
       </form>
     </div>

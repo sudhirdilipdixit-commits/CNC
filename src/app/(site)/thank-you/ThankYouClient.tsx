@@ -66,8 +66,8 @@ export default function ThankYouClient() {
             </div>
 
             <p className="lede" style={{ color: "var(--grey)", marginBottom: 0 }}>
-              Confirmation sent by SMS and WhatsApp. A senior counsellor will call
-              you within 30 minutes during working hours.
+              Confirmation sent by SMS and WhatsApp. The programme team you enquired
+              about will be in touch during working hours.
             </p>
 
           </div>
@@ -99,23 +99,23 @@ export default function ThankYouClient() {
 
               {/* Step 2 – next */}
               <div className="timeline-step">
-                <span className="time-badge">Within 30 min</span>
+                <span className="time-badge">Next</span>
                 <div className="timeline-icon tl-next">2</div>
-                <h4>Counsellor review</h4>
+                <h4>Matched to the right team</h4>
                 <p>
-                  A senior counsellor reads your enquiry and prepares personalised
-                  programme options for you.
+                  Your enquiry is matched to the university or programme team best
+                  placed to help, based on what you shared.
                 </p>
               </div>
 
               {/* Step 3 – later */}
               <div className="timeline-step">
-                <span className="time-badge">First call</span>
+                <span className="time-badge">Then</span>
                 <div className="timeline-icon tl-later">3</div>
-                <h4>30-minute call</h4>
+                <h4>They reach out to help</h4>
                 <p>
-                  Your situation, your options, your questions. No commitment, no
-                  sales pitch.
+                  With your consent, that admissions team contacts you directly —
+                  no call centre in between.
                 </p>
               </div>
 

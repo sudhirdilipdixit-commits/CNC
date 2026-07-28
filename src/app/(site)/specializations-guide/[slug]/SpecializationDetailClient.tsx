@@ -147,7 +147,7 @@ const DEFAULT: CMSData = {
     heading: "Not sure Marketing is right for you?",
     body: "Our AI Counsellor compares all 8 specializations against your profile and recommends the best fit in 2 minutes.",
     primaryCtaLabel: "Try the AI Counsellor",
-    secondaryCtaLabel: "Talk to a Counsellor",
+    secondaryCtaLabel: "Call Us",
     secondaryCtaHref: "tel:+917350460393",
   },
 };
@@ -604,7 +604,7 @@ export default function SpecializationDetailClient({ data }: Props) {
               href={ctaBand.secondaryCtaHref ?? "tel:+917350460393"}
               className="btn btn-secondary"
             >
-              {ctaBand.secondaryCtaLabel ?? "Talk to a Counsellor"}
+              {ctaBand.secondaryCtaLabel ?? "Call Us"}
             </a>
           </div>
         </div>

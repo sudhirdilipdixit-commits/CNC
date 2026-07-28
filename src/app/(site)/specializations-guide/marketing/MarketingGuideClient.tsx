@@ -250,7 +250,7 @@ const FAQS = [
   },
   {
     q: "How does CollegeNCourses help me choose a programme?",
-    a: "Our counsellors run a structured 30-minute free call. We understand your role, salary, career goal, budget, and timeline; shortlist three programmes matched to your profile from UGC-DEB approved options only; walk you through fee structures, EMI options, admission timelines, and the trade-offs.",
+    a: "Our AI Counsellor understands your role, salary, career goal, budget, and timeline; shortlists three programmes matched to your profile from UGC-DEB approved options only; and walks you through fee structures, EMI options, admission timelines, and the trade-offs.",
   },
   {
     q: "Is online MBA worth it for a working professional?",
@@ -837,7 +837,7 @@ export default function MarketingGuideClient() {
               <p>
                 Our current top-10 list across Distance, Online, and Executive modes. Not paid, not
                 sponsored. Drawn from UGC-DEB and AICTE approval status, NAAC accreditation, our internal
-                placement tracking from 412 alumni, and structured feedback from counsellors handling
+                placement tracking from 412 alumni, and structured feedback from our team handling
                 2,000+ enquiries per month. We refresh this list every six months.
               </p>
               <div className="mg-table-wrap">
@@ -880,8 +880,8 @@ export default function MarketingGuideClient() {
               </div>
               <div className="mg-table-cta">
                 <p>
-                  <strong>Confused about which one fits your profile?</strong> Our counsellors shortlist
-                  three programmes matched to your role, budget, and timeline in a free 30-minute call.
+                  <strong>Confused about which one fits your profile?</strong> Our AI Counsellor shortlists
+                  three programmes matched to your role, budget, and timeline.
                 </p>
                 <button
                   type="button"
@@ -1093,8 +1093,8 @@ export default function MarketingGuideClient() {
         <div className="container">
           <h2>Ready to shortlist your Marketing MBA?</h2>
           <p>
-            Talk to a CollegeNCourses counsellor. We&apos;ll match you to three programmes based on your
-            role, budget, and timeline. Free, 30 minutes.
+            Get a free shortlist from our AI Counsellor. We&apos;ll match you to three programmes based on your
+            role, budget, and timeline. Free, no call required.
           </p>
           <div className="mg-cta-btns">
             <button

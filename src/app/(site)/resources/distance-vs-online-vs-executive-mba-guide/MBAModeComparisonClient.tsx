@@ -317,7 +317,7 @@ const FAQS = [
   { q: "Which mode is best for working professionals?", a: "For most working professionals in India in 2025-26, Online MBA is the best mode. It balances cost (₹1.5–3.5 lakh), time commitment (12–15 hours per week), live faculty interaction, and placement support. Distance suits only budget-tight self-directed learners. Executive suits only Tier-1 industry-reset moments.", voice: true },
   { q: "Is online MBA equal to regular MBA?", a: "Yes. As of 2025-26, an Online MBA from a UGC-DEB approved university is legally equivalent to a regular MBA for all purposes: government jobs, further education, and private-sector employment. Employer acceptance is high in most sectors, though Tier-1 consulting and investment banking still prefer residential MBAs.", voice: true },
   { q: "How to choose the right MBA in India?", a: "Choose based on six factors: budget ceiling, weekly time availability, target role two years post-MBA, current employer's stated position on Online and Distance MBAs, your dropout risk profile, and whether you need international recognition. If under ₹3 lakh with a promotion target: Online MBA. Under ₹2 lakh, self-directed: Distance. Above ₹8 lakh, Tier-1 reset: Executive.", voice: true },
-  { q: "How does CollegeNCourses help me choose the right mode?", a: "Our counsellors run a structured 30-minute free call in which we understand your role, income, career goal, budget, and timeline; walk you through the six-question decision framework; and shortlist three specific programmes across the right mode for your profile. We have no referral deal that affects our recommendation." },
+  { q: "How does CollegeNCourses help me choose the right mode?", a: "Our AI Counsellor understands your role, income, career goal, budget, and timeline; walks you through the six-question decision framework; and shortlists three specific programmes across the right mode for your profile. We have no referral deal that affects our recommendation." },
 ];
 
 const RELATED = [
@@ -1238,10 +1238,10 @@ export default function MBAModeComparisonClient() {
         <div className="container">
           <h2>Still unsure which mode fits you?</h2>
           <p>
-            Talk to a CollegeNCourses counsellor. We&apos;ll walk you through the six-question framework in a free 30-minute call, then shortlist three programmes matched to your role, budget, and timeline.
+            Get a free shortlist from our AI Counsellor. Answer six questions and we&apos;ll match you to three programmes based on your role, budget, and timeline.
           </p>
           <button className="mc-btn mc-btn-navy" onClick={() => setModalOpen(true)}>
-            Book a free counselling call →
+            Get Free Guidance →
           </button>
           <br />
           <a href="/specializations-guide/marketing/" className="mc-cta-secondary">

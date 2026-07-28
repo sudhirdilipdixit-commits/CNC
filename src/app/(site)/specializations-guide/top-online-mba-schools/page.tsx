@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import LeadCTAButton from "@/components/forms/LeadCTAButton";
 
 export const metadata: Metadata = {
   title: "Top Online MBA Schools | Specializations Guide | CollegeNCourses",
@@ -356,12 +357,10 @@ export default function SpecializationsGuidePage() {
             Find the right MBA programme for your goals
           </h2>
           <p style={{ color: "var(--pale-navy)", fontSize: 16, marginBottom: 28 }}>
-            Speak with our counsellors to match your profile and ambitions with the right
+            Get a free shortlist matched to your profile, ambitions, and the right
             specialisation and institution.
           </p>
-          <Link href="/contact-us" className="btn btn-primary">
-            Talk to a Counsellor
-          </Link>
+          <LeadCTAButton label="Get Free Guidance" source="top-mba-schools-cta" className="btn btn-primary" />
         </div>
       </section>
 

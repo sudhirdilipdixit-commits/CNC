@@ -103,7 +103,7 @@ export default function HRGuidePage() {
             "@type": "HowTo",
             name: "How to decide if an HR Management MBA is right for you",
             description:
-              "A 5-question framework used by CollegeNCourses counsellors to help aspirants choose an HR Management MBA in 2025-26.",
+              "A 5-question framework used by CollegeNCourses to help aspirants choose an HR Management MBA in 2025-26.",
             step: [
               { "@type": "HowToStep", position: 1, name: "Name your target HR role family", text: "HRBP? Talent Acquisition? L&D? Compensation? People Analytics? Consulting? The programme choice, elective mix, and networking strategy differ across these." },
               { "@type": "HowToStep", position: 2, name: "Confirm whether Tier-1 HR consulting or CHRO track is a realistic goal", text: "If yes — XLRI Executive justifies the Rs 25 lakh. If not — Online MBA is far better ROI." },

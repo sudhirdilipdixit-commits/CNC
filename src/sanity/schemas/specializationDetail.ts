@@ -224,7 +224,7 @@ export default defineType({
         defineField({ name: "heading", title: "Heading", type: "string" }),
         defineField({ name: "body", title: "Body", type: "text", rows: 2 }),
         defineField({ name: "primaryCtaLabel", title: "Primary CTA Label", type: "string", initialValue: "Try the AI Counsellor" }),
-        defineField({ name: "secondaryCtaLabel", title: "Secondary CTA Label", type: "string", initialValue: "Talk to a Counsellor" }),
+        defineField({ name: "secondaryCtaLabel", title: "Secondary CTA Label", type: "string", initialValue: "Call Us" }),
         defineField({ name: "secondaryCtaHref", title: "Secondary CTA URL", type: "string", initialValue: "tel:+917350460393" }),
       ],
     }),

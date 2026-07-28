@@ -653,7 +653,7 @@ export default function ITSystemsGuideClient() {
       <section className="it-cta-band">
         <div className="it-wrap">
           <h2>Ready to shortlist your IT &amp; Systems MBA?</h2>
-          <p>We&apos;ll match you to three programmes based on your target role (Product, Consulting, EA, IT Management), your existing IT experience, and your budget. Free 30-minute call.</p>
+          <p>We&apos;ll match you to three programmes based on your target role (Product, Consulting, EA, IT Management), your existing IT experience, and your budget. Free, no call required.</p>
           <button onClick={() => setModalOpen(true)}>Get matched →</button>
         </div>
       </section>

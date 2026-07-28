@@ -745,14 +745,14 @@ export default function LandingPageClient({
                   <h4>{data.sidebarForm?.heading || "Need help choosing?"}</h4>
                   <p>
                     {data.sidebarForm?.subheading ||
-                      "Our counsellors match you to the right programme based on your profile and budget."}
+                      "Our AI Counsellor matches you to the right programme based on your profile and budget."}
                   </p>
                   <button
                     className="btn btn-primary btn-sm"
                     style={{ width: "100%" }}
-                    onClick={() => openModal("Talk to a Counsellor")}
+                    onClick={() => openModal("Get Free Guidance")}
                   >
-                    Talk to a Counsellor
+                    Get Free Guidance
                   </button>
                   <p className="lp-sidebar-note">Free · Takes 30 min · Results in your inbox</p>
                 </div>
@@ -941,10 +941,10 @@ export default function LandingPageClient({
           </h2>
           <p className="lp-cta-band-body">
             {data.ctaBand?.body ||
-              "Our counsellors recommend three programmes matched to your situation, budget, and timeline."}
+              "Our AI Counsellor recommends three programmes matched to your situation, budget, and timeline."}
           </p>
-          <button className="btn btn-inverted" onClick={() => openModal(data.ctaBand?.ctaLabel || "Talk to a Counsellor")}>
-            {data.ctaBand?.ctaLabel || "Talk to a Counsellor"}
+          <button className="btn btn-inverted" onClick={() => openModal(data.ctaBand?.ctaLabel || "Get Free Guidance")}>
+            {data.ctaBand?.ctaLabel || "Get Free Guidance"}
           </button>
         </div>
       </section>

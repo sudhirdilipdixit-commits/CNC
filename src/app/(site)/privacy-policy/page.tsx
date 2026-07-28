@@ -110,7 +110,7 @@ export default function PrivacyPolicyPage() {
               <div className="legal-highlight">
                 <p style={{ marginBottom: 6 }}><strong>In plain language</strong> (this box is a friendly summary only &mdash; the numbered sections below are what actually governs):</p>
                 <ul style={{ margin: "8px 0 0 18px" }}>
-                  <li>We collect your name, contact details, and information about the programmes and specializations you&apos;re interested in, so our counsellors can help you.</li>
+                  <li>We collect your name, contact details, and information about the programmes and specializations you&apos;re interested in, so our team and AI Counsellor can help you.</li>
                   <li>If you express interest in a specific university or programme, we share your contact details with that specific institution so they can follow up with you &mdash; this is core to how the Platform works, and we tell you this plainly rather than burying it.</li>
                   <li>We never sell your data to unrelated third parties for their own marketing purposes.</li>
                   <li>We keep your data on India-hosted systems.</li>
@@ -163,13 +163,13 @@ export default function PrivacyPolicyPage() {
                 <strong>3.2 Academic and career data.</strong> Your current qualification, work
                 experience, target programme and specialization interest, preferred mode of study
                 (Distance/Online/Executive), budget range, and similar information you share with us
-                or with our AI Counsellor tool, so that our counsellors &mdash; and the AI Counsellor
+                or with our AI Counsellor tool, so that our team &mdash; and the AI Counsellor
                 &mdash; can give you relevant guidance.
               </p>
               <p>
                 <strong>3.3 Communication data.</strong> Records of calls, WhatsApp messages, emails,
                 and chat or AI Counsellor conversation transcripts between you and CollegeNCourses,
-                kept so our counselling team has context across follow-up conversations.
+                kept so our team has context across follow-up conversations.
               </p>
               <p>
                 <strong>3.4 Technical and usage data.</strong> IP address, device and browser type,
@@ -218,7 +218,7 @@ export default function PrivacyPolicyPage() {
                 our legitimate interest in operating a functioning counselling service:
               </p>
               <ul>
-                <li>To respond to your enquiry and connect you with a counsellor;</li>
+                <li>To respond to your enquiry and connect you with the right programme team;</li>
                 <li>To assess which programmes and universities may fit your stated goals, budget, and background;</li>
                 <li>To share your enquiry, with your knowledge, with the specific partner institution(s) you&apos;ve expressed interest in (Section 6);</li>
                 <li>To send you confirmation messages (SMS, WhatsApp, email) about your enquiry;</li>
@@ -236,8 +236,8 @@ export default function PrivacyPolicyPage() {
               <p>
                 <strong>6.1 Partner educational institutions.</strong> When you express interest in
                 a specific programme or university through the Platform &mdash; for example, by
-                requesting more information about a specific institution, or by asking a counsellor
-                to connect you &mdash; we share your relevant contact and enquiry details (typically
+                requesting more information about a specific institution, or by asking to be
+                connected with one &mdash; we share your relevant contact and enquiry details (typically
                 name, mobile number, and email address) with that specific institution, so they can
                 follow up with you directly regarding admissions, further information, or enrolment.
                 We only do this in connection with programmes or institutions you&apos;ve actually

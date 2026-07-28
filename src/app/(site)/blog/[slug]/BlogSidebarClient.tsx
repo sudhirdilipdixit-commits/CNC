@@ -95,7 +95,7 @@ export default function BlogSidebarClient({ items }: { items: TocItem[] }) {
         {/* Lead form */}
         <div className="bp-form-wrap">
           <p style={{ fontSize: 12, color: "var(--grey)", marginBottom: 12, lineHeight: 1.5 }}>
-            Get expert guidance — speak with a counsellor today.
+            Get a free, personalised programme shortlist today.
           </p>
           <form onSubmit={handleSubmit} noValidate>
             <div style={{ marginBottom: 10 }}>
@@ -125,7 +125,7 @@ export default function BlogSidebarClient({ items }: { items: TocItem[] }) {
               style={{ width: "100%", fontSize: 13, padding: "9px 16px", minHeight: 40 }}
               disabled={submitting}
             >
-              {submitting ? "Sending…" : "Talk to a Counsellor"}
+              {submitting ? "Sending…" : "Get Free Guidance"}
             </button>
           </form>
         </div>

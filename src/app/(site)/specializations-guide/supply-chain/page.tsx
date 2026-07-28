@@ -88,7 +88,7 @@ export default function SupplyChainGuidePage() {
             "@context": "https://schema.org",
             "@type": "HowTo",
             name: "How to decide if a Supply Chain Management MBA is right for you",
-            description: "A 5-question framework used by CollegeNCourses counsellors to help aspirants choose a Supply Chain Management MBA in 2025-26.",
+            description: "A 5-question framework used by CollegeNCourses to help aspirants choose a Supply Chain Management MBA in 2025-26.",
             step: [
               { "@type": "HowToStep", position: 1, name: "Name your target segment — e-commerce, manufacturing, 3PL, retail, or consulting", text: "Each has different economics, employer preferences, and daily work. E-commerce pays highest with RSU components. Manufacturing pays steadily with stability. 3PL pays growth-linked. Consulting pays highest but requires Tier-1 brand access." },
               { "@type": "HowToStep", position: 2, name: "Confirm your comfort with 24×7 operations rhythm", text: "SCM roles at e-commerce and 3PL involve peak-season escalations, evening operational reviews, and weekend inventory checks." },

@@ -155,7 +155,7 @@ export default defineType({
       initialValue: [
         { stepLabel: "01", title: "Guide in your inbox", body: "Within 60 seconds. Check spam if not there within 2 minutes." },
         { stepLabel: "02", title: "One follow-up email", body: "In 3 days, with questions other aspirants asked us after reading. Unsubscribe in one click." },
-        { stepLabel: "03", title: "No call unless you ask", body: "If you want to talk to a counsellor, reply to the email or use the contact form." },
+        { stepLabel: "03", title: "No call unless you ask", body: "If you have questions, reply to the email or use the contact form." },
       ],
     }),
 

@@ -2,12 +2,13 @@
 
 import { useState } from "react";
 import type { ResourceDetail } from "./page";
+import LeadModal from "@/components/forms/LeadModal";
 
 // ─── Default after-steps (shown if Sanity field is empty) ─────────────────────
 const DEFAULT_AFTER_STEPS = [
   { stepLabel: "01", title: "Guide in your inbox", body: "Within 60 seconds. Check spam if not there within 2 minutes." },
   { stepLabel: "02", title: "One follow-up email", body: "In 3 days, with questions other aspirants asked us after reading. Unsubscribe in one click." },
-  { stepLabel: "03", title: "No call unless you ask", body: "If you want to talk to a counsellor, reply to the email or use the contact form." },
+  { stepLabel: "03", title: "No call unless you ask", body: "If you have questions, reply to the email or use the contact form." },
 ];
 
 // ─── Shared input style ────────────────────────────────────────────────────────
@@ -32,6 +33,7 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError]       = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const afterSteps = (data.afterSteps && data.afterSteps.length > 0)
     ? data.afterSteps
@@ -313,11 +315,16 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
                           Ready to take the next step?
                         </p>
                         <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                          <a href="/contact-us" className="btn btn-primary btn-sm" style={{ justifyContent: "center" }}>
-                            Book a Free Counselling Call
-                          </a>
+                          <button
+                            type="button"
+                            className="btn btn-primary btn-sm"
+                            style={{ justifyContent: "center" }}
+                            onClick={() => setModalOpen(true)}
+                          >
+                            Get Free Guidance
+                          </button>
                           <a href="/contact-us" style={{ textAlign: "center", fontSize: 13, color: "var(--navy)", fontWeight: 600 }}>
-                            Talk to a senior counsellor →
+                            Contact us →
                           </a>
                         </div>
                       </div>
@@ -364,24 +371,26 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
       <section style={{ background: "var(--yellow)", padding: "56px 0", textAlign: "center", borderTop: "4px solid var(--navy)" }}>
         <div className="container" style={{ maxWidth: 640 }}>
           <h2 style={{ fontFamily: "var(--font-serif)", color: "var(--navy)", fontSize: "clamp(24px,3.5vw,34px)", marginBottom: 12 }}>
-            Want a counsellor to walk you through this?
+            Want a personalised shortlist instead?
           </h2>
           <p style={{ color: "var(--navy)", fontSize: 17, marginBottom: 28, lineHeight: 1.6 }}>
-            Book a free 30-minute call. We&apos;ll cover your specific profile, the guide findings, and what makes sense for you.
+            Get a personalised shortlist covering your specific profile, the guide findings, and what makes sense for you.
           </p>
           <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-            <a href="/contact-us" className="btn btn-inverted">
-              Book a Free Call
+            <button type="button" className="btn btn-inverted" onClick={() => setModalOpen(true)}>
+              Get Free Guidance
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
-            </a>
+            </button>
             <a href="/resources" className="btn btn-secondary">
               ← Back to Resources
             </a>
           </div>
         </div>
       </section>
+
+      <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} source="lead-magnet-cta" />
     </>
   );
 }

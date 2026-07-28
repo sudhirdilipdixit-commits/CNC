@@ -13,6 +13,7 @@ import {
 import { urlFor } from "@/sanity/lib/image";
 import BlogProgressBar from "./BlogProgressBar";
 import BlogSidebarClient from "./BlogSidebarClient";
+import LeadCTAButton from "@/components/forms/LeadCTAButton";
 
 /* ── Types ──────────────────────────────────────────────────────────── */
 
@@ -496,15 +497,14 @@ export default async function BlogPostPage(
             Find the right MBA for your goals
           </h2>
           <p style={{ color: "var(--navy)", fontSize: 17, marginBottom: 28 }}>
-            Speak with a CollegeNCourses counsellor — no commitment, no sales pitch.
+            Free, no commitment, no sales pitch — just a shortlist matched to your profile.
           </p>
-          <Link
-            href="/contact-us"
+          <LeadCTAButton
+            label="Get Free Guidance"
+            source="blog-article-cta"
             className="btn btn-primary"
             style={{ background: "var(--navy)", color: "var(--yellow)", borderTopColor: "var(--yellow)" }}
-          >
-            Talk to a Counsellor
-          </Link>
+          />
         </div>
       </section>
 
@@ -586,8 +586,8 @@ export default async function BlogPostPage(
           max-width: 720px;
         }
         .bp-body h2 {
-          font-family: var(--font-serif); color: var(--navy);
-          font-size: clamp(22px, 2.8vw, 30px);
+          font-family: var(--font-serif); color: var(--navy); font-weight: 400;
+          font-size: clamp(24px, 3.2vw, 32px);
           margin: 40px 0 16px; padding-bottom: 12px;
           border-bottom: 2px solid var(--mist); position: relative;
         }
@@ -597,8 +597,8 @@ export default async function BlogPostPage(
           background: var(--yellow);
         }
         .bp-body h3 {
-          font-family: var(--font-serif); color: var(--navy);
-          font-size: clamp(18px, 2.2vw, 23px); margin: 28px 0 12px;
+          font-family: var(--font-serif); color: var(--navy); font-weight: 400;
+          font-size: clamp(20px, 2.6vw, 26px); margin: 28px 0 12px;
         }
         .bp-body p { margin-bottom: 1.1em; }
         .bp-body ul, .bp-body ol {
@@ -666,7 +666,8 @@ export default async function BlogPostPage(
         .bp-faqs-title {
           font-family: var(--font-serif);
           color: var(--navy);
-          font-size: clamp(22px, 2.8vw, 30px);
+          font-weight: 400;
+          font-size: clamp(24px, 3.2vw, 32px);
           margin: 0 0 24px;
           padding-bottom: 12px;
           border-bottom: 2px solid var(--mist);
