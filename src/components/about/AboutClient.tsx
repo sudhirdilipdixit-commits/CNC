@@ -13,7 +13,7 @@ const ARROW = (
 const STATS = [
   { value: '12,000+', label: 'Learners helped since 2023' },
   { value: '150+', label: 'UGC-DEB approved universities listed' },
-  { value: '4.8 / 5', label: 'Average platform rating from users' },
+  { value: '9', label: 'MBA specializations compared' },
   { value: '2 Pillars', label: 'Study in India and Study Abroad' },
 ]
 
@@ -81,14 +81,6 @@ const LEGAL_CARDS = [
       'Deletion on request: privacy@collegencourses.com',
     ],
   },
-]
-
-const PRESS = [
-  'Economic Times Education',
-  'Business Standard',
-  'Hindustan Times',
-  'Outlook Business',
-  'The Hindu Education Plus',
 ]
 
 export default function AboutClient() {
@@ -268,36 +260,18 @@ export default function AboutClient() {
         </div>
       </section>
 
-      {/* Press */}
-      <section className="section-lp section-lp-alt" id="press">
-        <div className="container">
-          <p style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--grey)', textAlign: 'center', marginBottom: 20 }}>
-            As featured in
-          </p>
-          <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', justifyContent: 'center', gap: '10px 28px' }}>
-            {PRESS.map(name => (
-              <div key={name} style={{ background: 'var(--white)', border: '1px solid var(--mist)', borderRadius: 'var(--radius-md)', padding: '10px 20px', fontSize: 13, fontWeight: 600, color: 'var(--grey)' }}>
-                {name}
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* CTA Band */}
       <section className="lp-cta-band">
         <div className="container">
-          <div className="h-display h2" style={{ color: 'var(--white)', marginBottom: 8 }}>
-            Have a question about a programme or how we work?
-          </div>
-          <p style={{ color: 'rgba(250,247,242,.82)', marginBottom: 28, fontSize: 16, maxWidth: 560, marginLeft: 'auto', marginRight: 'auto' }}>
+          <h2>Have a question about a programme or how we work?</h2>
+          <p style={{ maxWidth: 560, marginLeft: 'auto', marginRight: 'auto' }}>
             Tell us your background and what you are looking for. We will match you to the right programme in 2 minutes.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <button type="button" className="btn btn-inverted" onClick={() => openModal('about-cta-band')}>
               Get Free Guidance {ARROW}
             </button>
-            <a href="/contact-us" className="btn btn-secondary" style={{ borderColor: 'rgba(250,247,242,.4)', color: 'var(--white)' }}>
+            <a href="/contact-us" className="btn btn-secondary">
               Contact Us {ARROW}
             </a>
           </div>

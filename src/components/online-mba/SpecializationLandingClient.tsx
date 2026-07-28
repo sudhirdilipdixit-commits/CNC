@@ -2,6 +2,7 @@
 
 import { useCallback, useState } from 'react'
 import LeadModal from '@/components/forms/LeadModal'
+import ProgrammeCompareCards from '@/components/online-mba/ProgrammeCompareCards'
 import type { SpecializationData } from '@/components/online-mba/specializationData'
 
 const ARROW = (
@@ -97,42 +98,10 @@ export default function SpecializationLandingClient({ data }: { data: Specializa
               <div className="eyebrow">PROGRAMME COMPARISON</div>
               <h2 className="h-display h2">Top online MBA options for this specialisation</h2>
               <hr className="section-rule" />
-              <div className="comp-table-wrap">
-                <table className="comp-table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th>University</th>
-                      <th>Fee</th>
-                      <th>Duration</th>
-                      <th>Next batch</th>
-                      <th>Approval</th>
-                      <th>Why it fits</th>
-                      <th></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {data.programmes.map((item) => (
-                      <tr key={item.rank}>
-                        <td className="rank">{item.rank}</td>
-                        <td>
-                          <span className="uni-name">{item.uni}</span>
-                        </td>
-                        <td className="fee">{item.fee}</td>
-                        <td>{item.duration}</td>
-                        <td>{item.batch}</td>
-                        <td><span className="accred-tag">{item.approval}</span></td>
-                        <td>{item.strength}</td>
-                        <td>
-                          <button type="button" className="btn btn-primary btn-sm" onClick={() => openModal(`${data.slug}-table-${item.rank}`)}>
-                            Enquire
-                          </button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              <ProgrammeCompareCards
+                programmes={data.programmes}
+                onEnquire={(rank) => openModal(`${data.slug}-card-${rank}`)}
+              />
             </div>
             <div />
           </div>

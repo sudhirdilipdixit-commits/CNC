@@ -171,33 +171,6 @@ export default function ContactPage() {
                 Pune, Maharashtra, India
               </div>
             </div>
-
-            {/* Map placeholder */}
-            <div className="map-placeholder">
-              <span>Map coming soon</span>
-            </div>
-
-            {/* Other contacts */}
-            <div className="other-contacts">
-              <div className="other-contact">
-                <strong>Partnerships</strong>
-                <a href="mailto:partnerships@collegencourses.com" style={{ color: "var(--navy)" }}>
-                  partnerships@collegencourses.com
-                </a>
-              </div>
-              <div className="other-contact">
-                <strong>Careers</strong>
-                <a href="mailto:careers@collegencourses.com" style={{ color: "var(--navy)" }}>
-                  careers@collegencourses.com
-                </a>
-              </div>
-              <div className="other-contact">
-                <strong>Grievance Redressal</strong>
-                <Link href="/grievances" style={{ color: "var(--navy)" }}>
-                  View grievance policy &rarr;
-                </Link>
-              </div>
-            </div>
           </div>
 
         </div>
@@ -294,22 +267,6 @@ export default function ContactPage() {
         .next-step-body h4 { color: var(--navy); font-size: 15px; margin-bottom: 4px; }
         .next-step-body p  { font-size: 13px; color: var(--grey); line-height: 1.5; margin: 0; }
 
-        /* Map */
-        .map-placeholder {
-          background: var(--pale-navy);
-          border-radius: 8px;
-          height: 220px;
-          display: flex; align-items: center; justify-content: center;
-          color: var(--navy); font-size: 14px; font-weight: 600;
-          border: 1px solid var(--mist);
-          margin-top: 20px;
-        }
-        .map-placeholder span { opacity: .5; }
-
-        /* Other contacts */
-        .other-contacts { margin-top: 28px; display: flex; flex-direction: column; gap: 12px; }
-        .other-contact { font-size: 14px; color: var(--charcoal); }
-        .other-contact strong { color: var(--navy); display: block; margin-bottom: 2px; font-size: 13px; }
       `}</style>
     </main>
   );

@@ -46,16 +46,17 @@ const PROGRAMMES = [
     duration: '24 months',
     ideal: 'Fresh graduates seeking campus experience',
   },
-  {
-    mode: 'Design',
-    title: 'Design Programmes',
-    href: '/design',
-    tagline: 'B.Des and M.Des programmes from accredited private design institutes across India.',
-    fee: 'Rs 3L - 15L',
-    duration: '24-48 months',
-    ideal: 'Creative professionals and NID/NIFT aspirants',
-  },
 ]
+
+const DESIGN_PROGRAMME = {
+  mode: 'Design',
+  title: 'Design Programmes',
+  href: '/design',
+  tagline: 'B.Des and M.Des programmes from accredited private design institutes across India.',
+  fee: 'Rs 3L - 15L',
+  duration: '24-48 months',
+  ideal: 'Creative professionals and NID/NIFT aspirants',
+}
 
 const MODE_COMPARISON = [
   { feature: 'Duration', online: '24 months', distance: '24-36 months', executive: '12-18 months', regular: '24 months' },
@@ -244,7 +245,7 @@ export default function StudyInIndiaClient() {
       <section className="section-lp section-lp-alt" id="programmes">
         <div className="container">
           <div className="eyebrow">PROGRAMME TYPES</div>
-          <h2 className="h-display h2">Five ways to study management in India</h2>
+          <h2 className="h-display h2">Four ways to study management in India</h2>
           <hr className="section-rule" />
 
           <div className="prog-cards">
@@ -263,6 +264,27 @@ export default function StudyInIndiaClient() {
                 </a>
               </div>
             ))}
+          </div>
+
+          <div style={{ marginTop: 32, paddingTop: 28, borderTop: '1px solid var(--mist)' }}>
+            <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '.1em', textTransform: 'uppercase', color: 'var(--grey)', marginBottom: 16 }}>
+              Also on our platform
+            </div>
+            <div className="prog-cards" style={{ gridTemplateColumns: 'minmax(220px, 380px)' }}>
+              <div className="prog-card" key={DESIGN_PROGRAMME.title}>
+                <div className="prog-card-mode">{DESIGN_PROGRAMME.mode}</div>
+                <div className="prog-card-title">{DESIGN_PROGRAMME.title}</div>
+                <div className="prog-card-tagline">{DESIGN_PROGRAMME.tagline}</div>
+                <div className="prog-card-meta">
+                  <span className="prog-card-badge">{DESIGN_PROGRAMME.fee}</span>
+                  <span className="prog-card-badge">{DESIGN_PROGRAMME.duration}</span>
+                </div>
+                <div style={{ fontSize: 13, color: 'var(--grey)', marginTop: 4 }}>Best for: {DESIGN_PROGRAMME.ideal}</div>
+                <a href={DESIGN_PROGRAMME.href} className="prog-card-link">
+                  Explore {DESIGN_PROGRAMME.title} {ARROW}
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
