@@ -22,6 +22,7 @@
   --shadow-cta: 0 4px 14px rgba(36, 48, 72, 0.18);
 
   --font-serif: var(--font-dm-serif, 'DM Serif Display', Georgia, 'Times New Roman', serif);
+  --font-heading: Georgia, 'Times New Roman', Times, serif;
   --font-sans: var(--font-inter, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
 
   --container-max: 1200px;
@@ -136,7 +137,7 @@ h1, h2, h3, h4, h5, h6 {
   text-wrap: balance;
 }
 h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.12; }
-h2 { font-size: clamp(24px, 3.2vw, 32px); }
+h2 { font-size: clamp(24px, 3.2vw, 32px); font-family: var(--font-heading); font-weight: 700; }
 h3 { font-size: clamp(20px, 2.6vw, 26px); }
 h4 { font-size: clamp(18px, 2.2vw, 22px); }
 h5 { font-size: clamp(16px, 1.8vw, 18px); }
@@ -149,7 +150,7 @@ h6 { font-size: clamp(14px, 1.4vw, 16px); }
   line-height: 1.2;
 }
 .h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.12; }
-.h2 { font-size: clamp(24px, 3.2vw, 32px); }
+.h2 { font-size: clamp(24px, 3.2vw, 32px); font-family: var(--font-heading); font-weight: 700; }
 .h3 { font-size: clamp(20px, 2.6vw, 26px); }
 .h4 { font-size: clamp(18px, 2.2vw, 22px); }
 .h5 { font-size: clamp(16px, 1.8vw, 18px); }
@@ -1129,7 +1130,7 @@ section { padding: 56px 0; }
   height: 4px;
   background: var(--navy);
 }
-.cta-band h2 { font-family: var(--font-serif); color: var(--navy); font-size: clamp(26px, 4vw, 36px); margin-bottom: 12px; line-height: 1.15; }
+.cta-band h2 { font-family: var(--font-heading); font-weight: 700; color: var(--navy); font-size: clamp(26px, 4vw, 36px); margin-bottom: 12px; line-height: 1.15; }
 .cta-band p { color: var(--navy); font-size: 17px; margin-bottom: 24px; }
 
 /* =====================================================================
@@ -1273,7 +1274,8 @@ section { padding: 56px 0; }
   position: relative;
 }
 .modal-header h2 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
+  font-weight: 700;
   color: var(--ivory);
   font-size: 22px;
   line-height: 1.2;
@@ -1423,7 +1425,8 @@ section { padding: 56px 0; }
   font-weight: 800;
 }
 .modal-success h2 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
+  font-weight: 700;
   color: var(--navy);
   font-size: 24px;
   margin-bottom: var(--s-3);
@@ -1668,7 +1671,8 @@ section { padding: 56px 0; }
   border-top: 4px solid var(--navy);
 }
 .lp-cta-band h2 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
+  font-weight: 700;
   color: var(--navy);
   font-size: clamp(24px, 3.5vw, 36px);
   margin-bottom: 12px;

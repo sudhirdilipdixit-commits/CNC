@@ -344,7 +344,7 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--navy)", marginBottom: 12 }}>
               WHAT HAPPENS NEXT
             </div>
-            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(24px,3.2vw,36px)", lineHeight: 1.15, color: "var(--navy)", marginBottom: 14 }}>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "clamp(24px,3.2vw,36px)", lineHeight: 1.15, color: "var(--navy)", marginBottom: 14 }}>
               After you download
             </h2>
             <div style={{ width: 48, height: 3, background: "var(--yellow)", margin: "0 auto" }} />
@@ -370,7 +370,7 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
       {/* ══ CTA BAND ════════════════════════════════════════════════════════ */}
       <section style={{ background: "var(--yellow)", padding: "56px 0", textAlign: "center", borderTop: "4px solid var(--navy)" }}>
         <div className="container" style={{ maxWidth: 640 }}>
-          <h2 style={{ fontFamily: "var(--font-serif)", color: "var(--navy)", fontSize: "clamp(24px,3.5vw,34px)", marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, color: "var(--navy)", fontSize: "clamp(24px,3.5vw,34px)", marginBottom: 12 }}>
             Want a personalised shortlist instead?
           </h2>
           <p style={{ color: "var(--navy)", fontSize: 17, marginBottom: 28, lineHeight: 1.6 }}>

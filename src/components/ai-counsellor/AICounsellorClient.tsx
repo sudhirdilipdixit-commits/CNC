@@ -481,7 +481,7 @@ export default function AICounsellorClient({ sanitySuggestions }: { sanitySugges
           <div className="container">
             <div style={{ maxWidth: 560, margin: "0 auto", textAlign: "center" }}>
               <div style={{ fontSize: 44, marginBottom: 20 }}>{"\u{1F30D}"}</div>
-              <h2 style={{ fontFamily: "var(--font-serif)", color: "var(--navy)", fontSize: "clamp(24px,3.5vw,32px)", marginBottom: 12 }}>
+              <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, color: "var(--navy)", fontSize: "clamp(24px,3.5vw,32px)", marginBottom: 12 }}>
                 The Study Abroad track is on its way
               </h2>
               <p style={{ color: "var(--grey)", fontSize: 16, lineHeight: 1.6, marginBottom: 32 }}>
@@ -520,7 +520,7 @@ export default function AICounsellorClient({ sanitySuggestions }: { sanitySugges
               {qData.label}
             </span>
 
-            <h2 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(22px,3.5vw,32px)", color: "var(--navy)", lineHeight: 1.2, marginBottom: 10 }}>{qData.q}</h2>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "clamp(22px,3.5vw,32px)", color: "var(--navy)", lineHeight: 1.2, marginBottom: 10 }}>{qData.q}</h2>
             <p style={{ fontSize: 15, color: "var(--grey)", marginBottom: 32 }}>{qData.sub}</p>
 
             <div style={{ display: "grid", gridTemplateColumns: isSpecQ ? "repeat(2,1fr)" : "repeat(auto-fit,minmax(220px,1fr))", gap: 12 }}>
@@ -586,7 +586,7 @@ export default function AICounsellorClient({ sanitySuggestions }: { sanitySugges
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--navy)", marginBottom: 12 }}>
               {answeredCount > 0 ? "YOUR RECOMMENDATIONS" : "POPULAR PROGRAMMES"}
             </div>
-            <h2 style={{ fontFamily: "var(--font-serif)", color: "var(--navy)", fontSize: "clamp(26px,3.5vw,36px)", marginBottom: 12 }}>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, color: "var(--navy)", fontSize: "clamp(26px,3.5vw,36px)", marginBottom: 12 }}>
               {answeredCount > 0 ? "Your 3 personalised programme matches" : "3 popular programmes to start exploring"}
             </h2>
             <p style={{ color: "var(--grey)", fontSize: 16, marginBottom: 16 }}>
@@ -720,7 +720,7 @@ export default function AICounsellorClient({ sanitySuggestions }: { sanitySugges
             {"✓"}
           </div>
 
-          <h2 style={{ fontFamily: "var(--font-serif)", color: "var(--navy)", fontSize: 26, marginBottom: 12 }}>You&apos;re all set.</h2>
+          <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, color: "var(--navy)", fontSize: 26, marginBottom: 12 }}>You&apos;re all set.</h2>
           <p style={{ color: "var(--grey)", fontSize: 15, marginBottom: 8 }}>Your shortlist is saved. The university or institution you&apos;re matched with may reach out to help you enrol.</p>
 
           <div style={{ display: "inline-block", background: "var(--pale-navy)", color: "var(--navy)", padding: "7px 20px", borderRadius: "var(--radius-md)", fontWeight: 700, fontSize: 14, letterSpacing: "0.06em", margin: "12px 0 20px" }}>

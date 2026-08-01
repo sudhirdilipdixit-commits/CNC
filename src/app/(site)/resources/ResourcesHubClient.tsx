@@ -250,7 +250,7 @@ export default function ResourcesHubClient({ resources }: { resources: ResourceI
       {/* ══ CTA BAND ═════════════════════════════════════════════════════════ */}
       <section style={{ background: "var(--yellow)", padding: "56px 0", textAlign: "center", borderTop: "4px solid var(--navy)" }}>
         <div className="container" style={{ maxWidth: 680 }}>
-          <h2 style={{ fontFamily: "var(--font-serif)", color: "var(--navy)", fontSize: "clamp(24px,3.5vw,34px)", marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, color: "var(--navy)", fontSize: "clamp(24px,3.5vw,34px)", marginBottom: 12 }}>
             Not sure which resource to start with?
           </h2>
           <p style={{ color: "var(--navy)", fontSize: 17, marginBottom: 28, lineHeight: 1.6 }}>
