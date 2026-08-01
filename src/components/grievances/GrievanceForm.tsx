@@ -95,7 +95,7 @@ export default function GrievanceForm() {
     return (
       <div style={{ textAlign: "center", padding: "24px 0" }}>
         <div style={{ fontSize: 48, marginBottom: 12 }}>✅</div>
-        <h3 style={{ fontFamily: "var(--font-serif)", color: "var(--navy)", fontSize: 20, marginBottom: 8 }}>
+        <h3 style={{ fontFamily: "var(--font-heading)", color: "var(--navy)", fontSize: 20, marginBottom: 8 }}>
           Grievance submitted successfully
         </h3>
         <div style={{

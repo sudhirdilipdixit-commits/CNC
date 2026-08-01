@@ -130,27 +130,27 @@ p:last-child { margin-bottom: 0; }
    down (dark bands, footer labels, modal headers, etc.) override color/size
    where a section needs to read against a different background. */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-weight: 400;
   color: var(--navy);
   line-height: 1.2;
   text-wrap: balance;
 }
 h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.12; }
-h2 { font-size: clamp(24px, 3.2vw, 32px); font-family: var(--font-heading); font-weight: 700; }
+h2 { font-size: clamp(24px, 3.2vw, 32px); }
 h3 { font-size: clamp(20px, 2.6vw, 26px); }
 h4 { font-size: clamp(18px, 2.2vw, 22px); }
 h5 { font-size: clamp(16px, 1.8vw, 18px); }
 h6 { font-size: clamp(14px, 1.4vw, 16px); }
 
 .h-display {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-weight: 400;
   color: var(--navy);
   line-height: 1.2;
 }
 .h1 { font-size: clamp(30px, 5vw, 44px); line-height: 1.12; }
-.h2 { font-size: clamp(24px, 3.2vw, 32px); font-family: var(--font-heading); font-weight: 700; }
+.h2 { font-size: clamp(24px, 3.2vw, 32px); }
 .h3 { font-size: clamp(20px, 2.6vw, 26px); }
 .h4 { font-size: clamp(18px, 2.2vw, 22px); }
 .h5 { font-size: clamp(16px, 1.8vw, 18px); }
@@ -556,7 +556,7 @@ section { padding: 56px 0; }
   margin-bottom: 16px;
 }
 .hero-visual-title {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 22px;
   color: var(--navy);
   margin-bottom: 16px;
@@ -684,7 +684,7 @@ section { padding: 56px 0; }
   margin-bottom: 12px;
 }
 .path-card h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   color: var(--navy);
   font-size: 20px;
   margin-bottom: 8px;
@@ -749,7 +749,7 @@ section { padding: 56px 0; }
 .tag-mode { background: var(--mist); color: var(--navy); }
 
 .programme-card h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   color: var(--navy);
   font-size: 22px;
   line-height: 1.2;
@@ -979,7 +979,7 @@ section { padding: 56px 0; }
   font-family: var(--font-serif);
   margin-bottom: 16px;
 }
-.step-title { font-family: var(--font-serif); color: var(--navy); font-size: 20px; line-height: 1.2; margin-bottom: 12px; }
+.step-title { font-family: var(--font-heading); color: var(--navy); font-size: 20px; line-height: 1.2; margin-bottom: 12px; }
 .step-body { color: var(--charcoal); font-size: 15px; line-height: 1.6; margin: 0; }
 
 /* =====================================================================
@@ -1065,7 +1065,7 @@ section { padding: 56px 0; }
     radial-gradient(circle at 20% 80%, rgba(214,219,237,0.15) 0, transparent 40%);
 }
 .blog-card-body { padding: 24px; flex: 1; display: flex; flex-direction: column; }
-.blog-card h3 { font-family: var(--font-serif); color: var(--navy); font-size: 19px; line-height: 1.25; margin-bottom: 12px; }
+.blog-card h3 { font-family: var(--font-heading); color: var(--navy); font-size: 19px; line-height: 1.25; margin-bottom: 12px; }
 .blog-card-excerpt { color: var(--grey); font-size: 14px; margin-bottom: 16px; flex: 1; }
 .blog-card-meta { display: flex; gap: 12px; font-size: 12px; color: var(--grey); align-items: center; }
 .blog-card-read { margin-top: 16px; color: var(--navy); font-weight: 600; font-size: 14px; display: inline-flex; gap: 6px; align-items: center; }
@@ -1130,7 +1130,7 @@ section { padding: 56px 0; }
   height: 4px;
   background: var(--navy);
 }
-.cta-band h2 { font-family: var(--font-heading); font-weight: 700; color: var(--navy); font-size: clamp(26px, 4vw, 36px); margin-bottom: 12px; line-height: 1.15; }
+.cta-band h2 { font-family: var(--font-heading); color: var(--navy); font-size: clamp(26px, 4vw, 36px); margin-bottom: 12px; line-height: 1.15; }
 .cta-band p { color: var(--navy); font-size: 17px; margin-bottom: 24px; }
 
 /* =====================================================================
@@ -1149,7 +1149,7 @@ section { padding: 56px 0; }
 @media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
 
 .footer-col h4 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   color: var(--yellow);
   font-size: 14px;
   letter-spacing: 0.05em;
@@ -1275,7 +1275,6 @@ section { padding: 56px 0; }
 }
 .modal-header h2 {
   font-family: var(--font-heading);
-  font-weight: 700;
   color: var(--ivory);
   font-size: 22px;
   line-height: 1.2;
@@ -1426,7 +1425,6 @@ section { padding: 56px 0; }
 }
 .modal-success h2 {
   font-family: var(--font-heading);
-  font-weight: 700;
   color: var(--navy);
   font-size: 24px;
   margin-bottom: var(--s-3);
@@ -1523,7 +1521,7 @@ section { padding: 56px 0; }
 }
 .sp-sidebar-header { background: var(--navy); padding: 20px; }
 .sp-sidebar-header h3 {
-  font-family: var(--font-serif);
+  font-family: var(--font-heading);
   font-size: 20px;
   color: var(--ivory);
   margin-bottom: 6px;
@@ -1672,7 +1670,6 @@ section { padding: 56px 0; }
 }
 .lp-cta-band h2 {
   font-family: var(--font-heading);
-  font-weight: 700;
   color: var(--navy);
   font-size: clamp(24px, 3.5vw, 36px);
   margin-bottom: 12px;

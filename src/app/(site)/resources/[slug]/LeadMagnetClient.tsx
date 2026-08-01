@@ -111,7 +111,7 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
               )}
 
               {/* H1 */}
-              <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(28px,4.5vw,48px)", lineHeight: 1.1, color: "var(--navy)", letterSpacing: "-0.01em", marginBottom: 20 }}>
+              <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(28px,4.5vw,48px)", lineHeight: 1.1, color: "var(--navy)", letterSpacing: "-0.01em", marginBottom: 20 }}>
                 {data.headline}
               </h1>
 
@@ -190,7 +190,7 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
                   /* ── Form state ─────────────────────────────────────── */
                   <>
                     <div style={{ background: "var(--navy)", padding: "24px 28px", textAlign: "center" }}>
-                      <h3 style={{ fontFamily: "var(--font-serif)", color: "var(--ivory)", fontSize: 22, marginBottom: 6 }}>
+                      <h3 style={{ fontFamily: "var(--font-heading)", color: "var(--ivory)", fontSize: 22, marginBottom: 6 }}>
                         {data.formTitle ?? "Get the Guide. Free."}
                       </h3>
                       <p style={{ color: "var(--yellow)", fontSize: 13 }}>
@@ -344,7 +344,7 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
             <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--navy)", marginBottom: 12 }}>
               WHAT HAPPENS NEXT
             </div>
-            <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, fontSize: "clamp(24px,3.2vw,36px)", lineHeight: 1.15, color: "var(--navy)", marginBottom: 14 }}>
+            <h2 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(24px,3.2vw,36px)", lineHeight: 1.15, color: "var(--navy)", marginBottom: 14 }}>
               After you download
             </h2>
             <div style={{ width: 48, height: 3, background: "var(--yellow)", margin: "0 auto" }} />
@@ -370,7 +370,7 @@ export default function LeadMagnetClient({ data }: { data: ResourceDetail }) {
       {/* ══ CTA BAND ════════════════════════════════════════════════════════ */}
       <section style={{ background: "var(--yellow)", padding: "56px 0", textAlign: "center", borderTop: "4px solid var(--navy)" }}>
         <div className="container" style={{ maxWidth: 640 }}>
-          <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, color: "var(--navy)", fontSize: "clamp(24px,3.5vw,34px)", marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "var(--font-heading)", color: "var(--navy)", fontSize: "clamp(24px,3.5vw,34px)", marginBottom: 12 }}>
             Want a personalised shortlist instead?
           </h2>
           <p style={{ color: "var(--navy)", fontSize: 17, marginBottom: 28, lineHeight: 1.6 }}>

@@ -173,7 +173,7 @@ export default function ResourcesHubClient({ resources }: { resources: ResourceI
           <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--yellow)", marginBottom: 12 }}>
             FREE RESOURCES
           </div>
-          <h1 style={{ fontFamily: "var(--font-serif)", fontSize: "clamp(30px,4.5vw,50px)", lineHeight: 1.1, color: "var(--ivory)", letterSpacing: "-0.01em", margin: "12px 0 16px" }}>
+          <h1 style={{ fontFamily: "var(--font-heading)", fontSize: "clamp(30px,4.5vw,50px)", lineHeight: 1.1, color: "var(--ivory)", letterSpacing: "-0.01em", margin: "12px 0 16px" }}>
             Download, compare, and decide with confidence.
           </h1>
           <p style={{ fontSize: "clamp(16px,1.8vw,19px)", color: "var(--pale-navy)", lineHeight: 1.6, maxWidth: 600, marginBottom: 32 }}>
@@ -250,7 +250,7 @@ export default function ResourcesHubClient({ resources }: { resources: ResourceI
       {/* ══ CTA BAND ═════════════════════════════════════════════════════════ */}
       <section style={{ background: "var(--yellow)", padding: "56px 0", textAlign: "center", borderTop: "4px solid var(--navy)" }}>
         <div className="container" style={{ maxWidth: 680 }}>
-          <h2 style={{ fontFamily: "var(--font-heading)", fontWeight: 700, color: "var(--navy)", fontSize: "clamp(24px,3.5vw,34px)", marginBottom: 12 }}>
+          <h2 style={{ fontFamily: "var(--font-heading)", color: "var(--navy)", fontSize: "clamp(24px,3.5vw,34px)", marginBottom: 12 }}>
             Not sure which resource to start with?
           </h2>
           <p style={{ color: "var(--navy)", fontSize: 17, marginBottom: 28, lineHeight: 1.6 }}>
