@@ -93,117 +93,92 @@ export default function SpecializationLandingClient({ data }: { data: Specializa
 
       <section className="section-lp section-lp-alt" id="compare">
         <div className="container">
-          <div className="sp-layout">
-            <div>
-              <div className="eyebrow">PROGRAMME COMPARISON</div>
-              <h2 className="h-display h2">Top online MBA options for this specialisation</h2>
-              <hr className="section-rule" />
-              <ProgrammeCompareCards
-                programmes={data.programmes}
-                onEnquire={(rank) => openModal(`${data.slug}-card-${rank}`)}
-              />
-            </div>
-            <div />
-          </div>
+          <div className="eyebrow">PROGRAMME COMPARISON</div>
+          <h2 className="h-display h2">Top online MBA options for this specialisation</h2>
+          <hr className="section-rule" />
+          <ProgrammeCompareCards
+            programmes={data.programmes}
+            onEnquire={(rank) => openModal(`${data.slug}-card-${rank}`)}
+          />
         </div>
       </section>
 
       <section className="section-lp">
         <div className="container">
-          <div className="sp-layout">
-            <div>
-              <div className="eyebrow">WHO THIS FITS</div>
-              <h2 className="h-display h2">Why this specialisation can be the right next step</h2>
-              <hr className="section-rule" />
-              <div className="fit-grid">
-                <div className="fit-box fit-yes">
-                  <h4>This fits if you are...</h4>
-                  <ul className="fit-list">
-                    {data.fitPoints.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-                <div className="fit-box fit-no">
-                  <h4>This may not fit if you are...</h4>
-                  <ul className="fit-list">
-                    {data.fitPointsNo.map((item) => (
-                      <li key={item}>{item}</li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
+          <div className="eyebrow">WHO THIS FITS</div>
+          <h2 className="h-display h2">Why this specialisation can be the right next step</h2>
+          <hr className="section-rule" />
+          <div className="fit-grid">
+            <div className="fit-box fit-yes">
+              <h4>This fits if you are...</h4>
+              <ul className="fit-list">
+                {data.fitPoints.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
             </div>
-            <div />
+            <div className="fit-box fit-no">
+              <h4>This may not fit if you are...</h4>
+              <ul className="fit-list">
+                {data.fitPointsNo.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="section-lp section-lp-alt">
         <div className="container">
-          <div className="sp-layout">
-            <div>
-              <div className="eyebrow">CAREER OUTCOMES</div>
-              <h2 className="h-display h2">What this specialisation is used for in real careers</h2>
-              <hr className="section-rule" />
-              <div style={{ display: 'grid', gap: 12 }}>
-                {data.outcomes.map((item) => (
-                  <div key={item.label} className="info-card">
-                    <div className="info-card-title">{item.label}</div>
-                    <p>{item.value}</p>
-                  </div>
-                ))}
+          <div className="eyebrow">CAREER OUTCOMES</div>
+          <h2 className="h-display h2">What this specialisation is used for in real careers</h2>
+          <hr className="section-rule" />
+          <div style={{ display: 'grid', gap: 12 }}>
+            {data.outcomes.map((item) => (
+              <div key={item.label} className="info-card">
+                <div className="info-card-title">{item.label}</div>
+                <p>{item.value}</p>
               </div>
-            </div>
-            <div />
+            ))}
           </div>
         </div>
       </section>
 
       <section className="section-lp">
         <div className="container">
-          <div className="sp-layout">
-            <div>
-              <div className="eyebrow">BEFORE YOU APPLY</div>
-              <h2 className="h-display h2">Questions to ask before choosing a programme</h2>
-              <hr className="section-rule" />
-              <div className="questions-list">
-                {data.questions.map((item, index) => (
-                  <div className="q-item" key={item.q}>
-                    <div className="q-num">{index + 1}</div>
-                    <div className="q-body">
-                      <h4>{item.q}</h4>
-                      <p>{item.a}</p>
-                    </div>
-                  </div>
-                ))}
+          <div className="eyebrow">BEFORE YOU APPLY</div>
+          <h2 className="h-display h2">Questions to ask before choosing a programme</h2>
+          <hr className="section-rule" />
+          <div className="questions-list">
+            {data.questions.map((item, index) => (
+              <div className="q-item" key={item.q}>
+                <div className="q-num">{index + 1}</div>
+                <div className="q-body">
+                  <h4>{item.q}</h4>
+                  <p>{item.a}</p>
+                </div>
               </div>
-            </div>
-            <div />
+            ))}
           </div>
         </div>
       </section>
 
       <section className="section-lp section-lp-alt" id="faq">
         <div className="container">
-          <div className="sp-layout">
-            <div>
-              <div className="eyebrow">FREQUENTLY ASKED QUESTIONS</div>
-              <h2 className="h-display h2">Quick answers for students comparing this option</h2>
-              <hr className="section-rule" />
-              <div className="faq-list">
-                {data.faqs.map((item, index) => (
-                  <div key={item.q} className={`faq-item${openFaq === index ? ' open' : ''}`}>
-                    <button type="button" className="faq-question" onClick={() => toggleFaq(index)} aria-expanded={openFaq === index}>
-                      <span>{item.q}</span>
-                      <span className="faq-icon" aria-hidden="true">{openFaq === index ? '-' : '+'}</span>
-                    </button>
-                    {openFaq === index && <div className="faq-answer">{item.a}</div>}
-                  </div>
-                ))}
+          <div className="eyebrow">FREQUENTLY ASKED QUESTIONS</div>
+          <h2 className="h-display h2">Quick answers for students comparing this option</h2>
+          <hr className="section-rule" />
+          <div className="faq-list">
+            {data.faqs.map((item, index) => (
+              <div key={item.q} className={`faq-item${openFaq === index ? ' open' : ''}`}>
+                <button type="button" className="faq-question" onClick={() => toggleFaq(index)} aria-expanded={openFaq === index}>
+                  <span>{item.q}</span>
+                  <span className="faq-icon" aria-hidden="true">{openFaq === index ? '-' : '+'}</span>
+                </button>
+                {openFaq === index && <div className="faq-answer">{item.a}</div>}
               </div>
-            </div>
-            <div />
+            ))}
           </div>
         </div>
       </section>

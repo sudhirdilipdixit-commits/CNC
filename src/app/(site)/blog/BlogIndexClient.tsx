@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import LeadCTAButton from "@/components/forms/LeadCTAButton";
 
 export interface BlogPostCard {
   _id: string;
@@ -22,69 +23,13 @@ function formatDate(iso?: string) {
 }
 
 function MidCaptureForm() {
-  const [form, setForm] = useState({ name: "", mobile: "" });
-  const [submitting, setSubmitting] = useState(false);
-  const [error, setError] = useState("");
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
-    if (!form.name.trim() || form.name.trim().length < 2) { setError("Please enter your name."); return; }
-    if (!/^[6-9]\d{9}$/.test(form.mobile)) { setError("Enter a valid 10-digit mobile number."); return; }
-    setError("");
-    setSubmitting(true);
-    try {
-      const res = await fetch("/api/leads", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          mobile: form.mobile,
-          source: "blog-mid-capture",
-          landingPage: window.location.href,
-          referrer: document.referrer,
-          userAgent: navigator.userAgent,
-          deviceType: /Mobi|Android/i.test(navigator.userAgent) ? "mobile" : "desktop",
-        }),
-      });
-      const json = await res.json();
-      if (res.ok) {
-        const id = `CNC-2026-${json.id || "XXXXX"}`;
-        const firstName = encodeURIComponent(form.name.trim().split(" ")[0]);
-        window.location.href = `/thank-you/?id=${encodeURIComponent(id)}&name=${firstName}&source=blog`;
-      } else {
-        setError(json.error || "Something went wrong. Please try again.");
-      }
-    } catch {
-      setError("Network error. Please try again.");
-    } finally {
-      setSubmitting(false);
-    }
-  }
-
   return (
     <div className="bi-mid-capture">
       <div className="bi-mid-body">
         <h3>Skip the research. Get expert guidance.</h3>
         <p>Get a personalised programme shortlist matched to your profile. Free. Takes 2 minutes.</p>
       </div>
-      <form className="bi-mid-form" onSubmit={handleSubmit} noValidate>
-        <input
-          type="text"
-          placeholder="Your name"
-          value={form.name}
-          onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-        />
-        <input
-          type="tel"
-          placeholder="Mobile number"
-          value={form.mobile}
-          onChange={(e) => setForm((f) => ({ ...f, mobile: e.target.value }))}
-        />
-        {error && <div style={{ fontSize: 12, color: "#B83A2A" }}>{error}</div>}
-        <button type="submit" className="btn btn-primary btn-sm" disabled={submitting}>
-          {submitting ? "Sending…" : "Get Free Guidance"}
-        </button>
-      </form>
+      <LeadCTAButton label="Get Free Guidance" source="blog-mid-capture" className="btn btn-primary btn-sm" />
     </div>
   );
 }

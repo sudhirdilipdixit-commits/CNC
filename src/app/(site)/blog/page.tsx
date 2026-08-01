@@ -291,21 +291,6 @@ export default async function BlogIndexPage() {
           margin-bottom: 6px;
         }
         .bi-mid-body p { color: var(--pale-navy); font-size: 14px; margin: 0; }
-        .bi-mid-form {
-          display: flex;
-          flex-direction: column;
-          gap: 8px;
-          min-width: 260px;
-        }
-        .bi-mid-form input {
-          padding: 11px 14px;
-          border: none;
-          border-radius: 8px;
-          font-size: 14px;
-          font-family: var(--font-sans);
-          color: var(--charcoal);
-        }
-        .bi-mid-form input:focus { outline: 2px solid var(--yellow); }
 
         /* ── Load more ── */
         .bi-load-more { text-align: center; margin-top: 40px; }
