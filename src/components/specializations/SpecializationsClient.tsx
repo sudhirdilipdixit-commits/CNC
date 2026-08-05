@@ -205,53 +205,60 @@ export default function SpecializationsClient() {
       </div>
 
       {/* Hero + Sidebar */}
-      <section className="section-lp" id="hero">
-        <div className="container sp-layout">
-          <div className="sp-hero-content">
-            <div className="eyebrow">STUDY IN INDIA - SPECIALIZATIONS GUIDE</div>
-            <h1 className="h-display h1">MBA Specializations Guide 2026-27: Choose the Right Track for Your Career</h1>
+      <section className="sp-hero" id="hero">
+        <div className="container">
+          <div className="sp-layout">
+            <div className="sp-hero-content">
+              <div className="eyebrow">STUDY IN INDIA - SPECIALIZATIONS GUIDE</div>
+              <h1 className="h-display h1">MBA Specializations Guide 2026-27: Choose the Right Track for Your Career</h1>
 
-            <div className="answer-capsule">
-              India has 9 active MBA specializations in 2026-27: Marketing, Finance, HR, Operations, IT and Project Management, Healthcare, Banking and Financial Services, Business Analytics, and AI in Management. Finance and IT offer the highest salaries (Rs 10-24 lakh). Marketing has the largest enrolment. Healthcare is the fastest-growing niche.
+              <div className="answer-capsule">
+                India has 9 active MBA specializations in 2026-27: Marketing, Finance, HR, Operations, IT and Project Management, Healthcare, Banking and Financial Services, Business Analytics, and AI in Management. Finance and IT offer the highest salaries (Rs 10-24 lakh). Marketing has the largest enrolment. Healthcare is the fastest-growing niche.
+              </div>
+
+              <p className="lede" style={{ marginBottom: 28 }}>
+                The specialization on your MBA degree certificate follows you for your entire career. It signals your intended career direction to employers, determines which hiring pools you enter, and shapes the content of your two years of study. This guide gives you the honest comparison - salary ranges, top roles, who each track is right for, and who it is not.
+              </p>
+
+              <div className="sp-cta-row">
+                <button type="button" className="btn btn-primary" onClick={() => openModal('spec-hub-hero')}>
+                  Get Matched to the Right Specialization {ARROW}
+                </button>
+              </div>
+
+              <div className="trust-strip">
+                <span className="stars">★★★★★</span>
+                <span>4.8/5 · 9 specializations compared · Salary data from 412 alumni · Updated July 2026</span>
+              </div>
             </div>
 
-            <p className="lede" style={{ marginBottom: 28 }}>
-              The specialization on your MBA degree certificate follows you for your entire career. It signals your intended career direction to employers, determines which hiring pools you enter, and shapes the content of your two years of study. This guide gives you the honest comparison - salary ranges, top roles, who each track is right for, and who it is not.
-            </p>
-
-            <div className="sp-cta-row">
-              <button type="button" className="btn btn-primary" onClick={() => openModal('spec-hub-hero')}>
-                Get Matched to the Right Specialization {ARROW}
-              </button>
-            </div>
-
-            <div className="trust-strip">
-              <span className="stars">★★★★★</span>
-              <span>4.8/5 · 9 specializations compared · Salary data from 412 alumni · Updated July 2026</span>
-            </div>
+            {/* Sidebar */}
+            <aside className="sp-sidebar" aria-label="Quick enquiry">
+              <div className="sp-sidebar-header">
+                <h3>Not sure which specialization fits you?</h3>
+                <p>Takes 2 minutes. Matched to your background and career goal.</p>
+              </div>
+              <div className="sp-sidebar-body">
+                <div className="sp-sidebar-stats">
+                  <div className="sp-sidebar-stat">
+                    <span>Specializations compared:</span>
+                    <strong>9</strong>
+                  </div>
+                  <div className="sp-sidebar-stat">
+                    <span>Salary range by track:</span>
+                    <strong>Rs 6-25L</strong>
+                  </div>
+                  <div className="sp-sidebar-stat">
+                    <span>Approved universities:</span>
+                    <strong>UGC-DEB only</strong>
+                  </div>
+                </div>
+                <button type="button" className="btn btn-primary" style={{ width: '100%' }} onClick={() => openModal('spec-hub-sidebar')}>
+                  Get Free Guidance {ARROW}
+                </button>
+              </div>
+            </aside>
           </div>
-
-          {/* Sidebar */}
-          <aside className="sp-sidebar">
-            <div className="sp-sidebar-header">
-              <div style={{ fontWeight: 700, fontSize: 17, color: 'var(--navy)', marginBottom: 4 }}>
-                Not sure which specialization fits you?
-              </div>
-              <div style={{ fontSize: 14, color: 'var(--charcoal)', lineHeight: 1.5 }}>
-                Takes 2 minutes. Matched to your background and career goal.
-              </div>
-            </div>
-            <div className="sp-sidebar-body">
-              <button type="button" className="btn btn-primary" style={{ width: '100%' }} onClick={() => openModal('spec-hub-sidebar')}>
-                Get Free Guidance {ARROW}
-              </button>
-            </div>
-            <div className="sp-sidebar-stats">
-              <div className="sp-sidebar-stat"><span>9</span><span>Specializations compared</span></div>
-              <div className="sp-sidebar-stat"><span>Rs 6-25L</span><span>Salary range by track</span></div>
-              <div className="sp-sidebar-stat"><span>UGC-DEB</span><span>Approved universities only</span></div>
-            </div>
-          </aside>
         </div>
       </section>
 
