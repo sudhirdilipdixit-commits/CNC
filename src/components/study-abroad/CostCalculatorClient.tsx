@@ -240,9 +240,6 @@ export default function CostCalculatorClient() {
               </div>
 
               <div className="trust-strip">
-                <span className="stars">★★★★★</span>
-                <span>4.8/5</span>
-                <span className="sep">·</span>
                 <span>7 countries</span>
                 <span className="sep">·</span>
                 <span>Tuition plus living plus all fees</span>

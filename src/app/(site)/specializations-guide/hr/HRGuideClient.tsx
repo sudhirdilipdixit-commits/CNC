@@ -356,7 +356,7 @@ export default function HRGuideClient() {
           <p className="hr-eyebrow">Specialization Guide • 2025-26 Edition</p>
           <h1 className="hr-h1">MBA in Human Resource Management: the honest 2025-26 guide to Distance, Online &amp; Executive modes</h1>
           <p className="hr-sub">Fees from ₹1.2 lakh to ₹25 lakh. Real salary data from HR alumni across HRBP, talent acquisition, L&amp;D, compensation, and consulting roles. Top 10 UGC-DEB approved programmes compared, mode-by-mode.</p>
-          <p className="hr-trust">★★★★★ 4.8 / 5 counselling rating &nbsp;•&nbsp; 12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
+          <p className="hr-trust">12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
           <div className="hr-cta-row">
             <button className="hr-btn-primary" onClick={() => setModalOpen(true)}>Get a free counsellor recommendation →</button>
             <a href="#top10" className="hr-btn-secondary">Jump to top 10 programmes ↓</a>

@@ -505,7 +505,7 @@ export default function BusinessAnalyticsGuideClient() {
             Fees from Rs 1.3 lakh to Rs 28 lakh. Real salary data from 246 alumni. Top 10
             UGC-DEB approved programmes compared, mode-by-mode. No paid rankings. No sales pitch.
           </p>
-          <p className="ba-hero-trust">★★★★★ 4.8/5 counselling rating · 12,000+ aspirants placed since 2019 · 150+ verified universities</p>
+          <p className="ba-hero-trust">12,000+ aspirants placed since 2019 · 150+ verified universities</p>
           <div className="ba-hero-meta">
             <span>📅 December 2025</span>
             <span>⏱ 15-min read</span>

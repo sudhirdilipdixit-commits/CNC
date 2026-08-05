@@ -359,7 +359,7 @@ export default function SupplyChainGuideClient() {
           <p className="sc-eyebrow">Specialization Guide • 2025-26 Edition</p>
           <h1 className="sc-h1">MBA in Supply Chain Management: the honest 2025-26 guide to Distance, Online &amp; Executive modes</h1>
           <p className="sc-sub">Fees from ₹1.2 lakh to ₹22 lakh. Real salary data from 284 alumni across e-commerce, retail, manufacturing, and 3PL roles. Top 10 UGC-DEB approved programmes compared, mode-by-mode.</p>
-          <p className="sc-trust">★★★★★ 4.8 / 5 counselling rating &nbsp;•&nbsp; 12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
+          <p className="sc-trust">12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
           <div className="sc-cta-row">
             <button className="sc-btn-primary" onClick={() => setModalOpen(true)}>Get a free counsellor recommendation →</button>
             <a href="#top10" className="sc-btn-secondary">Jump to top 10 programmes ↓</a>

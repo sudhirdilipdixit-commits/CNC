@@ -250,9 +250,6 @@ export default function ByProgrammeClient() {
               </div>
 
               <div className="trust-strip">
-                <span className="stars">★★★★★</span>
-                <span>4.8 / 5</span>
-                <span className="sep">·</span>
                 <span>MBA, MS, MIM, Bachelors, PhD</span>
                 <span className="sep">·</span>
                 <span>7 countries covered</span>

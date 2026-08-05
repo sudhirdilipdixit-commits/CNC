@@ -194,9 +194,6 @@ export default function StudyInIndiaClient() {
               </div>
 
               <div className="trust-strip">
-                <span className="stars">★★★★★</span>
-                <span>4.8 / 5</span>
-                <span className="sep">·</span>
                 <span>3,200+ students guided since 2023</span>
                 <span className="sep">·</span>
                 <span>150+ UGC-DEB approved universities</span>

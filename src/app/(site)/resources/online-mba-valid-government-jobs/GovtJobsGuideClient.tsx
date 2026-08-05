@@ -315,9 +315,6 @@ export default function GovtJobsGuideClient() {
             Yes, with one condition that matters more than any other: always verify the specific job notification. Built from 241 government-job-eligibility counselling conversations. No blanket guarantees: the real regulatory picture.
           </p>
           <div className="gj-trust">
-            <span className="stars">★★★★★</span>
-            <span>4.8 / 5 counselling rating</span>
-            <span className="dot">•</span>
             <span>12,000+ aspirants placed since 2019</span>
             <span className="dot">•</span>
             <span>150+ verified universities</span>

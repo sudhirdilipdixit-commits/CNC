@@ -349,7 +349,7 @@ export default function FinanceGuideClient() {
           <p className="fm-eyebrow">Specialization Guide • 2025-26 Edition</p>
           <h1 className="fm-h1">MBA in Finance Management: the honest 2025-26 guide to Distance, Online &amp; Executive modes</h1>
           <p className="fm-sub">Fees from ₹1.3 lakh to ₹40 lakh. Real salary data from 389 alumni across corporate finance, FP&amp;A, treasury, investment analysis, and consulting roles. Top 10 UGC-DEB approved programmes compared, mode-by-mode.</p>
-          <p className="fm-trust">★★★★★ 4.8 / 5 counselling rating &nbsp;•&nbsp; 12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
+          <p className="fm-trust">12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
           <div className="fm-cta-row">
             <button className="fm-btn-primary" onClick={() => setModalOpen(true)}>Get a free counsellor recommendation →</button>
             <a href="#top10" className="fm-btn-secondary">Jump to top 10 programmes ↓</a>

@@ -440,8 +440,6 @@ export default function DigitalMarketingGuideClient() {
             Fees from ₹1.2 lakh to ₹18 lakh. Real salary data from 289 alumni across performance marketing, SEO, growth, and analytics roles. Top 10 UGC-DEB approved programmes compared, mode-by-mode. No paid rankings.
           </p>
           <div className="dg-trust">
-            <span><span className="stars">★★★★★</span> 4.8 / 5 counselling rating</span>
-            <span className="dot">•</span>
             <span>12,000+ aspirants placed since 2019</span>
             <span className="dot">•</span>
             <span>150+ verified universities</span>

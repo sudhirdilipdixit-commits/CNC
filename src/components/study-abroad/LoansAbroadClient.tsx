@@ -115,9 +115,6 @@ export default function LoansAbroadClient() {
               </div>
 
               <div className="trust-strip">
-                <span className="stars">★★★★★</span>
-                <span>4.8/5</span>
-                <span className="sep">·</span>
                 <span>6 lenders compared</span>
                 <span className="sep">·</span>
                 <span>Section 80E tax benefit</span>

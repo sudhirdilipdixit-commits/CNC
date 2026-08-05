@@ -59,9 +59,6 @@ export default function SpecializationLandingClient({ data }: { data: Specializa
                 <a href="#compare" className="btn btn-secondary">Compare programmes</a>
               </div>
               <div className="trust-strip">
-                <span className="stars">★★★★★</span>
-                <span>4.7 / 5</span>
-                <span className="sep">·</span>
                 <span>Fast, honest guidance for working professionals</span>
                 <span className="sep">·</span>
                 <span>Lead-ready landing page for paid campaigns</span>

@@ -560,8 +560,6 @@ export default function MarketingGuideClient() {
             programmes compared, mode-by-mode. No paid rankings. No sales pitch.
           </p>
           <div className="mg-trust-strip">
-            <span><span className="mg-stars">★★★★★</span> 4.8 / 5 counselling rating</span>
-            <span className="mg-dot">•</span>
             <span>12,000+ aspirants placed since 2019</span>
             <span className="mg-dot">•</span>
             <span>150+ verified universities</span>

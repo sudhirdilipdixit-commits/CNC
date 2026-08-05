@@ -361,7 +361,7 @@ export default function ProjectManagementGuideClient() {
           <p className="pm-eyebrow">Specialization Guide • 2025-26 Edition</p>
           <h1 className="pm-h1">MBA in Project Management: the honest 2025-26 guide to Distance, Online &amp; Executive modes</h1>
           <p className="pm-sub">Fees from ₹1.2 lakh to ₹22 lakh. Real salary data across IT services, construction, consulting, and infrastructure. Top 10 UGC-DEB approved programmes compared, mode-by-mode.</p>
-          <p className="pm-trust">★★★★★ 4.8 / 5 counselling rating &nbsp;•&nbsp; 12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
+          <p className="pm-trust">12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
           <div className="pm-cta-row">
             <button className="pm-btn-primary" onClick={() => setModalOpen(true)}>Get a free counsellor recommendation →</button>
             <a href="#top10" className="pm-btn-secondary">Jump to top 10 programmes ↓</a>

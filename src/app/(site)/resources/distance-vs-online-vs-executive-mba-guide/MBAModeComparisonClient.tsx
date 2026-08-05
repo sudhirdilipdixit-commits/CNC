@@ -620,8 +620,6 @@ export default function MBAModeComparisonClient() {
             Fees, duration, salary, placement, and employer acceptance: all three modes compared side by side. Built from 412 alumni interviews and 2,000+ counselling conversations. No paid rankings. No sales pitch.
           </p>
           <div className="mc-trust">
-            <span><span className="stars">★★★★★</span> 4.8 / 5 counselling rating</span>
-            <span className="dot">•</span>
             <span>12,000+ aspirants placed since 2019</span>
             <span className="dot">•</span>
             <span>150+ verified universities</span>

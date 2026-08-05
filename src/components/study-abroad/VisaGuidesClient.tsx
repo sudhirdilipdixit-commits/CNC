@@ -253,9 +253,6 @@ export default function VisaGuidesClient() {
               </div>
 
               <div className="trust-strip">
-                <span className="stars">★★★★★</span>
-                <span>4.8/5</span>
-                <span className="sep">·</span>
                 <span>5 countries detailed</span>
                 <span className="sep">·</span>
                 <span>Processing times and checklists</span>

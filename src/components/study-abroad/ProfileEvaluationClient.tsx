@@ -185,9 +185,6 @@ export default function ProfileEvaluationClient() {
               </div>
 
               <div className="trust-strip">
-                <span className="stars">★★★★★</span>
-                <span>4.8/5</span>
-                <span className="sep">·</span>
                 <span>Shortlist with admit probability</span>
                 <span className="sep">·</span>
                 <span>MBA, MS, MIM, Bachelors</span>

@@ -257,9 +257,6 @@ export default function TestPrepClient() {
               </div>
 
               <div className="trust-strip">
-                <span className="stars">★★★★★</span>
-                <span>4.8/5</span>
-                <span className="sep">·</span>
                 <span>6 tests covered</span>
                 <span className="sep">·</span>
                 <span>Country and programme specific guidance</span>

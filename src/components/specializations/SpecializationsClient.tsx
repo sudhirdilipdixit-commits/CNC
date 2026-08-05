@@ -19,11 +19,15 @@ interface Spec {
   topRoles: string
   bestFor: string
   highlight: string
+  icon: string
+  iconBg: string
 }
 
 const SPECS: Spec[] = [
   {
     slug: 'marketing',
+    icon: '📣',
+    iconBg: '#F6D9DC',
     tag: 'Highest Enrolment 2026',
     title: 'Marketing and Digital Marketing',
     tagline: "India's fastest-growing MBA stream. Covers brand strategy, B2B marketing, performance campaigns, and AI-assisted customer acquisition.",
@@ -35,6 +39,8 @@ const SPECS: Spec[] = [
   },
   {
     slug: 'finance',
+    icon: '💰',
+    iconBg: '#FBEFC2',
     tag: 'Highest Salary',
     title: 'Finance',
     tagline: 'Corporate finance, equity research, financial modelling, and CFO-track careers. The single largest discipline by hiring volume in the Indian MBA market.',
@@ -46,6 +52,8 @@ const SPECS: Spec[] = [
   },
   {
     slug: 'hr',
+    icon: '👥',
+    iconBg: '#D6DBED',
     tag: 'Mid-Career Favourite',
     title: 'Human Resources',
     tagline: 'Talent acquisition, learning and development, HR analytics, and CHRO-track roles. Increasingly data-driven in 2026 with people analytics tools widely adopted.',
@@ -57,6 +65,8 @@ const SPECS: Spec[] = [
   },
   {
     slug: 'operations',
+    icon: '🏭',
+    iconBg: '#D6DBED',
     tag: 'Manufacturing and Logistics',
     title: 'Operations and Supply Chain',
     tagline: 'End-to-end supply chain, procurement, logistics, and operations strategy. Strong employer demand from manufacturing, e-commerce, and pharma sectors.',
@@ -68,6 +78,8 @@ const SPECS: Spec[] = [
   },
   {
     slug: 'it-systems',
+    icon: '💻',
+    iconBg: '#D9EEE1',
     tag: 'Tech + Management',
     title: 'IT and Project Management',
     tagline: 'Programme management, IT governance, product management, and tech leadership. The highest density of working professionals, particularly from engineering and tech backgrounds.',
@@ -79,6 +91,8 @@ const SPECS: Spec[] = [
   },
   {
     slug: 'healthcare',
+    icon: '🏥',
+    iconBg: '#F6D9DC',
     tag: 'Fastest-Growing Niche',
     title: 'Healthcare Management',
     tagline: 'Hospital administration, health-tech, pharma operations, and public health management. Fastest-growing niche MBA specialization in 2026 by job posting volume.',
@@ -90,6 +104,8 @@ const SPECS: Spec[] = [
   },
   {
     slug: 'banking-finance',
+    icon: '🏦',
+    iconBg: '#FBEFC2',
     tag: 'BFSI Sector',
     title: 'Banking and Financial Services',
     tagline: 'Retail banking, wealth management, fintech operations, and NBFC roles. Distinct from corporate finance - focuses on banking products, credit, and financial inclusion.',
@@ -101,6 +117,8 @@ const SPECS: Spec[] = [
   },
   {
     slug: 'business-analytics',
+    icon: '📈',
+    iconBg: '#D6DBED',
     tag: 'Data-Driven Decision Making',
     title: 'Business Analytics',
     tagline: 'Data analytics, business intelligence, predictive modelling, and strategy. Bridges the gap between data science and management - no coding required but data fluency is essential.',
@@ -112,6 +130,8 @@ const SPECS: Spec[] = [
   },
   {
     slug: 'ai-management',
+    icon: '🤖',
+    iconBg: '#D9EEE1',
     tag: 'New 2026 Track',
     title: 'AI in Management',
     tagline: 'Artificial intelligence strategy, AI-driven business transformation, and leading AI-first teams. The newest MBA track in 2026, offered by select UGC-DEB approved private universities.',
@@ -227,8 +247,7 @@ export default function SpecializationsClient() {
               </div>
 
               <div className="trust-strip">
-                <span className="stars">★★★★★</span>
-                <span>4.8/5 · 9 specializations compared · Salary data from 412 alumni · Updated July 2026</span>
+                <span>9 specializations compared · Salary data from 412 alumni · Updated July 2026</span>
               </div>
             </div>
 
@@ -272,6 +291,22 @@ export default function SpecializationsClient() {
           <div className="prog-cards" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))' }}>
             {SPECS.map(spec => (
               <div className="prog-card" key={spec.slug}>
+                <div
+                  aria-hidden="true"
+                  style={{
+                    width: 48,
+                    height: 48,
+                    borderRadius: 14,
+                    background: spec.iconBg,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontSize: 24,
+                    marginBottom: 4,
+                  }}
+                >
+                  {spec.icon}
+                </div>
                 <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: 8 }}>
                   <div className="prog-card-title" style={{ marginBottom: 0 }}>{spec.title}</div>
                   <span style={{ fontSize: 10, fontWeight: 700, background: 'var(--yellow)', color: 'var(--navy)', padding: '3px 9px', borderRadius: 'var(--radius-pill)', whiteSpace: 'nowrap', flexShrink: 0 }}>{spec.tag}</span>

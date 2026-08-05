@@ -520,9 +520,6 @@ export default function SalaryReportClient() {
             Entry to leadership salary, the Executive MBA premium, and what actually moves your offer. Built from 3,842 alumni salary outcomes tracked across all 12 specializations we cover.
           </p>
           <div className="sr-trust">
-            <span className="stars">★★★★★</span>
-            <span>4.8 / 5 counselling rating</span>
-            <span className="dot">•</span>
             <span>12,000+ aspirants placed since 2019</span>
             <span className="dot">•</span>
             <span>150+ verified universities</span>

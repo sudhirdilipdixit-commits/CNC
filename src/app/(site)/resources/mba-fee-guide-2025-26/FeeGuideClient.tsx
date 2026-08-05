@@ -425,9 +425,6 @@ export default function FeeGuideClient() {
             Tuition, hidden costs, EMI options, scholarships, and Section 80E tax benefits explained. The full true-cost picture, not just the advertised number. Built from 1,200+ fee consultations.
           </p>
           <div className="fg-trust">
-            <span className="stars">★★★★★</span>
-            <span>4.8 / 5 counselling rating</span>
-            <span className="dot">•</span>
             <span>12,000+ aspirants placed</span>
             <span className="dot">•</span>
             <span>150+ universities tracked</span>

@@ -367,7 +367,7 @@ export default function ITSystemsGuideClient() {
           <p className="it-eyebrow">Specialization Guide • 2025-26 Edition</p>
           <h1 className="it-h1">MBA in IT &amp; Systems Management: the honest 2025-26 guide to Distance, Online &amp; Executive modes</h1>
           <p className="it-sub">Fees from ₹1.3 lakh to ₹28 lakh. Salary bands, top 10 UGC-DEB approved programmes compared mode-by-mode. Built for software engineers and IT professionals.</p>
-          <p className="it-trust">★★★★★ 4.8 / 5 counselling rating &nbsp;•&nbsp; 12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
+          <p className="it-trust">12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
           <div className="it-cta-row">
             <button className="it-btn-primary" onClick={() => setModalOpen(true)}>Get a free counsellor recommendation →</button>
             <a href="#top10" className="it-btn-secondary">Jump to top 10 programmes ↓</a>

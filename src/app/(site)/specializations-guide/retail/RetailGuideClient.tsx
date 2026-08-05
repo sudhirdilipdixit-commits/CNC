@@ -361,7 +361,7 @@ export default function RetailGuideClient() {
           <p className="rt-eyebrow">Specialization Guide • 2025-26 Edition</p>
           <h1 className="rt-h1">MBA in Retail Management: the honest 2025-26 guide to Distance, Online &amp; Executive modes</h1>
           <p className="rt-sub">Fees from ₹1.2 lakh to ₹20 lakh. Real salary data across store operations, category management, D2C brand building, e-commerce retail, and quick commerce roles. Top 10 UGC-DEB approved programmes compared, mode-by-mode.</p>
-          <p className="rt-trust">★★★★★ 4.8 / 5 counselling rating &nbsp;•&nbsp; 12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
+          <p className="rt-trust">12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
           <div className="rt-cta-row">
             <button className="rt-btn-primary" onClick={() => setModalOpen(true)}>Get a free counsellor recommendation →</button>
             <a href="#top10" className="rt-btn-secondary">Jump to top 10 programmes ↓</a>

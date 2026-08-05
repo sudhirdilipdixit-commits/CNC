@@ -146,9 +146,6 @@ export default function ScholarshipsClient() {
               </div>
 
               <div className="trust-strip">
-                <span className="stars">★★★★★</span>
-                <span>4.8/5</span>
-                <span className="sep">·</span>
                 <span>Government and university scholarships</span>
                 <span className="sep">·</span>
                 <span>Fully funded options available</span>

@@ -593,9 +593,6 @@ export default function Top20UniversitiesClient() {
             Every university here holds current UGC-DEB approval. Ranked by career outcomes, learning experience, recognition, and fee-to-value ratio. Updated for 2025-26 enrolment.
           </p>
           <div className="t2-trust">
-            <span className="stars">★★★★★</span>
-            <span>4.8 / 5 counselling rating</span>
-            <span className="dot">•</span>
             <span>12,000+ aspirants placed</span>
             <span className="dot">•</span>
             <span>150+ universities assessed</span>

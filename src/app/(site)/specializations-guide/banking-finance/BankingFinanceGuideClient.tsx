@@ -358,7 +358,7 @@ export default function BankingFinanceGuideClient() {
           <p className="bf-eyebrow">Specialization Guide • 2025-26 Edition</p>
           <h1 className="bf-h1">MBA in Banking &amp; Finance Management: the honest 2025-26 guide to Distance, Online &amp; Executive modes</h1>
           <p className="bf-sub">Fees from ₹1.2 lakh to ₹15 lakh. Real salary data from 421 alumni across retail banking, corporate banking, wealth management, and fintech roles. Top 10 UGC-DEB approved programmes compared, mode-by-mode.</p>
-          <p className="bf-trust">★★★★★ 4.8 / 5 counselling rating &nbsp;•&nbsp; 12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
+          <p className="bf-trust">12,000+ aspirants placed since 2019 &nbsp;•&nbsp; 150+ verified universities</p>
           <div className="bf-cta-row">
             <button className="bf-btn-primary" onClick={() => setModalOpen(true)}>Get a free counsellor recommendation →</button>
             <a href="#top10" className="bf-btn-secondary">Jump to top 10 programmes ↓</a>
