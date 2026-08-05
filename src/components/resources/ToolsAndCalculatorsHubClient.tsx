@@ -113,12 +113,8 @@ export default function ToolsAndCalculatorsHubClient() {
       {/* CTA Band */}
       <section className="lp-cta-band">
         <div className="container">
-          <div className="h-display h2" style={{ color: 'var(--white)', marginBottom: 8 }}>
-            Not sure which numbers apply to you?
-          </div>
-          <p style={{ color: 'rgba(250,247,242,.82)', marginBottom: 28, fontSize: 16 }}>
-            Tell us your programme, budget, and timeline. We will point you to the right calculator and the right numbers for your situation.
-          </p>
+          <h2>Not sure which numbers apply to you?</h2>
+          <p>Tell us your programme, budget, and timeline. We will point you to the right calculator and the right numbers for your situation.</p>
           <button type="button" className="btn btn-inverted" onClick={() => openModal('tools-hub-cta-band')}>
             Get Free Guidance {ARROW}
           </button>

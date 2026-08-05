@@ -507,12 +507,8 @@ export default function SpecializationsClient() {
       {/* CTA Band */}
       <section className="lp-cta-band">
         <div className="container">
-          <div className="h-display h2" style={{ color: 'var(--white)', marginBottom: 8 }}>
-            Not sure which specialization fits your background and goal?
-          </div>
-          <p style={{ color: 'rgba(250,247,242,.82)', marginBottom: 28, fontSize: 16 }}>
-            Tell us your work experience, undergraduate background, and target salary. We will match you to the right specialization and the right university in 2 minutes.
-          </p>
+          <h2>Not sure which specialization fits your background and goal?</h2>
+          <p>Tell us your work experience, undergraduate background, and target salary. We will match you to the right specialization and the right university in 2 minutes.</p>
           <button type="button" className="btn btn-inverted" onClick={() => openModal('spec-hub-cta-band')}>
             Get Free Guidance {ARROW}
           </button>

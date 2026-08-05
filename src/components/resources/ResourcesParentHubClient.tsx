@@ -156,12 +156,8 @@ export default function ResourcesParentHubClient() {
       {/* CTA Band */}
       <section className="lp-cta-band">
         <div className="container">
-          <div className="h-display h2" style={{ color: 'var(--white)', marginBottom: 8 }}>
-            Not sure where to start?
-          </div>
-          <p style={{ color: 'rgba(250,247,242,.82)', marginBottom: 28, fontSize: 16 }}>
-            Tell us your goal, current profile, and budget. We will point you to the right guide, tool, or programme comparison.
-          </p>
+          <h2>Not sure where to start?</h2>
+          <p>Tell us your goal, current profile, and budget. We will point you to the right guide, tool, or programme comparison.</p>
           <button type="button" className="btn btn-inverted" onClick={() => openModal('resources-hub-cta-band')}>
             Get Free Guidance {ARROW}
           </button>
