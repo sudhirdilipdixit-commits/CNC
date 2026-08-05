@@ -66,11 +66,11 @@ export default function ResourcesParentHubClient() {
   return (
     <main id="main">
       {/* Breadcrumb */}
-      <div className="section-lp" style={{ paddingTop: 16, paddingBottom: 0 }}>
+      <div style={{ background: 'var(--white)', borderBottom: '1px solid var(--mist)' }}>
         <div className="container">
           <nav className="breadcrumb" aria-label="Breadcrumb">
-            <a href="/" className="breadcrumb-link">Home</a>
-            <span className="sep">&rsaquo;</span>
+            <a href="/">Home</a>
+            <span className="sep">/</span>
             <span className="crumb-current">Resources</span>
           </nav>
         </div>

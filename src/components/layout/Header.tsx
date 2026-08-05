@@ -44,10 +44,6 @@ const NAV_ITEMS = [
     ],
   },
   {
-    label: "AI Counsellor",
-    href: "/ai-counsellor",
-  },
-  {
     label: "Resources",
     href: null,
     children: [
