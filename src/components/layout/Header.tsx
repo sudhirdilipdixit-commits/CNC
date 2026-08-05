@@ -49,7 +49,7 @@ const NAV_ITEMS = [
     children: [
       { label: "Blog", href: "/blog" },
       { label: "Guides", href: "#" },
-      { label: "Tools and Calculator", href: "#" },
+      { label: "Tools and Calculator", href: "/resources/tools-and-calculators" },
     ],
   },
   { label: "About", href: "/about" },

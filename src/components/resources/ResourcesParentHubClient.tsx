@@ -40,8 +40,8 @@ const TILES: HubTile[] = [
     title: 'Tools and Calculators',
     badge: 'MBA fee and EMI calculator',
     tagline: 'Work out your real total cost and monthly EMI across bank loans and university payment plans before you apply.',
-    href: '/resources/emi-calculator',
-    linkLabel: 'Try the calculator',
+    href: '/resources/tools-and-calculators',
+    linkLabel: 'Browse tools',
   },
 ]
 
