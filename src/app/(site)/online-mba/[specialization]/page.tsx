@@ -137,6 +137,12 @@ export default async function SpecializationLandingPage({ params }: { params: Pr
               '@type': 'EducationalOrganization',
               name: 'CollegeNCourses',
               logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
+              founder: {
+                '@type': 'Person',
+                name: 'Nikhita Pradeep Deshmukh',
+                jobTitle: 'Founder and Lead Education Expert',
+                worksFor: { '@type': 'Organization', name: 'CollegeNCourses' },
+              },
             },
           }),
         }}
