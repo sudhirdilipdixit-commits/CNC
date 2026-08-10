@@ -51,7 +51,10 @@ export default function SpecializationLandingClient({ data }: { data: Specializa
               <h1 className="h-display h1">{data.title}</h1>
               <div className="answer-capsule">{data.answerCapsule}</div>
               <p className="lede" style={{ marginBottom: 8 }}>{data.description}</p>
-              <p style={{ fontSize: 13, color: 'var(--grey)', marginBottom: 28 }}>{data.updated}</p>
+              <p style={{ fontSize: 13, color: 'var(--grey)', marginBottom: 6 }}>{data.updated}</p>
+              <p className="sp-byline">
+                Written by CollegeNCourses Editorial Team · Reviewed by CollegeNCourses Senior Counsellor · Approved by Nikhita Pradeep Deshmukh, Founder
+              </p>
               <div className="sp-cta-row">
                 <button type="button" className="btn btn-primary" onClick={() => openModal(`${data.slug}-hero`)}>
                   Get Free Guidance {ARROW}
@@ -176,6 +179,35 @@ export default function SpecializationLandingClient({ data }: { data: Specializa
                 {openFaq === index && <div className="faq-answer">{item.a}</div>}
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="section-lp">
+        <div className="container">
+          <div className="eyebrow">ABOUT THIS PAGE</div>
+          <h2 className="h-display h2">Who wrote and reviewed this comparison</h2>
+          <hr className="section-rule" />
+          <div className="sp-authors">
+            <div className="sp-author-row">
+              <span className="sp-author-name">Written by: CollegeNCourses Editorial Team</span>
+              <div className="sp-author-role">Content Lead, CollegeNCourses Editorial Desk</div>
+              <div className="sp-author-bio">
+                Our editorial team tracks fees, approvals, and batch timelines for online MBA programmes across UGC-DEB approved private universities.
+              </div>
+            </div>
+            <div className="sp-author-row">
+              <span className="sp-author-name">Reviewed by: CollegeNCourses Senior Counsellor</span>
+              <div className="sp-author-role">Senior Counsellor, CollegeNCourses</div>
+              <div className="sp-author-bio">
+                Our reviewing counsellor has advised working professionals across Distance, Online, and Executive MBA modes, with a focus on Marketing and Digital specializations.
+              </div>
+            </div>
+            <div className="sp-author-row">
+              <span className="sp-author-name">Approved by: Nikhita Pradeep Deshmukh</span>
+              <div className="sp-author-role">Founder, Dnyanal Educon Pvt Ltd</div>
+              <div className="sp-author-bio">Founder of CollegeNCourses.</div>
+            </div>
           </div>
         </div>
       </section>

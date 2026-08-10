@@ -40,6 +40,14 @@ CREATE TABLE IF NOT EXISTS leads (
   updated_at      TIMESTAMPTZ NOT NULL DEFAULT NOW()
 );
 
+-- Third-party data-sharing consent record (DPDP Act 2023, Section 4.5 of the
+-- build spec). Added 2026-08. ALTER form used because the leads table may
+-- already exist in production; CREATE TABLE IF NOT EXISTS above will not
+-- backfill columns onto an existing table.
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS consent_text TEXT;
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS consent_version TEXT;
+ALTER TABLE leads ADD COLUMN IF NOT EXISTS consent_given_at TIMESTAMPTZ;
+
 -- Indexes for fast lookups
 CREATE INDEX IF NOT EXISTS idx_leads_mobile      ON leads (mobile);
 CREATE INDEX IF NOT EXISTS idx_leads_email       ON leads (email);

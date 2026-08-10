@@ -110,6 +110,37 @@ export default async function SpecializationLandingPage({ params }: { params: Pr
           }),
         }}
       />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebPage',
+            '@id': url,
+            url,
+            name: data.title,
+            description: data.metaDescription,
+            dateModified: data.dateModified,
+            author: {
+              '@type': 'Person',
+              name: 'CollegeNCourses Editorial Team',
+              jobTitle: 'Content Lead',
+              worksFor: { '@type': 'Organization', name: 'CollegeNCourses' },
+            },
+            reviewedBy: {
+              '@type': 'Person',
+              name: 'CollegeNCourses Senior Counsellor',
+              jobTitle: 'Senior Counsellor',
+              worksFor: { '@type': 'Organization', name: 'CollegeNCourses' },
+            },
+            publisher: {
+              '@type': 'EducationalOrganization',
+              name: 'CollegeNCourses',
+              logo: { '@type': 'ImageObject', url: `${SITE_URL}/logo.png` },
+            },
+          }),
+        }}
+      />
       <SpecializationLandingClient data={data} />
     </>
   )

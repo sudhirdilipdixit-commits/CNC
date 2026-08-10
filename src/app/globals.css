@@ -1491,6 +1491,15 @@ section { padding: 56px 0; }
 .sp-hero-content { padding-bottom: 40px; }
 .sp-hero-content h1 { margin: 12px 0 20px; }
 .sp-cta-row { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 24px; }
+.sp-byline { font-size: 12px; color: var(--grey); margin-bottom: 28px; }
+
+/* Author / reviewer credibility block (E-E-A-T) */
+.sp-authors { background: var(--white); border: 1px solid var(--mist); border-radius: var(--radius-md); padding: 20px; }
+.sp-author-row { padding: 12px 0; border-bottom: 1px solid var(--mist); }
+.sp-author-row:last-child { border-bottom: none; }
+.sp-author-name { color: var(--navy); font-size: 15px; font-weight: 700; display: block; margin-bottom: 4px; }
+.sp-author-role { font-size: 13px; color: var(--grey); margin-bottom: 4px; }
+.sp-author-bio { font-size: 13px; color: var(--charcoal); line-height: 1.55; }
 
 /* Answer capsule (AEO) */
 .answer-capsule {

@@ -4,6 +4,7 @@ import { createClient } from "@supabase/supabase-js";
 import { headers } from "next/headers";
 import { waitUntil } from "@vercel/functions";
 import { pushToAgile } from "@/lib/agilecrm";
+import { CONSENT_TEXT, CONSENT_VERSION } from "@/lib/consent";
 
 const leadSchema = z.object({
   name: z.string().min(2).max(100),
@@ -11,7 +12,7 @@ const leadSchema = z.object({
   email: z.string().email(),
   city: z.string().min(2).max(100),
   courseInterested: z.string().max(200).optional().default(""),
-  consent: z.boolean(),
+  consent: z.boolean().refine((v) => v, "Consent to be contacted is required"),
   // UTM fields
   utmSource: z.string().max(200).optional().default(""),
   utmMedium: z.string().max(200).optional().default(""),
@@ -102,6 +103,9 @@ export async function POST(request: NextRequest) {
         city: d.city,
         course_interested: d.courseInterested,
         consent: d.consent,
+        consent_text: CONSENT_TEXT,
+        consent_version: CONSENT_VERSION,
+        consent_given_at: new Date().toISOString(),
         utm_source: d.utmSource,
         utm_medium: d.utmMedium,
         utm_campaign: d.utmCampaign,

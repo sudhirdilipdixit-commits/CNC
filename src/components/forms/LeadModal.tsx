@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { z } from "zod";
+import { CONSENT_TEXT } from "@/lib/consent";
 
 const OTP_ENABLED = process.env.NEXT_PUBLIC_OTP_ENABLED === "true";
 
@@ -12,7 +13,7 @@ const leadSchema = z.object({
   email: z.string().email("Please enter a valid email address"),
   city: z.string().min(2, "Please enter your city"),
   courseInterested: z.string().min(1, "Please select a course"),
-  consent: z.boolean().refine((v) => v, "Please accept the Terms and Conditions to continue"),
+  consent: z.boolean().refine((v) => v, "Please accept to be contacted about your enquiry to continue"),
 });
 
 type FormData = {
@@ -718,15 +719,7 @@ export default function LeadModal({
                   checked={data.consent}
                   onChange={(e) => handleChange("consent", e.target.checked)}
                 />
-                <span>
-                  I Accept the{" "}
-                  <a
-                    href="/terms-and-conditions"
-                    style={{ color: "var(--navy)", textDecoration: "underline" }}
-                  >
-                    Terms and Conditions
-                  </a>
-                </span>
+                <span>{CONSENT_TEXT}</span>
               </label>
               {errors.consent && (
                 <div className="hint" style={{ color: "#B83A2A", marginBottom: 8 }}>{errors.consent}</div>
