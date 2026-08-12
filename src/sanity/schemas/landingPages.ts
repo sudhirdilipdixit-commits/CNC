@@ -1,8 +1,8 @@
 import { defineType, defineField } from "sanity";
 
 export default defineType({
-  name: "landingPage",
-  title: "Landing Page-OLD",
+  name: "landingPages",
+  title: "Landing Pages",
   type: "document",
   groups: [
     { name: "content", title: "Content", default: true },

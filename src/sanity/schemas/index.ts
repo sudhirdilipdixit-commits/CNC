@@ -4,6 +4,7 @@ import author from "./author";
 import blogCategory from "./blogCategory";
 import faq from "./faq";
 import landingPage from "./landingPage";
+import landingPages from "./landingPages";
 import courseCard from "./courseCard";
 import universityCard from "./universityCard";
 import aiCounsellorSuggestion from "./aiCounsellorSuggestion";
@@ -24,6 +25,7 @@ export const schemaTypes = [
   blogCategory,
   faq,
   landingPage,
+  landingPages,
   courseCard,
   universityCard,
   aiCounsellorSuggestion,
