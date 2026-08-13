@@ -7,7 +7,7 @@ export default defineType({
   groups: [
     { name: "content", title: "Content", default: true },
     { name: "display", title: "Display Settings" },
-    { name: "filters", title: "Filters & Grid" },
+    { name: "cards", title: "Cards" },
     { name: "seo", title: "SEO" },
   ],
   fields: [
@@ -16,7 +16,7 @@ export default defineType({
       name: "pageType",
       title: "Page Type",
       type: "string",
-      description: "Controls which card type is shown and which fields appear in the Filters & Grid tab.",
+      description: "Controls which card type is shown.",
       options: {
         list: [
           { title: "Course / Programme Grid", value: "course" },
@@ -64,56 +64,6 @@ export default defineType({
       group: "content",
     }),
 
-    // ── Display Settings ─────────────────────────────────────────────
-    defineField({
-      name: "urgencyBanner",
-      title: "Urgency Banner (optional)",
-      type: "string",
-      description:
-        "Yellow strip above header. e.g. 'Mar 2026 batch closing — only 23 seats remaining at Symbiosis.'",
-      group: "display",
-    }),
-    defineField({
-      name: "showFullHeader",
-      title: "Show Full Site Header",
-      type: "boolean",
-      description:
-        "OFF (default) = stripped header with logo + phone + CTA only. ON = full site navigation.",
-      initialValue: false,
-      group: "display",
-    }),
-    defineField({
-      name: "showFooter",
-      title: "Show Footer",
-      type: "boolean",
-      initialValue: false,
-      group: "display",
-    }),
-    defineField({
-      name: "hideSidebar",
-      title: "Hide Sidebar (wider cards)",
-      type: "boolean",
-      initialValue: false,
-      description: "Hides the filter sidebar so cards stretch to full width. Filters are disabled when sidebar is hidden.",
-      group: "display",
-    }),
-    defineField({
-      name: "cardLoadMode",
-      title: "Card Loading Mode",
-      type: "string",
-      description: "How additional cards are revealed after the initial batch (9 cards).",
-      options: {
-        list: [
-          { title: "Load More button (default)", value: "load-more" },
-          { title: "Auto-load on scroll", value: "auto-load" },
-          { title: "Lazy fade-in (all cards, scroll reveal)", value: "lazy" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "load-more",
-      group: "display",
-    }),
-
     // ── Hero ─────────────────────────────────────────────────────────
     defineField({
       name: "hero",
@@ -121,12 +71,6 @@ export default defineType({
       type: "object",
       group: "content",
       fields: [
-        defineField({
-          name: "eyebrow",
-          title: "Eyebrow",
-          type: "string",
-          description: "e.g. '150+ VERIFIED PROGRAMMES'",
-        }),
         defineField({
           name: "headline",
           title: "Headline",
@@ -145,136 +89,49 @@ export default defineType({
           type: "string",
           initialValue: "Get Free Counselling",
         }),
-        defineField({
-          name: "secondaryCtaLabel",
-          title: "Secondary CTA Label",
-          type: "string",
-          description: "Leave blank to hide.",
-        }),
-        defineField({
-          name: "secondaryCtaHref",
-          title: "Secondary CTA URL",
-          type: "string",
-          description: "e.g. '#programmes' or '/contact-us'",
-        }),
       ],
     }),
 
-    // ── Content block (optional — shown between hero and cards) ─────────────
+    // ── Display Settings ─────────────────────────────────────────────
     defineField({
-      name: "contentBlock",
-      title: "Content Block (below hero)",
+      name: "urgencyBanner",
+      title: "Urgency Banner (optional)",
       type: "object",
-      description: "Optional section shown between the hero and the cards grid. Leave both fields empty to hide.",
-      group: "content",
+      group: "display",
       fields: [
         defineField({
-          name: "heading",
-          title: "Heading",
-          type: "string",
-          description: "e.g. 'Why choose an Online MBA?'",
+          name: "show",
+          title: "Show Urgency Banner",
+          type: "boolean",
+          initialValue: false,
         }),
         defineField({
-          name: "body",
-          title: "Body Text",
-          type: "array",
-          of: [
-            {
-              type: "block",
-              styles: [
-                { title: "Normal", value: "normal" },
-                { title: "Heading 2", value: "h2" },
-                { title: "Heading 3", value: "h3" },
-              ],
-              lists: [
-                { title: "Bullet", value: "bullet" },
-                { title: "Numbered", value: "number" },
-              ],
-              marks: {
-                decorators: [
-                  { title: "Bold", value: "strong" },
-                  { title: "Italic", value: "em" },
-                  { title: "Underline", value: "underline" },
-                ],
-                annotations: [
-                  {
-                    name: "link",
-                    type: "object",
-                    title: "Link",
-                    fields: [
-                      defineField({ name: "href", type: "url", title: "URL" }),
-                      defineField({ name: "blank", type: "boolean", title: "Open in new tab", initialValue: true }),
-                    ],
-                  },
-                ],
-              },
-            },
-          ],
-          description: "Rich text body. Supports headings, bold, italic, bullet/numbered lists, and links.",
-        }),
-        defineField({
-          name: "textAlign",
-          title: "Body Text Alignment",
+          name: "text",
+          title: "Banner Text",
           type: "string",
-          options: {
-            list: [
-              { title: "Left", value: "left" },
-              { title: "Center", value: "center" },
-              { title: "Right", value: "right" },
-            ],
-            layout: "radio",
-            direction: "horizontal",
-          },
-          initialValue: "left",
+          description:
+            "Yellow strip above header. e.g. 'Mar 2026 batch closing — only 23 seats remaining at Symbiosis.'",
         }),
       ],
     }),
-
-    // ── Trust points ─────────────────────────────────────────────────
     defineField({
-      name: "trustPoints",
-      title: "Trust / USP Points",
-      type: "array",
-      of: [{ type: "string" }],
-      description: "Shown below CTAs in the hero. e.g. '2,400+ learners placed since 2023'",
-      group: "content",
+      name: "showFullHeader",
+      title: "Show Full Site Header",
+      type: "boolean",
+      description:
+        "OFF (default) = stripped header with logo + phone + CTA only. ON = full site navigation.",
+      initialValue: false,
+      group: "display",
+    }),
+    defineField({
+      name: "showFooter",
+      title: "Show Footer",
+      type: "boolean",
+      initialValue: false,
+      group: "display",
     }),
 
-    // ── Filters & Grid ───────────────────────────────────────────────
-    defineField({
-      name: "courseItems",
-      title: "Course Cards",
-      type: "array",
-      of: [{
-        type: "reference",
-        to: [{ type: "courseCard" }],
-        options: {
-          filter: ({ document }: { document: Record<string, unknown> }) => {
-            const items = Array.isArray(document?.courseItems)
-              ? (document.courseItems as Array<Record<string, unknown>>)
-              : [];
-            const usedIds = items
-              .filter((item) => typeof item._ref === "string")
-              .map((item) => item._ref as string);
-            if (!usedIds.length) return { filter: "true", params: {} };
-            return { filter: "!(_id in $usedIds)", params: { usedIds } };
-          },
-        },
-      }],
-      description: "Select and reorder course cards. Drag to change display order.",
-      group: "filters",
-      hidden: ({ document }) => (document as { pageType?: string })?.pageType === "university",
-      validation: (R) =>
-        R.custom((items?: Array<{ _ref: string }>) => {
-          if (!items || items.length === 0) return true;
-          const seen = new Set<string>();
-          for (const item of items) {
-            if (seen.has(item._ref)) return "Each course card can only be added once.";
-            seen.add(item._ref);
-          }
-          return true;
-        }),
-    }),
+    // ── Cards ──────────────────────────────────────────────────────────
     defineField({
       name: "universityItems",
       title: "University Cards",
@@ -296,8 +153,7 @@ export default defineType({
         },
       }],
       description: "Select and reorder university cards. Drag to change display order.",
-      group: "filters",
-      hidden: ({ document }) => (document as { pageType?: string })?.pageType !== "university",
+      group: "cards",
       validation: (R) =>
         R.custom((items?: Array<{ _ref: string }>) => {
           if (!items || items.length === 0) return true;
@@ -309,140 +165,97 @@ export default defineType({
           return true;
         }),
     }),
-    defineField({
-      name: "filterConfig",
-      title: "Filter Configuration",
-      type: "object",
-      description: "Choose which filters to expose on this page.",
-      group: "filters",
-      fields: [
-        defineField({
-          name: "showMode",
-          title: "Show Mode filter (Online / Distance / etc.)",
-          type: "boolean",
-          initialValue: true,
-          description: "Visible only when cards have two or more distinct mode values.",
-        }),
-        defineField({
-          name: "showDuration",
-          title: "Show Duration filter",
-          type: "boolean",
-          initialValue: true,
-          description: "Visible only when cards have two or more distinct duration values.",
-        }),
-        defineField({
-          name: "showFeeRange",
-          title: "Show Fee Range filter",
-          type: "boolean",
-          initialValue: true,
-          description: "Visible only when cards have two or more distinct fee range values.",
-        }),
-      ],
-    }),
-
-    // ── Sidebar form ─────────────────────────────────────────────────
-    defineField({
-      name: "sidebarForm",
-      title: "Sidebar Counselling Prompt",
-      type: "object",
-      description: "Small CTA card shown at the bottom of the left sidebar on desktop.",
-      group: "content",
-      fields: [
-        defineField({
-          name: "show",
-          title: "Show sidebar CTA",
-          type: "boolean",
-          initialValue: true,
-        }),
-        defineField({
-          name: "heading",
-          title: "Heading",
-          type: "string",
-          initialValue: "Need help choosing?",
-        }),
-        defineField({
-          name: "subheading",
-          title: "Sub-heading",
-          type: "text",
-          rows: 2,
-          initialValue:
-            "Our AI Counsellor matches you to the right programme based on your profile and budget.",
-        }),
-      ],
-    }),
 
     // ── FAQs ────────────────────────────────────────────────────────
     defineField({
       name: "faqs",
       title: "FAQs",
-      type: "array",
-      description:
-        "Add FAQs in any order. Use 'FAQ from Library' for shared questions — edit once and it updates everywhere. Use 'Custom FAQ' for questions unique to this page.",
-      of: [
-        {
-          type: "object",
-          name: "faqItem",
-          title: "Custom FAQ (this page only)",
-          fields: [
-            defineField({
-              name: "question",
-              title: "Question",
-              type: "string",
-              validation: (R) => R.required(),
-            }),
-            defineField({
-              name: "answer",
-              title: "Answer",
-              type: "text",
-              rows: 3,
-              validation: (R) => R.required(),
-            }),
+      type: "object",
+      group: "content",
+      fields: [
+        defineField({
+          name: "show",
+          title: "Show FAQs Section",
+          type: "boolean",
+          initialValue: true,
+        }),
+        defineField({
+          name: "items",
+          title: "FAQ Items",
+          type: "array",
+          description:
+            "Add FAQs in any order. Use 'FAQ from Library' for shared questions — edit once and it updates everywhere. Use 'Custom FAQ' for questions unique to this page.",
+          of: [
+            {
+              type: "object",
+              name: "faqItem",
+              title: "Custom FAQ (this page only)",
+              fields: [
+                defineField({
+                  name: "question",
+                  title: "Question",
+                  type: "string",
+                  validation: (R) => R.required(),
+                }),
+                defineField({
+                  name: "answer",
+                  title: "Answer",
+                  type: "text",
+                  rows: 3,
+                  validation: (R) => R.required(),
+                }),
+              ],
+              preview: { select: { title: "question" } },
+            },
+            {
+              type: "reference",
+              title: "FAQ from Library",
+              to: [{ type: "faq" }],
+              options: {
+                // Already-added FAQs are hidden from the picker so you can't add the same one twice.
+                filter: ({ document }: { document: Record<string, unknown> }) => {
+                  const faqs = Array.isArray((document?.faqs as Record<string, unknown>)?.items)
+                    ? ((document.faqs as Record<string, unknown>).items as Array<Record<string, unknown>>)
+                    : [];
+                  const usedIds = faqs
+                    .filter((item) => item._type === "reference" && typeof item._ref === "string")
+                    .map((item) => item._ref as string);
+                  if (!usedIds.length) return { filter: "true", params: {} };
+                  return { filter: "!(_id in $usedIds)", params: { usedIds } };
+                },
+              },
+            },
           ],
-          preview: { select: { title: "question" } },
-        },
-        {
-          type: "reference",
-          title: "FAQ from Library",
-          to: [{ type: "faq" }],
-          options: {
-            // Already-added FAQs are hidden from the picker so you can't add the same one twice.
-            filter: ({ document }: { document: Record<string, unknown> }) => {
-              const faqs = Array.isArray(document?.faqs)
-                ? (document.faqs as Array<Record<string, unknown>>)
-                : [];
-              const usedIds = faqs
+          validation: (R) =>
+            R.custom((items?: Array<Record<string, unknown>>) => {
+              if (!items) return true;
+              const refs = items
                 .filter((item) => item._type === "reference" && typeof item._ref === "string")
                 .map((item) => item._ref as string);
-              if (!usedIds.length) return { filter: "true", params: {} };
-              return { filter: "!(_id in $usedIds)", params: { usedIds } };
-            },
-          },
-        },
-      ],
-      group: "content",
-      validation: (R) =>
-        R.custom((items?: Array<Record<string, unknown>>) => {
-          if (!items) return true;
-          const refs = items
-            .filter((item) => item._type === "reference" && typeof item._ref === "string")
-            .map((item) => item._ref as string);
-          const seen = new Set<string>();
-          for (const ref of refs) {
-            if (seen.has(ref)) return "Each FAQ from Library can only be added once.";
-            seen.add(ref);
-          }
-          return true;
+              const seen = new Set<string>();
+              for (const ref of refs) {
+                if (seen.has(ref)) return "Each FAQ from Library can only be added once.";
+                seen.add(ref);
+              }
+              return true;
+            }),
         }),
+      ],
     }),
 
     // ── Icon Feature Strip ───────────────────────────────────────────
     defineField({
       name: "iconStrip",
       title: "Icon Feature Strip",
-      description: "Row of icon + label highlights shown after FAQs. Leave empty to hide.",
       type: "object",
       group: "content",
       fields: [
+        defineField({
+          name: "show",
+          title: "Show Icon Feature Strip",
+          type: "boolean",
+          initialValue: true,
+        }),
         defineField({
           name: "items",
           title: "Items (max 6)",
@@ -465,10 +278,15 @@ export default defineType({
     defineField({
       name: "placementStats",
       title: "Placement Stats Section",
-      description: "Yellow stat cards. Leave heading empty to hide the section.",
       type: "object",
       group: "content",
       fields: [
+        defineField({
+          name: "show",
+          title: "Show Placement Stats Section",
+          type: "boolean",
+          initialValue: true,
+        }),
         defineField({ name: "eyebrow", title: "Eyebrow", type: "string", description: "e.g. 'Placements In Distance MBA'" }),
         defineField({ name: "heading", title: "Heading", type: "string" }),
         defineField({ name: "description", title: "Description", type: "text", rows: 2 }),
@@ -494,10 +312,15 @@ export default defineType({
     defineField({
       name: "howWeHelp",
       title: "How We Help Section",
-      description: "Dark navy section with two columns of bullet points. Leave heading empty to hide.",
       type: "object",
       group: "content",
       fields: [
+        defineField({
+          name: "show",
+          title: "Show How We Help Section",
+          type: "boolean",
+          initialValue: true,
+        }),
         defineField({ name: "heading", title: "Heading", type: "string" }),
         defineField({ name: "subheading", title: "Sub-heading", type: "text", rows: 2 }),
         defineField({ name: "leftPoints", title: "Left Column Bullet Points", type: "array", of: [{ type: "string" }] }),
@@ -513,6 +336,12 @@ export default defineType({
       type: "object",
       group: "content",
       fields: [
+        defineField({
+          name: "show",
+          title: "Show Bottom CTA Band",
+          type: "boolean",
+          initialValue: true,
+        }),
         defineField({
           name: "headline",
           type: "string",

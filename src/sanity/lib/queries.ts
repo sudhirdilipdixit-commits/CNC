@@ -210,3 +210,33 @@ export const landingPageQuery = groq`*[_type == "landingPage" && slug.current ==
   ctaBand { headline, body, ctaLabel },
   seo { title, description, noIndex },
 }`;
+
+export const allLandingPagesSlugsQuery = groq`*[_type == "landingPages"]{ "slug": slug.current }`;
+
+export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current == $slug][0]{
+  title, campaign, pageType,
+  showFullHeader, showFooter,
+  urgencyBanner { show, text },
+  hero { headline, subheadline, primaryCtaLabel },
+  "universityItems": universityItems[]->{
+    "_id": _id,
+    universityName,
+    "universityLogoUrl": universityLogo.asset->url,
+    "universityLogoAlt": universityLogo.alt,
+    "universityLogoTitle": universityLogo.title,
+    mode, duration, approvedBy, fees, feeCategory, eligibility, badge, isFeatured,
+  },
+  faqs {
+    show,
+    "items": items[]{
+      "_id": select(_type == "reference" => @->_id, _key),
+      "question": select(_type == "reference" => @->question, question),
+      "answer": select(_type == "reference" => @->answer, answer),
+    },
+  },
+  iconStrip { show, "items": items[] { "iconUrl": icon.asset->url, label } },
+  placementStats { show, eyebrow, heading, description, "stats": stats[] { value, label } },
+  howWeHelp { show, heading, subheading, leftPoints, rightPoints, ctaLabel },
+  ctaBand { show, headline, body, ctaLabel },
+  seo { title, description, noIndex },
+}`;
