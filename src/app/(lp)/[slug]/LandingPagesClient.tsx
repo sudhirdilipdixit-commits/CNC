@@ -7,6 +7,20 @@ import LeadModal from "@/components/forms/LeadModal";
 
 // ── Types ──────────────────────────────────────────────────────────────────
 
+export interface CourseCardItem {
+  _id: string;
+  courseName: string;
+  universityName?: string;
+  universityLogoUrl?: string;
+  mode?: string;
+  duration?: string;
+  fees?: string;
+  feeCategory?: string;
+  eligibility?: string;
+  badge?: string;
+  isFeatured?: boolean;
+}
+
 export interface UniversityCardItem {
   _id: string;
   universityName: string;
@@ -21,9 +35,12 @@ export interface UniversityCardItem {
   isFeatured?: boolean;
 }
 
+type AnyCardItem = CourseCardItem | UniversityCardItem;
+
 export interface LandingPagesData {
   title: string;
   campaign?: string;
+  pageType?: "course" | "university";
   showFullHeader?: boolean;
   showFooter?: boolean;
   urgencyBanner?: { show?: boolean; text?: string };
@@ -50,6 +67,7 @@ export interface LandingPagesData {
     headlineColor?: string;
     ctaButtonColor?: string;
   };
+  courseItems?: CourseCardItem[];
   universityItems?: UniversityCardItem[];
   faqs?: { show?: boolean; items?: { _id: string; question: string; answer: string }[] };
   iconStrip?: { show?: boolean; items?: { iconUrl?: string; label: string }[] };
@@ -76,10 +94,12 @@ export interface LandingPagesData {
 
 function CompareModal({
   items,
+  pageType,
   onClose,
   onCta,
 }: {
-  items: UniversityCardItem[];
+  items: AnyCardItem[];
+  pageType: "course" | "university";
   onClose: () => void;
   onCta: (name: string) => void;
 }) {
@@ -93,20 +113,35 @@ function CompareModal({
     };
   }, [onClose]);
 
-  const fields: { label: string; render: (i: UniversityCardItem) => string | undefined }[] = [
-    { label: "Mode", render: (i) => i.mode },
-    { label: "Duration", render: (i) => i.duration },
-    { label: "Fees (₹)", render: (i) => i.fees },
-    { label: "Approved By", render: (i) => i.approvedBy?.join(" • ") },
-    { label: "Eligibility", render: (i) => i.eligibility },
-  ];
+  const getItemName = (item: AnyCardItem): string =>
+    (pageType === "course" ? (item as CourseCardItem).courseName : item.universityName) ?? "";
+
+  const fields: { label: string; render: (i: AnyCardItem) => string | undefined }[] =
+    pageType === "course"
+      ? [
+          { label: "University", render: (i) => i.universityName },
+          { label: "Mode",       render: (i) => i.mode },
+          { label: "Duration",   render: (i) => i.duration },
+          { label: "Fees (₹)",    render: (i) => i.fees },
+          { label: "Eligibility",render: (i) => i.eligibility },
+        ]
+      : [
+          { label: "Mode",        render: (i) => i.mode },
+          { label: "Duration",    render: (i) => i.duration },
+          { label: "Fees (₹)",   render: (i) => i.fees },
+          { label: "Approved By", render: (i) => (i as UniversityCardItem).approvedBy?.join(" • ") },
+          { label: "Eligibility", render: (i) => i.eligibility },
+        ];
+
+  const modalLabel = pageType === "course" ? "Compare courses" : "Compare universities";
+  const modalTitle = pageType === "course" ? "Compare Courses" : "Compare Universities";
 
   return (
     <div className="lp-cmp-backdrop" onClick={(e) => { if (e.target === e.currentTarget) onClose(); }}
-      role="dialog" aria-modal="true" aria-label="Compare universities">
+      role="dialog" aria-modal="true" aria-label={modalLabel}>
       <div className="lp-cmp-modal">
         <div className="lp-cmp-header">
-          <h2 className="lp-cmp-title">Compare Universities</h2>
+          <h2 className="lp-cmp-title">{modalTitle}</h2>
           <button className="lp-cmp-close" onClick={onClose} aria-label="Close">×</button>
         </div>
         <div className="lp-cmp-body">
@@ -118,12 +153,12 @@ function CompareModal({
                   {items.map((item) => (
                     <th key={item._id} className="lp-cmp-th">
                       {item.universityLogoUrl ? (
-                        <Image src={item.universityLogoUrl} alt={item.universityName}
+                        <Image src={item.universityLogoUrl} alt={item.universityName ?? ""}
                           width={200} height={90} className="lp-cmp-logo" />
                       ) : (
-                        <div className="lp-cmp-logo-ph">{item.universityName.charAt(0)}</div>
+                        <div className="lp-cmp-logo-ph">{(item.universityName ?? "?").charAt(0)}</div>
                       )}
-                      <div className="lp-cmp-course-name">{item.universityName}</div>
+                      <div className="lp-cmp-course-name">{getItemName(item)}</div>
                     </th>
                   ))}
                 </tr>
@@ -178,6 +213,94 @@ function LpHeader({ onOpenModal }: { onOpenModal: () => void }) {
         </div>
       </div>
     </header>
+  );
+}
+
+// ── Course card ────────────────────────────────────────────────────────────
+
+function CourseCard({
+  item,
+  onCta,
+  inCompare = false,
+  canCompare = true,
+  onToggleCompare,
+}: {
+  item: CourseCardItem;
+  onCta: (name: string) => void;
+  inCompare?: boolean;
+  canCompare?: boolean;
+  onToggleCompare?: (id: string) => void;
+}) {
+  return (
+    <article className={`lp-card${item.isFeatured ? " lp-card--featured" : ""}${inCompare ? " lp-card--comparing" : ""}`}>
+      {item.badge && <span className="lp-card-badge">{item.badge}</span>}
+      <div className="lp-card-head">
+        {item.universityLogoUrl ? (
+          <Image
+            src={item.universityLogoUrl}
+            alt={item.universityName || item.courseName}
+            width={243}
+            height={100}
+            className="lp-card-logo"
+          />
+        ) : (
+          <div className="lp-card-logo-ph" aria-hidden="true">
+            {(item.universityName || item.courseName).charAt(0)}
+          </div>
+        )}
+        <div className="lp-card-name">{item.courseName}</div>
+        {item.universityName && <div className="lp-card-sub">{item.universityName}</div>}
+        {item.mode && <span className="lp-mode-tag">{item.mode}</span>}
+      </div>
+
+      {(item.duration || item.fees) && (
+        <div className="lp-card-meta">
+          {item.duration && (
+            <div className="lp-meta-cell">
+              <span className="lp-meta-label">Duration</span>
+              <span className="lp-meta-val">{item.duration}</span>
+            </div>
+          )}
+          {item.fees && (
+            <div className="lp-meta-cell">
+              <span className="lp-meta-label">Fees (₹)</span>
+              <span className="lp-meta-val">{item.fees}</span>
+            </div>
+          )}
+        </div>
+      )}
+
+      {item.eligibility && (
+        <div className="lp-card-info-row">
+          <span className="lp-meta-label">Eligibility</span>
+          <span>{item.eligibility}</span>
+        </div>
+      )}
+
+      <div className="lp-card-actions">
+        <button className="lp-btn-primary-full" onClick={() => onCta("Get Free Career Counselling")}>
+          Get Free Career Counselling
+        </button>
+        <div className="lp-card-sec-row">
+          <button className="lp-btn-secondary" onClick={() => onCta("Download Brochure")}>
+            Download Brochure
+          </button>
+          <button className="lp-btn-secondary" onClick={() => onCta("Enquire Now")}>
+            Enquire Now
+          </button>
+        </div>
+        {onToggleCompare && (
+          <button
+            className={`lp-compare-btn${inCompare ? " lp-compare-btn--active" : ""}`}
+            onClick={() => onToggleCompare(item._id)}
+            disabled={!inCompare && !canCompare}
+            title={!inCompare && !canCompare ? "Maximum 3 courses can be compared" : undefined}
+          >
+            {inCompare ? "✓ Added to Compare" : "+ Compare"}
+          </button>
+        )}
+      </div>
+    </article>
   );
 }
 
@@ -304,7 +427,13 @@ export default function LandingPagesClient({
   const [compareOpen, setCompareOpen] = useState(false);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
-  const allItems = useMemo(() => data.universityItems ?? [], [data.universityItems]);
+  const pageType: "course" | "university" =
+    data.pageType ?? (data.courseItems?.length ? "course" : "university");
+
+  const allItems: AnyCardItem[] = useMemo(
+    () => (pageType === "course" ? (data.courseItems ?? []) : (data.universityItems ?? [])),
+    [pageType, data.courseItems, data.universityItems]
+  );
   const visible = allItems.slice(0, visibleCount);
   const hasMore = visibleCount < allItems.length;
 
@@ -314,7 +443,7 @@ export default function LandingPagesClient({
   }, []);
 
   const compareItems = useMemo(
-    () => compareIds.map((id) => allItems.find((c) => c._id === id)).filter(Boolean) as UniversityCardItem[],
+    () => compareIds.map((id) => allItems.find((c) => c._id === id)).filter(Boolean) as AnyCardItem[],
     [compareIds, allItems]
   );
 
@@ -323,6 +452,9 @@ export default function LandingPagesClient({
       prev.includes(id) ? prev.filter((i) => i !== id) : prev.length < 3 ? [...prev, id] : prev
     );
   }, []);
+
+  const itemLabel = pageType === "course" ? "course" : "university";
+  const itemLabelPlural = pageType === "course" ? "courses" : "universities";
 
   const showHighlightBanner = data.highlightBanner?.show;
   const showUniversityLogos = data.universityLogos?.show && (data.universityLogos.logos?.length ?? 0) > 0;
@@ -470,26 +602,37 @@ export default function LandingPagesClient({
             <div className="lp-results-header">
               <p className="lp-results-count">
                 Showing <strong>{Math.min(visibleCount, allItems.length)}</strong> of{" "}
-                <strong>{allItems.length}</strong> {allItems.length === 1 ? "university" : "universities"}
+                <strong>{allItems.length}</strong> {allItems.length === 1 ? itemLabel : itemLabelPlural}
               </p>
             </div>
 
             {allItems.length === 0 ? (
               <div className="lp-empty">
-                <p>No universities added yet.</p>
+                <p>No {itemLabelPlural} added yet.</p>
               </div>
             ) : (
               <div className="lp-card-grid lp-card-grid--full">
-                {visible.map((item) => (
-                  <UniversityCard
-                    key={item._id}
-                    item={item}
-                    onCta={openModal}
-                    inCompare={compareIds.includes(item._id)}
-                    canCompare={compareIds.length < 3}
-                    onToggleCompare={toggleCompare}
-                  />
-                ))}
+                {pageType === "course"
+                  ? (visible as CourseCardItem[]).map((item) => (
+                      <CourseCard
+                        key={item._id}
+                        item={item}
+                        onCta={openModal}
+                        inCompare={compareIds.includes(item._id)}
+                        canCompare={compareIds.length < 3}
+                        onToggleCompare={toggleCompare}
+                      />
+                    ))
+                  : (visible as UniversityCardItem[]).map((item) => (
+                      <UniversityCard
+                        key={item._id}
+                        item={item}
+                        onCta={openModal}
+                        inCompare={compareIds.includes(item._id)}
+                        canCompare={compareIds.length < 3}
+                        onToggleCompare={toggleCompare}
+                      />
+                    ))}
               </div>
             )}
 
@@ -660,20 +803,23 @@ export default function LandingPagesClient({
             <div className="lp-cmp-tray-slots">
               {[0, 1, 2].map((i) => {
                 const item = compareItems[i];
+                const emptyLabel = pageType === "course" ? "+ Add course" : "+ Add university";
                 return item ? (
                   <div key={item._id} className="lp-cmp-slot lp-cmp-slot--filled">
                     {item.universityLogoUrl ? (
-                      <Image src={item.universityLogoUrl} alt={item.universityName}
+                      <Image src={item.universityLogoUrl} alt={item.universityName ?? ""}
                         width={36} height={36} className="lp-cmp-slot-thumb" />
                     ) : (
-                      <div className="lp-cmp-slot-ph">{item.universityName.charAt(0)}</div>
+                      <div className="lp-cmp-slot-ph">{(item.universityName ?? "?").charAt(0)}</div>
                     )}
-                    <span className="lp-cmp-slot-name">{item.universityName}</span>
+                    <span className="lp-cmp-slot-name">
+                      {pageType === "course" ? (item as CourseCardItem).courseName : item.universityName}
+                    </span>
                     <button className="lp-cmp-slot-remove" onClick={() => toggleCompare(item._id)} aria-label="Remove">×</button>
                   </div>
                 ) : (
                   <div key={i} className="lp-cmp-slot lp-cmp-slot--empty">
-                    <span className="lp-cmp-slot-empty-label">+ Add university</span>
+                    <span className="lp-cmp-slot-empty-label">{emptyLabel}</span>
                   </div>
                 );
               })}
@@ -695,6 +841,7 @@ export default function LandingPagesClient({
       {compareOpen && compareItems.length >= 2 && (
         <CompareModal
           items={compareItems}
+          pageType={pageType}
           onClose={() => setCompareOpen(false)}
           onCta={(name) => { setCompareOpen(false); openModal(name); }}
         />
