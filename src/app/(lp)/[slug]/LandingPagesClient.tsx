@@ -28,6 +28,28 @@ export interface LandingPagesData {
   showFooter?: boolean;
   urgencyBanner?: { show?: boolean; text?: string };
   hero: { headline: string; subheadline?: string; primaryCtaLabel?: string };
+  highlightBanner?: {
+    show?: boolean;
+    headline?: string;
+    leadText?: string;
+    highlightText?: string;
+    leftPoints?: string[];
+    rightPoints?: string[];
+    ctaLabel?: string;
+    backgroundColor?: string;
+    headlineColor?: string;
+    accentTextColor?: string;
+    ctaButtonColor?: string;
+  };
+  universityLogos?: {
+    show?: boolean;
+    headline?: string;
+    ctaLabel?: string;
+    logos?: { logoUrl?: string; name?: string }[];
+    backgroundColor?: string;
+    headlineColor?: string;
+    ctaButtonColor?: string;
+  };
   universityItems?: UniversityCardItem[];
   faqs?: { show?: boolean; items?: { _id: string; question: string; answer: string }[] };
   iconStrip?: { show?: boolean; items?: { iconUrl?: string; label: string }[] };
@@ -302,6 +324,8 @@ export default function LandingPagesClient({
     );
   }, []);
 
+  const showHighlightBanner = data.highlightBanner?.show;
+  const showUniversityLogos = data.universityLogos?.show && (data.universityLogos.logos?.length ?? 0) > 0;
   const showFaqs = data.faqs?.show && (data.faqs.items?.length ?? 0) > 0;
   const showIconStrip = data.iconStrip?.show && (data.iconStrip.items?.length ?? 0) > 0;
   const showPlacementStats = data.placementStats?.show;
@@ -334,6 +358,110 @@ export default function LandingPagesClient({
           </div>
         </div>
       </div>
+
+      {/* Highlight Banner */}
+      {showHighlightBanner && (
+        <section
+          className="lp-hlb"
+          style={{ background: data.highlightBanner?.backgroundColor || "var(--navy)" }}
+        >
+          <div className="container">
+            {data.highlightBanner?.headline && (
+              <h2
+                className="lp-hlb-headline"
+                style={{ color: data.highlightBanner.headlineColor || "var(--yellow)" }}
+              >
+                {data.highlightBanner.headline}
+              </h2>
+            )}
+            {(data.highlightBanner?.leadText || data.highlightBanner?.highlightText) && (
+              <p className="lp-hlb-subtext">
+                {data.highlightBanner?.leadText}{" "}
+                {data.highlightBanner?.highlightText && (
+                  <span style={{ color: data.highlightBanner.accentTextColor || "var(--yellow)" }}>
+                    {data.highlightBanner.highlightText}
+                  </span>
+                )}
+              </p>
+            )}
+            {((data.highlightBanner?.leftPoints?.length ?? 0) > 0 ||
+              (data.highlightBanner?.rightPoints?.length ?? 0) > 0) && (
+              <div className="lp-hlb-points">
+                {data.highlightBanner?.leftPoints && data.highlightBanner.leftPoints.length > 0 && (
+                  <ul className="lp-hlb-points-col">
+                    {data.highlightBanner.leftPoints.map((pt, i) => (
+                      <li key={i}>{pt}</li>
+                    ))}
+                  </ul>
+                )}
+                {data.highlightBanner?.rightPoints && data.highlightBanner.rightPoints.length > 0 && (
+                  <ul className="lp-hlb-points-col">
+                    {data.highlightBanner.rightPoints.map((pt, i) => (
+                      <li key={i}>{pt}</li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+            )}
+            {data.highlightBanner?.ctaLabel && (
+              <div className="lp-hlb-cta">
+                <button
+                  className="lp-hlb-cta-btn"
+                  style={{ background: data.highlightBanner.ctaButtonColor || "var(--yellow)" }}
+                  onClick={() => openModal(data.highlightBanner?.ctaLabel ?? "")}
+                >
+                  {data.highlightBanner.ctaLabel}
+                </button>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* University Logos */}
+      {showUniversityLogos && (
+        <section
+          className="lp-unilogos"
+          style={{ background: data.universityLogos?.backgroundColor || "var(--ivory)" }}
+        >
+          <div className="container">
+            {data.universityLogos?.headline && (
+              <h2
+                className="lp-unilogos-headline"
+                style={{ color: data.universityLogos.headlineColor || "var(--navy)" }}
+              >
+                {data.universityLogos.headline}
+              </h2>
+            )}
+            <div className="lp-unilogos-grid">
+              {data.universityLogos!.logos!.map((item, i) => (
+                <div key={i} className="lp-unilogos-card">
+                  {item.logoUrl && (
+                    <Image
+                      src={item.logoUrl}
+                      alt={item.name || ""}
+                      width={220}
+                      height={100}
+                      className="lp-unilogos-img"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
+            {data.universityLogos?.ctaLabel && (
+              <div className="lp-unilogos-cta">
+                <button
+                  className="lp-unilogos-cta-btn"
+                  style={{ background: data.universityLogos.ctaButtonColor || "var(--yellow)" }}
+                  onClick={() => openModal(data.universityLogos?.ctaLabel ?? "")}
+                >
+                  {data.universityLogos.ctaLabel}
+                </button>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
 
       {/* Cards area — full width, no sidebar */}
       <div className="lp-main">
@@ -378,21 +506,6 @@ export default function LandingPagesClient({
           </div>
         </div>
       </div>
-
-      {/* FAQs */}
-      {showFaqs && (
-        <section className="lp-faq-section">
-          <div className="container">
-            <div className="eyebrow" style={{ textAlign: "center", color: "var(--navy)" }}>FAQ</div>
-            <h2 className="lp-faq-heading">Frequently asked questions</h2>
-            <div className="lp-faq-list">
-              {data.faqs!.items!.map((faq) => (
-                <FaqItem key={faq._id} question={faq.question} answer={faq.answer} />
-              ))}
-            </div>
-          </div>
-        </section>
-      )}
 
       {/* Icon Feature Strip */}
       {showIconStrip && (
@@ -500,6 +613,21 @@ export default function LandingPagesClient({
         </section>
       )}
 
+      {/* FAQs */}
+      {showFaqs && (
+        <section className="lp-faq-section">
+          <div className="container">
+            <div className="eyebrow" style={{ textAlign: "center", color: "var(--navy)" }}>FAQ</div>
+            <h2 className="lp-faq-heading">Frequently asked questions</h2>
+            <div className="lp-faq-list">
+              {data.faqs!.items!.map((faq) => (
+                <FaqItem key={faq._id} question={faq.question} answer={faq.answer} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {footer}
 
       {/* Mobile sticky bar */}
@@ -596,6 +724,31 @@ export default function LandingPagesClient({
         .lp-h1 { font-family: var(--font-serif); color: var(--ivory); font-size: clamp(28px, 4.5vw, 52px); line-height: 1.1; margin: 0 0 16px; }
         .lp-lede { color: var(--pale-navy); font-size: clamp(15px, 1.8vw, 18px); max-width: 640px; margin-bottom: 28px; line-height: 1.6; }
         .lp-cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        /* ── Highlight Banner ── */
+        .lp-hlb { padding: 56px 0; text-align: center; }
+        .lp-hlb-headline { font-family: var(--font-serif); font-size: clamp(24px, 3.5vw, 40px); line-height: 1.15; margin: 0 0 20px; }
+        .lp-hlb-subtext { color: var(--ivory); font-size: clamp(14px, 1.6vw, 17px); line-height: 1.6; max-width: 880px; margin: 0 auto 32px; }
+        .lp-hlb-points { display: grid; grid-template-columns: 1fr; gap: 10px 48px; max-width: 760px; margin: 0 auto 36px; text-align: left; }
+        @media (min-width: 640px) { .lp-hlb-points { grid-template-columns: 1fr 1fr; } }
+        .lp-hlb-points-col { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; }
+        .lp-hlb-points-col li { position: relative; padding-left: 20px; color: var(--ivory); font-size: 15px; line-height: 1.4; }
+        .lp-hlb-points-col li::before { content: "•"; position: absolute; left: 0; color: var(--ivory); font-weight: 700; }
+        .lp-hlb-cta { text-align: center; }
+        .lp-hlb-cta-btn { color: var(--navy); border: none; border-radius: 28px; padding: 14px 36px; font-size: 15px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: transform .15s, filter .15s; }
+        .lp-hlb-cta-btn:hover { filter: brightness(0.94); transform: translateY(-1px); }
+
+        /* ── University Logos ── */
+        .lp-unilogos { padding: 56px 0; text-align: center; }
+        .lp-unilogos-headline { font-family: var(--font-serif); font-size: clamp(22px, 3vw, 34px); line-height: 1.25; margin: 0 auto 32px; max-width: 900px; }
+        .lp-unilogos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin: 0 auto; }
+        @media (min-width: 640px) { .lp-unilogos-grid { grid-template-columns: repeat(3, 1fr); } }
+        @media (min-width: 1024px) { .lp-unilogos-grid { grid-template-columns: repeat(6, 1fr); } }
+        .lp-unilogos-card { background: var(--white); border-radius: 8px; padding: 12px; display: flex; align-items: center; justify-content: center; min-height: 70px; }
+        .lp-unilogos-img { width: 100%; height: 60px; object-fit: contain; }
+        .lp-unilogos-cta { margin-top: 36px; }
+        .lp-unilogos-cta-btn { color: var(--navy); border: none; border-radius: 28px; padding: 14px 36px; font-size: 15px; font-weight: 700; font-family: var(--font-sans); cursor: pointer; transition: transform .15s, filter .15s; }
+        .lp-unilogos-cta-btn:hover { filter: brightness(0.94); transform: translateY(-1px); }
 
         /* ── Main layout — full width, no sidebar ── */
         .lp-main { padding: 28px 0 64px; }

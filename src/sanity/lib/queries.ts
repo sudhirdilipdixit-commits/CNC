@@ -218,6 +218,20 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
   showFullHeader, showFooter,
   urgencyBanner { show, text },
   hero { headline, subheadline, primaryCtaLabel },
+  highlightBanner {
+    show, headline, leadText, highlightText, leftPoints, rightPoints, ctaLabel,
+    "backgroundColor": backgroundColor.hex,
+    "headlineColor": headlineColor.hex,
+    "accentTextColor": accentTextColor.hex,
+    "ctaButtonColor": ctaButtonColor.hex,
+  },
+  universityLogos {
+    show, headline, ctaLabel,
+    "logos": logos[] { "logoUrl": logo.asset->url, name },
+    "backgroundColor": backgroundColor.hex,
+    "headlineColor": headlineColor.hex,
+    "ctaButtonColor": ctaButtonColor.hex,
+  },
   "universityItems": universityItems[]->{
     "_id": _id,
     universityName,
@@ -226,6 +240,10 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
     "universityLogoTitle": universityLogo.title,
     mode, duration, approvedBy, fees, feeCategory, eligibility, badge, isFeatured,
   },
+  iconStrip { show, "items": items[] { "iconUrl": icon.asset->url, label } },
+  placementStats { show, eyebrow, heading, description, "stats": stats[] { value, label } },
+  howWeHelp { show, heading, subheading, leftPoints, rightPoints, ctaLabel },
+  ctaBand { show, headline, body, ctaLabel },
   faqs {
     show,
     "items": items[]{
@@ -234,9 +252,5 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
       "answer": select(_type == "reference" => @->answer, answer),
     },
   },
-  iconStrip { show, "items": items[] { "iconUrl": icon.asset->url, label } },
-  placementStats { show, eyebrow, heading, description, "stats": stats[] { value, label } },
-  howWeHelp { show, heading, subheading, leftPoints, rightPoints, ctaLabel },
-  ctaBand { show, headline, body, ctaLabel },
   seo { title, description, noIndex },
 }`;
