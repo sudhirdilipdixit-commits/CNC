@@ -5,11 +5,11 @@ import { useRef, useState } from "react";
 type Tab = "courses" | "universities" | "faqs" | "blogs";
 type ResultRow = { internalName: string; action: string; error?: string };
 
-const COURSE_HEADERS = "internalName,courseName,universityName,mode,duration,fees,feeCategory,eligibility,badge,isFeatured,logoUrl,logoAlt,logoTitle,logoDescription";
-const COURSE_SAMPLE = `Amity Online MBA Marketing 2026,Online MBA in Marketing Management,Amity University Online,Online,2 Years,"Rs 80,000 - Rs 1,20,000",1-2 Lakh,Graduation in any stream | Min. 50%,Top Pick,TRUE,https://example.com/logo.png,Amity University Online logo,Amity University Online,Online MBA programmes from Amity University`;
+const COURSE_HEADERS = "internalName,courseName,universityName,duration,fees,eligibility,badge,isFeatured,logoUrl,logoAlt,logoTitle,logoDescription";
+const COURSE_SAMPLE = `Amity Online MBA Marketing 2026,Online MBA in Marketing Management,Amity University Online,2 Years,"Rs 80,000 - Rs 1,20,000",Graduation in any stream | Min. 50%,Top Pick,TRUE,https://example.com/logo.png,Amity University Online logo,Amity University Online,Online MBA programmes from Amity University`;
 
-const UNIVERSITY_HEADERS = "internalName,universityName,mode,duration,approvedBy,fees,feeCategory,eligibility,badge,isFeatured,logoUrl,logoAlt,logoTitle,logoDescription";
-const UNIVERSITY_SAMPLE = `Amity Online MBA 2026,Amity University Online,Online,2 Years,UGC-DEB|NAAC A++,"Rs 1,20,000/year",1-2 Lakh,Graduation in any stream | Min. 50%,NAAC A++,TRUE,https://example.com/logo.png,Amity University Online logo,Amity University Online,UGC-DEB approved online MBA university`;
+const UNIVERSITY_HEADERS = "internalName,universityName,duration,approvedBy,fees,eligibility,badge,isFeatured,logoUrl,logoAlt,logoTitle,logoDescription";
+const UNIVERSITY_SAMPLE = `Amity Online MBA 2026,Amity University Online,2 Years,UGC-DEB|NAAC A++,"Rs 1,20,000/year",Graduation in any stream | Min. 50%,NAAC A++,TRUE,https://example.com/logo.png,Amity University Online logo,Amity University Online,UGC-DEB approved online MBA university`;
 
 const FAQ_HEADERS = "question,answer,tags";
 const FAQ_SAMPLE = `Is online MBA valid in India?,"Yes, an online MBA from a UGC-DEB approved university carries the same validity as a regular MBA for government and private sector jobs.",validity|ugc-deb`;
@@ -259,8 +259,6 @@ export default function ImportExportPage() {
               </>
             ) : (
               <>
-                <strong>mode:</strong> Online &nbsp;·&nbsp; Distance &nbsp;·&nbsp; Online + Distance &nbsp;·&nbsp; Blended<br />
-                <strong>feeCategory:</strong> Under 1 Lakh &nbsp;·&nbsp; 1-2 Lakh &nbsp;·&nbsp; 2-3 Lakh &nbsp;·&nbsp; 3-5 Lakh &nbsp;·&nbsp; 5+ Lakh<br />
                 <strong>isFeatured:</strong> TRUE or FALSE<br />
                 {tab === "universities" && (
                   <><strong>approvedBy:</strong> Pipe-separated — e.g. <code>UGC-DEB|AICTE|NAAC A++</code><br /></>

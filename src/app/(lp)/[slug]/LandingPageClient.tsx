@@ -13,10 +13,8 @@ export interface CourseCardItem {
   courseName: string;
   universityName?: string;
   universityLogoUrl?: string;
-  mode?: string;
   duration?: string;
   fees?: string;
-  feeCategory?: string;
   eligibility?: string;
   badge?: string;
   isFeatured?: boolean;
@@ -26,11 +24,9 @@ export interface UniversityCardItem {
   _id: string;
   universityName: string;
   universityLogoUrl?: string;
-  mode?: string;
   duration?: string;
   approvedBy?: string[];
   fees?: string;
-  feeCategory?: string;
   eligibility?: string;
   badge?: string;
   isFeatured?: boolean;
@@ -55,9 +51,7 @@ export interface LandingPageData {
   };
   hideSidebar?: boolean;
   filterConfig?: {
-    showMode?: boolean;
     showDuration?: boolean;
-    showFeeRange?: boolean;
   };
   contentBlock?: {
     heading?: string;
@@ -148,7 +142,6 @@ function CourseCard({
         )}
         <div className="lp-card-name">{item.courseName}</div>
         {item.universityName && <div className="lp-card-sub">{item.universityName}</div>}
-        {item.mode && <span className="lp-mode-tag">{item.mode}</span>}
       </div>
 
       {(item.duration || item.fees) && (
@@ -211,7 +204,6 @@ function UniversityCard({
           </div>
         )}
         <div className="lp-card-name">{item.universityName}</div>
-        {item.mode && <span className="lp-mode-tag">{item.mode}</span>}
       </div>
 
       {(item.duration || item.fees) && (
@@ -307,9 +299,7 @@ export default function LandingPageClient({
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [formTitle, setFormTitle] = useState("");
-  const [activeMode, setActiveMode] = useState<string | null>(null);
   const [activeDuration, setActiveDuration] = useState<string | null>(null);
-  const [activeFeeCategory, setActiveFeeCategory] = useState<string | null>(null);
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
 
   const cardLoadMode = data.cardLoadMode ?? "load-more";
@@ -325,30 +315,18 @@ export default function LandingPageClient({
     pageType === "course" ? (data.courseItems ?? []) : (data.universityItems ?? []);
 
   // Extract unique filter values from all items (always from full list)
-  const allModes = useMemo(
-    () => [...new Set(allItems.map((i) => i.mode).filter(Boolean) as string[])].sort(),
-    [allItems]
-  );
   const allDurations = useMemo(
     () => [...new Set(allItems.map((i) => i.duration).filter(Boolean) as string[])].sort(),
     [allItems]
   );
-  const allFeeCategories = useMemo(() => {
-    const seen = new Set<string>();
-    allItems.forEach((i) => { if (i.feeCategory) seen.add(i.feeCategory); });
-    const order = ["Under 1 Lakh", "1-2 Lakh", "2-3 Lakh", "3-5 Lakh", "5+ Lakh"];
-    return order.filter((c) => seen.has(c));
-  }, [allItems]);
 
-  const anyFilterActive = activeMode !== null || activeDuration !== null || activeFeeCategory !== null;
+  const anyFilterActive = activeDuration !== null;
 
   const filtered = useMemo(() => {
     let items = allItems;
-    if (activeMode) items = items.filter((i) => i.mode === activeMode);
     if (activeDuration) items = items.filter((i) => i.duration === activeDuration);
-    if (activeFeeCategory) items = items.filter((i) => i.feeCategory === activeFeeCategory);
     return items;
-  }, [allItems, activeMode, activeDuration, activeFeeCategory]);
+  }, [allItems, activeDuration]);
 
   const visible = filtered.slice(0, visibleCount);
   const hasMore = visibleCount < filtered.length;
@@ -376,25 +354,13 @@ export default function LandingPageClient({
     setModalOpen(true);
   }, []);
 
-  const toggleMode = useCallback((mode: string) => {
-    setActiveMode((prev) => (prev === mode ? null : mode));
-    setVisibleCount(INITIAL_COUNT);
-  }, []);
-
   const toggleDuration = useCallback((dur: string) => {
     setActiveDuration((prev) => (prev === dur ? null : dur));
     setVisibleCount(INITIAL_COUNT);
   }, []);
 
-  const toggleFeeCategory = useCallback((cat: string) => {
-    setActiveFeeCategory((prev) => (prev === cat ? null : cat));
-    setVisibleCount(INITIAL_COUNT);
-  }, []);
-
   const clearFilters = useCallback(() => {
-    setActiveMode(null);
     setActiveDuration(null);
-    setActiveFeeCategory(null);
     setVisibleCount(INITIAL_COUNT);
   }, []);
 
@@ -486,7 +452,7 @@ export default function LandingPageClient({
             {!data.hideSidebar && <aside className="lp-sidebar" aria-label="Filters">
 
               {/* Filter sections */}
-              {(allModes.length > 0 || allDurations.length > 0 || allFeeCategories.length > 0) && (
+              {allDurations.length > 0 && (
                 <div className="lp-filter-panel">
                   <div className="lp-filter-panel-head">
                     <span className="lp-filter-panel-title">Filters</span>
@@ -496,30 +462,6 @@ export default function LandingPageClient({
                       </button>
                     )}
                   </div>
-
-                  {/* Mode */}
-                  {data.filterConfig?.showMode !== false && allModes.length > 0 && (
-                    <div className="lp-filter-section">
-                      <h4 className="lp-filter-heading">Mode</h4>
-                      {allModes.map((mode) => (
-                        <label key={mode} className="lp-filter-check">
-                          <input
-                            type="radio"
-                            name="lp-mode-radio"
-                            checked={activeMode === mode}
-                            onChange={() => toggleMode(mode)}
-                          />
-                          <span>{mode}</span>
-                        </label>
-                      ))}
-                      {activeMode && (
-                        <button className="lp-filter-clear-link" style={{ marginTop: 4 }}
-                          onClick={() => { setActiveMode(null); setVisibleCount(INITIAL_COUNT); }}>
-                          Clear ×
-                        </button>
-                      )}
-                    </div>
-                  )}
 
                   {/* Duration */}
                   {data.filterConfig?.showDuration !== false && allDurations.length > 0 && (
@@ -539,33 +481,6 @@ export default function LandingPageClient({
                       {activeDuration && (
                         <button className="lp-filter-clear-link" style={{ marginTop: 4 }}
                           onClick={() => { setActiveDuration(null); setVisibleCount(INITIAL_COUNT); }}>
-                          Clear ×
-                        </button>
-                      )}
-                    </div>
-                  )}
-
-                  {/* Fee Range */}
-                  {data.filterConfig?.showFeeRange !== false && allFeeCategories.length > 0 && (
-                    <div className="lp-filter-section">
-                      <h4 className="lp-filter-heading">Fee Range (₹)</h4>
-                      {allFeeCategories.map((cat) => (
-                        <label key={cat} className="lp-filter-check">
-                          <input
-                            type="radio"
-                            name="lp-fee-radio"
-                            checked={activeFeeCategory === cat}
-                            onChange={() => toggleFeeCategory(cat)}
-                          />
-                          <span>{cat}</span>
-                        </label>
-                      ))}
-                      {activeFeeCategory && (
-                        <button
-                          className="lp-filter-clear-link"
-                          style={{ marginTop: 4 }}
-                          onClick={() => { setActiveFeeCategory(null); setVisibleCount(INITIAL_COUNT); }}
-                        >
                           Clear ×
                         </button>
                       )}
@@ -917,7 +832,6 @@ export default function LandingPageClient({
         .lp-card-logo-ph { width: 243px; max-width: 100%; height: 100px; border-radius: 10px; background: var(--navy); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 800; font-family: var(--font-serif); }
         .lp-card-name { font-family: var(--font-serif); font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--navy); margin-bottom: 0; }
         .lp-card-sub { font-size: 12px; color: var(--grey); margin-bottom: 0; }
-        .lp-mode-tag { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; background: var(--mist); color: var(--navy); padding: 2px 8px; border-radius: 999px; }
         .lp-card-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 0; border-top: 1px solid var(--mist); border-bottom: 1px solid var(--mist); }
         .lp-meta-cell { display: flex; flex-direction: column; gap: 2px; }
         .lp-meta-label { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }

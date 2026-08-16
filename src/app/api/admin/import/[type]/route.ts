@@ -13,9 +13,6 @@ const SANITY_TYPE_MAP: Record<ImportType, string> = {
   faqs: "faq",
 };
 
-const VALID_MODES = ["Online", "Distance", "Online + Distance", "Blended"];
-const VALID_FEE_CATEGORIES = ["Under 1 Lakh", "1-2 Lakh", "2-3 Lakh", "3-5 Lakh", "5+ Lakh"];
-
 function getSanityClient() {
   return createClient({
     projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
@@ -191,10 +188,8 @@ export async function POST(
           internalName,
           courseName: row.courseName.trim(),
           universityName: row.universityName?.trim() || "",
-          mode: VALID_MODES.includes(row.mode?.trim()) ? row.mode.trim() : "",
           duration: row.duration?.trim() || "",
           fees: row.fees?.trim() || "",
-          feeCategory: VALID_FEE_CATEGORIES.includes(row.feeCategory?.trim()) ? row.feeCategory.trim() : "",
           eligibility: row.eligibility?.trim() || "",
           badge: row.badge?.trim() || "",
           isFeatured: row.isFeatured?.trim().toUpperCase() === "TRUE",
@@ -207,13 +202,11 @@ export async function POST(
         fields = {
           internalName,
           universityName: row.universityName.trim(),
-          mode: VALID_MODES.includes(row.mode?.trim()) ? row.mode.trim() : "",
           duration: row.duration?.trim() || "",
           approvedBy: row.approvedBy?.trim()
             ? row.approvedBy.split("|").map((s) => s.trim()).filter(Boolean)
             : [],
           fees: row.fees?.trim() || "",
-          feeCategory: VALID_FEE_CATEGORIES.includes(row.feeCategory?.trim()) ? row.feeCategory.trim() : "",
           eligibility: row.eligibility?.trim() || "",
           badge: row.badge?.trim() || "",
           isFeatured: row.isFeatured?.trim().toUpperCase() === "TRUE",

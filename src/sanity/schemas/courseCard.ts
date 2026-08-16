@@ -37,16 +37,6 @@ export default defineType({
       description: "e.g. 'Amity University Online'",
     }),
     defineField({
-      name: "mode",
-      title: "Mode",
-      type: "string",
-      options: {
-        list: ["Online", "Distance", "Online + Distance", "Blended"],
-        layout: "radio",
-        direction: "horizontal",
-      },
-    }),
-    defineField({
       name: "duration",
       title: "Duration",
       type: "string",
@@ -57,17 +47,6 @@ export default defineType({
       title: "Fees (display)",
       type: "string",
       description: "Shown on the card — e.g. '₹80,000 – ₹1,20,000'",
-    }),
-    defineField({
-      name: "feeCategory",
-      title: "Fee Range (for filter)",
-      type: "string",
-      options: {
-        list: ["Under 1 Lakh", "1-2 Lakh", "2-3 Lakh", "3-5 Lakh", "5+ Lakh"],
-        layout: "radio",
-        direction: "horizontal",
-      },
-      description: "Used to power the fee filter on landing pages.",
     }),
     defineField({
       name: "eligibility",
