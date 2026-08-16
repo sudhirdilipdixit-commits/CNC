@@ -39,20 +39,24 @@ type AnyCardItem = CourseCardItem | UniversityCardItem;
 
 // ── Sort chips ─────────────────────────────────────────────────────────────
 
-const FEE_ORDER = ["Under 1 Lakh", "1-2 Lakh", "2-3 Lakh", "3-5 Lakh", "5+ Lakh"];
-
 type SortKey = "balanced" | "fee-low" | "fee-high" | "accreditation";
+
+function parseFeeAmount(fees?: string): number | null {
+  if (!fees) return null;
+  const match = fees.replace(/,/g, "").match(/\d+(\.\d+)?/);
+  return match ? parseFloat(match[0]) : null;
+}
 
 function sortItems(items: AnyCardItem[], sort: SortKey): AnyCardItem[] {
   if (sort === "balanced") return items;
 
   if (sort === "fee-low" || sort === "fee-high") {
-    const known = items.filter((i) => i.feeCategory && FEE_ORDER.includes(i.feeCategory));
-    const unknown = items.filter((i) => !i.feeCategory || !FEE_ORDER.includes(i.feeCategory));
+    const known = items.filter((i) => parseFeeAmount(i.fees) !== null);
+    const unknown = items.filter((i) => parseFeeAmount(i.fees) === null);
     known.sort((a, b) => {
-      const ra = FEE_ORDER.indexOf(a.feeCategory!);
-      const rb = FEE_ORDER.indexOf(b.feeCategory!);
-      return sort === "fee-low" ? ra - rb : rb - ra;
+      const va = parseFeeAmount(a.fees)!;
+      const vb = parseFeeAmount(b.fees)!;
+      return sort === "fee-low" ? va - vb : vb - va;
     });
     return [...known, ...unknown];
   }
