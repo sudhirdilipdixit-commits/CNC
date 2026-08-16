@@ -171,17 +171,9 @@ function CourseCard({
       )}
 
       <div className="lp-card-actions">
-        <button className="lp-btn-primary-full" onClick={() => onCta("Get Free Career Counselling")}>
-          Get Free Career Counselling
+        <button className="lp-btn-primary-full" onClick={() => onCta("Enquire Now")}>
+          Enquire Now
         </button>
-        <div className="lp-card-sec-row">
-          <button className="lp-btn-secondary" onClick={() => onCta("Download Brochure")}>
-            Download Brochure
-          </button>
-          <button className="lp-btn-secondary" onClick={() => onCta("Enquire Now")}>
-            Enquire Now
-          </button>
-        </div>
       </div>
     </article>
   );
@@ -249,14 +241,9 @@ function UniversityCard({
       )}
 
       <div className="lp-card-actions">
-        <div className="lp-card-sec-row">
-          <button className="lp-btn-secondary" onClick={() => onCta("Download Brochure")}>
-            Download Brochure
-          </button>
-          <button className="lp-btn-primary-half" onClick={() => onCta("Enquire Now")}>
-            Enquire Now
-          </button>
-        </div>
+        <button className="lp-btn-primary-full" onClick={() => onCta("Enquire Now")}>
+          Enquire Now
+        </button>
       </div>
     </article>
   );
@@ -725,13 +712,8 @@ export default function LandingPagesClient({
         .lp-meta-val { font-size: 13px; font-weight: 700; color: var(--navy); }
         .lp-card-info-row { font-size: 12px; color: var(--charcoal); line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
         .lp-card-actions { display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 2px; }
-        .lp-card-sec-row { display: flex; gap: 6px; }
         .lp-btn-primary-full { width: 100%; background: var(--yellow); color: var(--navy); border: 2px solid var(--navy); border-radius: 8px; font-size: 13px; font-weight: 700; font-family: var(--font-sans); padding: 9px 16px; cursor: pointer; transition: background .15s; text-align: center; }
         .lp-btn-primary-full:hover { background: #e6b800; }
-        .lp-btn-primary-half { flex: 1; background: var(--yellow); color: var(--navy); border: 2px solid var(--navy); border-radius: 8px; font-size: 12px; font-weight: 700; font-family: var(--font-sans); padding: 9px 10px; cursor: pointer; transition: background .15s; text-align: center; }
-        .lp-btn-primary-half:hover { background: #e6b800; }
-        .lp-btn-secondary { flex: 1; background: var(--white); color: var(--navy); border: 1.5px solid var(--pale-navy); border-radius: 8px; font-size: 12px; font-weight: 600; font-family: var(--font-sans); padding: 9px 8px; cursor: pointer; transition: border-color .15s, background .15s; text-align: center; }
-        .lp-btn-secondary:hover { border-color: var(--navy); background: var(--ivory); }
 
         /* ── Empty ── */
         .lp-empty { text-align: center; padding: 64px 0; color: var(--grey); }
