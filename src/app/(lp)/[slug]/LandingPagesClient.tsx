@@ -37,6 +37,33 @@ export interface UniversityCardItem {
 
 type AnyCardItem = CourseCardItem | UniversityCardItem;
 
+// ── Sort chips ─────────────────────────────────────────────────────────────
+
+const FEE_ORDER = ["Under 1 Lakh", "1-2 Lakh", "2-3 Lakh", "3-5 Lakh", "5+ Lakh"];
+
+type SortKey = "balanced" | "fee-low" | "fee-high" | "accreditation";
+
+function sortItems(items: AnyCardItem[], sort: SortKey): AnyCardItem[] {
+  if (sort === "balanced") return items;
+
+  if (sort === "fee-low" || sort === "fee-high") {
+    const known = items.filter((i) => i.feeCategory && FEE_ORDER.includes(i.feeCategory));
+    const unknown = items.filter((i) => !i.feeCategory || !FEE_ORDER.includes(i.feeCategory));
+    known.sort((a, b) => {
+      const ra = FEE_ORDER.indexOf(a.feeCategory!);
+      const rb = FEE_ORDER.indexOf(b.feeCategory!);
+      return sort === "fee-low" ? ra - rb : rb - ra;
+    });
+    return [...known, ...unknown];
+  }
+
+  // accreditation — university cards only
+  return [...items].sort(
+    (a, b) =>
+      ((b as UniversityCardItem).approvedBy?.length ?? 0) - ((a as UniversityCardItem).approvedBy?.length ?? 0)
+  );
+}
+
 export interface LandingPagesData {
   title: string;
   campaign?: string;
@@ -278,6 +305,7 @@ export default function LandingPagesClient({
   const [modalOpen, setModalOpen] = useState(false);
   const [formTitle, setFormTitle] = useState("");
   const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
+  const [sort, setSort] = useState<SortKey>("balanced");
 
   const pageType: "course" | "university" =
     data.pageType ?? (data.courseItems?.length ? "course" : "university");
@@ -286,8 +314,30 @@ export default function LandingPagesClient({
     () => (pageType === "course" ? (data.courseItems ?? []) : (data.universityItems ?? [])),
     [pageType, data.courseItems, data.universityItems]
   );
-  const visible = allItems.slice(0, visibleCount);
-  const hasMore = visibleCount < allItems.length;
+
+  const sortedItems = useMemo(() => sortItems(allItems, sort), [allItems, sort]);
+
+  const sortOptions: { key: SortKey; label: string }[] =
+    pageType === "university"
+      ? [
+          { key: "balanced", label: "Balanced pick" },
+          { key: "fee-low", label: "Lowest fee first" },
+          { key: "fee-high", label: "Highest fee first" },
+          { key: "accreditation", label: "Strongest accreditation" },
+        ]
+      : [
+          { key: "balanced", label: "Balanced pick" },
+          { key: "fee-low", label: "Lowest fee first" },
+          { key: "fee-high", label: "Highest fee first" },
+        ];
+
+  const changeSort = useCallback((key: SortKey) => {
+    setSort(key);
+    setVisibleCount(INITIAL_COUNT);
+  }, []);
+
+  const visible = sortedItems.slice(0, visibleCount);
+  const hasMore = visibleCount < sortedItems.length;
 
   const openModal = useCallback((title = "") => {
     setFormTitle(title);
@@ -442,10 +492,25 @@ export default function LandingPagesClient({
           <div className="lp-content lp-content--full">
             <div className="lp-results-header">
               <p className="lp-results-count">
-                Showing <strong>{Math.min(visibleCount, allItems.length)}</strong> of{" "}
-                <strong>{allItems.length}</strong> {allItems.length === 1 ? itemLabel : itemLabelPlural}
+                Showing <strong>{Math.min(visibleCount, sortedItems.length)}</strong> of{" "}
+                <strong>{sortedItems.length}</strong> {sortedItems.length === 1 ? itemLabel : itemLabelPlural}
               </p>
             </div>
+
+            {allItems.length > 0 && (
+              <div className="lp-sort-chips" role="group" aria-label={`Sort ${itemLabelPlural} by`}>
+                {sortOptions.map((opt) => (
+                  <button
+                    key={opt.key}
+                    type="button"
+                    className={`lp-sort-chip${sort === opt.key ? " lp-sort-chip--active" : ""}`}
+                    onClick={() => changeSort(opt.key)}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            )}
 
             {allItems.length === 0 ? (
               <div className="lp-empty">
@@ -477,7 +542,7 @@ export default function LandingPagesClient({
                   className="btn btn-secondary"
                   onClick={() => setVisibleCount((c) => c + LOAD_BATCH)}
                 >
-                  Load {Math.min(LOAD_BATCH, allItems.length - visibleCount)} more
+                  Load {Math.min(LOAD_BATCH, sortedItems.length - visibleCount)} more
                 </button>
               </div>
             )}
@@ -689,6 +754,13 @@ export default function LandingPagesClient({
         .lp-results-header { margin-bottom: 14px; }
         .lp-results-count { font-size: 14px; color: var(--grey); }
         .lp-results-count strong { color: var(--navy); }
+
+        /* ── Sort chips ── */
+        .lp-sort-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+        .lp-sort-chip { font-family: var(--font-sans); font-size: 12.5px; font-weight: 600; padding: 8px 14px; border-radius: 999px; border: 1.5px solid var(--mist); background: var(--white); color: var(--charcoal); cursor: pointer; transition: background .15s, border-color .15s, color .15s; }
+        .lp-sort-chip:hover { border-color: var(--pale-navy); }
+        .lp-sort-chip--active { background: var(--navy); border-color: var(--navy); color: var(--white); }
+        .lp-sort-chip--active:hover { border-color: var(--navy); }
 
         /* ── Card grid — full width: 1 col → 2 col → 3 col → 4 col ── */
         .lp-card-grid--full { display: grid; grid-template-columns: 1fr; gap: 16px; }
