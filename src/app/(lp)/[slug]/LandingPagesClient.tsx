@@ -71,7 +71,26 @@ export interface LandingPagesData {
   showFullHeader?: boolean;
   showFooter?: boolean;
   urgencyBanner?: { show?: boolean; text?: string };
-  hero: { headline: string; subheadline?: string; primaryCtaLabel?: string };
+  hero: {
+    eyebrow?: string;
+    headline: string;
+    calloutText?: string;
+    description?: string;
+    updatedLabel?: string;
+    reviewerName?: string;
+    reviewerRole?: string;
+    approverName?: string;
+    approverRole?: string;
+    primaryCtaLabel?: string;
+    secondaryCtaLabel?: string;
+  };
+  heroSidebarCard?: {
+    show?: boolean;
+    heading?: string;
+    subtext?: string;
+    stats?: { label: string; value: string }[];
+    ctaLabel?: string;
+  };
   highlightBanner?: {
     show?: boolean;
     headline?: string;
@@ -368,17 +387,64 @@ export default function LandingPagesClient({
       )}
 
       {/* Hero */}
-      <div className="lp-hero">
+      <section className="lp-hero">
         <div className="container">
-          <h1 className="lp-h1">{data.hero.headline}</h1>
-          {data.hero.subheadline && <p className="lp-lede">{data.hero.subheadline}</p>}
-          <div className="lp-cta-row">
-            <button className="btn btn-primary" onClick={() => openModal(data.hero.primaryCtaLabel || "Get Free Counselling")}>
-              {data.hero.primaryCtaLabel || "Get Free Counselling"}
-            </button>
+          <div className="lp-hero-layout">
+            <div className="lp-hero-content">
+              {data.hero.eyebrow && <div className="lp-hero-eyebrow">{data.hero.eyebrow}</div>}
+              <h1 className="lp-h1">{data.hero.headline}</h1>
+              {data.hero.calloutText && <div className="lp-hero-callout">{data.hero.calloutText}</div>}
+              {data.hero.description && <p className="lp-lede">{data.hero.description}</p>}
+              {data.hero.updatedLabel && <p className="lp-hero-updated">{data.hero.updatedLabel}</p>}
+              <p className="lp-hero-byline">
+                Written by CollegeNCourses Editorial Team
+                {" · Reviewed by "}
+                {data.hero.reviewerName ? `${data.hero.reviewerName}, ` : ""}
+                {data.hero.reviewerRole || "CollegeNCourses Senior Counsellor"}
+                {" · Approved by "}
+                {data.hero.approverName || "Nikhita Pradeep Deshmukh"}
+                {data.hero.approverRole ? `, ${data.hero.approverRole}` : ""}
+              </p>
+              <div className="lp-cta-row">
+                <button className="btn btn-primary" onClick={() => openModal(data.hero.primaryCtaLabel || "Get Free Counselling")}>
+                  {data.hero.primaryCtaLabel || "Get Free Counselling"}
+                </button>
+                {data.hero.secondaryCtaLabel && (
+                  <a href="#programmes" className="btn btn-secondary">{data.hero.secondaryCtaLabel}</a>
+                )}
+              </div>
+            </div>
+
+            {data.heroSidebarCard?.show !== false && (
+              <aside className="lp-hero-sidebar" aria-label="Quick enquiry">
+                <div className="lp-hero-sidebar-header">
+                  <h3>{data.heroSidebarCard?.heading || "Find the right programme for your goal"}</h3>
+                  <p>{data.heroSidebarCard?.subtext || "Free. Takes 2 minutes."}</p>
+                </div>
+                <div className="lp-hero-sidebar-body">
+                  {data.heroSidebarCard?.stats && data.heroSidebarCard.stats.length > 0 && (
+                    <div className="lp-hero-sidebar-stats">
+                      {data.heroSidebarCard.stats.map((item) => (
+                        <div className="lp-hero-sidebar-stat" key={item.label}>
+                          <span>{item.label}:</span>
+                          <strong>{item.value}</strong>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <button
+                    className="btn btn-primary"
+                    style={{ width: "100%" }}
+                    onClick={() => openModal(data.heroSidebarCard?.ctaLabel || "Get Free Guidance")}
+                  >
+                    {data.heroSidebarCard?.ctaLabel || "Get Free Guidance"}
+                  </button>
+                </div>
+              </aside>
+            )}
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Highlight Banner */}
       {showHighlightBanner && (
@@ -485,7 +551,7 @@ export default function LandingPagesClient({
       )}
 
       {/* Cards area — full width, no sidebar */}
-      <div className="lp-main">
+      <div className="lp-main" id="programmes">
         <div className="container">
           <div className="lp-content lp-content--full">
             <div className="lp-results-header">
@@ -714,10 +780,29 @@ export default function LandingPagesClient({
         @media (min-width: 768px) { .lp-phone { display: flex; } }
 
         /* ── Hero ── */
-        .lp-hero { background: var(--navy); padding: 56px 0 48px; }
-        .lp-h1 { font-family: var(--font-serif); color: var(--ivory); font-size: clamp(28px, 4.5vw, 52px); line-height: 1.1; margin: 0 0 16px; }
-        .lp-lede { color: var(--pale-navy); font-size: clamp(15px, 1.8vw, 18px); max-width: 640px; margin-bottom: 28px; line-height: 1.6; }
+        .lp-hero { background: var(--ivory); padding: 40px 0; }
+        .lp-hero-layout { display: grid; grid-template-columns: 1fr; gap: 40px; align-items: start; }
+        @media (min-width: 1024px) { .lp-hero-layout { grid-template-columns: 1fr 340px; gap: 56px; } }
+        .lp-hero-eyebrow { font-size: 12px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--grey); margin-bottom: 10px; }
+        .lp-h1 { font-family: var(--font-serif); color: var(--navy); font-size: clamp(28px, 4.5vw, 52px); line-height: 1.1; margin: 0 0 20px; }
+        .lp-hero-callout { background: var(--white); border-left: 4px solid var(--yellow); border-radius: 0 8px 8px 0; padding: 16px 20px; margin-bottom: 24px; font-size: 15px; color: var(--charcoal); line-height: 1.65; }
+        .lp-lede { color: var(--charcoal); font-size: clamp(15px, 1.8vw, 17px); max-width: 640px; margin-bottom: 8px; line-height: 1.6; }
+        .lp-hero-updated { font-size: 13px; color: var(--grey); margin-bottom: 6px; }
+        .lp-hero-byline { font-size: 12px; color: var(--grey); margin-bottom: 28px; line-height: 1.5; }
         .lp-cta-row { display: flex; gap: 10px; flex-wrap: wrap; }
+
+        /* ── Hero sidebar card ── */
+        .lp-hero-sidebar { display: none; }
+        @media (min-width: 1024px) {
+          .lp-hero-sidebar { display: block; position: sticky; top: calc(64px + 24px); background: var(--white); border: 1px solid var(--mist); border-top: 4px solid var(--yellow); border-radius: 10px; box-shadow: 0 4px 18px rgba(36,48,72,.1); overflow: hidden; }
+        }
+        .lp-hero-sidebar-header { background: var(--navy); padding: 20px; }
+        .lp-hero-sidebar-header h3 { font-family: var(--font-serif); font-size: 20px; color: var(--ivory); margin-bottom: 6px; line-height: 1.2; }
+        .lp-hero-sidebar-header p { font-size: 13px; color: var(--yellow); }
+        .lp-hero-sidebar-body { padding: 20px; }
+        .lp-hero-sidebar-stats { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
+        .lp-hero-sidebar-stat { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--charcoal); }
+        .lp-hero-sidebar-stat strong { color: var(--navy); }
 
         /* ── Highlight Banner ── */
         .lp-hlb { padding: 56px 0; text-align: center; }
