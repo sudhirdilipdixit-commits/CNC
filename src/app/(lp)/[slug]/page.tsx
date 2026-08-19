@@ -79,7 +79,7 @@ export default async function LandingPage({
   const footer = page.data.showFooter ? <Footer /> : null;
 
   if (page.kind === "new") {
-    return <LandingPagesClient data={page.data} footer={footer} />;
+    return <LandingPagesClient data={page.data} footer={footer} slug={slug} />;
   }
   return <LandingPageClient data={page.data} footer={footer} />;
 }

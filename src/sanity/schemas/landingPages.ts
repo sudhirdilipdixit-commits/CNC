@@ -47,23 +47,6 @@ export default defineType({
       description: "Page URL will be /[slug]",
       group: "content",
     }),
-    defineField({
-      name: "campaign",
-      title: "Campaign / Channel",
-      type: "string",
-      options: {
-        list: [
-          "Google Ads",
-          "Meta Ads",
-          "Email",
-          "WhatsApp",
-          "Organic",
-          "Partner",
-        ],
-      },
-      group: "content",
-    }),
-
     // ── Hero ─────────────────────────────────────────────────────────
     defineField({
       name: "hero",
@@ -666,5 +649,5 @@ export default defineType({
       ],
     }),
   ],
-  preview: { select: { title: "title", subtitle: "campaign" } },
+  preview: { select: { title: "title", subtitle: "slug.current" } },
 });

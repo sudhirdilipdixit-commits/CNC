@@ -214,7 +214,7 @@ export const landingPageQuery = groq`*[_type == "landingPage" && slug.current ==
 export const allLandingPagesSlugsQuery = groq`*[_type == "landingPages"]{ "slug": slug.current }`;
 
 export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current == $slug][0]{
-  title, campaign, pageType,
+  title, pageType,
   showFullHeader, showFooter,
   urgencyBanner { show, text },
   hero {

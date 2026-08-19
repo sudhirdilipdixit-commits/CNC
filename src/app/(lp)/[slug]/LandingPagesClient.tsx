@@ -66,7 +66,6 @@ function sortItems(items: AnyCardItem[], sort: SortKey): AnyCardItem[] {
 
 export interface LandingPagesData {
   title: string;
-  campaign?: string;
   pageType?: "course" | "university";
   showFullHeader?: boolean;
   showFooter?: boolean;
@@ -315,9 +314,11 @@ const LOAD_BATCH = 6;
 export default function LandingPagesClient({
   data,
   footer,
+  slug,
 }: {
   data: LandingPagesData;
   footer: React.ReactNode;
+  slug: string;
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [formTitle, setFormTitle] = useState("");
@@ -763,7 +764,7 @@ export default function LandingPagesClient({
       <LeadModal
         open={modalOpen}
         onClose={() => setModalOpen(false)}
-        source={`lp-${data.campaign?.toLowerCase().replace(/\s+/g, "-") || "organic"}`}
+        source={`lp-${slug}`}
         title={formTitle || undefined}
       />
 
