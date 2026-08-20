@@ -88,9 +88,9 @@ export default defineType({
           description: "Only one hero option should be ON at a time.",
           validation: (R) =>
             R.custom((value, context) => {
-              const doc = context.document as { heroOption2?: { show?: boolean } } | undefined;
-              if (value !== false && doc?.heroOption2?.show === true) {
-                return "Hero Option 2 is also turned ON below. Turn one of them OFF — only one hero can be active.";
+              const doc = context.document as { heroOption2?: { show?: boolean }; heroOption3?: { show?: boolean } } | undefined;
+              if (value !== false && (doc?.heroOption2?.show === true || doc?.heroOption3?.show === true)) {
+                return "Another hero option is also turned ON below. Turn one of them OFF — only one hero can be active.";
               }
               return true;
             }).warning(),
@@ -193,9 +193,9 @@ export default defineType({
           description: "Only one hero option should be ON at a time.",
           validation: (R) =>
             R.custom((value, context) => {
-              const doc = context.document as { hero?: { show?: boolean } } | undefined;
-              if (value === true && doc?.hero?.show !== false) {
-                return "Hero Option 1 above is still ON. Turn one of them OFF — only one hero can be active.";
+              const doc = context.document as { hero?: { show?: boolean }; heroOption3?: { show?: boolean } } | undefined;
+              if (value === true && (doc?.hero?.show !== false || doc?.heroOption3?.show === true)) {
+                return "Another hero option is also ON. Turn the others OFF — only one hero can be active.";
               }
               return true;
             }).warning(),
@@ -204,7 +204,99 @@ export default defineType({
           name: "eyebrow",
           title: "Eyebrow",
           type: "string",
-          description: "e.g. '150+ Programmes' or '200+ Verified Programmes'",
+          description: "e.g. '150+ Programmes'",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "headline",
+          title: "Headline",
+          type: "string",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "subheadline",
+          title: "Sub-headline",
+          type: "text",
+          rows: 2,
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "image",
+          title: "Right-side Image (optional)",
+          type: "image",
+          options: { hotspot: true },
+          description: "Shown in the empty space to the right of the text on desktop.",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "primaryCtaLabel",
+          title: "Primary CTA Label",
+          type: "string",
+          initialValue: "Get Free Counselling",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "secondaryCtaLabel",
+          title: "Secondary CTA Label (optional)",
+          type: "string",
+          description: "Outlined button next to the primary CTA. Opens the lead form. Leave blank to hide.",
+          initialValue: "Download Brochure",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "backgroundColor",
+          title: "Background Color",
+          type: "color",
+          options: { disableAlpha: true },
+          description: "Defaults to navy if not set.",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "buttonColor",
+          title: "Primary Button Color",
+          type: "color",
+          options: { disableAlpha: true },
+          description: "Defaults to yellow if not set.",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "fontColor",
+          title: "Font Color",
+          type: "color",
+          options: { disableAlpha: true },
+          description: "Headline and sub-headline text color. Defaults to ivory/white if not set.",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+      ],
+    }),
+
+    // ── Hero — Option 3 ────────────────────────────────────────────────
+    defineField({
+      name: "heroOption3",
+      title: "Hero Section — Option 3",
+      type: "object",
+      description: "Same layout as Option 2 (eyebrow badge, headline, subheadline, dual CTA, optional right-side image) — a second preset you can configure independently.",
+      fields: [
+        defineField({
+          name: "show",
+          title: "Show This Hero (Option 3)",
+          type: "boolean",
+          initialValue: false,
+          description: "Only one hero option should be ON at a time.",
+          validation: (R) =>
+            R.custom((value, context) => {
+              const doc = context.document as { hero?: { show?: boolean }; heroOption2?: { show?: boolean } } | undefined;
+              if (value === true && (doc?.hero?.show !== false || doc?.heroOption2?.show === true)) {
+                return "Another hero option is also ON. Turn the others OFF — only one hero can be active.";
+              }
+              return true;
+            }).warning(),
+        }),
+        defineField({
+          name: "eyebrow",
+          title: "Eyebrow",
+          type: "string",
+          description: "e.g. '200+ Verified Programmes'",
           hidden: ({ parent }) => parent?.show !== true,
         }),
         defineField({
@@ -275,7 +367,7 @@ export default defineType({
       name: "heroSidebarCard",
       title: "Hero Sidebar Card",
       type: "object",
-      description: "Sticky quick-enquiry card shown beside the hero on desktop.",
+      description: "Sticky quick-enquiry card shown beside the hero on desktop. Only used with Hero Section — Option 1.",
       fields: [
         defineField({
           name: "show",

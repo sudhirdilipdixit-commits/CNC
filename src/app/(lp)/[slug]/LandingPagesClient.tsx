@@ -64,6 +64,20 @@ function sortItems(items: AnyCardItem[], sort: SortKey): AnyCardItem[] {
   );
 }
 
+export interface SimpleHeroData {
+  show?: boolean;
+  eyebrow?: string;
+  headline?: string;
+  subheadline?: string;
+  primaryCtaLabel?: string;
+  secondaryCtaLabel?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  backgroundColor?: string;
+  buttonColor?: string;
+  fontColor?: string;
+}
+
 export interface LandingPagesData {
   title: string;
   pageType?: "course" | "university";
@@ -84,19 +98,8 @@ export interface LandingPagesData {
     primaryCtaLabel?: string;
     secondaryCtaLabel?: string;
   };
-  heroOption2?: {
-    show?: boolean;
-    eyebrow?: string;
-    headline?: string;
-    subheadline?: string;
-    primaryCtaLabel?: string;
-    secondaryCtaLabel?: string;
-    imageUrl?: string;
-    imageAlt?: string;
-    backgroundColor?: string;
-    buttonColor?: string;
-    fontColor?: string;
-  };
+  heroOption2?: SimpleHeroData;
+  heroOption3?: SimpleHeroData;
   heroSidebarCard?: {
     show?: boolean;
     heading?: string;
@@ -179,6 +182,56 @@ function LpHeader({ onOpenModal }: { onOpenModal: () => void }) {
         </div>
       </div>
     </header>
+  );
+}
+
+// ── Simple hero (Options 2 & 3) ─────────────────────────────────────────────
+
+function SimpleHero({ data, onCta }: { data: SimpleHeroData; onCta: (name: string) => void }) {
+  return (
+    <section className="lp-hero2" style={{ background: data.backgroundColor || "var(--navy)" }}>
+      <div className="container">
+        <div className="lp-hero2-layout">
+          <div className="lp-hero2-content">
+            {data.eyebrow && (
+              <div className="lp-hero2-eyebrow" style={{ color: data.buttonColor || "var(--yellow)" }}>
+                {data.eyebrow}
+              </div>
+            )}
+            {data.headline && (
+              <h1 className="lp-hero2-headline" style={{ color: data.fontColor || "var(--ivory)" }}>
+                {data.headline}
+              </h1>
+            )}
+            {data.subheadline && (
+              <p className="lp-hero2-sub" style={{ color: data.fontColor || "var(--pale-navy)" }}>
+                {data.subheadline}
+              </p>
+            )}
+            <div className="lp-cta-row">
+              <button
+                className="btn btn-primary"
+                style={data.buttonColor ? { background: data.buttonColor } : undefined}
+                onClick={() => onCta(data.primaryCtaLabel || "Get Free Counselling")}
+              >
+                {data.primaryCtaLabel || "Get Free Counselling"}
+              </button>
+              {data.secondaryCtaLabel && (
+                <button className="lp-hero2-secondary-btn" onClick={() => onCta(data.secondaryCtaLabel || "Download Brochure")}>
+                  {data.secondaryCtaLabel}
+                </button>
+              )}
+            </div>
+          </div>
+
+          {data.imageUrl && (
+            <div className="lp-hero2-media">
+              <Image src={data.imageUrl} alt={data.imageAlt || ""} width={560} height={420} className="lp-hero2-img" />
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -387,7 +440,9 @@ export default function LandingPagesClient({
   const itemLabel = pageType === "course" ? "course" : "university";
   const itemLabelPlural = pageType === "course" ? "courses" : "universities";
 
-  const showHeroOption2 = data.heroOption2?.show === true;
+  const showHeroOption3 = data.heroOption3?.show === true;
+  const showHeroOption2 = !showHeroOption3 && data.heroOption2?.show === true;
+  const showHeroOption1 = !showHeroOption2 && !showHeroOption3;
   const showHighlightBanner = data.highlightBanner?.show;
   const showUniversityLogos = data.universityLogos?.show && (data.universityLogos.logos?.length ?? 0) > 0;
   const showFaqs = data.faqs?.show && (data.faqs.items?.length ?? 0) > 0;
@@ -412,7 +467,7 @@ export default function LandingPagesClient({
       )}
 
       {/* Hero — Option 1 */}
-      {!showHeroOption2 && (
+      {showHeroOption1 && (
         <section className="lp-hero">
           <div className="container">
             <div className="lp-hero-layout">
@@ -474,63 +529,10 @@ export default function LandingPagesClient({
       )}
 
       {/* Hero — Option 2 */}
-      {showHeroOption2 && (
-        <section
-          className="lp-hero2"
-          style={{ background: data.heroOption2?.backgroundColor || "var(--navy)" }}
-        >
-          <div className="container">
-            <div className="lp-hero2-layout">
-              <div className="lp-hero2-content">
-                {data.heroOption2?.eyebrow && (
-                  <div className="lp-hero2-eyebrow" style={{ color: data.heroOption2?.buttonColor || "var(--yellow)" }}>
-                    {data.heroOption2.eyebrow}
-                  </div>
-                )}
-                {data.heroOption2?.headline && (
-                  <h1 className="lp-hero2-headline" style={{ color: data.heroOption2?.fontColor || "var(--ivory)" }}>
-                    {data.heroOption2.headline}
-                  </h1>
-                )}
-                {data.heroOption2?.subheadline && (
-                  <p className="lp-hero2-sub" style={{ color: data.heroOption2?.fontColor || "var(--pale-navy)" }}>
-                    {data.heroOption2.subheadline}
-                  </p>
-                )}
-                <div className="lp-cta-row">
-                  <button
-                    className="btn btn-primary"
-                    style={data.heroOption2?.buttonColor ? { background: data.heroOption2.buttonColor } : undefined}
-                    onClick={() => openModal(data.heroOption2?.primaryCtaLabel || "Get Free Counselling")}
-                  >
-                    {data.heroOption2?.primaryCtaLabel || "Get Free Counselling"}
-                  </button>
-                  {data.heroOption2?.secondaryCtaLabel && (
-                    <button
-                      className="lp-hero2-secondary-btn"
-                      onClick={() => openModal(data.heroOption2?.secondaryCtaLabel || "Download Brochure")}
-                    >
-                      {data.heroOption2.secondaryCtaLabel}
-                    </button>
-                  )}
-                </div>
-              </div>
+      {showHeroOption2 && data.heroOption2 && <SimpleHero data={data.heroOption2} onCta={openModal} />}
 
-              {data.heroOption2?.imageUrl && (
-                <div className="lp-hero2-media">
-                  <Image
-                    src={data.heroOption2.imageUrl}
-                    alt={data.heroOption2.imageAlt || ""}
-                    width={560}
-                    height={420}
-                    className="lp-hero2-img"
-                  />
-                </div>
-              )}
-            </div>
-          </div>
-        </section>
-      )}
+      {/* Hero — Option 3 */}
+      {showHeroOption3 && data.heroOption3 && <SimpleHero data={data.heroOption3} onCta={openModal} />}
 
       {/* Highlight Banner */}
       {showHighlightBanner && (

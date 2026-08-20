@@ -230,6 +230,14 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
     "buttonColor": buttonColor.hex,
     "fontColor": fontColor.hex,
   },
+  heroOption3 {
+    show, eyebrow, headline, subheadline, primaryCtaLabel, secondaryCtaLabel,
+    "imageUrl": image.asset->url,
+    "imageAlt": image.alt,
+    "backgroundColor": backgroundColor.hex,
+    "buttonColor": buttonColor.hex,
+    "fontColor": fontColor.hex,
+  },
   heroSidebarCard { show, heading, subtext, "stats": stats[] { label, value }, ctaLabel },
   highlightBanner {
     show, headline, leadText, highlightText, leftPoints, rightPoints, ctaLabel,
