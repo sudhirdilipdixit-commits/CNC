@@ -73,23 +73,41 @@ export default defineType({
       initialValue: false,
     }),
 
-    // ── Hero ─────────────────────────────────────────────────────────
+    // ── Hero — Option 1 ────────────────────────────────────────────────
     defineField({
       name: "hero",
-      title: "Hero Section",
+      title: "Hero Section — Option 1",
       type: "object",
+      description: "Eyebrow + headline + highlight callout + byline, with an optional sidebar goal card.",
       fields: [
+        defineField({
+          name: "show",
+          title: "Show This Hero (Option 1)",
+          type: "boolean",
+          initialValue: true,
+          description: "Only one hero option should be ON at a time.",
+          validation: (R) =>
+            R.custom((value, context) => {
+              const doc = context.document as { heroOption2?: { show?: boolean } } | undefined;
+              if (value !== false && doc?.heroOption2?.show === true) {
+                return "Hero Option 2 is also turned ON below. Turn one of them OFF — only one hero can be active.";
+              }
+              return true;
+            }).warning(),
+        }),
         defineField({
           name: "eyebrow",
           title: "Eyebrow",
           type: "string",
           description: "Small label above the headline, e.g. 'Study in India · Online MBA in Marketing'",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "headline",
           title: "Headline",
           type: "string",
           validation: (R) => R.required(),
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "calloutText",
@@ -97,6 +115,7 @@ export default defineType({
           type: "text",
           rows: 3,
           description: "Short answer-first summary shown in a highlighted box below the headline.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "description",
@@ -104,42 +123,49 @@ export default defineType({
           type: "text",
           rows: 3,
           description: "Body paragraph below the highlight callout.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "updatedLabel",
           title: "Updated Label",
           type: "string",
           description: "e.g. 'Updated July 2026'. Leave blank to hide.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "reviewerName",
           title: "Reviewer Name (optional)",
           type: "string",
           description: "Leave blank to credit the role only, e.g. just 'CollegeNCourses Senior Counsellor'.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "reviewerRole",
           title: "Reviewer Role",
           type: "string",
           initialValue: "CollegeNCourses Senior Counsellor",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "approverName",
           title: "Approver Name",
           type: "string",
           initialValue: "Nikhita Pradeep Deshmukh",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "approverRole",
           title: "Approver Role",
           type: "string",
           initialValue: "Founder",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "primaryCtaLabel",
           title: "Primary CTA Label",
           type: "string",
           initialValue: "Get Free Counselling",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "secondaryCtaLabel",
@@ -147,6 +173,99 @@ export default defineType({
           type: "string",
           description: "Outlined button next to the primary CTA. Scrolls down to the card grid. Leave blank to hide.",
           initialValue: "View Programmes",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+      ],
+    }),
+
+    // ── Hero — Option 2 ────────────────────────────────────────────────
+    defineField({
+      name: "heroOption2",
+      title: "Hero Section — Option 2",
+      type: "object",
+      description: "Simple full-bleed banner: eyebrow badge, headline, subheadline, dual CTA, optional right-side image.",
+      fields: [
+        defineField({
+          name: "show",
+          title: "Show This Hero (Option 2)",
+          type: "boolean",
+          initialValue: false,
+          description: "Only one hero option should be ON at a time.",
+          validation: (R) =>
+            R.custom((value, context) => {
+              const doc = context.document as { hero?: { show?: boolean } } | undefined;
+              if (value === true && doc?.hero?.show !== false) {
+                return "Hero Option 1 above is still ON. Turn one of them OFF — only one hero can be active.";
+              }
+              return true;
+            }).warning(),
+        }),
+        defineField({
+          name: "eyebrow",
+          title: "Eyebrow",
+          type: "string",
+          description: "e.g. '150+ Programmes' or '200+ Verified Programmes'",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "headline",
+          title: "Headline",
+          type: "string",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "subheadline",
+          title: "Sub-headline",
+          type: "text",
+          rows: 2,
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "image",
+          title: "Right-side Image (optional)",
+          type: "image",
+          options: { hotspot: true },
+          description: "Shown in the empty space to the right of the text on desktop.",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "primaryCtaLabel",
+          title: "Primary CTA Label",
+          type: "string",
+          initialValue: "Get Free Counselling",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "secondaryCtaLabel",
+          title: "Secondary CTA Label (optional)",
+          type: "string",
+          description: "Outlined button next to the primary CTA. Opens the lead form. Leave blank to hide.",
+          initialValue: "Download Brochure",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "backgroundColor",
+          title: "Background Color",
+          type: "color",
+          options: { disableAlpha: true },
+          description: "Defaults to navy if not set.",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "buttonColor",
+          title: "Primary Button Color",
+          type: "color",
+          options: { disableAlpha: true },
+          description: "Defaults to yellow if not set.",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
+          name: "fontColor",
+          title: "Font Color",
+          type: "color",
+          options: { disableAlpha: true },
+          description: "Headline and sub-headline text color. Defaults to ivory/white if not set.",
+          hidden: ({ parent }) => parent?.show !== true,
         }),
       ],
     }),

@@ -71,6 +71,7 @@ export interface LandingPagesData {
   showFooter?: boolean;
   urgencyBanner?: { show?: boolean; text?: string };
   hero: {
+    show?: boolean;
     eyebrow?: string;
     headline: string;
     calloutText?: string;
@@ -82,6 +83,19 @@ export interface LandingPagesData {
     approverRole?: string;
     primaryCtaLabel?: string;
     secondaryCtaLabel?: string;
+  };
+  heroOption2?: {
+    show?: boolean;
+    eyebrow?: string;
+    headline?: string;
+    subheadline?: string;
+    primaryCtaLabel?: string;
+    secondaryCtaLabel?: string;
+    imageUrl?: string;
+    imageAlt?: string;
+    backgroundColor?: string;
+    buttonColor?: string;
+    fontColor?: string;
   };
   heroSidebarCard?: {
     show?: boolean;
@@ -373,6 +387,7 @@ export default function LandingPagesClient({
   const itemLabel = pageType === "course" ? "course" : "university";
   const itemLabelPlural = pageType === "course" ? "courses" : "universities";
 
+  const showHeroOption2 = data.heroOption2?.show === true;
   const showHighlightBanner = data.highlightBanner?.show;
   const showUniversityLogos = data.universityLogos?.show && (data.universityLogos.logos?.length ?? 0) > 0;
   const showFaqs = data.faqs?.show && (data.faqs.items?.length ?? 0) > 0;
@@ -396,65 +411,126 @@ export default function LandingPagesClient({
         <LpHeader onOpenModal={() => openModal()} />
       )}
 
-      {/* Hero */}
-      <section className="lp-hero">
-        <div className="container">
-          <div className="lp-hero-layout">
-            <div className="lp-hero-content">
-              {data.hero.eyebrow && <div className="lp-hero-eyebrow">{data.hero.eyebrow}</div>}
-              <h1 className="lp-h1">{data.hero.headline}</h1>
-              {data.hero.calloutText && <div className="lp-hero-callout">{data.hero.calloutText}</div>}
-              {data.hero.description && <p className="lp-lede">{data.hero.description}</p>}
-              {data.hero.updatedLabel && <p className="lp-hero-updated">{data.hero.updatedLabel}</p>}
-              <p className="lp-hero-byline">
-                Written by CollegeNCourses Editorial Team
-                {" · Reviewed by "}
-                {data.hero.reviewerName ? `${data.hero.reviewerName}, ` : ""}
-                {data.hero.reviewerRole || "CollegeNCourses Senior Counsellor"}
-                {" · Approved by "}
-                {data.hero.approverName || "Nikhita Pradeep Deshmukh"}
-                {data.hero.approverRole ? `, ${data.hero.approverRole}` : ""}
-              </p>
-              <div className="lp-cta-row">
-                <button className="btn btn-primary" onClick={() => openModal(data.hero.primaryCtaLabel || "Get Free Counselling")}>
-                  {data.hero.primaryCtaLabel || "Get Free Counselling"}
-                </button>
-                {data.hero.secondaryCtaLabel && (
-                  <a href="#programmes" className="btn btn-secondary">{data.hero.secondaryCtaLabel}</a>
-                )}
-              </div>
-            </div>
-
-            {data.heroSidebarCard?.show !== false && (
-              <aside className="lp-hero-sidebar" aria-label="Quick enquiry">
-                <div className="lp-hero-sidebar-header">
-                  <h3>{data.heroSidebarCard?.heading || "Find the right programme for your goal"}</h3>
-                  <p>{data.heroSidebarCard?.subtext || "Free. Takes 2 minutes."}</p>
-                </div>
-                <div className="lp-hero-sidebar-body">
-                  {data.heroSidebarCard?.stats && data.heroSidebarCard.stats.length > 0 && (
-                    <div className="lp-hero-sidebar-stats">
-                      {data.heroSidebarCard.stats.map((item) => (
-                        <div className="lp-hero-sidebar-stat" key={item.label}>
-                          <span>{item.label}:</span>
-                          <strong>{item.value}</strong>
-                        </div>
-                      ))}
-                    </div>
+      {/* Hero — Option 1 */}
+      {!showHeroOption2 && (
+        <section className="lp-hero">
+          <div className="container">
+            <div className="lp-hero-layout">
+              <div className="lp-hero-content">
+                {data.hero.eyebrow && <div className="lp-hero-eyebrow">{data.hero.eyebrow}</div>}
+                <h1 className="lp-h1">{data.hero.headline}</h1>
+                {data.hero.calloutText && <div className="lp-hero-callout">{data.hero.calloutText}</div>}
+                {data.hero.description && <p className="lp-lede">{data.hero.description}</p>}
+                {data.hero.updatedLabel && <p className="lp-hero-updated">{data.hero.updatedLabel}</p>}
+                <p className="lp-hero-byline">
+                  Written by CollegeNCourses Editorial Team
+                  {" · Reviewed by "}
+                  {data.hero.reviewerName ? `${data.hero.reviewerName}, ` : ""}
+                  {data.hero.reviewerRole || "CollegeNCourses Senior Counsellor"}
+                  {" · Approved by "}
+                  {data.hero.approverName || "Nikhita Pradeep Deshmukh"}
+                  {data.hero.approverRole ? `, ${data.hero.approverRole}` : ""}
+                </p>
+                <div className="lp-cta-row">
+                  <button className="btn btn-primary" onClick={() => openModal(data.hero.primaryCtaLabel || "Get Free Counselling")}>
+                    {data.hero.primaryCtaLabel || "Get Free Counselling"}
+                  </button>
+                  {data.hero.secondaryCtaLabel && (
+                    <a href="#programmes" className="btn btn-secondary">{data.hero.secondaryCtaLabel}</a>
                   )}
+                </div>
+              </div>
+
+              {data.heroSidebarCard?.show !== false && (
+                <aside className="lp-hero-sidebar" aria-label="Quick enquiry">
+                  <div className="lp-hero-sidebar-header">
+                    <h3>{data.heroSidebarCard?.heading || "Find the right programme for your goal"}</h3>
+                    <p>{data.heroSidebarCard?.subtext || "Free. Takes 2 minutes."}</p>
+                  </div>
+                  <div className="lp-hero-sidebar-body">
+                    {data.heroSidebarCard?.stats && data.heroSidebarCard.stats.length > 0 && (
+                      <div className="lp-hero-sidebar-stats">
+                        {data.heroSidebarCard.stats.map((item) => (
+                          <div className="lp-hero-sidebar-stat" key={item.label}>
+                            <span>{item.label}:</span>
+                            <strong>{item.value}</strong>
+                          </div>
+                        ))}
+                      </div>
+                    )}
+                    <button
+                      className="btn btn-primary"
+                      style={{ width: "100%" }}
+                      onClick={() => openModal(data.heroSidebarCard?.ctaLabel || "Get Free Guidance")}
+                    >
+                      {data.heroSidebarCard?.ctaLabel || "Get Free Guidance"}
+                    </button>
+                  </div>
+                </aside>
+              )}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Hero — Option 2 */}
+      {showHeroOption2 && (
+        <section
+          className="lp-hero2"
+          style={{ background: data.heroOption2?.backgroundColor || "var(--navy)" }}
+        >
+          <div className="container">
+            <div className="lp-hero2-layout">
+              <div className="lp-hero2-content">
+                {data.heroOption2?.eyebrow && (
+                  <div className="lp-hero2-eyebrow" style={{ color: data.heroOption2?.buttonColor || "var(--yellow)" }}>
+                    {data.heroOption2.eyebrow}
+                  </div>
+                )}
+                {data.heroOption2?.headline && (
+                  <h1 className="lp-hero2-headline" style={{ color: data.heroOption2?.fontColor || "var(--ivory)" }}>
+                    {data.heroOption2.headline}
+                  </h1>
+                )}
+                {data.heroOption2?.subheadline && (
+                  <p className="lp-hero2-sub" style={{ color: data.heroOption2?.fontColor || "var(--pale-navy)" }}>
+                    {data.heroOption2.subheadline}
+                  </p>
+                )}
+                <div className="lp-cta-row">
                   <button
                     className="btn btn-primary"
-                    style={{ width: "100%" }}
-                    onClick={() => openModal(data.heroSidebarCard?.ctaLabel || "Get Free Guidance")}
+                    style={data.heroOption2?.buttonColor ? { background: data.heroOption2.buttonColor } : undefined}
+                    onClick={() => openModal(data.heroOption2?.primaryCtaLabel || "Get Free Counselling")}
                   >
-                    {data.heroSidebarCard?.ctaLabel || "Get Free Guidance"}
+                    {data.heroOption2?.primaryCtaLabel || "Get Free Counselling"}
                   </button>
+                  {data.heroOption2?.secondaryCtaLabel && (
+                    <button
+                      className="lp-hero2-secondary-btn"
+                      onClick={() => openModal(data.heroOption2?.secondaryCtaLabel || "Download Brochure")}
+                    >
+                      {data.heroOption2.secondaryCtaLabel}
+                    </button>
+                  )}
                 </div>
-              </aside>
-            )}
+              </div>
+
+              {data.heroOption2?.imageUrl && (
+                <div className="lp-hero2-media">
+                  <Image
+                    src={data.heroOption2.imageUrl}
+                    alt={data.heroOption2.imageAlt || ""}
+                    width={560}
+                    height={420}
+                    className="lp-hero2-img"
+                  />
+                </div>
+              )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* Highlight Banner */}
       {showHighlightBanner && (
@@ -852,6 +928,18 @@ export default function LandingPagesClient({
         .lp-hero-sidebar-stats { display: flex; flex-direction: column; gap: 12px; margin-bottom: 20px; }
         .lp-hero-sidebar-stat { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--charcoal); }
         .lp-hero-sidebar-stat strong { color: var(--navy); }
+
+        /* ── Hero — Option 2 ── */
+        .lp-hero2 { padding: 64px 0; }
+        .lp-hero2-layout { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
+        @media (min-width: 900px) { .lp-hero2-layout { grid-template-columns: 1fr 1fr; } }
+        .lp-hero2-eyebrow { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
+        .lp-hero2-headline { font-family: var(--font-serif); font-size: clamp(28px, 4.5vw, 50px); line-height: 1.1; margin: 0 0 20px; }
+        .lp-hero2-sub { font-size: clamp(15px, 1.8vw, 18px); max-width: 640px; margin-bottom: 28px; line-height: 1.6; }
+        .lp-hero2-secondary-btn { background: rgba(255,255,255,.08); color: var(--ivory); border: 1.5px solid rgba(255,255,255,.3); min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 13px 24px; font-size: 15px; font-weight: 600; font-family: var(--font-sans); border-radius: 8px; cursor: pointer; transition: background .15s; }
+        .lp-hero2-secondary-btn:hover { background: rgba(255,255,255,.16); }
+        .lp-hero2-media { display: flex; align-items: center; justify-content: center; }
+        .lp-hero2-img { width: 100%; height: auto; max-width: 560px; object-fit: contain; border-radius: 12px; }
 
         /* ── Highlight Banner ── */
         .lp-hlb { padding: 56px 0; text-align: center; }

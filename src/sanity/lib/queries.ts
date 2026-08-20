@@ -218,9 +218,17 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
   showFullHeader, showFooter,
   urgencyBanner { show, text },
   hero {
-    eyebrow, headline, calloutText, description, updatedLabel,
+    show, eyebrow, headline, calloutText, description, updatedLabel,
     reviewerName, reviewerRole, approverName, approverRole,
     primaryCtaLabel, secondaryCtaLabel,
+  },
+  heroOption2 {
+    show, eyebrow, headline, subheadline, primaryCtaLabel, secondaryCtaLabel,
+    "imageUrl": image.asset->url,
+    "imageAlt": image.alt,
+    "backgroundColor": backgroundColor.hex,
+    "buttonColor": buttonColor.hex,
+    "fontColor": fontColor.hex,
   },
   heroSidebarCard { show, heading, subtext, "stats": stats[] { label, value }, ctaLabel },
   highlightBanner {
