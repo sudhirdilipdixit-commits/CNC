@@ -145,17 +145,20 @@ export default defineType({
           title: "Heading",
           type: "string",
           initialValue: "Find the right programme for your goal",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "subtext",
           title: "Sub-text",
           type: "string",
           initialValue: "Free. Takes 2 minutes.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "stats",
           title: "Stat Rows",
           type: "array",
+          hidden: ({ parent }) => parent?.show === false,
           of: [{
             type: "object",
             name: "heroStatItem",
@@ -172,6 +175,7 @@ export default defineType({
           title: "CTA Button Label",
           type: "string",
           initialValue: "Get Free Guidance",
+          hidden: ({ parent }) => parent?.show === false,
         }),
       ],
     }),
@@ -195,6 +199,7 @@ export default defineType({
           title: "Headline",
           type: "string",
           description: "e.g. 'Top 10 Online/Distance MBA Colleges/Universities'",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "leadText",
@@ -202,6 +207,7 @@ export default defineType({
           type: "text",
           rows: 2,
           description: "First part of the sub-heading, e.g. 'Are You Looking For The Best Online/Distance MBA Colleges In India?'",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "highlightText",
@@ -209,24 +215,28 @@ export default defineType({
           type: "text",
           rows: 2,
           description: "Second part of the sub-heading, shown in the accent color set below.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "leftPoints",
           title: "Left Column Bullet Points",
           type: "array",
           of: [{ type: "string" }],
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "rightPoints",
           title: "Right Column Bullet Points",
           type: "array",
           of: [{ type: "string" }],
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "ctaLabel",
           title: "CTA Button Label",
           type: "string",
           initialValue: "Get Free Career Counseling",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "backgroundColor",
@@ -234,6 +244,7 @@ export default defineType({
           type: "color",
           options: { disableAlpha: true },
           description: "Defaults to navy if not set.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "headlineColor",
@@ -241,6 +252,7 @@ export default defineType({
           type: "color",
           options: { disableAlpha: true },
           description: "Defaults to yellow if not set.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "accentTextColor",
@@ -248,6 +260,7 @@ export default defineType({
           type: "color",
           options: { disableAlpha: true },
           description: "Color of the Highlight Text sentence above. Defaults to yellow if not set.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "ctaButtonColor",
@@ -255,6 +268,7 @@ export default defineType({
           type: "color",
           options: { disableAlpha: true },
           description: "Background color of the CTA button. Defaults to yellow if not set.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
       ],
     }),
@@ -278,11 +292,13 @@ export default defineType({
           title: "Headline",
           type: "string",
           description: "e.g. 'Only Choose The Best Govt. Approved Indian Universities For Online/Distance MBA'",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "logos",
           title: "Logos",
           type: "array",
+          hidden: ({ parent }) => parent?.show === false,
           of: [{
             type: "object",
             name: "universityLogoItem",
@@ -299,6 +315,7 @@ export default defineType({
           title: "CTA Button Label",
           type: "string",
           initialValue: "Enquire Now",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "backgroundColor",
@@ -306,6 +323,7 @@ export default defineType({
           type: "color",
           options: { disableAlpha: true },
           description: "Defaults to ivory if not set.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "headlineColor",
@@ -313,6 +331,7 @@ export default defineType({
           type: "color",
           options: { disableAlpha: true },
           description: "Defaults to navy if not set.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "ctaButtonColor",
@@ -320,6 +339,7 @@ export default defineType({
           type: "color",
           options: { disableAlpha: true },
           description: "Background color of the CTA button. Defaults to yellow if not set.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
       ],
     }),
@@ -343,6 +363,7 @@ export default defineType({
           type: "string",
           description:
             "Yellow strip above header. e.g. 'Mar 2026 batch closing — only 23 seats remaining at Symbiosis.'",
+          hidden: ({ parent }) => parent?.show === false,
         }),
       ],
     }),
@@ -450,6 +471,7 @@ export default defineType({
           name: "items",
           title: "Items (max 6)",
           type: "array",
+          hidden: ({ parent }) => parent?.show === false,
           of: [{
             type: "object",
             name: "iconStripItem",
@@ -477,13 +499,14 @@ export default defineType({
           type: "boolean",
           initialValue: true,
         }),
-        defineField({ name: "eyebrow", title: "Eyebrow", type: "string", description: "e.g. 'Placements In Distance MBA'" }),
-        defineField({ name: "heading", title: "Heading", type: "string" }),
-        defineField({ name: "description", title: "Description", type: "text", rows: 2 }),
+        defineField({ name: "eyebrow", title: "Eyebrow", type: "string", description: "e.g. 'Placements In Distance MBA'", hidden: ({ parent }) => parent?.show === false }),
+        defineField({ name: "heading", title: "Heading", type: "string", hidden: ({ parent }) => parent?.show === false }),
+        defineField({ name: "description", title: "Description", type: "text", rows: 2, hidden: ({ parent }) => parent?.show === false }),
         defineField({
           name: "stats",
           title: "Stat Cards",
           type: "array",
+          hidden: ({ parent }) => parent?.show === false,
           of: [{
             type: "object",
             name: "statItem",
@@ -511,11 +534,11 @@ export default defineType({
           type: "boolean",
           initialValue: true,
         }),
-        defineField({ name: "heading", title: "Heading", type: "string" }),
-        defineField({ name: "subheading", title: "Sub-heading", type: "text", rows: 2 }),
-        defineField({ name: "leftPoints", title: "Left Column Bullet Points", type: "array", of: [{ type: "string" }] }),
-        defineField({ name: "rightPoints", title: "Right Column Bullet Points", type: "array", of: [{ type: "string" }] }),
-        defineField({ name: "ctaLabel", title: "CTA Button Label", type: "string", initialValue: "Get Free Career Counseling" }),
+        defineField({ name: "heading", title: "Heading", type: "string", hidden: ({ parent }) => parent?.show === false }),
+        defineField({ name: "subheading", title: "Sub-heading", type: "text", rows: 2, hidden: ({ parent }) => parent?.show === false }),
+        defineField({ name: "leftPoints", title: "Left Column Bullet Points", type: "array", of: [{ type: "string" }], hidden: ({ parent }) => parent?.show === false }),
+        defineField({ name: "rightPoints", title: "Right Column Bullet Points", type: "array", of: [{ type: "string" }], hidden: ({ parent }) => parent?.show === false }),
+        defineField({ name: "ctaLabel", title: "CTA Button Label", type: "string", initialValue: "Get Free Career Counseling", hidden: ({ parent }) => parent?.show === false }),
       ],
     }),
 
@@ -536,6 +559,7 @@ export default defineType({
           name: "headline",
           type: "string",
           initialValue: "Get a recommendation in 2 minutes.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "body",
@@ -543,11 +567,13 @@ export default defineType({
           rows: 2,
           initialValue:
             "Our AI Counsellor recommends three programmes matched to your situation, budget, and timeline.",
+          hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
           name: "ctaLabel",
           type: "string",
           initialValue: "Get Free Guidance",
+          hidden: ({ parent }) => parent?.show === false,
         }),
       ],
     }),
@@ -571,6 +597,7 @@ export default defineType({
           type: "array",
           description:
             "Add FAQs in any order. Use 'FAQ from Library' for shared questions — edit once and it updates everywhere. Use 'Custom FAQ' for questions unique to this page.",
+          hidden: ({ parent }) => parent?.show === false,
           of: [
             {
               type: "object",
