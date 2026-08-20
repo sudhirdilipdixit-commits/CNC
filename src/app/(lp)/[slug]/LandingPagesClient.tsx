@@ -132,6 +132,14 @@ export interface LandingPagesData {
     ctaLabel?: string;
   };
   ctaBand?: { show?: boolean; headline?: string; body?: string; ctaLabel?: string };
+  aboutThisPage?: {
+    show?: boolean;
+    eyebrow?: string;
+    heading?: string;
+    writtenBy?: { name?: string; role?: string; bio?: string };
+    reviewedBy?: { name?: string; role?: string; bio?: string };
+    approvedBy?: { name?: string; role?: string; bio?: string };
+  };
   seo?: { title?: string; description?: string; noIndex?: boolean };
 }
 
@@ -372,6 +380,7 @@ export default function LandingPagesClient({
   const showPlacementStats = data.placementStats?.show;
   const showHowWeHelp = data.howWeHelp?.show;
   const showCtaBand = data.ctaBand?.show !== false;
+  const showAboutThisPage = data.aboutThisPage?.show !== false;
 
   return (
     <>
@@ -736,6 +745,45 @@ export default function LandingPagesClient({
         </section>
       )}
 
+      {/* About This Page */}
+      {showAboutThisPage && (
+        <section className="lp-about-section">
+          <div className="container">
+            <div className="lp-about-eyebrow">{data.aboutThisPage?.eyebrow || "About This Page"}</div>
+            <h2 className="lp-about-heading">{data.aboutThisPage?.heading || "Who wrote and reviewed this page"}</h2>
+            <hr className="lp-about-rule" />
+            <div className="lp-about-card">
+              {[
+                {
+                  label: "Written by",
+                  name: data.aboutThisPage?.writtenBy?.name || "CollegeNCourses Editorial Team",
+                  role: data.aboutThisPage?.writtenBy?.role || "Content Lead, CollegeNCourses Editorial Desk",
+                  bio: data.aboutThisPage?.writtenBy?.bio || "Our editorial team tracks fees, approvals, and batch timelines for online MBA programmes across UGC-DEB approved private universities.",
+                },
+                {
+                  label: "Reviewed by",
+                  name: data.aboutThisPage?.reviewedBy?.name || "CollegeNCourses Senior Counsellor",
+                  role: data.aboutThisPage?.reviewedBy?.role || "Senior Counsellor, CollegeNCourses",
+                  bio: data.aboutThisPage?.reviewedBy?.bio || "Our reviewing counsellor has advised working professionals across Distance, Online, and Executive MBA modes.",
+                },
+                {
+                  label: "Approved by",
+                  name: data.aboutThisPage?.approvedBy?.name || "Nikhita Pradeep Deshmukh",
+                  role: data.aboutThisPage?.approvedBy?.role || "Founder, Dnyanal Educon Pvt Ltd",
+                  bio: data.aboutThisPage?.approvedBy?.bio || "Founder of CollegeNCourses.",
+                },
+              ].map(({ label, name, role, bio }) => (
+                <div className="lp-about-row" key={label}>
+                  <span className="lp-about-name">{label}: {name}</span>
+                  {role && <div className="lp-about-role">{role}</div>}
+                  {bio && <p className="lp-about-bio">{bio}</p>}
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {footer}
 
       {/* Mobile sticky bar */}
@@ -888,6 +936,18 @@ export default function LandingPagesClient({
         .lp-faq-icon { width: 22px; height: 22px; background: var(--yellow); color: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: 800; transition: transform .2s; flex: 0 0 22px; line-height: 1; }
         .lp-faq-item[open] .lp-faq-icon { transform: rotate(45deg); }
         .lp-faq-a { padding: 0 18px 18px; font-size: 14px; color: var(--charcoal); line-height: 1.65; }
+
+        /* ── About This Page ── */
+        .lp-about-section { background: var(--ivory); padding: 56px 0; border-top: 1px solid var(--mist); }
+        .lp-about-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--navy); margin-bottom: 10px; }
+        .lp-about-heading { font-family: var(--font-serif); color: var(--navy); font-size: clamp(22px, 3vw, 34px); line-height: 1.2; margin: 0 0 14px; }
+        .lp-about-rule { width: 48px; height: 3px; background: var(--yellow); border: none; margin: 0 0 28px; }
+        .lp-about-card { background: var(--white); border: 1px solid var(--mist); border-radius: 10px; padding: 20px; }
+        .lp-about-row { padding: 12px 0; border-bottom: 1px solid var(--mist); }
+        .lp-about-row:last-child { border-bottom: none; }
+        .lp-about-name { color: var(--navy); font-size: 15px; font-weight: 700; display: block; margin-bottom: 4px; }
+        .lp-about-role { font-size: 13px; color: var(--grey); margin-bottom: 4px; }
+        .lp-about-bio { font-size: 13px; color: var(--charcoal); line-height: 1.55; margin: 0; }
 
         /* ── CTA band ── */
         .lp-cta-band { background: var(--yellow); padding: 56px 0; border-top: 4px solid var(--navy); }

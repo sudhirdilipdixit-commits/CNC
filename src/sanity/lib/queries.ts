@@ -265,5 +265,11 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
       "answer": select(_type == "reference" => @->answer, answer),
     },
   },
+  aboutThisPage {
+    show, eyebrow, heading,
+    writtenBy { name, role, bio },
+    reviewedBy { name, role, bio },
+    approvedBy { name, role, bio },
+  },
   seo { title, description, noIndex },
 }`;

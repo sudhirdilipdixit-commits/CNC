@@ -656,6 +656,88 @@ export default defineType({
       ],
     }),
 
+    // ── About This Page ──────────────────────────────────────────────
+    defineField({
+      name: "aboutThisPage",
+      title: "About This Page",
+      type: "object",
+      description: "E-E-A-T credibility card shown near the bottom of the page — who wrote, reviewed, and approved it.",
+      group: "content",
+      fields: [
+        defineField({
+          name: "show",
+          title: "Show About This Page Section",
+          type: "boolean",
+          initialValue: true,
+        }),
+        defineField({
+          name: "eyebrow",
+          title: "Eyebrow",
+          type: "string",
+          initialValue: "About This Page",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+        defineField({
+          name: "heading",
+          title: "Heading",
+          type: "string",
+          initialValue: "Who wrote and reviewed this page",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+        defineField({
+          name: "writtenBy",
+          title: "Written By",
+          type: "object",
+          hidden: ({ parent }) => parent?.show === false,
+          fields: [
+            defineField({ name: "name", title: "Name", type: "string", initialValue: "CollegeNCourses Editorial Team" }),
+            defineField({ name: "role", title: "Role", type: "string", initialValue: "Content Lead, CollegeNCourses Editorial Desk" }),
+            defineField({
+              name: "bio",
+              title: "Bio",
+              type: "text",
+              rows: 2,
+              initialValue: "Our editorial team tracks fees, approvals, and batch timelines for online MBA programmes across UGC-DEB approved private universities.",
+            }),
+          ],
+        }),
+        defineField({
+          name: "reviewedBy",
+          title: "Reviewed By",
+          type: "object",
+          hidden: ({ parent }) => parent?.show === false,
+          fields: [
+            defineField({ name: "name", title: "Name", type: "string", initialValue: "CollegeNCourses Senior Counsellor" }),
+            defineField({ name: "role", title: "Role", type: "string", initialValue: "Senior Counsellor, CollegeNCourses" }),
+            defineField({
+              name: "bio",
+              title: "Bio",
+              type: "text",
+              rows: 2,
+              initialValue: "Our reviewing counsellor has advised working professionals across Distance, Online, and Executive MBA modes.",
+            }),
+          ],
+        }),
+        defineField({
+          name: "approvedBy",
+          title: "Approved By",
+          type: "object",
+          hidden: ({ parent }) => parent?.show === false,
+          fields: [
+            defineField({ name: "name", title: "Name", type: "string", initialValue: "Nikhita Pradeep Deshmukh" }),
+            defineField({ name: "role", title: "Role", type: "string", initialValue: "Founder, Dnyanal Educon Pvt Ltd" }),
+            defineField({
+              name: "bio",
+              title: "Bio",
+              type: "text",
+              rows: 2,
+              initialValue: "Founder of CollegeNCourses.",
+            }),
+          ],
+        }),
+      ],
+    }),
+
     // ── SEO ──────────────────────────────────────────────────────────
     defineField({
       name: "seo",
