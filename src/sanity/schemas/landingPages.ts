@@ -4,14 +4,8 @@ export default defineType({
   name: "landingPages",
   title: "Landing Pages",
   type: "document",
-  groups: [
-    { name: "content", title: "Content", default: true },
-    { name: "display", title: "Display Settings" },
-    { name: "cards", title: "Cards" },
-    { name: "seo", title: "SEO" },
-  ],
   fields: [
-    // ── Page Type — ungrouped so it floats above all tabs ────────────
+    // ── Page Type ──────────────────────────────────────────────────────
     defineField({
       name: "pageType",
       title: "Page Type",
@@ -36,7 +30,6 @@ export default defineType({
       type: "string",
       description: "Used in Sanity only. e.g. 'Marketing MBA – Google Ads – Jun 2026'",
       validation: (R) => R.required(),
-      group: "content",
     }),
     defineField({
       name: "slug",
@@ -45,14 +38,46 @@ export default defineType({
       options: { source: "title" },
       validation: (R) => R.required(),
       description: "Page URL will be /[slug]",
-      group: "content",
     }),
+
+    // ── Urgency Banner ─────────────────────────────────────────────────
+    defineField({
+      name: "urgencyBanner",
+      title: "Urgency Banner (optional)",
+      type: "object",
+      fields: [
+        defineField({
+          name: "show",
+          title: "Show Urgency Banner",
+          type: "boolean",
+          initialValue: false,
+        }),
+        defineField({
+          name: "text",
+          title: "Banner Text",
+          type: "string",
+          description:
+            "Yellow strip above header. e.g. 'Mar 2026 batch closing — only 23 seats remaining at Symbiosis.'",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+      ],
+    }),
+
+    // ── Show Full Site Header ──────────────────────────────────────────
+    defineField({
+      name: "showFullHeader",
+      title: "Show Full Site Header",
+      type: "boolean",
+      description:
+        "OFF (default) = stripped header with logo + phone + CTA only. ON = full site navigation.",
+      initialValue: false,
+    }),
+
     // ── Hero ─────────────────────────────────────────────────────────
     defineField({
       name: "hero",
       title: "Hero Section",
       type: "object",
-      group: "content",
       fields: [
         defineField({
           name: "eyebrow",
@@ -132,7 +157,6 @@ export default defineType({
       title: "Hero Sidebar Card",
       type: "object",
       description: "Sticky quick-enquiry card shown beside the hero on desktop.",
-      group: "content",
       fields: [
         defineField({
           name: "show",
@@ -186,7 +210,6 @@ export default defineType({
       title: "Highlight Banner",
       type: "object",
       description: "Full-width banner with a headline, two-tone sub-text, two-column bullet points, and a CTA button.",
-      group: "content",
       fields: [
         defineField({
           name: "show",
@@ -279,7 +302,6 @@ export default defineType({
       title: "University Logos",
       type: "object",
       description: "Headline + grid of university logos + CTA button.",
-      group: "content",
       fields: [
         defineField({
           name: "show",
@@ -344,46 +366,6 @@ export default defineType({
       ],
     }),
 
-    // ── Display Settings ─────────────────────────────────────────────
-    defineField({
-      name: "urgencyBanner",
-      title: "Urgency Banner (optional)",
-      type: "object",
-      group: "display",
-      fields: [
-        defineField({
-          name: "show",
-          title: "Show Urgency Banner",
-          type: "boolean",
-          initialValue: false,
-        }),
-        defineField({
-          name: "text",
-          title: "Banner Text",
-          type: "string",
-          description:
-            "Yellow strip above header. e.g. 'Mar 2026 batch closing — only 23 seats remaining at Symbiosis.'",
-          hidden: ({ parent }) => parent?.show === false,
-        }),
-      ],
-    }),
-    defineField({
-      name: "showFullHeader",
-      title: "Show Full Site Header",
-      type: "boolean",
-      description:
-        "OFF (default) = stripped header with logo + phone + CTA only. ON = full site navigation.",
-      initialValue: false,
-      group: "display",
-    }),
-    defineField({
-      name: "showFooter",
-      title: "Show Footer",
-      type: "boolean",
-      initialValue: false,
-      group: "display",
-    }),
-
     // ── Cards ──────────────────────────────────────────────────────────
     defineField({
       name: "courseItems",
@@ -406,7 +388,6 @@ export default defineType({
         },
       }],
       description: "Select and reorder course cards. Drag to change display order.",
-      group: "cards",
       hidden: ({ document }) => (document as { pageType?: string })?.pageType === "university",
       validation: (R) =>
         R.custom((items?: Array<{ _ref: string }>) => {
@@ -440,7 +421,6 @@ export default defineType({
         },
       }],
       description: "Select and reorder university cards. Drag to change display order.",
-      group: "cards",
       hidden: ({ document }) => (document as { pageType?: string })?.pageType !== "university",
       validation: (R) =>
         R.custom((items?: Array<{ _ref: string }>) => {
@@ -459,7 +439,6 @@ export default defineType({
       name: "iconStrip",
       title: "Icon Feature Strip",
       type: "object",
-      group: "content",
       fields: [
         defineField({
           name: "show",
@@ -491,7 +470,6 @@ export default defineType({
       name: "placementStats",
       title: "Placement Stats Section",
       type: "object",
-      group: "content",
       fields: [
         defineField({
           name: "show",
@@ -526,7 +504,6 @@ export default defineType({
       name: "howWeHelp",
       title: "How We Help Section",
       type: "object",
-      group: "content",
       fields: [
         defineField({
           name: "show",
@@ -542,48 +519,11 @@ export default defineType({
       ],
     }),
 
-    // ── CTA band ─────────────────────────────────────────────────────
-    defineField({
-      name: "ctaBand",
-      title: "Bottom CTA Band",
-      type: "object",
-      group: "content",
-      fields: [
-        defineField({
-          name: "show",
-          title: "Show Bottom CTA Band",
-          type: "boolean",
-          initialValue: true,
-        }),
-        defineField({
-          name: "headline",
-          type: "string",
-          initialValue: "Get a recommendation in 2 minutes.",
-          hidden: ({ parent }) => parent?.show === false,
-        }),
-        defineField({
-          name: "body",
-          type: "text",
-          rows: 2,
-          initialValue:
-            "Our AI Counsellor recommends three programmes matched to your situation, budget, and timeline.",
-          hidden: ({ parent }) => parent?.show === false,
-        }),
-        defineField({
-          name: "ctaLabel",
-          type: "string",
-          initialValue: "Get Free Guidance",
-          hidden: ({ parent }) => parent?.show === false,
-        }),
-      ],
-    }),
-
     // ── FAQs ────────────────────────────────────────────────────────
     defineField({
       name: "faqs",
       title: "FAQs",
       type: "object",
-      group: "content",
       fields: [
         defineField({
           name: "show",
@@ -662,7 +602,6 @@ export default defineType({
       title: "About This Page",
       type: "object",
       description: "E-E-A-T credibility card shown near the bottom of the page — who wrote, reviewed, and approved it.",
-      group: "content",
       fields: [
         defineField({
           name: "show",
@@ -738,12 +677,54 @@ export default defineType({
       ],
     }),
 
+    // ── CTA band ─────────────────────────────────────────────────────
+    defineField({
+      name: "ctaBand",
+      title: "Bottom CTA Band",
+      type: "object",
+      fields: [
+        defineField({
+          name: "show",
+          title: "Show Bottom CTA Band",
+          type: "boolean",
+          initialValue: true,
+        }),
+        defineField({
+          name: "headline",
+          type: "string",
+          initialValue: "Get a recommendation in 2 minutes.",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+        defineField({
+          name: "body",
+          type: "text",
+          rows: 2,
+          initialValue:
+            "Our AI Counsellor recommends three programmes matched to your situation, budget, and timeline.",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+        defineField({
+          name: "ctaLabel",
+          type: "string",
+          initialValue: "Get Free Guidance",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+      ],
+    }),
+
+    // ── Show Footer ─────────────────────────────────────────────────
+    defineField({
+      name: "showFooter",
+      title: "Show Footer",
+      type: "boolean",
+      initialValue: false,
+    }),
+
     // ── SEO ──────────────────────────────────────────────────────────
     defineField({
       name: "seo",
       title: "SEO",
       type: "object",
-      group: "seo",
       fields: [
         defineField({ name: "title", type: "string" }),
         defineField({ name: "description", type: "text", rows: 2 }),
