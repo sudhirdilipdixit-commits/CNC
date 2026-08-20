@@ -178,6 +178,59 @@ export default defineType({
       ],
     }),
 
+    // ── Hero Sidebar Card ────────────────────────────────────────────
+    defineField({
+      name: "heroSidebarCard",
+      title: "Hero Sidebar Card",
+      type: "object",
+      description: "Sticky quick-enquiry card shown beside the hero on desktop. Only used with Hero Section — Option 1.",
+      fields: [
+        defineField({
+          name: "show",
+          title: "Show Sidebar Card",
+          type: "boolean",
+          initialValue: true,
+        }),
+        defineField({
+          name: "heading",
+          title: "Heading",
+          type: "string",
+          initialValue: "Find the right programme for your goal",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+        defineField({
+          name: "subtext",
+          title: "Sub-text",
+          type: "string",
+          initialValue: "Free. Takes 2 minutes.",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+        defineField({
+          name: "stats",
+          title: "Stat Rows",
+          type: "array",
+          hidden: ({ parent }) => parent?.show === false,
+          of: [{
+            type: "object",
+            name: "heroStatItem",
+            title: "Stat Row",
+            fields: [
+              defineField({ name: "label", title: "Label", type: "string", description: "e.g. 'Typical fee range'", validation: (R) => R.required() }),
+              defineField({ name: "value", title: "Value", type: "string", description: "e.g. 'Rs 1.1L to Rs 2.8L'", validation: (R) => R.required() }),
+            ],
+            preview: { select: { title: "label", subtitle: "value" } },
+          }],
+        }),
+        defineField({
+          name: "ctaLabel",
+          title: "CTA Button Label",
+          type: "string",
+          initialValue: "Get Free Guidance",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+      ],
+    }),
+
     // ── Hero — Option 2 ────────────────────────────────────────────────
     defineField({
       name: "heroOption2",
@@ -358,59 +411,6 @@ export default defineType({
           options: { disableAlpha: true },
           description: "Headline and sub-headline text color. Defaults to ivory/white if not set.",
           hidden: ({ parent }) => parent?.show !== true,
-        }),
-      ],
-    }),
-
-    // ── Hero Sidebar Card ────────────────────────────────────────────
-    defineField({
-      name: "heroSidebarCard",
-      title: "Hero Sidebar Card",
-      type: "object",
-      description: "Sticky quick-enquiry card shown beside the hero on desktop. Only used with Hero Section — Option 1.",
-      fields: [
-        defineField({
-          name: "show",
-          title: "Show Sidebar Card",
-          type: "boolean",
-          initialValue: true,
-        }),
-        defineField({
-          name: "heading",
-          title: "Heading",
-          type: "string",
-          initialValue: "Find the right programme for your goal",
-          hidden: ({ parent }) => parent?.show === false,
-        }),
-        defineField({
-          name: "subtext",
-          title: "Sub-text",
-          type: "string",
-          initialValue: "Free. Takes 2 minutes.",
-          hidden: ({ parent }) => parent?.show === false,
-        }),
-        defineField({
-          name: "stats",
-          title: "Stat Rows",
-          type: "array",
-          hidden: ({ parent }) => parent?.show === false,
-          of: [{
-            type: "object",
-            name: "heroStatItem",
-            title: "Stat Row",
-            fields: [
-              defineField({ name: "label", title: "Label", type: "string", description: "e.g. 'Typical fee range'", validation: (R) => R.required() }),
-              defineField({ name: "value", title: "Value", type: "string", description: "e.g. 'Rs 1.1L to Rs 2.8L'", validation: (R) => R.required() }),
-            ],
-            preview: { select: { title: "label", subtitle: "value" } },
-          }],
-        }),
-        defineField({
-          name: "ctaLabel",
-          title: "CTA Button Label",
-          type: "string",
-          initialValue: "Get Free Guidance",
-          hidden: ({ parent }) => parent?.show === false,
         }),
       ],
     }),

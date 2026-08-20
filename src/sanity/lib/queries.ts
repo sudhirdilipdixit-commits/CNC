@@ -222,6 +222,7 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
     reviewerName, reviewerRole, approverName, approverRole,
     primaryCtaLabel, secondaryCtaLabel,
   },
+  heroSidebarCard { show, heading, subtext, "stats": stats[] { label, value }, ctaLabel },
   heroOption2 {
     show, eyebrow, headline, subheadline, primaryCtaLabel, secondaryCtaLabel,
     "imageUrl": image.asset->url,
@@ -238,7 +239,6 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
     "buttonColor": buttonColor.hex,
     "fontColor": fontColor.hex,
   },
-  heroSidebarCard { show, heading, subtext, "stats": stats[] { label, value }, ctaLabel },
   highlightBanner {
     show, headline, leadText, highlightText, leftPoints, rightPoints, ctaLabel,
     "backgroundColor": backgroundColor.hex,
