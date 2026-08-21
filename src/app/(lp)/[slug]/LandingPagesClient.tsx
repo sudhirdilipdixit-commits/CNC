@@ -97,16 +97,16 @@ export interface LandingPagesData {
     approverRole?: string;
     primaryCtaLabel?: string;
     secondaryCtaLabel?: string;
+    heroSidebarCard?: {
+      show?: boolean;
+      heading?: string;
+      subtext?: string;
+      stats?: { label: string; value: string }[];
+      ctaLabel?: string;
+    };
   };
   heroOption2?: SimpleHeroData;
   heroOption3?: SimpleHeroData;
-  heroSidebarCard?: {
-    show?: boolean;
-    heading?: string;
-    subtext?: string;
-    stats?: { label: string; value: string }[];
-    ctaLabel?: string;
-  };
   highlightBanner?: {
     show?: boolean;
     headline?: string;
@@ -496,16 +496,16 @@ export default function LandingPagesClient({
                 </div>
               </div>
 
-              {data.heroSidebarCard?.show !== false && (
+              {data.hero.heroSidebarCard?.show !== false && (
                 <aside className="lp-hero-sidebar" aria-label="Quick enquiry">
                   <div className="lp-hero-sidebar-header">
-                    <h3>{data.heroSidebarCard?.heading || "Find the right programme for your goal"}</h3>
-                    <p>{data.heroSidebarCard?.subtext || "Free. Takes 2 minutes."}</p>
+                    <h3>{data.hero.heroSidebarCard?.heading || "Find the right programme for your goal"}</h3>
+                    <p>{data.hero.heroSidebarCard?.subtext || "Free. Takes 2 minutes."}</p>
                   </div>
                   <div className="lp-hero-sidebar-body">
-                    {data.heroSidebarCard?.stats && data.heroSidebarCard.stats.length > 0 && (
+                    {data.hero.heroSidebarCard?.stats && data.hero.heroSidebarCard.stats.length > 0 && (
                       <div className="lp-hero-sidebar-stats">
-                        {data.heroSidebarCard.stats.map((item) => (
+                        {data.hero.heroSidebarCard.stats.map((item) => (
                           <div className="lp-hero-sidebar-stat" key={item.label}>
                             <span>{item.label}:</span>
                             <strong>{item.value}</strong>
@@ -516,9 +516,9 @@ export default function LandingPagesClient({
                     <button
                       className="btn btn-primary"
                       style={{ width: "100%" }}
-                      onClick={() => openModal(data.heroSidebarCard?.ctaLabel || "Get Free Guidance")}
+                      onClick={() => openModal(data.hero.heroSidebarCard?.ctaLabel || "Get Free Guidance")}
                     >
-                      {data.heroSidebarCard?.ctaLabel || "Get Free Guidance"}
+                      {data.hero.heroSidebarCard?.ctaLabel || "Get Free Guidance"}
                     </button>
                   </div>
                 </aside>
