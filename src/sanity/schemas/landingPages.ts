@@ -183,30 +183,21 @@ export default defineType({
           hidden: ({ parent }) => parent?.show === false,
           fields: [
             defineField({
-              name: "show",
-              title: "Show Sidebar Card",
-              type: "boolean",
-              initialValue: true,
-            }),
-            defineField({
               name: "heading",
               title: "Heading",
               type: "string",
               initialValue: "Find the right programme for your goal",
-              hidden: ({ parent }) => parent?.show === false,
             }),
             defineField({
               name: "subtext",
               title: "Sub-text",
               type: "string",
               initialValue: "Free. Takes 2 minutes.",
-              hidden: ({ parent }) => parent?.show === false,
             }),
             defineField({
               name: "stats",
               title: "Stat Rows",
               type: "array",
-              hidden: ({ parent }) => parent?.show === false,
               of: [{
                 type: "object",
                 name: "heroStatItem",
@@ -223,7 +214,6 @@ export default defineType({
               title: "CTA Button Label",
               type: "string",
               initialValue: "Get Free Guidance",
-              hidden: ({ parent }) => parent?.show === false,
             }),
           ],
         }),

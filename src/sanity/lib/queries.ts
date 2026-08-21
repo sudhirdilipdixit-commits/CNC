@@ -221,7 +221,7 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
     show, eyebrow, headline, calloutText, description, updatedLabel,
     reviewerName, reviewerRole, approverName, approverRole,
     primaryCtaLabel, secondaryCtaLabel,
-    heroSidebarCard { show, heading, subtext, "stats": stats[] { label, value }, ctaLabel },
+    heroSidebarCard { heading, subtext, "stats": stats[] { label, value }, ctaLabel },
   },
   heroOption2 {
     show, eyebrow, headline, subheadline, primaryCtaLabel, secondaryCtaLabel,

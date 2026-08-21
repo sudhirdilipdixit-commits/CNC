@@ -98,7 +98,6 @@ export interface LandingPagesData {
     primaryCtaLabel?: string;
     secondaryCtaLabel?: string;
     heroSidebarCard?: {
-      show?: boolean;
       heading?: string;
       subtext?: string;
       stats?: { label: string; value: string }[];
@@ -496,33 +495,31 @@ export default function LandingPagesClient({
                 </div>
               </div>
 
-              {data.hero.heroSidebarCard?.show !== false && (
-                <aside className="lp-hero-sidebar" aria-label="Quick enquiry">
-                  <div className="lp-hero-sidebar-header">
-                    <h3>{data.hero.heroSidebarCard?.heading || "Find the right programme for your goal"}</h3>
-                    <p>{data.hero.heroSidebarCard?.subtext || "Free. Takes 2 minutes."}</p>
-                  </div>
-                  <div className="lp-hero-sidebar-body">
-                    {data.hero.heroSidebarCard?.stats && data.hero.heroSidebarCard.stats.length > 0 && (
-                      <div className="lp-hero-sidebar-stats">
-                        {data.hero.heroSidebarCard.stats.map((item) => (
-                          <div className="lp-hero-sidebar-stat" key={item.label}>
-                            <span>{item.label}:</span>
-                            <strong>{item.value}</strong>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    <button
-                      className="btn btn-primary"
-                      style={{ width: "100%" }}
-                      onClick={() => openModal(data.hero.heroSidebarCard?.ctaLabel || "Get Free Guidance")}
-                    >
-                      {data.hero.heroSidebarCard?.ctaLabel || "Get Free Guidance"}
-                    </button>
-                  </div>
-                </aside>
-              )}
+              <aside className="lp-hero-sidebar" aria-label="Quick enquiry">
+                <div className="lp-hero-sidebar-header">
+                  <h3>{data.hero.heroSidebarCard?.heading || "Find the right programme for your goal"}</h3>
+                  <p>{data.hero.heroSidebarCard?.subtext || "Free. Takes 2 minutes."}</p>
+                </div>
+                <div className="lp-hero-sidebar-body">
+                  {data.hero.heroSidebarCard?.stats && data.hero.heroSidebarCard.stats.length > 0 && (
+                    <div className="lp-hero-sidebar-stats">
+                      {data.hero.heroSidebarCard.stats.map((item) => (
+                        <div className="lp-hero-sidebar-stat" key={item.label}>
+                          <span>{item.label}:</span>
+                          <strong>{item.value}</strong>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                  <button
+                    className="btn btn-primary"
+                    style={{ width: "100%" }}
+                    onClick={() => openModal(data.hero.heroSidebarCard?.ctaLabel || "Get Free Guidance")}
+                  >
+                    {data.hero.heroSidebarCard?.ctaLabel || "Get Free Guidance"}
+                  </button>
+                </div>
+              </aside>
             </div>
           </div>
         </section>
