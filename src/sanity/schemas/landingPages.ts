@@ -269,6 +269,9 @@ export default defineType({
           options: { hotspot: true },
           description: "Shown in the empty space to the right of the text on desktop.",
           hidden: ({ parent }) => parent?.show !== true,
+          fields: [
+            defineField({ name: "alt", title: "Alt Text", type: "string", description: "Describe the image for screen readers and SEO." }),
+          ],
         }),
         defineField({
           name: "primaryCtaLabel",
@@ -927,6 +930,13 @@ export default defineType({
           initialValue: true,
           description:
             "Landing pages are usually no-indexed to avoid duplicate content. Uncheck only for SEO-targeted pages.",
+        }),
+        defineField({
+          name: "dateModified",
+          title: "Last Updated",
+          type: "datetime",
+          description:
+            "Set whenever you make significant content changes. Drives dateModified in Google's rich results and structured data — separate from the free-text 'Updated Label' shown on the page.",
         }),
       ],
     }),

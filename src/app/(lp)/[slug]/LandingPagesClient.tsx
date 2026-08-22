@@ -156,7 +156,7 @@ export interface LandingPagesData {
     reviewedBy?: { name?: string; role?: string; bio?: string };
     approvedBy?: { name?: string; role?: string; bio?: string };
   };
-  seo?: { title?: string; description?: string; noIndex?: boolean };
+  seo?: { title?: string; description?: string; noIndex?: boolean; dateModified?: string };
 }
 
 // ── Stripped header ────────────────────────────────────────────────────────

@@ -213,6 +213,11 @@ export const landingPageQuery = groq`*[_type == "landingPage" && slug.current ==
 
 export const allLandingPagesSlugsQuery = groq`*[_type == "landingPages"]{ "slug": slug.current }`;
 
+export const allLandingPagesForSitemapQuery = groq`*[_type == "landingPages" && seo.noIndex != true]{
+  "slug": slug.current,
+  "dateModified": seo.dateModified,
+}`;
+
 export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current == $slug][0]{
   title, pageType,
   showFullHeader, showFooter,
@@ -285,5 +290,5 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
     reviewedBy { name, role, bio },
     approvedBy { name, role, bio },
   },
-  seo { title, description, noIndex },
+  seo { title, description, noIndex, dateModified },
 }`;

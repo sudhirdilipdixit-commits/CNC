@@ -4,12 +4,14 @@ import {
   allBlogPostsForSitemapQuery,
   allAuthorSlugsQuery,
   allCategorySlugsQuery,
+  allLandingPagesForSitemapQuery,
 } from "@/sanity/lib/queries";
 
-const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://collegencourses.com";
+const BASE_URL = (process.env.NEXT_PUBLIC_SITE_URL ?? "https://collegencourses.com").replace(/\/+$/, "");
 
 type BlogSitemapItem = { slug: string; publishedAt?: string; updatedAt?: string };
 type SlugItem = { slug: string };
+type LandingPageSitemapItem = { slug: string; dateModified?: string };
 
 function makeSanityClient() {
   const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
@@ -40,11 +42,21 @@ async function getSlugs(query: string): Promise<string[]> {
   } catch { return []; }
 }
 
+async function getLandingPages(): Promise<LandingPageSitemapItem[]> {
+  try {
+    const c = makeSanityClient();
+    if (!c) return [];
+    const items = await c.fetch<LandingPageSitemapItem[]>(allLandingPagesForSitemapQuery);
+    return items.filter((i) => i.slug);
+  } catch { return []; }
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [blogPosts, authorSlugs, categorySlugs] = await Promise.all([
+  const [blogPosts, authorSlugs, categorySlugs, landingPages] = await Promise.all([
     getBlogPosts(),
     getSlugs(allAuthorSlugsQuery),
     getSlugs(allCategorySlugsQuery),
+    getLandingPages(),
   ]);
 
   const staticRoutes: MetadataRoute.Sitemap = [
@@ -77,5 +89,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.65,
   }));
 
-  return [...staticRoutes, ...blogRoutes, ...authorRoutes, ...categoryRoutes];
+  const landingPageRoutes: MetadataRoute.Sitemap = landingPages.map((page) => ({
+    url: `${BASE_URL}/${page.slug}`,
+    lastModified: page.dateModified ? new Date(page.dateModified) : new Date(),
+    changeFrequency: "weekly" as const,
+    priority: 0.7,
+  }));
+
+  return [...staticRoutes, ...blogRoutes, ...authorRoutes, ...categoryRoutes, ...landingPageRoutes];
 }
