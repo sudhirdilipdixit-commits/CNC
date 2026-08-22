@@ -190,7 +190,7 @@ function SimpleHero({ data, onCta }: { data: SimpleHeroData; onCta: (name: strin
   return (
     <section className="lp-hero2" style={{ background: data.backgroundColor || "var(--navy)" }}>
       <div className="container">
-        <div className="lp-hero2-layout">
+        <div className={`lp-hero2-layout${!data.imageUrl ? " lp-hero2-layout--full" : ""}`}>
           <div className="lp-hero2-content">
             {data.eyebrow && (
               <div className="lp-hero2-eyebrow" style={{ color: data.buttonColor || "var(--yellow)" }}>
@@ -932,6 +932,10 @@ export default function LandingPagesClient({
         .lp-hero2 { padding: 64px 0; }
         .lp-hero2-layout { display: grid; grid-template-columns: 1fr; gap: 32px; align-items: center; }
         @media (min-width: 900px) { .lp-hero2-layout { grid-template-columns: 1fr 1fr; } }
+        .lp-hero2-layout--full { grid-template-columns: 1fr; }
+        .lp-hero2-layout--full .lp-hero2-content { max-width: 760px; margin: 0 auto; text-align: center; }
+        .lp-hero2-layout--full .lp-hero2-sub { margin-left: auto; margin-right: auto; }
+        .lp-hero2-layout--full .lp-cta-row { justify-content: center; }
         .lp-hero2-eyebrow { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
         .lp-hero2-headline { font-family: var(--font-serif); font-size: clamp(28px, 4.5vw, 50px); line-height: 1.1; margin: 0 0 20px; }
         .lp-hero2-sub { font-size: clamp(15px, 1.8vw, 18px); max-width: 640px; margin-bottom: 28px; line-height: 1.6; }

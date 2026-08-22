@@ -317,7 +317,7 @@ export default defineType({
       name: "heroOption3",
       title: "Hero Section — Option 3",
       type: "object",
-      description: "Same layout as Option 2 (eyebrow badge, headline, subheadline, dual CTA, optional right-side image) — a second preset you can configure independently.",
+      description: "Same layout as Option 2 (eyebrow badge, headline, subheadline, dual CTA) but always full-width, without a right-side image.",
       fields: [
         defineField({
           name: "show",
@@ -352,14 +352,6 @@ export default defineType({
           title: "Sub-headline",
           type: "text",
           rows: 2,
-          hidden: ({ parent }) => parent?.show !== true,
-        }),
-        defineField({
-          name: "image",
-          title: "Right-side Image (optional)",
-          type: "image",
-          options: { hotspot: true },
-          description: "Shown in the empty space to the right of the text on desktop.",
           hidden: ({ parent }) => parent?.show !== true,
         }),
         defineField({
