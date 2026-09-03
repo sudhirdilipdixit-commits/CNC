@@ -2,6 +2,7 @@
 
 import { useState, useMemo, useCallback } from "react";
 import Image from "next/image";
+import { PortableText } from "@portabletext/react";
 import Header from "@/components/layout/Header";
 import LeadModal from "@/components/forms/LeadModal";
 
@@ -74,7 +75,7 @@ export interface SimpleHeroData {
   show?: boolean;
   eyebrow?: string;
   headline?: string;
-  subheadline?: string;
+  subheadline?: any[];
   primaryCtaLabel?: string;
   secondaryCtaLabel?: string;
   imageUrl?: string;
@@ -209,10 +210,10 @@ function SimpleHero({ data, onCta }: { data: SimpleHeroData; onCta: (name: strin
                 {data.headline}
               </h1>
             )}
-            {data.subheadline && (
-              <p className="lp-hero2-sub" style={{ color: data.fontColor || "var(--pale-navy)" }}>
-                {data.subheadline}
-              </p>
+            {data.subheadline && data.subheadline.length > 0 && (
+              <div className="lp-hero2-sub" style={{ color: data.fontColor || "var(--pale-navy)" }}>
+                <PortableText value={data.subheadline} />
+              </div>
             )}
             <div className="lp-cta-row">
               <button
@@ -965,6 +966,8 @@ export default function LandingPagesClient({
         .lp-hero2-eyebrow { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; margin-bottom: 14px; }
         .lp-hero2-headline { font-family: var(--font-serif); font-size: clamp(28px, 4.5vw, 50px); line-height: 1.1; margin: 0 0 20px; }
         .lp-hero2-sub { font-size: clamp(15px, 1.8vw, 18px); max-width: 640px; margin-bottom: 28px; line-height: 1.6; }
+        .lp-hero2-sub p { margin: 0 0 8px; }
+        .lp-hero2-sub p:last-child { margin-bottom: 0; }
         .lp-hero2-secondary-btn { background: rgba(255,255,255,.08); color: var(--ivory); border: 1.5px solid rgba(255,255,255,.3); min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 13px 24px; font-size: 15px; font-weight: 600; font-family: var(--font-sans); border-radius: 8px; cursor: pointer; transition: background .15s; }
         .lp-hero2-secondary-btn:hover { background: rgba(255,255,255,.16); }
         .lp-hero2-media { display: flex; align-items: center; justify-content: center; }

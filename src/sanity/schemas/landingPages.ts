@@ -1,5 +1,18 @@
 import { defineType, defineField } from "sanity";
 
+const simpleRichTextBlock = {
+  type: "block",
+  styles: [{ title: "Normal", value: "normal" }],
+  lists: [],
+  marks: {
+    decorators: [
+      { title: "Bold", value: "strong" },
+      { title: "Italic", value: "em" },
+    ],
+    annotations: [],
+  },
+};
+
 export default defineType({
   name: "landingPages",
   title: "Landing Pages",
@@ -302,8 +315,9 @@ export default defineType({
         defineField({
           name: "subheadline",
           title: "Sub-headline",
-          type: "text",
-          rows: 2,
+          type: "array",
+          of: [simpleRichTextBlock],
+          description: "Supports bold, italic, and separate paragraph lines.",
           hidden: ({ parent }) => parent?.show !== true,
         }),
         defineField({
@@ -397,8 +411,9 @@ export default defineType({
         defineField({
           name: "subheadline",
           title: "Sub-headline",
-          type: "text",
-          rows: 2,
+          type: "array",
+          of: [simpleRichTextBlock],
+          description: "Supports bold, italic, and separate paragraph lines.",
           hidden: ({ parent }) => parent?.show !== true,
         }),
         defineField({
