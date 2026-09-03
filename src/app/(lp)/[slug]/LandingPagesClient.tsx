@@ -5,6 +5,12 @@ import Image from "next/image";
 import Header from "@/components/layout/Header";
 import LeadModal from "@/components/forms/LeadModal";
 
+const SCROLLING_NOTIFICATION_SPEED: Record<"slow" | "normal" | "fast", string> = {
+  slow: "36s",
+  normal: "22s",
+  fast: "12s",
+};
+
 // ── Types ──────────────────────────────────────────────────────────────────
 
 export interface CourseCardItem {
@@ -84,7 +90,7 @@ export interface LandingPagesData {
   showFullHeader?: boolean;
   showFooter?: boolean;
   urgencyBanner?: { show?: boolean; text?: string };
-  scrollingNotification?: { show?: boolean; text?: string };
+  scrollingNotification?: { show?: boolean; text?: string; speed?: "slow" | "normal" | "fast" };
   hero: {
     show?: boolean;
     eyebrow?: string;
@@ -469,7 +475,10 @@ export default function LandingPagesClient({
       {/* Scrolling Notification */}
       {data.scrollingNotification?.show && data.scrollingNotification.text && (
         <div className="lp-scrolling-notification">
-          <div className="lp-scrolling-notification-track">
+          <div
+            className="lp-scrolling-notification-track"
+            style={{ animationDuration: SCROLLING_NOTIFICATION_SPEED[data.scrollingNotification.speed || "normal"] }}
+          >
             <span className="lp-scrolling-notification-text">{data.scrollingNotification.text}</span>
             <span className="lp-scrolling-notification-text" aria-hidden="true">{data.scrollingNotification.text}</span>
           </div>

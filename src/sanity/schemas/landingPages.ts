@@ -93,6 +93,22 @@ export default defineType({
           description: "Scrolls continuously right-to-left below the header.",
           hidden: ({ parent }) => parent?.show === false,
         }),
+        defineField({
+          name: "speed",
+          title: "Scroll Speed",
+          type: "string",
+          options: {
+            list: [
+              { title: "Slow", value: "slow" },
+              { title: "Normal", value: "normal" },
+              { title: "Fast", value: "fast" },
+            ],
+            layout: "radio",
+            direction: "horizontal",
+          },
+          initialValue: "normal",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
       ],
     }),
 
