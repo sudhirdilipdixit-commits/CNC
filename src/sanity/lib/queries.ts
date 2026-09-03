@@ -230,7 +230,7 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
     heroSidebarCard { heading, subtext, "stats": stats[] { label, value }, ctaLabel },
   },
   heroOption2 {
-    show, eyebrow, headline, subheadline, primaryCtaLabel, secondaryCtaLabel,
+    show, eyebrow, headline, subheadline, subheadlineAlign, primaryCtaLabel, secondaryCtaLabel,
     "imageUrl": image.asset->url,
     "imageAlt": image.alt,
     "backgroundColor": backgroundColor.hex,
@@ -238,7 +238,7 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
     "fontColor": fontColor.hex,
   },
   heroOption3 {
-    show, eyebrow, headline, subheadline, primaryCtaLabel, secondaryCtaLabel,
+    show, eyebrow, headline, subheadline, subheadlineAlign, primaryCtaLabel, secondaryCtaLabel,
     "backgroundColor": backgroundColor.hex,
     "buttonColor": buttonColor.hex,
     "fontColor": fontColor.hex,

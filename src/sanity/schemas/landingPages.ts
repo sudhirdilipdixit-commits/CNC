@@ -2,7 +2,12 @@ import { defineType, defineField } from "sanity";
 
 const simpleRichTextBlock = {
   type: "block",
-  styles: [{ title: "Normal", value: "normal" }],
+  styles: [
+    { title: "Small", value: "small" },
+    { title: "Normal", value: "normal" },
+    { title: "Subheading", value: "subheading" },
+    { title: "Heading", value: "heading" },
+  ],
   lists: [],
   marks: {
     decorators: [
@@ -12,6 +17,24 @@ const simpleRichTextBlock = {
     annotations: [],
   },
 };
+
+const subheadlineAlignField = () =>
+  defineField({
+    name: "subheadlineAlign",
+    title: "Sub-headline Alignment",
+    type: "string",
+    description: "Leave blank to use the layout's default alignment.",
+    options: {
+      list: [
+        { title: "Left", value: "left" },
+        { title: "Center", value: "center" },
+        { title: "Right", value: "right" },
+      ],
+      layout: "radio",
+      direction: "horizontal",
+    },
+    hidden: ({ parent }: { parent?: { show?: boolean } }) => parent?.show !== true,
+  });
 
 export default defineType({
   name: "landingPages",
@@ -317,9 +340,10 @@ export default defineType({
           title: "Sub-headline",
           type: "array",
           of: [simpleRichTextBlock],
-          description: "Supports bold, italic, and separate paragraph lines.",
+          description: "Supports bold, italic, font size (via the paragraph style dropdown), and separate paragraph lines.",
           hidden: ({ parent }) => parent?.show !== true,
         }),
+        subheadlineAlignField(),
         defineField({
           name: "image",
           title: "Right-side Image (optional)",
@@ -413,9 +437,10 @@ export default defineType({
           title: "Sub-headline",
           type: "array",
           of: [simpleRichTextBlock],
-          description: "Supports bold, italic, and separate paragraph lines.",
+          description: "Supports bold, italic, font size (via the paragraph style dropdown), and separate paragraph lines.",
           hidden: ({ parent }) => parent?.show !== true,
         }),
+        subheadlineAlignField(),
         defineField({
           name: "primaryCtaLabel",
           title: "Primary CTA Label",

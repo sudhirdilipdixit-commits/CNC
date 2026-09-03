@@ -76,6 +76,7 @@ export interface SimpleHeroData {
   eyebrow?: string;
   headline?: string;
   subheadline?: any[];
+  subheadlineAlign?: "left" | "center" | "right";
   primaryCtaLabel?: string;
   secondaryCtaLabel?: string;
   imageUrl?: string;
@@ -211,8 +212,21 @@ function SimpleHero({ data, onCta }: { data: SimpleHeroData; onCta: (name: strin
               </h1>
             )}
             {data.subheadline && data.subheadline.length > 0 && (
-              <div className="lp-hero2-sub" style={{ color: data.fontColor || "var(--pale-navy)" }}>
-                <PortableText value={data.subheadline} />
+              <div
+                className="lp-hero2-sub"
+                style={{ color: data.fontColor || "var(--pale-navy)", textAlign: data.subheadlineAlign || undefined }}
+              >
+                <PortableText
+                  value={data.subheadline}
+                  components={{
+                    block: {
+                      small: ({ children }) => <p className="lp-hero2-sub-small">{children}</p>,
+                      normal: ({ children }) => <p>{children}</p>,
+                      subheading: ({ children }) => <p className="lp-hero2-sub-subheading">{children}</p>,
+                      heading: ({ children }) => <p className="lp-hero2-sub-heading">{children}</p>,
+                    },
+                  }}
+                />
               </div>
             )}
             <div className="lp-cta-row">
@@ -968,6 +982,9 @@ export default function LandingPagesClient({
         .lp-hero2-sub { font-size: clamp(15px, 1.8vw, 18px); max-width: 640px; margin-bottom: 28px; line-height: 1.6; }
         .lp-hero2-sub p { margin: 0 0 8px; }
         .lp-hero2-sub p:last-child { margin-bottom: 0; }
+        .lp-hero2-sub-small { font-size: 0.85em; }
+        .lp-hero2-sub-subheading { font-size: 1.2em; font-weight: 600; }
+        .lp-hero2-sub-heading { font-size: 1.5em; font-weight: 700; }
         .lp-hero2-secondary-btn { background: rgba(255,255,255,.08); color: var(--ivory); border: 1.5px solid rgba(255,255,255,.3); min-height: 48px; display: inline-flex; align-items: center; justify-content: center; padding: 13px 24px; font-size: 15px; font-weight: 600; font-family: var(--font-sans); border-radius: 8px; cursor: pointer; transition: background .15s; }
         .lp-hero2-secondary-btn:hover { background: rgba(255,255,255,.16); }
         .lp-hero2-media { display: flex; align-items: center; justify-content: center; }
