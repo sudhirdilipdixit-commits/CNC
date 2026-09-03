@@ -480,7 +480,6 @@ export default function LandingPagesClient({
             style={{ animationDuration: SCROLLING_NOTIFICATION_SPEED[data.scrollingNotification.speed || "normal"] }}
           >
             <span className="lp-scrolling-notification-text">{data.scrollingNotification.text}</span>
-            <span className="lp-scrolling-notification-text" aria-hidden="true">{data.scrollingNotification.text}</span>
           </div>
         </div>
       )}
@@ -916,11 +915,11 @@ export default function LandingPagesClient({
         .lp-urgency-bar { background: var(--yellow); color: var(--navy); font-size: 14px; font-weight: 600; text-align: center; padding: 10px 16px; border-bottom: 2px solid rgba(36,48,72,.15); }
 
         /* ── Scrolling Notification ── */
-        .lp-scrolling-notification { background: var(--navy); overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.1); }
-        .lp-scrolling-notification-track { display: flex; width: max-content; animation: lp-scrolling-notification-scroll 22s linear infinite; }
-        .lp-scrolling-notification-text { flex-shrink: 0; padding: 8px 48px; font-size: 13px; font-weight: 600; letter-spacing: .02em; color: var(--ivory); white-space: nowrap; }
-        @keyframes lp-scrolling-notification-scroll { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-        @media (prefers-reduced-motion: reduce) { .lp-scrolling-notification-track { animation: none; } }
+        .lp-scrolling-notification { background: var(--navy); overflow: hidden; border-bottom: 1px solid rgba(255,255,255,.1); padding: 8px 0; }
+        .lp-scrolling-notification-track { display: inline-block; white-space: nowrap; padding-left: 100%; animation: lp-scrolling-notification-scroll 22s linear infinite; }
+        .lp-scrolling-notification-text { display: inline-block; font-size: 13px; font-weight: 600; letter-spacing: .02em; color: var(--ivory); }
+        @keyframes lp-scrolling-notification-scroll { from { transform: translateX(0); } to { transform: translateX(-100%); } }
+        @media (prefers-reduced-motion: reduce) { .lp-scrolling-notification-track { animation: none; padding-left: 0; } }
 
         /* ── Stripped header ── */
         .lp-header { background: rgba(250,247,242,.97); backdrop-filter: saturate(180%) blur(8px); border-bottom: 1px solid var(--mist); position: sticky; top: 0; z-index: 100; }
