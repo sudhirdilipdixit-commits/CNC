@@ -222,6 +222,7 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
   title, pageType,
   showFullHeader, showFooter,
   urgencyBanner { show, text },
+  scrollingNotification { show, text },
   hero {
     show, eyebrow, headline, calloutText, description, updatedLabel,
     reviewerName, reviewerRole, approverName, approverRole,

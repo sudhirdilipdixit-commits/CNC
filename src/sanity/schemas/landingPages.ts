@@ -73,6 +73,29 @@ export default defineType({
       initialValue: false,
     }),
 
+    // ── Scrolling Notification ─────────────────────────────────────────
+    defineField({
+      name: "scrollingNotification",
+      title: "Scrolling Notification (below Main Menu)",
+      type: "object",
+      description: "Scrolling text strip shown right below the header.",
+      fields: [
+        defineField({
+          name: "show",
+          title: "Show Scrolling Notification",
+          type: "boolean",
+          initialValue: false,
+        }),
+        defineField({
+          name: "text",
+          title: "Notification Text",
+          type: "string",
+          description: "Scrolls continuously right-to-left below the header.",
+          hidden: ({ parent }) => parent?.show === false,
+        }),
+      ],
+    }),
+
     // ── Hero — Option 1 ────────────────────────────────────────────────
     defineField({
       name: "hero",
