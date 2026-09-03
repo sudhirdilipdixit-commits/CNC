@@ -145,7 +145,12 @@ export default defineType({
           name: "headline",
           title: "Headline",
           type: "string",
-          validation: (R) => R.required(),
+          validation: (R) =>
+            R.custom((value, context) => {
+              const parent = context.parent as { show?: boolean } | undefined;
+              if (parent?.show === false) return true;
+              return value ? true : "Required";
+            }),
           hidden: ({ parent }) => parent?.show === false,
         }),
         defineField({
