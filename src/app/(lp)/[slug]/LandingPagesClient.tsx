@@ -5,6 +5,7 @@ import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import Header from "@/components/layout/Header";
 import LeadModal from "@/components/forms/LeadModal";
+import InlineLeadForm from "@/components/forms/InlineLeadForm";
 
 const SCROLLING_NOTIFICATION_SPEED: Record<"slow" | "normal" | "fast", string> = {
   slow: "36s",
@@ -77,6 +78,7 @@ export interface SimpleHeroData {
   headline?: string;
   subheadline?: any[];
   subheadlineAlign?: "left" | "center" | "right";
+  showEnquiryForm?: boolean;
   primaryCtaLabel?: string;
   secondaryCtaLabel?: string;
   imageUrl?: string;
@@ -195,11 +197,20 @@ function LpHeader({ onOpenModal }: { onOpenModal: () => void }) {
 
 // ── Simple hero (Options 2 & 3) ─────────────────────────────────────────────
 
-function SimpleHero({ data, onCta }: { data: SimpleHeroData; onCta: (name: string) => void }) {
+function SimpleHero({
+  data,
+  onCta,
+  leadSource,
+}: {
+  data: SimpleHeroData;
+  onCta: (name: string) => void;
+  leadSource: string;
+}) {
+  const showRightColumn = Boolean(data.imageUrl || data.showEnquiryForm);
   return (
     <section className="lp-hero2" style={{ background: data.backgroundColor || "var(--navy)" }}>
       <div className="container">
-        <div className={`lp-hero2-layout${!data.imageUrl ? " lp-hero2-layout--full" : ""}`}>
+        <div className={`lp-hero2-layout${!showRightColumn ? " lp-hero2-layout--full" : ""}`}>
           <div className="lp-hero2-content">
             {data.eyebrow && (
               <div className="lp-hero2-eyebrow" style={{ color: data.buttonColor || "var(--yellow)" }}>
@@ -229,26 +240,34 @@ function SimpleHero({ data, onCta }: { data: SimpleHeroData; onCta: (name: strin
                 />
               </div>
             )}
-            <div className="lp-cta-row">
-              <button
-                className="btn btn-primary"
-                style={data.buttonColor ? { background: data.buttonColor } : undefined}
-                onClick={() => onCta(data.primaryCtaLabel || "Get Free Counselling")}
-              >
-                {data.primaryCtaLabel || "Get Free Counselling"}
-              </button>
-              {data.secondaryCtaLabel && (
-                <button className="lp-hero2-secondary-btn" onClick={() => onCta(data.secondaryCtaLabel || "Download Brochure")}>
-                  {data.secondaryCtaLabel}
+            {!data.showEnquiryForm && (
+              <div className="lp-cta-row">
+                <button
+                  className="btn btn-primary"
+                  style={data.buttonColor ? { background: data.buttonColor } : undefined}
+                  onClick={() => onCta(data.primaryCtaLabel || "Get Free Counselling")}
+                >
+                  {data.primaryCtaLabel || "Get Free Counselling"}
                 </button>
-              )}
-            </div>
+                {data.secondaryCtaLabel && (
+                  <button className="lp-hero2-secondary-btn" onClick={() => onCta(data.secondaryCtaLabel || "Download Brochure")}>
+                    {data.secondaryCtaLabel}
+                  </button>
+                )}
+              </div>
+            )}
           </div>
 
-          {data.imageUrl && (
+          {data.showEnquiryForm ? (
             <div className="lp-hero2-media">
-              <Image src={data.imageUrl} alt={data.imageAlt || ""} width={560} height={420} className="lp-hero2-img" />
+              <InlineLeadForm source={leadSource} />
             </div>
+          ) : (
+            data.imageUrl && (
+              <div className="lp-hero2-media">
+                <Image src={data.imageUrl} alt={data.imageAlt || ""} width={560} height={420} className="lp-hero2-img" />
+              </div>
+            )
           )}
         </div>
       </div>
@@ -560,10 +579,14 @@ export default function LandingPagesClient({
       )}
 
       {/* Hero — Option 2 */}
-      {showHeroOption2 && data.heroOption2 && <SimpleHero data={data.heroOption2} onCta={openModal} />}
+      {showHeroOption2 && data.heroOption2 && (
+        <SimpleHero data={data.heroOption2} onCta={openModal} leadSource={`lp-${slug}-hero2`} />
+      )}
 
       {/* Hero — Option 3 */}
-      {showHeroOption3 && data.heroOption3 && <SimpleHero data={data.heroOption3} onCta={openModal} />}
+      {showHeroOption3 && data.heroOption3 && (
+        <SimpleHero data={data.heroOption3} onCta={openModal} leadSource={`lp-${slug}-hero3`} />
+      )}
 
       {/* Highlight Banner */}
       {showHighlightBanner && (

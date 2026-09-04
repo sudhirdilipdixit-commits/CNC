@@ -238,7 +238,7 @@ export const landingPagesQuery = groq`*[_type == "landingPages" && slug.current 
     "fontColor": fontColor.hex,
   },
   heroOption3 {
-    show, eyebrow, headline, subheadline, subheadlineAlign, primaryCtaLabel, secondaryCtaLabel,
+    show, eyebrow, headline, subheadline, subheadlineAlign, showEnquiryForm, primaryCtaLabel, secondaryCtaLabel,
     "backgroundColor": backgroundColor.hex,
     "buttonColor": buttonColor.hex,
     "fontColor": fontColor.hex,

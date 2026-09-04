@@ -405,7 +405,7 @@ export default defineType({
       name: "heroOption3",
       title: "Hero Section — Option 3",
       type: "object",
-      description: "Same layout as Option 2 (eyebrow badge, headline, subheadline, dual CTA) but always full-width, without a right-side image.",
+      description: "Same layout as Option 2 (eyebrow badge, headline, subheadline, dual CTA), full-width by default, with an option to show an enquiry form on the right instead.",
       components: { field: withFieldPreview("/studio-previews/hero-option-3.png", "Preview of Hero Section — Option 3") },
       fields: [
         defineField({
@@ -446,11 +446,20 @@ export default defineType({
         }),
         subheadlineAlignField(),
         defineField({
+          name: "showEnquiryForm",
+          title: "Show Enquiry Form (right side)",
+          type: "boolean",
+          initialValue: false,
+          description:
+            "ON = replaces the two CTA buttons below with a full enquiry form shown on the right, making the hero two-column. OFF = full-width text with the two CTA buttons.",
+          hidden: ({ parent }) => parent?.show !== true,
+        }),
+        defineField({
           name: "primaryCtaLabel",
           title: "Primary CTA Label",
           type: "string",
           initialValue: "Get Free Counselling",
-          hidden: ({ parent }) => parent?.show !== true,
+          hidden: ({ parent }) => parent?.show !== true || parent?.showEnquiryForm === true,
         }),
         defineField({
           name: "secondaryCtaLabel",
@@ -458,7 +467,7 @@ export default defineType({
           type: "string",
           description: "Outlined button next to the primary CTA. Opens the lead form. Leave blank to hide.",
           initialValue: "Download Brochure",
-          hidden: ({ parent }) => parent?.show !== true,
+          hidden: ({ parent }) => parent?.show !== true || parent?.showEnquiryForm === true,
         }),
         defineField({
           name: "backgroundColor",

@@ -1315,6 +1315,21 @@ section { padding: 56px 0; }
 .modal-body { padding: var(--s-5); background: var(--white); }
 .modal-step { display: none; }
 .modal-step.active { display: block; }
+.inline-lead-form {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  width: 100%;
+  max-width: 460px;
+}
+.inline-lead-form-header { background: var(--navy); color: var(--ivory); padding: var(--s-5); }
+.inline-lead-form-header h3 { font-family: var(--font-heading); color: var(--ivory); font-size: 20px; line-height: 1.2; margin: 0 0 var(--s-2); }
+.inline-lead-form-header p { color: var(--yellow); font-size: 13px; margin: 0; }
+.inline-lead-form-body { padding: var(--s-5); }
+.inline-lead-form-body .form-field:last-of-type { margin-bottom: 0; }
+.inline-lead-form-success { padding: var(--s-5); text-align: center; }
+.inline-lead-form-success p { margin: var(--s-3) 0 0; color: var(--charcoal); }
 .form-field { margin-bottom: 20px; }
 .form-field:last-of-type { margin-bottom: 0; }
 .form-field label {
