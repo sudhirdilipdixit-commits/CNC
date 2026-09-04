@@ -106,8 +106,8 @@ export default defineType({
       title: "Show Full Site Header",
       type: "boolean",
       description:
-        "OFF (default) = stripped header with logo + phone + CTA only. ON = full site navigation.",
-      initialValue: false,
+        "ON (default) = full site navigation. OFF = stripped header with logo + phone + CTA only.",
+      initialValue: true,
     }),
 
     // ── Scrolling Notification ─────────────────────────────────────────
