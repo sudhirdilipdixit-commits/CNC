@@ -1,4 +1,5 @@
 import { defineType, defineField } from "sanity";
+import { withFieldPreview } from "../components/FieldPreviewImage";
 
 const simpleRichTextBlock = {
   type: "block",
@@ -154,6 +155,7 @@ export default defineType({
       title: "Hero Section — Option 1",
       type: "object",
       description: "Eyebrow + headline + highlight callout + byline, with an optional sidebar goal card.",
+      components: { field: withFieldPreview("/studio-previews/hero-option-1.png", "Preview of Hero Section — Option 1") },
       fields: [
         defineField({
           name: "show",
@@ -306,6 +308,7 @@ export default defineType({
       title: "Hero Section — Option 2",
       type: "object",
       description: "Simple full-bleed banner: eyebrow badge, headline, subheadline, dual CTA, optional right-side image.",
+      components: { field: withFieldPreview("/studio-previews/hero-option-2.png", "Preview of Hero Section — Option 2") },
       fields: [
         defineField({
           name: "show",
@@ -403,6 +406,7 @@ export default defineType({
       title: "Hero Section — Option 3",
       type: "object",
       description: "Same layout as Option 2 (eyebrow badge, headline, subheadline, dual CTA) but always full-width, without a right-side image.",
+      components: { field: withFieldPreview("/studio-previews/hero-option-3.png", "Preview of Hero Section — Option 3") },
       fields: [
         defineField({
           name: "show",
@@ -489,6 +493,7 @@ export default defineType({
       title: "Highlight Banner",
       type: "object",
       description: "Full-width banner with a headline, two-tone sub-text, two-column bullet points, and a CTA button.",
+      components: { field: withFieldPreview("/studio-previews/highlight-banner.png", "Preview of Highlight Banner") },
       fields: [
         defineField({
           name: "show",
@@ -581,6 +586,7 @@ export default defineType({
       title: "University Logos",
       type: "object",
       description: "Headline + grid of university logos + CTA button.",
+      components: { field: withFieldPreview("/studio-previews/university-logos.png", "Preview of University Logos") },
       fields: [
         defineField({
           name: "show",

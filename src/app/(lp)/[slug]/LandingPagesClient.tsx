@@ -463,7 +463,7 @@ export default function LandingPagesClient({
 
   const showHeroOption3 = data.heroOption3?.show === true;
   const showHeroOption2 = !showHeroOption3 && data.heroOption2?.show === true;
-  const showHeroOption1 = !showHeroOption2 && !showHeroOption3;
+  const showHeroOption1 = !showHeroOption2 && !showHeroOption3 && data.hero?.show !== false;
   const showHighlightBanner = data.highlightBanner?.show;
   const showUniversityLogos = data.universityLogos?.show && (data.universityLogos.logos?.length ?? 0) > 0;
   const showFaqs = data.faqs?.show && (data.faqs.items?.length ?? 0) > 0;
