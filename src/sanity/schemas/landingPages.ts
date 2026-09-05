@@ -165,8 +165,8 @@ export default defineType({
           description: "Only one hero option should be ON at a time.",
           validation: (R) =>
             R.custom((value, context) => {
-              const doc = context.document as { heroOption2?: { show?: boolean }; heroOption3?: { show?: boolean } } | undefined;
-              if (value !== false && (doc?.heroOption2?.show === true || doc?.heroOption3?.show === true)) {
+              const doc = context.document as { heroOption2?: { show?: boolean } } | undefined;
+              if (value !== false && doc?.heroOption2?.show === true) {
                 return "Another hero option is also turned ON below. Turn one of them OFF — only one hero can be active.";
               }
               return true;
@@ -318,8 +318,8 @@ export default defineType({
           description: "Only one hero option should be ON at a time.",
           validation: (R) =>
             R.custom((value, context) => {
-              const doc = context.document as { hero?: { show?: boolean }; heroOption3?: { show?: boolean } } | undefined;
-              if (value === true && (doc?.hero?.show !== false || doc?.heroOption3?.show === true)) {
+              const doc = context.document as { hero?: { show?: boolean } } | undefined;
+              if (value === true && doc?.hero?.show !== false) {
                 return "Another hero option is also ON. Turn the others OFF — only one hero can be active.";
               }
               return true;
@@ -372,102 +372,6 @@ export default defineType({
           description: "Outlined button next to the primary CTA. Opens the lead form. Leave blank to hide.",
           initialValue: "Download Brochure",
           hidden: ({ parent }) => parent?.show !== true,
-        }),
-        defineField({
-          name: "backgroundColor",
-          title: "Background Color",
-          type: "color",
-          options: { disableAlpha: true },
-          description: "Defaults to navy if not set.",
-          hidden: ({ parent }) => parent?.show !== true,
-        }),
-        defineField({
-          name: "buttonColor",
-          title: "Primary Button Color",
-          type: "color",
-          options: { disableAlpha: true },
-          description: "Defaults to yellow if not set.",
-          hidden: ({ parent }) => parent?.show !== true,
-        }),
-        defineField({
-          name: "fontColor",
-          title: "Font Color",
-          type: "color",
-          options: { disableAlpha: true },
-          description: "Headline and sub-headline text color. Defaults to ivory/white if not set.",
-          hidden: ({ parent }) => parent?.show !== true,
-        }),
-      ],
-    }),
-
-    // ── Hero — Option 3 ────────────────────────────────────────────────
-    defineField({
-      name: "heroOption3",
-      title: "Hero Section — Option 3",
-      type: "object",
-      description: "Same layout as Option 2 (eyebrow badge, headline, subheadline, dual CTA), full-width by default, with an option to show an enquiry form on the right instead.",
-      components: { field: withFieldPreview("/studio-previews/hero-option-3.png", "Preview of Hero Section — Option 3") },
-      fields: [
-        defineField({
-          name: "show",
-          title: "Show This Hero (Option 3)",
-          type: "boolean",
-          initialValue: false,
-          description: "Only one hero option should be ON at a time.",
-          validation: (R) =>
-            R.custom((value, context) => {
-              const doc = context.document as { hero?: { show?: boolean }; heroOption2?: { show?: boolean } } | undefined;
-              if (value === true && (doc?.hero?.show !== false || doc?.heroOption2?.show === true)) {
-                return "Another hero option is also ON. Turn the others OFF — only one hero can be active.";
-              }
-              return true;
-            }).warning(),
-        }),
-        defineField({
-          name: "eyebrow",
-          title: "Eyebrow",
-          type: "string",
-          description: "e.g. '200+ Verified Programmes'",
-          hidden: ({ parent }) => parent?.show !== true,
-        }),
-        defineField({
-          name: "headline",
-          title: "Headline",
-          type: "string",
-          hidden: ({ parent }) => parent?.show !== true,
-        }),
-        defineField({
-          name: "subheadline",
-          title: "Sub-headline",
-          type: "array",
-          of: [simpleRichTextBlock],
-          description: "Supports bold, italic, font size (via the paragraph style dropdown), and separate paragraph lines.",
-          hidden: ({ parent }) => parent?.show !== true,
-        }),
-        subheadlineAlignField(),
-        defineField({
-          name: "showEnquiryForm",
-          title: "Show Enquiry Form (right side)",
-          type: "boolean",
-          initialValue: false,
-          description:
-            "ON = replaces the two CTA buttons below with a full enquiry form shown on the right, making the hero two-column. OFF = full-width text with the two CTA buttons.",
-          hidden: ({ parent }) => parent?.show !== true,
-        }),
-        defineField({
-          name: "primaryCtaLabel",
-          title: "Primary CTA Label",
-          type: "string",
-          initialValue: "Get Free Counselling",
-          hidden: ({ parent }) => parent?.show !== true || parent?.showEnquiryForm === true,
-        }),
-        defineField({
-          name: "secondaryCtaLabel",
-          title: "Secondary CTA Label (optional)",
-          type: "string",
-          description: "Outlined button next to the primary CTA. Opens the lead form. Leave blank to hide.",
-          initialValue: "Download Brochure",
-          hidden: ({ parent }) => parent?.show !== true || parent?.showEnquiryForm === true,
         }),
         defineField({
           name: "backgroundColor",

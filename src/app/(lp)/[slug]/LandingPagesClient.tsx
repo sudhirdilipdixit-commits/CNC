@@ -5,7 +5,6 @@ import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import Header from "@/components/layout/Header";
 import LeadModal from "@/components/forms/LeadModal";
-import InlineLeadForm from "@/components/forms/InlineLeadForm";
 
 const SCROLLING_NOTIFICATION_SPEED: Record<"slow" | "normal" | "fast", string> = {
   slow: "36s",
@@ -78,7 +77,6 @@ export interface SimpleHeroData {
   headline?: string;
   subheadline?: any[];
   subheadlineAlign?: "left" | "center" | "right";
-  showEnquiryForm?: boolean;
   primaryCtaLabel?: string;
   secondaryCtaLabel?: string;
   imageUrl?: string;
@@ -116,7 +114,6 @@ export interface LandingPagesData {
     };
   };
   heroOption2?: SimpleHeroData;
-  heroOption3?: SimpleHeroData;
   highlightBanner?: {
     show?: boolean;
     headline?: string;
@@ -195,22 +192,13 @@ function LpHeader({ onOpenModal }: { onOpenModal: () => void }) {
   );
 }
 
-// ── Simple hero (Options 2 & 3) ─────────────────────────────────────────────
+// ── Simple hero (Option 2) ─────────────────────────────────────────────────
 
-function SimpleHero({
-  data,
-  onCta,
-  leadSource,
-}: {
-  data: SimpleHeroData;
-  onCta: (name: string) => void;
-  leadSource: string;
-}) {
-  const showRightColumn = Boolean(data.imageUrl || data.showEnquiryForm);
+function SimpleHero({ data, onCta }: { data: SimpleHeroData; onCta: (name: string) => void }) {
   return (
     <section className="lp-hero2" style={{ background: data.backgroundColor || "var(--navy)" }}>
       <div className="container">
-        <div className={`lp-hero2-layout${!showRightColumn ? " lp-hero2-layout--full" : ""}`}>
+        <div className={`lp-hero2-layout${!data.imageUrl ? " lp-hero2-layout--full" : ""}`}>
           <div className="lp-hero2-content">
             {data.eyebrow && (
               <div className="lp-hero2-eyebrow" style={{ color: data.buttonColor || "var(--yellow)" }}>
@@ -240,34 +228,26 @@ function SimpleHero({
                 />
               </div>
             )}
-            {!data.showEnquiryForm && (
-              <div className="lp-cta-row">
-                <button
-                  className="btn btn-primary"
-                  style={data.buttonColor ? { background: data.buttonColor } : undefined}
-                  onClick={() => onCta(data.primaryCtaLabel || "Get Free Counselling")}
-                >
-                  {data.primaryCtaLabel || "Get Free Counselling"}
+            <div className="lp-cta-row">
+              <button
+                className="btn btn-primary"
+                style={data.buttonColor ? { background: data.buttonColor } : undefined}
+                onClick={() => onCta(data.primaryCtaLabel || "Get Free Counselling")}
+              >
+                {data.primaryCtaLabel || "Get Free Counselling"}
+              </button>
+              {data.secondaryCtaLabel && (
+                <button className="lp-hero2-secondary-btn" onClick={() => onCta(data.secondaryCtaLabel || "Download Brochure")}>
+                  {data.secondaryCtaLabel}
                 </button>
-                {data.secondaryCtaLabel && (
-                  <button className="lp-hero2-secondary-btn" onClick={() => onCta(data.secondaryCtaLabel || "Download Brochure")}>
-                    {data.secondaryCtaLabel}
-                  </button>
-                )}
-              </div>
-            )}
+              )}
+            </div>
           </div>
 
-          {data.showEnquiryForm ? (
+          {data.imageUrl && (
             <div className="lp-hero2-media">
-              <InlineLeadForm source={leadSource} />
+              <Image src={data.imageUrl} alt={data.imageAlt || ""} width={560} height={420} className="lp-hero2-img" />
             </div>
-          ) : (
-            data.imageUrl && (
-              <div className="lp-hero2-media">
-                <Image src={data.imageUrl} alt={data.imageAlt || ""} width={560} height={420} className="lp-hero2-img" />
-              </div>
-            )
           )}
         </div>
       </div>
@@ -480,9 +460,8 @@ export default function LandingPagesClient({
   const itemLabel = pageType === "course" ? "course" : "university";
   const itemLabelPlural = pageType === "course" ? "courses" : "universities";
 
-  const showHeroOption3 = data.heroOption3?.show === true;
-  const showHeroOption2 = !showHeroOption3 && data.heroOption2?.show === true;
-  const showHeroOption1 = !showHeroOption2 && !showHeroOption3 && data.hero?.show !== false;
+  const showHeroOption2 = data.heroOption2?.show === true;
+  const showHeroOption1 = !showHeroOption2 && data.hero?.show !== false;
   const showHighlightBanner = data.highlightBanner?.show;
   const showUniversityLogos = data.universityLogos?.show && (data.universityLogos.logos?.length ?? 0) > 0;
   const showFaqs = data.faqs?.show && (data.faqs.items?.length ?? 0) > 0;
@@ -579,14 +558,7 @@ export default function LandingPagesClient({
       )}
 
       {/* Hero — Option 2 */}
-      {showHeroOption2 && data.heroOption2 && (
-        <SimpleHero data={data.heroOption2} onCta={openModal} leadSource={`lp-${slug}-hero2`} />
-      )}
-
-      {/* Hero — Option 3 */}
-      {showHeroOption3 && data.heroOption3 && (
-        <SimpleHero data={data.heroOption3} onCta={openModal} leadSource={`lp-${slug}-hero3`} />
-      )}
+      {showHeroOption2 && data.heroOption2 && <SimpleHero data={data.heroOption2} onCta={openModal} />}
 
       {/* Highlight Banner */}
       {showHighlightBanner && (
