@@ -63,10 +63,18 @@ export default defineType({
     // ── Internal ─────────────────────────────────────────────────────
     defineField({
       name: "title",
+      title: "Page Title",
+      type: "string",
+      description:
+        "e.g. 'Marketing MBA – Google Ads – Jun 2026'. Used as the SEO title/meta title whenever the SEO Title field at the bottom of this page is left blank.",
+      validation: (R) => R.required(),
+    }),
+    defineField({
+      name: "internalTitle",
       title: "Internal Title",
       type: "string",
-      description: "Used in Sanity only. e.g. 'Marketing MBA – Google Ads – Jun 2026'",
-      validation: (R) => R.required(),
+      description:
+        "For your own reference in Sanity only — never shown on the site. Prefix with 'U -' for University pages or 'C -' for Course pages so you can tell them apart at a glance in this list.",
     }),
     defineField({
       name: "slug",
@@ -944,5 +952,10 @@ export default defineType({
       ],
     }),
   ],
-  preview: { select: { title: "title", subtitle: "slug.current" } },
+  preview: {
+    select: { internalTitle: "internalTitle", title: "title", slug: "slug.current" },
+    prepare({ internalTitle, title, slug }) {
+      return { title: internalTitle || title, subtitle: slug };
+    },
+  },
 });
