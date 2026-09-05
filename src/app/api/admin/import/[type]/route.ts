@@ -1,8 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "next-sanity";
 
-// Vercel Pro: extend timeout for image uploads. Hobby plan caps at 10s.
-export const maxDuration = 60;
+// Rows are processed concurrently (see mapWithConcurrency), so this only
+// needs to cover the slowest single row plus network overhead — not
+// rows * per-row time like a fully sequential loop would.
+export const maxDuration = 300;
 
 const VALID_TYPES = ["courses", "universities", "faqs"] as const;
 type ImportType = (typeof VALID_TYPES)[number];
@@ -64,6 +66,26 @@ function parseCSV(raw: string): Record<string, string>[] {
       headers.forEach((h, i) => { row[h] = values[i]?.trim() ?? ""; });
       return row;
     });
+}
+
+// Runs `fn` over `items` with at most `limit` in flight at once, preserving
+// result order. Used so 100 rows' worth of network calls (existence checks,
+// logo uploads, writes) overlap instead of running one at a time.
+async function mapWithConcurrency<T, R>(
+  items: T[],
+  limit: number,
+  fn: (item: T, index: number) => Promise<R>
+): Promise<R[]> {
+  const results: R[] = new Array(items.length);
+  let cursor = 0;
+  async function worker() {
+    while (cursor < items.length) {
+      const i = cursor++;
+      results[i] = await fn(items[i], i);
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, items.length) }, worker));
+  return results;
 }
 
 async function uploadLogoFromUrl(
@@ -167,13 +189,25 @@ export async function POST(
     return NextResponse.json({ results });
   }
 
-  for (const row of rows) {
+  // ── Courses & Universities ──────────────────────────────────────────────
+  // One query up front instead of one per row, so 100 rows don't mean 100
+  // round-trips just to find out which ones already exist.
+  const existing = await client.fetch<{ _id: string; internalName: string }[]>(
+    `*[_type == $sanityType]{_id, internalName}`,
+    { sanityType }
+  );
+  const existingMap = new Map(existing.map((d) => [d.internalName, d._id]));
 
-    // ── Courses & Universities ────────────────────────────────────────────────
+  const tx = client.transaction();
+
+  // Logo uploads and existence lookups are network-bound and independent
+  // per row, so run them with several in flight at once instead of strictly
+  // one row at a time — this is what actually kept 100-row imports under
+  // the function timeout.
+  const rowResults = await mapWithConcurrency(rows, 6, async (row): Promise<ResultRow> => {
     const internalName = row.internalName?.trim();
     if (!internalName) {
-      results.push({ internalName: "(empty)", action: "skipped", error: "Missing internalName" });
-      continue;
+      return { internalName: "(empty)", action: "skipped", error: "Missing internalName" };
     }
 
     try {
@@ -181,8 +215,7 @@ export async function POST(
 
       if (importType === "courses") {
         if (!row.courseName?.trim()) {
-          results.push({ internalName, action: "skipped", error: "Missing courseName" });
-          continue;
+          return { internalName, action: "skipped", error: "Missing courseName" };
         }
         fields = {
           internalName,
@@ -196,8 +229,7 @@ export async function POST(
         };
       } else {
         if (!row.universityName?.trim()) {
-          results.push({ internalName, action: "skipped", error: "Missing universityName" });
-          continue;
+          return { internalName, action: "skipped", error: "Missing universityName" };
         }
         fields = {
           internalName,
@@ -235,36 +267,45 @@ export async function POST(
         }
       }
 
-      // Upsert: update if exists, create if not
-      const existingId = await client.fetch<string | null>(
-        `*[_type == $sanityType && internalName == $name][0]._id`,
-        { sanityType, name: internalName }
-      );
+      // Upsert: update if exists, create if not — queued into the shared
+      // transaction and committed once at the end, not per row.
+      const existingId = existingMap.get(internalName);
 
       if (existingId) {
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        let patch = (client.patch(existingId) as any).set(fields);
-        // Update logo metadata even without a new logo URL
-        if (!logoUrl && (logoAlt || logoTitle || logoDescription)) {
-          const metaPatch: Record<string, string> = {};
-          if (logoAlt) metaPatch["universityLogo.alt"] = logoAlt;
-          if (logoTitle) metaPatch["universityLogo.title"] = logoTitle;
-          if (logoDescription) metaPatch["universityLogo.description"] = logoDescription;
-          patch = patch.set(metaPatch);
-        }
-        await patch.commit();
-        results.push({ internalName, action: "updated", error: logoError });
+        tx.patch(existingId, (p) => {
+          let patched = p.set(fields);
+          // Update logo metadata even without a new logo URL
+          if (!logoUrl && (logoAlt || logoTitle || logoDescription)) {
+            const metaPatch: Record<string, string> = {};
+            if (logoAlt) metaPatch["universityLogo.alt"] = logoAlt;
+            if (logoTitle) metaPatch["universityLogo.title"] = logoTitle;
+            if (logoDescription) metaPatch["universityLogo.description"] = logoDescription;
+            patched = patched.set(metaPatch);
+          }
+          return patched;
+        });
+        return { internalName, action: "updated", error: logoError };
       } else {
-        await client.create({ _type: sanityType, ...fields });
-        results.push({ internalName, action: "created", error: logoError });
+        tx.create({ _type: sanityType, ...fields });
+        return { internalName, action: "created", error: logoError };
       }
     } catch (err) {
-      results.push({
+      return {
         internalName,
         action: "error",
         error: err instanceof Error ? err.message : "Unknown error",
-      });
+      };
     }
+  });
+
+  results.push(...rowResults);
+
+  try {
+    await tx.commit();
+  } catch (err) {
+    return NextResponse.json({
+      error: `Transaction failed: ${err instanceof Error ? err.message : "Unknown error"}`,
+    }, { status: 500 });
   }
 
   return NextResponse.json({ results });
