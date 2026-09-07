@@ -403,9 +403,6 @@ function FaqItem({ question, answer }: { question: string; answer: string }) {
 
 // ── Main component ─────────────────────────────────────────────────────────
 
-const INITIAL_COUNT = 9;
-const LOAD_BATCH = 6;
-
 export default function LandingPagesClient({
   data,
   footer,
@@ -417,7 +414,6 @@ export default function LandingPagesClient({
 }) {
   const [modalOpen, setModalOpen] = useState(false);
   const [formTitle, setFormTitle] = useState("");
-  const [visibleCount, setVisibleCount] = useState(INITIAL_COUNT);
   const [sort, setSort] = useState<SortKey>("balanced");
 
   const pageType: "course" | "university" =
@@ -446,11 +442,7 @@ export default function LandingPagesClient({
 
   const changeSort = useCallback((key: SortKey) => {
     setSort(key);
-    setVisibleCount(INITIAL_COUNT);
   }, []);
-
-  const visible = sortedItems.slice(0, visibleCount);
-  const hasMore = visibleCount < sortedItems.length;
 
   const openModal = useCallback((title = "") => {
     setFormTitle(title);
@@ -670,8 +662,7 @@ export default function LandingPagesClient({
           <div className="lp-content lp-content--full">
             <div className="lp-results-header">
               <p className="lp-results-count">
-                Showing <strong>{Math.min(visibleCount, sortedItems.length)}</strong> of{" "}
-                <strong>{sortedItems.length}</strong> {sortedItems.length === 1 ? itemLabel : itemLabelPlural}
+                Showing <strong>{sortedItems.length}</strong> {sortedItems.length === 1 ? itemLabel : itemLabelPlural}
               </p>
             </div>
 
@@ -697,31 +688,20 @@ export default function LandingPagesClient({
             ) : (
               <div className="lp-card-grid lp-card-grid--full">
                 {pageType === "course"
-                  ? (visible as CourseCardItem[]).map((item) => (
+                  ? (sortedItems as CourseCardItem[]).map((item) => (
                       <CourseCard
                         key={item._id}
                         item={item}
                         onCta={openModal}
                       />
                     ))
-                  : (visible as UniversityCardItem[]).map((item) => (
+                  : (sortedItems as UniversityCardItem[]).map((item) => (
                       <UniversityCard
                         key={item._id}
                         item={item}
                         onCta={openModal}
                       />
                     ))}
-              </div>
-            )}
-
-            {hasMore && (
-              <div className="lp-load-more">
-                <button
-                  className="btn btn-secondary"
-                  onClick={() => setVisibleCount((c) => c + LOAD_BATCH)}
-                >
-                  Load {Math.min(LOAD_BATCH, sortedItems.length - visibleCount)} more
-                </button>
               </div>
             )}
           </div>
@@ -1053,9 +1033,6 @@ export default function LandingPagesClient({
         /* ── Empty ── */
         .lp-empty { text-align: center; padding: 64px 0; color: var(--grey); }
         .lp-empty p { font-size: 16px; margin-bottom: 16px; }
-
-        /* ── Load more ── */
-        .lp-load-more { text-align: center; margin-top: 36px; }
 
         /* ── FAQ ── */
         .lp-faq-section { background: var(--white); padding: 56px 0; border-top: 1px solid var(--mist); }
