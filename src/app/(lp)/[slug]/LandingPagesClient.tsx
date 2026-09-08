@@ -552,6 +552,58 @@ export default function LandingPagesClient({
       {/* Hero — Option 2 */}
       {showHeroOption2 && data.heroOption2 && <SimpleHero data={data.heroOption2} onCta={openModal} />}
 
+      {/* Cards area — full width, no sidebar */}
+      <div className="lp-main" id="programmes">
+        <div className="container">
+          <div className="lp-content lp-content--full">
+            <div className="lp-results-header">
+              <p className="lp-results-count">
+                Showing <strong>{sortedItems.length}</strong> {sortedItems.length === 1 ? itemLabel : itemLabelPlural}
+              </p>
+            </div>
+
+            {allItems.length > 0 && (
+              <div className="lp-sort-chips" role="group" aria-label={`Sort ${itemLabelPlural} by`}>
+                {sortOptions.map((opt) => (
+                  <button
+                    key={opt.key}
+                    type="button"
+                    className={`lp-sort-chip${sort === opt.key ? " lp-sort-chip--active" : ""}`}
+                    onClick={() => changeSort(opt.key)}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {allItems.length === 0 ? (
+              <div className="lp-empty">
+                <p>No {itemLabelPlural} added yet.</p>
+              </div>
+            ) : (
+              <div className="lp-card-grid lp-card-grid--full">
+                {pageType === "course"
+                  ? (sortedItems as CourseCardItem[]).map((item) => (
+                      <CourseCard
+                        key={item._id}
+                        item={item}
+                        onCta={openModal}
+                      />
+                    ))
+                  : (sortedItems as UniversityCardItem[]).map((item) => (
+                      <UniversityCard
+                        key={item._id}
+                        item={item}
+                        onCta={openModal}
+                      />
+                    ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+
       {/* Highlight Banner */}
       {showHighlightBanner && (
         <section
@@ -611,6 +663,26 @@ export default function LandingPagesClient({
         </section>
       )}
 
+      {/* Icon Feature Strip */}
+      {showIconStrip && (
+        <section className="lp-icon-strip">
+          <div className="container">
+            <div className="lp-icon-strip-card">
+              {data.iconStrip!.items!.map((item, i) => (
+                <div key={i} className="lp-icon-strip-item">
+                  <div className="lp-icon-strip-circle">
+                    {item.iconUrl && (
+                      <Image src={item.iconUrl} alt={item.label} width={48} height={48} className="lp-icon-strip-img" />
+                    )}
+                  </div>
+                  <span className="lp-icon-strip-label">{item.label}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       {/* University Logos */}
       {showUniversityLogos && (
         <section
@@ -652,78 +724,6 @@ export default function LandingPagesClient({
                 </button>
               </div>
             )}
-          </div>
-        </section>
-      )}
-
-      {/* Cards area — full width, no sidebar */}
-      <div className="lp-main" id="programmes">
-        <div className="container">
-          <div className="lp-content lp-content--full">
-            <div className="lp-results-header">
-              <p className="lp-results-count">
-                Showing <strong>{sortedItems.length}</strong> {sortedItems.length === 1 ? itemLabel : itemLabelPlural}
-              </p>
-            </div>
-
-            {allItems.length > 0 && (
-              <div className="lp-sort-chips" role="group" aria-label={`Sort ${itemLabelPlural} by`}>
-                {sortOptions.map((opt) => (
-                  <button
-                    key={opt.key}
-                    type="button"
-                    className={`lp-sort-chip${sort === opt.key ? " lp-sort-chip--active" : ""}`}
-                    onClick={() => changeSort(opt.key)}
-                  >
-                    {opt.label}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            {allItems.length === 0 ? (
-              <div className="lp-empty">
-                <p>No {itemLabelPlural} added yet.</p>
-              </div>
-            ) : (
-              <div className="lp-card-grid lp-card-grid--full">
-                {pageType === "course"
-                  ? (sortedItems as CourseCardItem[]).map((item) => (
-                      <CourseCard
-                        key={item._id}
-                        item={item}
-                        onCta={openModal}
-                      />
-                    ))
-                  : (sortedItems as UniversityCardItem[]).map((item) => (
-                      <UniversityCard
-                        key={item._id}
-                        item={item}
-                        onCta={openModal}
-                      />
-                    ))}
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-
-      {/* Icon Feature Strip */}
-      {showIconStrip && (
-        <section className="lp-icon-strip">
-          <div className="container">
-            <div className="lp-icon-strip-card">
-              {data.iconStrip!.items!.map((item, i) => (
-                <div key={i} className="lp-icon-strip-item">
-                  <div className="lp-icon-strip-circle">
-                    {item.iconUrl && (
-                      <Image src={item.iconUrl} alt={item.label} width={48} height={48} className="lp-icon-strip-img" />
-                    )}
-                  </div>
-                  <span className="lp-icon-strip-label">{item.label}</span>
-                </div>
-              ))}
-            </div>
           </div>
         </section>
       )}

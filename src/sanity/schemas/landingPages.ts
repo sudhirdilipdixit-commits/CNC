@@ -408,6 +408,74 @@ export default defineType({
       ],
     }),
 
+    // ── Cards ──────────────────────────────────────────────────────────
+    defineField({
+      name: "courseItems",
+      title: "Course Cards",
+      type: "array",
+      of: [{
+        type: "reference",
+        to: [{ type: "courseCard" }],
+        options: {
+          filter: ({ document }: { document: Record<string, unknown> }) => {
+            const items = Array.isArray(document?.courseItems)
+              ? (document.courseItems as Array<Record<string, unknown>>)
+              : [];
+            const usedIds = items
+              .filter((item) => typeof item._ref === "string")
+              .map((item) => item._ref as string);
+            if (!usedIds.length) return { filter: "true", params: {} };
+            return { filter: "!(_id in $usedIds)", params: { usedIds } };
+          },
+        },
+      }],
+      description: "Select and reorder course cards. Drag to change display order.",
+      hidden: ({ document }) => (document as { pageType?: string })?.pageType === "university",
+      validation: (R) =>
+        R.custom((items?: Array<{ _ref: string }>) => {
+          if (!items || items.length === 0) return true;
+          const seen = new Set<string>();
+          for (const item of items) {
+            if (seen.has(item._ref)) return "Each course card can only be added once.";
+            seen.add(item._ref);
+          }
+          return true;
+        }),
+    }),
+    defineField({
+      name: "universityItems",
+      title: "University Cards",
+      type: "array",
+      of: [{
+        type: "reference",
+        to: [{ type: "universityCard" }],
+        options: {
+          filter: ({ document }: { document: Record<string, unknown> }) => {
+            const items = Array.isArray(document?.universityItems)
+              ? (document.universityItems as Array<Record<string, unknown>>)
+              : [];
+            const usedIds = items
+              .filter((item) => typeof item._ref === "string")
+              .map((item) => item._ref as string);
+            if (!usedIds.length) return { filter: "true", params: {} };
+            return { filter: "!(_id in $usedIds)", params: { usedIds } };
+          },
+        },
+      }],
+      description: "Select and reorder university cards. Drag to change display order.",
+      hidden: ({ document }) => (document as { pageType?: string })?.pageType !== "university",
+      validation: (R) =>
+        R.custom((items?: Array<{ _ref: string }>) => {
+          if (!items || items.length === 0) return true;
+          const seen = new Set<string>();
+          for (const item of items) {
+            if (seen.has(item._ref)) return "Each university card can only be added once.";
+            seen.add(item._ref);
+          }
+          return true;
+        }),
+    }),
+
     // ── Highlight Banner ─────────────────────────────────────────────
     defineField({
       name: "highlightBanner",
@@ -501,6 +569,37 @@ export default defineType({
       ],
     }),
 
+    // ── Icon Feature Strip ───────────────────────────────────────────
+    defineField({
+      name: "iconStrip",
+      title: "Icon Feature Strip",
+      type: "object",
+      fields: [
+        defineField({
+          name: "show",
+          title: "Show Icon Feature Strip",
+          type: "boolean",
+          initialValue: true,
+        }),
+        defineField({
+          name: "items",
+          title: "Items (max 6)",
+          type: "array",
+          hidden: ({ parent }) => parent?.show === false,
+          of: [{
+            type: "object",
+            name: "iconStripItem",
+            title: "Item",
+            fields: [
+              defineField({ name: "icon", title: "Icon Image", type: "image" }),
+              defineField({ name: "label", title: "Label", type: "string", validation: (R) => R.required() }),
+            ],
+            preview: { select: { title: "label", media: "icon" } },
+          }],
+        }),
+      ],
+    }),
+
     // ── University Logos ──────────────────────────────────────────────
     defineField({
       name: "universityLogos",
@@ -568,105 +667,6 @@ export default defineType({
           options: { disableAlpha: true },
           description: "Background color of the CTA button. Defaults to yellow if not set.",
           hidden: ({ parent }) => parent?.show === false,
-        }),
-      ],
-    }),
-
-    // ── Cards ──────────────────────────────────────────────────────────
-    defineField({
-      name: "courseItems",
-      title: "Course Cards",
-      type: "array",
-      of: [{
-        type: "reference",
-        to: [{ type: "courseCard" }],
-        options: {
-          filter: ({ document }: { document: Record<string, unknown> }) => {
-            const items = Array.isArray(document?.courseItems)
-              ? (document.courseItems as Array<Record<string, unknown>>)
-              : [];
-            const usedIds = items
-              .filter((item) => typeof item._ref === "string")
-              .map((item) => item._ref as string);
-            if (!usedIds.length) return { filter: "true", params: {} };
-            return { filter: "!(_id in $usedIds)", params: { usedIds } };
-          },
-        },
-      }],
-      description: "Select and reorder course cards. Drag to change display order.",
-      hidden: ({ document }) => (document as { pageType?: string })?.pageType === "university",
-      validation: (R) =>
-        R.custom((items?: Array<{ _ref: string }>) => {
-          if (!items || items.length === 0) return true;
-          const seen = new Set<string>();
-          for (const item of items) {
-            if (seen.has(item._ref)) return "Each course card can only be added once.";
-            seen.add(item._ref);
-          }
-          return true;
-        }),
-    }),
-    defineField({
-      name: "universityItems",
-      title: "University Cards",
-      type: "array",
-      of: [{
-        type: "reference",
-        to: [{ type: "universityCard" }],
-        options: {
-          filter: ({ document }: { document: Record<string, unknown> }) => {
-            const items = Array.isArray(document?.universityItems)
-              ? (document.universityItems as Array<Record<string, unknown>>)
-              : [];
-            const usedIds = items
-              .filter((item) => typeof item._ref === "string")
-              .map((item) => item._ref as string);
-            if (!usedIds.length) return { filter: "true", params: {} };
-            return { filter: "!(_id in $usedIds)", params: { usedIds } };
-          },
-        },
-      }],
-      description: "Select and reorder university cards. Drag to change display order.",
-      hidden: ({ document }) => (document as { pageType?: string })?.pageType !== "university",
-      validation: (R) =>
-        R.custom((items?: Array<{ _ref: string }>) => {
-          if (!items || items.length === 0) return true;
-          const seen = new Set<string>();
-          for (const item of items) {
-            if (seen.has(item._ref)) return "Each university card can only be added once.";
-            seen.add(item._ref);
-          }
-          return true;
-        }),
-    }),
-
-    // ── Icon Feature Strip ───────────────────────────────────────────
-    defineField({
-      name: "iconStrip",
-      title: "Icon Feature Strip",
-      type: "object",
-      fields: [
-        defineField({
-          name: "show",
-          title: "Show Icon Feature Strip",
-          type: "boolean",
-          initialValue: true,
-        }),
-        defineField({
-          name: "items",
-          title: "Items (max 6)",
-          type: "array",
-          hidden: ({ parent }) => parent?.show === false,
-          of: [{
-            type: "object",
-            name: "iconStripItem",
-            title: "Item",
-            fields: [
-              defineField({ name: "icon", title: "Icon Image", type: "image" }),
-              defineField({ name: "label", title: "Label", type: "string", validation: (R) => R.required() }),
-            ],
-            preview: { select: { title: "label", media: "icon" } },
-          }],
         }),
       ],
     }),
