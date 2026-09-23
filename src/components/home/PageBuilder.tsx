@@ -44,7 +44,14 @@ export default function PageBuilder({ sections, onOpenLeadForm }: PageBuilderPro
             );
 
           case "promiseBlock":
-            return <PromiseSection key={key} />;
+            return (
+              <PromiseSection
+                key={key}
+                heading={section.heading as string}
+                body={section.body as string}
+                pillars={section.pillars as string[]}
+              />
+            );
 
           case "pathBlock":
             return <PathSection key={key} />;
@@ -54,6 +61,8 @@ export default function PageBuilder({ sections, onOpenLeadForm }: PageBuilderPro
               <ProgrammesSection
                 key={key}
                 onOpenLeadForm={() => onOpenLeadForm("programmes")}
+                heading={section.heading as string}
+                subheading={section.subheading as string}
                 featuredCourses={section.featuredCourses as never}
               />
             );
@@ -71,6 +80,8 @@ export default function PageBuilder({ sections, onOpenLeadForm }: PageBuilderPro
             return (
               <BlogSection
                 key={key}
+                heading={section.heading as string}
+                subheading={section.subheading as string}
                 blogPosts={section.posts as never}
               />
             );
@@ -85,7 +96,13 @@ export default function PageBuilder({ sections, onOpenLeadForm }: PageBuilderPro
 
           case "ctaBandBlock":
             return (
-              <CTABand key={key} onOpenLeadForm={() => onOpenLeadForm("cta-band")} />
+              <CTABand
+                key={key}
+                onOpenLeadForm={() => onOpenLeadForm("cta-band")}
+                heading={section.heading as string}
+                subheading={section.subheading as string}
+                ctaText={section.ctaText as string}
+              />
             );
 
           default:

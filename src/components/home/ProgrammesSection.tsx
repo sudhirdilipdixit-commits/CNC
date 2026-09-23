@@ -14,8 +14,14 @@ interface FeaturedCourse {
 
 interface ProgrammesSectionProps {
   onOpenLeadForm: () => void;
+  heading?: string;
+  subheading?: string;
   featuredCourses?: FeaturedCourse[];
 }
+
+const DEFAULT_HEADING = "Programmes aspirants are choosing in 2026";
+const DEFAULT_SUBHEADING =
+  "Curated from the most-applied-to programmes on our portal this quarter. Fees and accreditation verified.";
 
 const FALLBACK_COURSES: FeaturedCourse[] = [
   {
@@ -47,7 +53,7 @@ const FALLBACK_COURSES: FeaturedCourse[] = [
   },
 ];
 
-export default function ProgrammesSection({ onOpenLeadForm, featuredCourses }: ProgrammesSectionProps) {
+export default function ProgrammesSection({ onOpenLeadForm, heading, subheading, featuredCourses }: ProgrammesSectionProps) {
   const courses = featuredCourses?.length ? featuredCourses : FALLBACK_COURSES;
 
   return (
@@ -55,8 +61,8 @@ export default function ProgrammesSection({ onOpenLeadForm, featuredCourses }: P
       <div className="container">
         <div className="section-head">
           <div className="eyebrow">FEATURED PROGRAMMES</div>
-          <h2 className="h-display h2">Programmes aspirants are choosing in 2026</h2>
-          <p>Curated from the most-applied-to programmes on our portal this quarter. Fees and accreditation verified.</p>
+          <h2 className="h-display h2">{heading || DEFAULT_HEADING}</h2>
+          <p>{subheading || DEFAULT_SUBHEADING}</p>
         </div>
 
         <div className="programme-grid">

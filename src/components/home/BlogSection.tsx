@@ -12,8 +12,14 @@ interface BlogPost {
 }
 
 interface BlogSectionProps {
+  heading?: string;
+  subheading?: string;
   blogPosts?: BlogPost[];
 }
+
+const DEFAULT_HEADING = "From our desk";
+const DEFAULT_SUBHEADING =
+  "Study in India, Study Abroad, programme choices, and what employers are really looking for.";
 
 const DEFAULT_POSTS: BlogPost[] = [
   {
@@ -48,7 +54,7 @@ function formatDate(iso?: string) {
   return d.toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
 }
 
-export default function BlogSection({ blogPosts }: BlogSectionProps) {
+export default function BlogSection({ heading, subheading, blogPosts }: BlogSectionProps) {
   const posts = blogPosts?.length ? blogPosts : DEFAULT_POSTS;
 
   return (
@@ -56,8 +62,8 @@ export default function BlogSection({ blogPosts }: BlogSectionProps) {
       <div className="container">
         <div className="section-head">
           <div className="eyebrow">FRESH PERSPECTIVES</div>
-          <h2 className="h-display h2">From our desk</h2>
-          <p>Study in India, Study Abroad, programme choices, and what employers are really looking for.</p>
+          <h2 className="h-display h2">{heading || DEFAULT_HEADING}</h2>
+          <p>{subheading || DEFAULT_SUBHEADING}</p>
         </div>
 
         <div className="blog-grid">
