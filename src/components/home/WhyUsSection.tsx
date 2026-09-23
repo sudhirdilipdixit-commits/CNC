@@ -1,10 +1,33 @@
-export default function WhyUsSection() {
+interface WhyUsRow {
+  label: string;
+  aggregatorValue?: string;
+  ourValue?: string;
+}
+
+interface WhyUsSectionProps {
+  heading?: string;
+  rows?: WhyUsRow[];
+}
+
+const DEFAULT_HEADING = "What makes us different";
+const DEFAULT_ROWS: WhyUsRow[] = [
+  { label: "Guidance", aggregatorValue: "Commission-driven sales call", ourValue: "AI Counsellor - instant, unbiased shortlist" },
+  { label: "Programme list", aggregatorValue: "500+ unverified listings", ourValue: "150+ UGC-DEB approved + global universities" },
+  { label: "Fees disclosure", aggregatorValue: "“Starting from...”", ourValue: "Exact range, every programme" },
+  { label: "Sales follow-up", aggregatorValue: "Multiple calls per day", ourValue: "Matched shortlist in your inbox" },
+  { label: "Recommendation tool", aggregatorValue: "None", ourValue: "AI Counsellor + Profile Evaluator" },
+  { label: "Study Abroad support", aggregatorValue: "Not available", ourValue: "7+ countries, Ambitious/Target/Safe shortlist" },
+];
+
+export default function WhyUsSection({ heading, rows }: WhyUsSectionProps) {
+  const resolvedRows = rows?.length ? rows : DEFAULT_ROWS;
+
   return (
     <section id="why">
       <div className="container">
         <div className="section-head">
           <div className="eyebrow">WHY COLLEGENCOURSES</div>
-          <h2 className="h-display h2">What makes us different</h2>
+          <h2 className="h-display h2">{heading || DEFAULT_HEADING}</h2>
         </div>
 
         <div className="compare-table-wrap">
@@ -17,36 +40,13 @@ export default function WhyUsSection() {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Guidance</td>
-                <td>Commission-driven sales call</td>
-                <td>AI Counsellor - instant, unbiased shortlist</td>
-              </tr>
-              <tr>
-                <td>Programme list</td>
-                <td>500+ unverified listings</td>
-                <td>150+ UGC-DEB approved + global universities</td>
-              </tr>
-              <tr>
-                <td>Fees disclosure</td>
-                <td>&ldquo;Starting from...&rdquo;</td>
-                <td>Exact range, every programme</td>
-              </tr>
-              <tr>
-                <td>Sales follow-up</td>
-                <td>Multiple calls per day</td>
-                <td>Matched shortlist in your inbox</td>
-              </tr>
-              <tr>
-                <td>Recommendation tool</td>
-                <td>None</td>
-                <td>AI Counsellor + Profile Evaluator</td>
-              </tr>
-              <tr>
-                <td>Study Abroad support</td>
-                <td>Not available</td>
-                <td>7+ countries, Ambitious/Target/Safe shortlist</td>
-              </tr>
+              {resolvedRows.map((row, i) => (
+                <tr key={i}>
+                  <td>{row.label}</td>
+                  <td>{row.aggregatorValue}</td>
+                  <td>{row.ourValue}</td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

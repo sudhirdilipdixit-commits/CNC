@@ -7,6 +7,7 @@ export const homepageQuery = groq`*[_type == "homepage"][0]{
     eyebrow, headline, subheadline, primaryCTA, secondaryCTA, trustStrip,
     heading, body, pillars,
     subheading, ctaText,
+    caption,
     "posts": posts[]->{_id, title, slug, excerpt, tag, readTime, publishedAt, "coverImageUrl": coverImage.asset->url},
     "faqs": faqs[]{"_id": _key, question, answer},
     "featuredCourses": featuredCourses[]->{
@@ -14,6 +15,10 @@ export const homepageQuery = groq`*[_type == "homepage"][0]{
       courseName, universityName, mode, duration, fees, eligibility, badge,
       "universityLogoUrl": universityLogo.asset->url
     },
+    "rows": rows[]{label, aggregatorValue, ourValue},
+    "steps": steps[]{title, body},
+    "badges": badges[]{icon, label},
+    "cards": cards[]{title, body, linkLabel},
   },
   seo
 }`;

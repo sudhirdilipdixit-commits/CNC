@@ -54,7 +54,14 @@ export default function PageBuilder({ sections, onOpenLeadForm }: PageBuilderPro
             );
 
           case "pathBlock":
-            return <PathSection key={key} />;
+            return (
+              <PathSection
+                key={key}
+                heading={section.heading as string}
+                subheading={section.subheading as string}
+                cards={section.cards as never}
+              />
+            );
 
           case "programmesBlock":
             return (
@@ -68,13 +75,32 @@ export default function PageBuilder({ sections, onOpenLeadForm }: PageBuilderPro
             );
 
           case "whyUsBlock":
-            return <WhyUsSection key={key} />;
+            return (
+              <WhyUsSection
+                key={key}
+                heading={section.heading as string}
+                rows={section.rows as never}
+              />
+            );
 
           case "howItWorksBlock":
-            return <HowItWorksSection key={key} />;
+            return (
+              <HowItWorksSection
+                key={key}
+                heading={section.heading as string}
+                subheading={section.subheading as string}
+                steps={section.steps as never}
+              />
+            );
 
           case "trustStripBlock":
-            return <TrustStripSection key={key} />;
+            return (
+              <TrustStripSection
+                key={key}
+                caption={section.caption as string}
+                badges={section.badges as never}
+              />
+            );
 
           case "blogBlock":
             return (
