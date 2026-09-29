@@ -77,6 +77,18 @@ export const programmesBlock = defineType({
       description: "Pick up to 3 isFeatured course cards to show here. Falls back to placeholder data if empty.",
       validation: (R) => R.max(3),
     }),
+    defineField({
+      name: "browseLinkLabel",
+      title: "\"Browse all\" Link Text",
+      type: "string",
+      description: "e.g. 'Browse all Design programmes'. Leave blank to use the default text.",
+    }),
+    defineField({
+      name: "browseLinkUrl",
+      title: "\"Browse all\" Link URL",
+      type: "string",
+      description: "e.g. '/design-programmes/'. Leave blank to use the default link.",
+    }),
   ],
   preview: { prepare: () => ({ title: "Programmes Section" }) },
 });

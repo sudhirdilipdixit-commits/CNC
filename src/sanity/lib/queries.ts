@@ -8,6 +8,7 @@ export const homepageQuery = groq`*[_type == "homepage"][0]{
     heading, body, pillars,
     subheading, ctaText,
     caption,
+    browseLinkLabel, browseLinkUrl,
     "posts": posts[]->{_id, title, slug, excerpt, tag, readTime, publishedAt, "coverImageUrl": coverImage.asset->url},
     "faqs": faqs[]{"_id": _key, question, answer},
     "featuredCourses": featuredCourses[]->{

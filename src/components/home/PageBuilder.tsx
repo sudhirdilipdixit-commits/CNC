@@ -71,6 +71,8 @@ export default function PageBuilder({ sections, onOpenLeadForm }: PageBuilderPro
                 heading={section.heading as string}
                 subheading={section.subheading as string}
                 featuredCourses={section.featuredCourses as never}
+                browseLinkLabel={section.browseLinkLabel as string}
+                browseLinkUrl={section.browseLinkUrl as string}
               />
             );
 

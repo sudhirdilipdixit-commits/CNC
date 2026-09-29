@@ -712,6 +712,7 @@ section { padding: 56px 0; }
    PROGRAMME CARDS
    ===================================================================== */
 .section-programmes { background: var(--white); }
+.section-programmes + .section-programmes { padding-top: 0; }
 
 .programme-grid {
   display: grid;
