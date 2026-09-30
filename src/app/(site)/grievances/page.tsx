@@ -1,73 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import GrievanceForm from "@/components/grievances/GrievanceForm";
+import LegalToc from "@/components/legal/LegalToc";
 
 export const metadata: Metadata = {
-  title: "Grievance Redressal | CollegeNCourses",
+  title: "Grievance Redressal — CollegeNCourses",
   description:
-    "Submit a complaint or grievance about our counselling, service, or data practices. Three-level escalation matrix with 24-hour acknowledgement.",
+    "How to raise a complaint or concern with CollegeNCourses, and how our Grievance Officer resolves it.",
+  alternates: { canonical: "https://collegencourses.com/grievances/" },
   openGraph: {
-    title: "Grievance Redressal | CollegeNCourses",
+    title: "Grievance Redressal — CollegeNCourses",
     description:
-      "We take every grievance seriously. Submit a complaint and receive a reference number within 24 hours.",
+      "How to raise a complaint or concern with CollegeNCourses, and how our Grievance Officer resolves it.",
   },
 };
 
-const ESC_LEVELS = [
-  {
-    num: "1",
-    label: "First contact",
-    title: "Customer Grievance Cell",
-    contact: "grievances@collegencourses.com",
-    subject: "Grievance: [brief description]",
-    sla: "Response within 48 working hours",
-    note: "Include your name, mobile, enquiry ID (if any), and a clear description of the issue. We will acknowledge within 24 hours and resolve or escalate within 48.",
-  },
-  {
-    num: "2",
-    label: "Second escalation",
-    title: "Grievance Officer",
-    contact: "grievanceofficer@collegencourses.com",
-    designation: "Head of Operations, DNYANAL EDUCON PRIVATE LIMITED",
-    sla: "Response within 7 working days",
-    note: "Escalate here only if Level 1 has not resolved your grievance within 5 working days. Please include the Level 1 ticket reference number in your email.",
-  },
-  {
-    num: "3",
-    label: "Founder escalation",
-    title: "Founder and Director",
-    contact: "founder@collegencourses.com",
-    designation: "Nikhita Pradeep Deshmukh, Founder and Director",
-    sla: "Response within 15 working days",
-    note: "Reserved for unresolved or serious grievances that have not been addressed satisfactorily at Levels 1 and 2. Include all previous correspondence.",
-  },
-];
-
-const RIGHTS = [
-  {
-    title: "Honest information",
-    body: "Accurate, up-to-date programme details including real fees, accreditation status, and batch dates.",
-  },
-  {
-    title: "No sales pressure",
-    body: "One call, one WhatsApp follow-up. No more unless you ask. No \"limited seats\" pressure tactics.",
-  },
-  {
-    title: "Data privacy",
-    body: "Your personal data is never sold. You can request deletion at any time at privacy@collegencourses.com.",
-  },
-  {
-    title: "Transparent pricing",
-    body: "No hidden fees, no surprise charges beyond what was disclosed before you applied.",
-  },
-  {
-    title: "Honest comparisons",
-    body: "We will tell you if a competitor's programme is a better fit for your situation, even if we don't earn a referral.",
-  },
-  {
-    title: "Timely resolution",
-    body: "Every grievance acknowledged within 24 hours, resolved or escalated within 48 working hours at Level 1.",
-  },
+const TOC = [
+  { id: "overview",    label: "Overview" },
+  { id: "who-for",     label: "Who this page is for" },
+  { id: "officer",     label: "Grievance Officer" },
+  { id: "how-to",      label: "How to raise a grievance" },
+  { id: "next-steps",  label: "What happens next" },
+  { id: "escalation",  label: "If you're not satisfied" },
+  { id: "fraud",       label: "Fraud, abuse & safety" },
+  { id: "related",     label: "Related pages" },
 ];
 
 export default function GrievancesPage() {
@@ -77,10 +32,7 @@ export default function GrievancesPage() {
       {/* Breadcrumb */}
       <div style={{ background: "var(--white)", borderBottom: "1px solid var(--mist)" }}>
         <div className="container">
-          <nav style={{
-            display: "flex", gap: 6, alignItems: "center",
-            padding: "10px 0", fontSize: 12, color: "var(--grey)", flexWrap: "wrap",
-          }}>
+          <nav style={{ display: "flex", gap: 6, alignItems: "center", padding: "10px 0", fontSize: 12, color: "var(--grey)", flexWrap: "wrap" }}>
             <Link href="/" style={{ color: "var(--grey)" }}>Home</Link>
             <span style={{ color: "var(--pale-navy)" }}>/</span>
             <span style={{ color: "var(--navy)", fontWeight: 500 }}>Grievance Redressal</span>
@@ -88,231 +40,361 @@ export default function GrievancesPage() {
         </div>
       </div>
 
-      {/* Hero */}
-      <section style={{ padding: "48px 0", background: "var(--ivory)" }}>
+      {/* Document header */}
+      <div className="legal-doc-header">
         <div className="container">
-          <div style={{ maxWidth: 720 }}>
+          <div className="legal-doc-header-inner">
             <div className="eyebrow">GRIEVANCE REDRESSAL</div>
-            <h1 className="h-display h1" style={{ margin: "12px 0 16px" }}>
-              Complaints and grievances
-            </h1>
-            <p className="lede" style={{ marginBottom: 20 }}>
-              We take every grievance seriously. If anything in our counselling,
-              sales process, or service did not meet the standard we promise,
-              please tell us. We will respond, and we will act.
-            </p>
-
-            {/* DPDP compliance card */}
-            <div style={{
-              background: "var(--pale-navy)",
-              borderLeft: "4px solid var(--yellow)",
-              borderRadius: "0 var(--radius-md) var(--radius-md) 0",
-              padding: "16px 20px",
-            }}>
-              <div style={{
-                fontSize: 11, fontWeight: 700, letterSpacing: "0.08em",
-                textTransform: "uppercase", color: "var(--navy)", marginBottom: 6,
-              }}>
-                DPDP Act 2023 compliance
+            <h1 className="h-display h1">Grievance Redressal</h1>
+            <div className="legal-meta">
+              <div className="legal-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
+                </svg>
+                Effective date: <strong>15 July 2026</strong>
               </div>
-              <p style={{ fontSize: 14, color: "var(--charcoal)", margin: 0 }}>
-                Our Grievance Redressal mechanism is maintained in compliance with
-                the Digital Personal Data Protection Act 2023 and the Consumer
-                Protection Act 2019. Every grievance receives a reference number
-                within 24 hours.
+              <div className="legal-meta-item">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M23 4v6h-6M1 20v-6h6" /><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
+                </svg>
+                Last updated: <strong>15 July 2026</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Two-column layout */}
+      <div className="container">
+        <div className="legal-layout">
+
+          <LegalToc items={TOC} />
+
+          {/* Main content */}
+          <article className="legal-content">
+
+            {/* Overview */}
+            <div className="legal-section" id="overview">
+              <p>
+                We&apos;d rather you tell us directly when something&apos;s gone wrong than leave
+                frustrated and say nothing. This page explains how to raise a concern with
+                CollegeNCourses, and what happens after you do.
+              </p>
+              <div className="legal-highlight">
+                <p style={{ marginBottom: 6 }}><strong>In plain language</strong> (this box is a friendly summary only &mdash; the numbered sections below are what actually governs):</p>
+                <ul style={{ margin: "8px 0 0 18px" }}>
+                  <li>If something about our service, our website, or how we&apos;ve handled your data has bothered you, email our named Grievance Officer directly.</li>
+                  <li>We&apos;ll acknowledge your complaint within 24 hours and aim to resolve it within 15 days.</li>
+                  <li>If you&apos;re still not satisfied, we&apos;ll tell you what to do next.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* 1. Who This Page Is For */}
+            <div className="legal-section" id="who-for">
+              <h2>1. Who This Page Is For</h2>
+              <p>You can use this grievance process if you have a concern about:</p>
+              <ul>
+                <li>The accuracy or conduct of information, advice, or counselling provided through the CollegeNCourses Platform;</li>
+                <li>How a CollegeNCourses counsellor has communicated with you (including concerns about pressure tactics or conduct inconsistent with our counsellor promise);</li>
+                <li>How your personal data has been collected, used, or shared, including any concern related to our <Link href="/privacy-policy">Privacy Policy</Link>;</li>
+                <li>Any other conduct on the Platform that you believe breaches our <Link href="/terms-conditions">Terms &amp; Conditions</Link> or applicable law.</li>
+              </ul>
+              <p>
+                If your concern is specifically about a partner educational institution&apos;s own
+                conduct, admission process, or fees, we encourage you to raise it with that
+                institution directly first, since the final decision on those matters rests with
+                them &mdash; but you&apos;re welcome to loop us in too, especially if you believe we
+                made an inaccurate representation about that institution on our Platform.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
 
-      {/* Escalation Matrix */}
-      <section style={{ background: "var(--white)", paddingTop: 0, paddingBottom: 64 }}>
-        <div className="container" style={{ maxWidth: 860 }}>
-          <div style={{ paddingTop: 56, marginBottom: 28 }}>
-            <div className="eyebrow">ESCALATION MATRIX</div>
-            <h2 className="h-display h2" style={{ marginBottom: 8 }}>
-              Three-level escalation
-            </h2>
-            <div style={{ width: 48, height: 3, background: "var(--yellow)", margin: "14px 0 24px" }} />
-            <p style={{ color: "var(--grey)", fontSize: 15, maxWidth: 640 }}>
-              Please follow this order. Most grievances are resolved at Level 1
-              within 48 hours. Escalate to Level 2 only if you have not received
-              a satisfactory response at Level 1.
-            </p>
-          </div>
-
-          {/* Matrix */}
-          <div style={{
-            display: "flex", flexDirection: "column",
-            border: "1px solid var(--mist)",
-            borderRadius: "var(--radius-lg)", overflow: "hidden",
-            marginBottom: 8,
-          }}>
-            {ESC_LEVELS.map((lvl, i) => (
-              <div key={lvl.num} className="esc-level"
-                style={{ borderBottom: i < 2 ? "1px solid var(--mist)" : "none" }}>
-                {/* Badge column */}
-                <div style={{
-                  background: "var(--navy)",
-                  padding: "20px 24px",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
-                  <div style={{ textAlign: "center" }}>
-                    <div style={{
-                      fontFamily: "var(--font-serif)", fontSize: 36,
-                      color: "var(--yellow)", lineHeight: 1,
-                    }}>{lvl.num}</div>
-                    <div style={{
-                      fontSize: 10, fontWeight: 700, letterSpacing: "0.1em",
-                      textTransform: "uppercase", color: "var(--pale-navy)", marginTop: 4,
-                    }}>{lvl.label}</div>
-                  </div>
-                </div>
-                {/* Content column */}
-                <div style={{ background: "var(--white)", padding: "20px 24px" }}>
-                  <div style={{ fontWeight: 700, color: "var(--navy)", fontSize: 16, marginBottom: 8 }}>
-                    {lvl.title}
-                  </div>
-                  <p style={{ fontSize: 14, color: "var(--charcoal)", marginBottom: 8 }}>
-                    Email:{" "}
-                    <a href={`mailto:${lvl.contact}`}
-                      style={{ color: "var(--navy)", fontWeight: 600 }}>
-                      {lvl.contact}
-                    </a>
-                    {lvl.subject && (
-                      <><br />Subject line: &ldquo;{lvl.subject}&rdquo;</>
-                    )}
-                    {lvl.designation && (
-                      <><br />Designation: {lvl.designation}</>
-                    )}
-                  </p>
-                  <span style={{
-                    display: "inline-flex", alignItems: "center", gap: 6,
-                    background: "var(--pale-navy)", color: "var(--navy)",
-                    fontSize: 12, fontWeight: 600,
-                    padding: "4px 10px", borderRadius: 999,
-                  }}>
-                    <span style={{ fontSize: 14 }}>⏰</span> {lvl.sla}
-                  </span>
-                  <p style={{ fontSize: 13, color: "var(--grey)", marginTop: 10, marginBottom: 0 }}>
-                    {lvl.note}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p style={{ fontSize: 12, color: "var(--grey)", marginTop: 12 }}>
-            If your grievance concerns a data privacy matter, please write to{" "}
-            <a href="mailto:privacy@collegencourses.com"
-              style={{ color: "var(--navy)", fontWeight: 600 }}>
-              privacy@collegencourses.com
-            </a>{" "}
-            directly. Data grievances are handled separately under the DPDP Act
-            2023 framework.
-          </p>
-        </div>
-      </section>
-
-      {/* Form + Your Rights */}
-      <section style={{ background: "var(--ivory)", padding: "64px 0 80px" }}>
-        <div className="container" style={{ maxWidth: 960 }}>
-          <div className="grv-main-grid">
-
-            {/* LEFT: Form */}
-            <div>
-              <div style={{ marginBottom: 24 }}>
-                <div className="eyebrow">SUBMIT A GRIEVANCE</div>
-                <h2 className="h-display h2" style={{ marginBottom: 8 }}>
-                  Tell us what happened
-                </h2>
-                <div style={{ width: 48, height: 3, background: "var(--yellow)", margin: "14px 0 0" }} />
-              </div>
-              <div style={{
-                background: "var(--white)",
-                border: "1px solid var(--mist)",
-                borderTop: "4px solid var(--yellow)",
-                borderRadius: "var(--radius-lg)",
-                padding: 32,
-                boxShadow: "0 1px 3px rgba(36,48,72,.06)",
-              }}>
-                <h2 style={{
-                  fontFamily: "var(--font-serif)", color: "var(--navy)",
-                  fontSize: 22, marginBottom: 6,
-                }}>Grievance submission form</h2>
-                <p style={{ color: "var(--grey)", fontSize: 14, marginBottom: 24 }}>
-                  All fields marked with * are required. You will receive a
-                  reference number by email within 24 hours.
+            {/* 2. Grievance Officer */}
+            <div className="legal-section" id="officer">
+              <h2>2. Grievance Officer</h2>
+              <p>
+                In accordance with applicable Indian law, including the Digital Personal Data
+                Protection Act, 2023 and the Information Technology Act, 2000 and rules made
+                thereunder, DNYANAL EDUCON PRIVATE LIMITED has appointed the following Grievance
+                Officer:
+              </p>
+              <div className="legal-highlight">
+                <p style={{ marginBottom: 6 }}><strong>Name:</strong> Mr. Sudhir Dixit</p>
+                <p style={{ marginBottom: 4 }}>
+                  <strong>Email:</strong>{" "}
+                  <a href="mailto:grievances@collegencourses.com">grievances@collegencourses.com</a>
                 </p>
-                <GrievanceForm />
+                <p style={{ margin: 0 }}>
+                  <strong>Contact number:</strong>{" "}
+                  <a href="tel:+917350460393">+91 7350 460 393</a>
+                </p>
+              </div>
+              <p>
+                <strong>Registered office:</strong><br />
+                DNYANAL EDUCON PRIVATE LIMITED<br />
+                FLNO A-603, Utsav Homes, Patil Nagar, Bavdhan BK, Pune &ndash; 411021, Maharashtra, India
+              </p>
+            </div>
+
+            {/* 3. How to Raise a Grievance */}
+            <div className="legal-section" id="how-to">
+              <h2>3. How to Raise a Grievance</h2>
+              <p>
+                Write to us at{" "}
+                <a href="mailto:grievances@collegencourses.com">grievances@collegencourses.com</a>{" "}
+                with:
+              </p>
+              <ul>
+                <li>Your full name and the contact details you used on the Platform (so we can match your complaint to your enquiry, if relevant);</li>
+                <li>A clear description of your concern &mdash; what happened, when, and who (if anyone) you were dealing with on our side;</li>
+                <li>Any supporting documents or screenshots, where relevant;</li>
+                <li>What outcome you&apos;re looking for.</li>
+              </ul>
+              <p>
+                You can also call us on <a href="tel:+917350460393">+91 7350 460 393</a>{" "}
+                to raise a concern verbally; we&apos;ll follow up by email to make sure it&apos;s
+                properly logged.
+              </p>
+            </div>
+
+            {/* 4. What Happens Next */}
+            <div className="legal-section" id="next-steps">
+              <h2>4. What Happens Next</h2>
+              <div className="legal-table-wrap">
+                <table className="legal-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">Step</th>
+                      <th scope="col">Timeline</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Acknowledgment</td>
+                      <td>Within 24 hours of receipt, on a working day.</td>
+                    </tr>
+                    <tr>
+                      <td>Investigation</td>
+                      <td>Our Grievance Officer reviews the matter, which may include speaking with the relevant counsellor or team member.</td>
+                    </tr>
+                    <tr>
+                      <td>Resolution</td>
+                      <td>Within 15 days of the original complaint, wherever reasonably possible. If a matter is genuinely complex and needs longer, we&apos;ll tell you why and give you a revised timeline.</td>
+                    </tr>
+                    <tr>
+                      <td>Outcome communication</td>
+                      <td>We&apos;ll email you directly with the outcome and, where relevant, the action taken.</td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
             </div>
 
-            {/* RIGHT: Your Rights */}
-            <div>
-              <div style={{ marginBottom: 24 }}>
-                <div className="eyebrow">YOUR RIGHTS</div>
-                <h2 className="h-display h2" style={{ marginBottom: 8 }}>
-                  What you are entitled to
-                </h2>
-                <div style={{ width: 48, height: 3, background: "var(--yellow)", margin: "14px 0 0" }} />
-              </div>
-              <div style={{
-                display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12,
-              }} className="rights-grid">
-                {RIGHTS.map((r) => (
-                  <div key={r.title} style={{
-                    display: "flex", gap: 12, alignItems: "flex-start",
-                    background: "var(--white)", border: "1px solid var(--mist)",
-                    borderRadius: "var(--radius-md)", padding: 16,
-                  }}>
-                    <div style={{
-                      width: 32, height: 32, background: "var(--yellow)",
-                      color: "var(--navy)", borderRadius: "50%",
-                      display: "flex", alignItems: "center", justifyContent: "center",
-                      fontSize: 14, fontWeight: 800, flexShrink: 0,
-                    }}>✓</div>
-                    <div>
-                      <h4 style={{
-                        fontSize: 14, fontWeight: 700,
-                        color: "var(--navy)", marginBottom: 4,
-                      }}>{r.title}</h4>
-                      <p style={{ fontSize: 13, color: "var(--grey)", lineHeight: 1.4, margin: 0 }}>
-                        {r.body}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
+            {/* 5. If You're Not Satisfied */}
+            <div className="legal-section" id="escalation">
+              <h2>5. If You&apos;re Not Satisfied With the Outcome</h2>
+              <p>If you feel your grievance hasn&apos;t been resolved satisfactorily:</p>
+              <ul>
+                <li>You&apos;re welcome to ask for the matter to be escalated within DEPL for a further review.</li>
+                <li>For grievances specifically relating to how your personal data has been handled, you have the right to approach the Data Protection Board of India, established under the Digital Personal Data Protection Act, 2023, once you have first attempted resolution through our internal process above.</li>
+                <li>For other consumer-related concerns, you may also approach the appropriate consumer forum under the Consumer Protection Act, 2019, or the National Consumer Helpline.</li>
+              </ul>
+              <p>
+                We genuinely prefer to resolve things directly wherever we can, and would rather
+                hear a hard truth from you than have you walk away quietly.
+              </p>
             </div>
 
-          </div>
+            {/* 6. Fraud, Abuse, or Safety Concerns */}
+            <div className="legal-section" id="fraud">
+              <h2>6. Fraud, Abuse, or Safety Concerns</h2>
+              <p>
+                If your concern involves something more serious &mdash; suspected fraud,
+                impersonation of CollegeNCourses by a third party, or a safety concern &mdash;
+                please mark your email to{" "}
+                <a href="mailto:grievances@collegencourses.com">grievances@collegencourses.com</a>{" "}
+                as &ldquo;Urgent&rdquo; in the subject line, and call us directly on{" "}
+                <a href="tel:+917350460393">+91 7350 460 393</a>{" "}
+                as well. We&apos;ll prioritise these.
+              </p>
+            </div>
+
+            {/* 7. Related Pages */}
+            <div className="legal-section" id="related">
+              <h2>7. Related Pages</h2>
+              <ul>
+                <li><Link href="/privacy-policy">Privacy Policy</Link></li>
+                <li><Link href="/terms-conditions">Terms &amp; Conditions</Link></li>
+                <li><Link href="/cookie-policy">Cookie Policy</Link></li>
+                <li><Link href="/contact-us">Contact Us</Link></li>
+              </ul>
+            </div>
+
+          </article>
         </div>
-      </section>
+      </div>
 
-      {/* Page-scoped styles */}
+      {/* Page-scoped styles matching reference */}
       <style>{`
-        .esc-level {
-          display: grid;
-          grid-template-columns: 1fr;
+        .legal-doc-header {
+          background: var(--white);
+          padding: 40px 0 0;
+          border-bottom: 1px solid var(--mist);
         }
-        @media (min-width: 640px) {
-          .esc-level { grid-template-columns: 160px 1fr; }
-        }
+        .legal-doc-header-inner { max-width: 880px; }
+        .legal-doc-header h1 { margin: 10px 0 14px; }
 
-        .grv-main-grid {
+        .legal-meta {
+          display: flex; flex-wrap: wrap;
+          gap: 12px; align-items: center;
+          padding-bottom: 20px;
+        }
+        .legal-meta-item {
+          font-size: 13px; color: var(--grey);
+          display: flex; align-items: center; gap: 6px;
+        }
+        .legal-meta-item strong { color: var(--navy); }
+
+        .legal-layout {
           display: grid;
           grid-template-columns: 1fr;
           gap: 40px;
+          padding: 40px 0 64px;
         }
         @media (min-width: 1024px) {
-          .grv-main-grid { grid-template-columns: 1.1fr 0.9fr; gap: 56px; align-items: start; }
+          .legal-layout {
+            grid-template-columns: 220px 1fr;
+            gap: 48px;
+            align-items: start;
+          }
         }
 
-        @media (max-width: 480px) {
-          .rights-grid { grid-template-columns: 1fr !important; }
+        .legal-toc { display: none; }
+        @media (min-width: 1024px) {
+          .legal-toc {
+            display: block;
+            position: sticky;
+            top: calc(var(--header-h) + 20px);
+          }
         }
+        .legal-toc-inner {
+          background: var(--white);
+          border: 1px solid var(--mist);
+          border-radius: 8px;
+          padding: 16px;
+        }
+        .legal-toc-title {
+          font-size: 11px; font-weight: 700;
+          letter-spacing: 0.1em; text-transform: uppercase;
+          color: var(--grey); margin-bottom: 12px;
+          padding-bottom: 10px;
+          border-bottom: 1px solid var(--mist);
+        }
+        .legal-toc-list {
+          list-style: none;
+          display: flex; flex-direction: column; gap: 2px;
+        }
+        .legal-toc-list a {
+          font-size: 13px; color: var(--grey);
+          display: block; padding: 6px 10px;
+          border-left: 2px solid transparent;
+          border-radius: 0 4px 4px 0;
+          transition: all 0.15s; line-height: 1.4;
+          text-decoration: none;
+        }
+        .legal-toc-list a:hover { color: var(--navy); background: var(--ivory); }
+        .legal-toc-list a.active {
+          color: var(--navy); font-weight: 600;
+          border-left-color: var(--yellow);
+          background: var(--ivory);
+        }
+
+        .mobile-toc { display: block; margin-bottom: 24px; }
+        @media (min-width: 1024px) { .mobile-toc { display: none; } }
+        .mobile-toc select {
+          width: 100%; padding: 11px 14px;
+          border: 1px solid var(--pale-navy);
+          border-radius: 8px; font-size: 14px;
+          font-family: var(--font-sans);
+          color: var(--charcoal); background: var(--white);
+        }
+
+        .legal-content { max-width: 720px; }
+
+        .legal-section {
+          margin-bottom: 40px;
+          padding-bottom: 40px;
+          border-bottom: 1px solid var(--mist);
+        }
+        .legal-section:last-child { border-bottom: none; margin-bottom: 0; }
+
+        .legal-section h2 {
+          font-family: var(--font-serif);
+          color: var(--navy);
+          font-size: clamp(19px, 2.2vw, 24px);
+          margin-bottom: 14px;
+          padding-bottom: 10px;
+          position: relative;
+        }
+        .legal-section h2::after {
+          content: '';
+          position: absolute; bottom: 0; left: 0;
+          width: 36px; height: 2px;
+          background: var(--yellow);
+        }
+        .legal-section p {
+          font-size: 15px; color: var(--charcoal);
+          line-height: 1.7; margin-bottom: 1em;
+        }
+        .legal-section ul, .legal-section ol {
+          margin: 10px 0 16px 20px;
+          display: flex; flex-direction: column; gap: 6px;
+        }
+        .legal-section li {
+          font-size: 14px; color: var(--charcoal); line-height: 1.6;
+        }
+        .legal-section a {
+          color: var(--navy);
+          text-decoration: underline;
+          text-underline-offset: 3px;
+          text-decoration-color: var(--yellow);
+        }
+
+        .legal-highlight {
+          background: var(--pale-navy);
+          border-left: 4px solid var(--yellow);
+          border-radius: 0 8px 8px 0;
+          padding: 16px 20px;
+          margin: 16px 0;
+        }
+        .legal-highlight p {
+          font-size: 14px; color: var(--navy); margin: 0;
+        }
+        .legal-highlight p + p { margin-top: 8px; }
+        .legal-highlight a { color: var(--navy); font-weight: 600; }
+        .legal-highlight ul { margin: 8px 0 0 18px; }
+        .legal-highlight li { font-size: 14px; color: var(--navy); line-height: 1.6; }
+
+        .legal-table-wrap {
+          overflow-x: auto;
+          border: 1px solid var(--mist);
+          border-radius: 8px;
+          margin: 16px 0;
+        }
+        .legal-table { width: 100%; border-collapse: collapse; min-width: 480px; }
+        .legal-table th {
+          background: var(--navy); color: var(--white);
+          font-size: 12px; font-weight: 700;
+          letter-spacing: 0.04em; text-transform: uppercase;
+          text-align: left; padding: 12px 16px;
+        }
+        .legal-table td {
+          font-size: 14px; color: var(--charcoal);
+          padding: 12px 16px; vertical-align: top;
+          border-top: 1px solid var(--mist);
+        }
+        .legal-table tr:nth-child(even) td { background: var(--ivory); }
+        .legal-table td:first-child { font-weight: 700; color: var(--navy); white-space: nowrap; }
       `}</style>
     </main>
   );
