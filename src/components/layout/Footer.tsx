@@ -1,4 +1,5 @@
 import Image from "next/image";
+import CookiePreferencesLink from "@/components/cookie-consent/CookiePreferencesLink";
 
 export default function Footer() {
   return (
@@ -76,6 +77,7 @@ export default function Footer() {
               <li><a href="/terms-conditions">Terms &amp; Conditions</a></li>
               <li><a href="/cookie-policy">Cookie Policy</a></li>
               <li><a href="/grievances">Grievances</a></li>
+              <li><CookiePreferencesLink /></li>
             </ul>
           </div>
         </div>

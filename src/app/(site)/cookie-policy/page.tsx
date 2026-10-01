@@ -161,11 +161,11 @@ export default function CookiePolicyPage() {
               </div>
 
               <div className="legal-highlight" style={{ marginTop: 20 }}>
-                <p style={{ marginBottom: 6 }}><strong>Example &mdash; a cookie we actually use</strong></p>
-                <p style={{ marginBottom: 4 }}><strong>Name:</strong> cnc_lead_submitted</p>
-                <p style={{ marginBottom: 4 }}><strong>Provider:</strong> collegencourses.com (first-party)</p>
-                <p style={{ marginBottom: 4 }}><strong>Purpose:</strong> Strictly necessary &mdash; prevents the same enquiry from being submitted twice in a short window.</p>
-                <p style={{ margin: 0 }}><strong>Expiry:</strong> 24 hours</p>
+                <p style={{ marginBottom: 10 }}><strong>Cookies we actually use today</strong></p>
+                <p style={{ marginBottom: 4 }}><strong>cnc_lead_submitted</strong> (first-party, strictly necessary)</p>
+                <p style={{ marginBottom: 10 }}>Prevents the same enquiry from being submitted twice in a short window. Expires after 24 hours.</p>
+                <p style={{ marginBottom: 4 }}><strong>cnc_cookie_consent</strong> (first-party, strictly necessary)</p>
+                <p style={{ margin: 0 }}>Remembers your cookie preferences from the banner below, so we don&apos;t ask again on every visit. Expires after 180 days.</p>
               </div>
               <p style={{ marginTop: 16, fontSize: 13, color: "var(--grey)" }}>
                 As we activate analytics and advertising tools (such as Google Analytics, Google
@@ -204,9 +204,10 @@ export default function CookiePolicyPage() {
               <h2>4. Managing Your Cookie Preferences</h2>
               <h3>4.1 On this site</h3>
               <p>
-                Where a cookie-consent banner is active on the Platform, you can accept or decline
-                non-essential cookie categories at any time by revisiting your cookie preferences
-                (typically available via a link in the footer).
+                When you first visit the Platform, a cookie banner lets you accept all
+                non-essential cookies, reject them, or choose which categories to allow. You can
+                change your choice at any time via the &ldquo;Cookie Preferences&rdquo; link in the
+                footer.
               </p>
               <h3>4.2 In your browser</h3>
               <p>
