@@ -3,67 +3,57 @@ import Link from "next/link";
 import LegalToc from "@/components/legal/LegalToc";
 
 export const metadata: Metadata = {
-  title: "Cookie Policy | CollegeNCourses",
+  title: "Cookie Policy — CollegeNCourses",
   description:
-    "How CollegeNCourses uses cookies, web beacons, and tracking technologies on its websites and apps. Learn how to control your cookie preferences.",
+    "How CollegeNCourses uses cookies and similar technologies, and how to manage your preferences.",
+  alternates: { canonical: "https://collegencourses.com/cookie-policy/" },
   openGraph: {
-    title: "Cookie Policy | CollegeNCourses",
+    title: "Cookie Policy — CollegeNCourses",
     description:
-      "Detailed information about how and when we use cookies on collegencourses.com.",
+      "How CollegeNCourses uses cookies and similar technologies, and how to manage your preferences.",
   },
 };
 
 const TOC = [
-  { id: "introduction",   label: "Introduction" },
-  { id: "uses-cookies",   label: "Does CNC Use Cookies?" },
-  { id: "what-is-cookie", label: "What is a Cookie?" },
-  { id: "cookies-used-for", label: "What Are Cookies Used For?" },
-  { id: "when-placed",    label: "When Are Cookies Placed?" },
-  { id: "analytics",      label: "Cookies for Analytics" },
-  { id: "advertising",    label: "Cookies for Advertising" },
-  { id: "third-party",    label: "Third-Party Cookies" },
-  { id: "web-beacons",    label: "Web Beacons" },
-  { id: "control-cookies",label: "How to Control Cookies" },
+  { id: "overview",   label: "Overview" },
+  { id: "what-are",   label: "What are cookies" },
+  { id: "why-we-use", label: "Why we use cookies" },
+  { id: "third-party",label: "Cookies set by third parties" },
+  { id: "managing",   label: "Managing your preferences" },
+  { id: "dnt",        label: "Do Not Track" },
+  { id: "changes",    label: "Changes to this policy" },
+  { id: "contact",    label: "Contact us" },
 ];
 
-const COOKIE_CATEGORIES = [
+const CATEGORIES = [
   {
     num: "1",
-    name: "Essential Cookies",
-    desc: "Essential cookies (First Party Cookies) are sometimes called “strictly necessary” as without them we cannot provide many services that you need on the Website. They maintain preferences and login functionality.",
+    name: "Strictly necessary",
+    purpose:
+      "Keep the site functional — for example, remembering your progress through a multi-step enquiry form, or keeping you securely connected to our AI Counsellor tool during a session.",
+    disable: "No — the site may not function correctly without these.",
   },
   {
     num: "2",
-    name: "Analytics Cookies",
-    desc: "These cookies track information about visits to the Collegencourses.com and partner (college/university websites) websites so that we can make improvements and report our performance. They analyse user behaviour and test features.",
+    name: "Analytics / performance",
+    purpose:
+      "Understand how visitors use the Platform — which pages are read, where visitors drop off — so we can improve content and navigation. Typically via a provider such as Google Analytics.",
+    disable: "Yes, via cookie settings or browser controls.",
   },
   {
     num: "3",
-    name: "Functionality or Preference Cookies",
-    desc: "During your visit to the Websites, cookies are used to remember information you have entered or choices you make (such as your username, language or your region) on the Websites. Preferences persist for future visits.",
+    name: "Advertising / marketing",
+    purpose:
+      "Measure whether our Google Ads and Meta (Facebook/Instagram) campaigns are reaching relevant aspirants, and avoid showing you the same ad repeatedly. This is where identifiers like gclid (Google) or fbclid (Meta) come from when you arrive via a paid ad.",
+    disable: "Yes, via cookie settings, browser controls, or the ad platform's own preference tools.",
   },
   {
     num: "4",
-    name: "Targeting or Advertising Cookies",
-    desc: "These Cookies are placed by third party advertising platforms or networks in order to deliver ads and track ad performance, and enable advertising networks to deliver ads that may be relevant to you based upon your activities.",
+    name: "Functional",
+    purpose:
+      "Remember choices you've made on the site (for example, a specialization you've been exploring) so you don't have to re-enter them on a return visit.",
+    disable: "Yes, via cookie settings or browser controls.",
   },
-];
-
-const THIRD_PARTY_LINKS = [
-  { name: "Facebook", url: "https://www.facebook.com/policy.php" },
-  { name: "AdSense", url: "https://policies.google.com/technologies/ads" },
-  { name: "Google Analytics", url: "https://www.google.com/analytics/learn/privacy.html" },
-  { name: "Google Tag Manager", url: "https://www.google.com/analytics/tag-manager/faq/" },
-  { name: "Google+", url: "https://www.google.com/policies/privacy/" },
-  { name: "Twitter", url: "https://twitter.com/en/privacy" },
-  { name: "Google Ad Manager", url: "https://support.google.com/admanager/answer/2839090?hl=en" },
-];
-
-const BROWSER_LINKS = [
-  { name: "Internet Explorer", url: "https://support.microsoft.com/en-us/help/17442/windows-internet-explorer-delete-manage-cookies" },
-  { name: "Firefox", url: "https://support.mozilla.org/en-US/kb/enable-and-disable-cookies-website-preferences" },
-  { name: "Chrome", url: "https://support.google.com/chrome/answer/95647" },
-  { name: "Safari", url: "https://support.apple.com/kb/ph21411" },
 ];
 
 export default function CookiePolicyPage() {
@@ -92,20 +82,14 @@ export default function CookiePolicyPage() {
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <rect x="3" y="4" width="18" height="18" rx="2" /><path d="M16 2v4M8 2v4M3 10h18" />
                 </svg>
-                Published: <strong>1 May 2023</strong>
+                Effective date: <strong>15 July 2026</strong>
               </div>
               <div className="legal-meta-item">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M23 4v6h-6M1 20v-6h6" /><path d="M3.51 9a9 9 0 0114.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0020.49 15" />
                 </svg>
-                Last updated: <strong>1 June 2026</strong>
+                Last updated: <strong>15 July 2026</strong>
               </div>
-              <span className="legal-updated-badge">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M9 11l3 3L22 4" />
-                </svg>
-                Current version
-              </span>
             </div>
           </div>
         </div>
@@ -120,225 +104,163 @@ export default function CookiePolicyPage() {
           {/* Main content */}
           <article className="legal-content">
 
-            {/* Introduction */}
-            <div className="legal-section" id="introduction">
-              <h2>Introduction</h2>
+            {/* Overview */}
+            <div className="legal-section" id="overview">
               <p>
-                This Cookie Policy (&ldquo;Policy&rdquo;) explains that we believe in being open and clear
-                about how we use your information. In the spirit of transparency, this Policy provides
-                detailed information about how and when we use cookies on our Websites.
+                This Cookie Policy explains how <strong>DNYANAL EDUCON PRIVATE LIMITED</strong>,
+                operating CollegeNCourses (&ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;),
+                uses cookies and similar technologies on collegencourses.com (the
+                &ldquo;Platform&rdquo;), and how you can manage your preferences. This Policy
+                should be read alongside our <Link href="/privacy-policy">Privacy Policy</Link>.
               </p>
-              <p>
-                The policy applies to any Collegencourses.com product or service that links to or
-                incorporates it by reference.
-              </p>
+              <div className="legal-highlight">
+                <p style={{ marginBottom: 6 }}><strong>In plain language</strong> (this box is a friendly summary only &mdash; the numbered sections below are what actually governs):</p>
+                <ul style={{ margin: "8px 0 0 18px" }}>
+                  <li>We use a small number of cookies to keep the site working properly, understand how visitors use it, and measure whether our marketing is reaching the right people.</li>
+                  <li>We don&apos;t use cookies to build a profile of you for sale to third parties.</li>
+                  <li>You can control or switch off non-essential cookies through your browser settings or our cookie banner, without losing access to the core site.</li>
+                </ul>
+              </div>
             </div>
 
-            {/* 1. Does CNC Use Cookies? */}
-            <div className="legal-section" id="uses-cookies">
-              <h2>Does Collegencourses.com use cookies?</h2>
+            {/* 1. What Are Cookies */}
+            <div className="legal-section" id="what-are">
+              <h2>1. What Are Cookies</h2>
               <p>
-                Collegencourses.com uses cookies, tags and other technologies when you use any of the
-                Collegencourses.com websites, mobile sites or mobile apps (collectively &ldquo;the
-                services&rdquo;).
+                Cookies are small text files placed on your device when you visit a website. They
+                help the website remember information about your visit &mdash; such as your
+                preferences or how you arrived at the site &mdash; which can make your next visit
+                easier and the site more useful to you. We also use similar technologies, such as
+                pixels and local storage, which work in comparable ways; this Policy refers to all
+                of them collectively as &ldquo;cookies.&rdquo;
               </p>
-              <p>
-                Cookies ensure optimal user experience and account security. By continuing to use the
-                services, users consent to cookie usage as described in this policy. Users preferring not
-                to receive cookies should discontinue site use or adjust browser settings.
-              </p>
-            </div>
-
-            {/* 2. What is a Cookie? */}
-            <div className="legal-section" id="what-is-cookie">
-              <h2>What is a cookie?</h2>
-              <p>
-                Cookies are small pieces of text stored by a website you visit in your browser and
-                subsequently sent by your web browser in every request to the website.
-              </p>
-              <p>
-                A cookie file remains in your web browser, allowing website recognition and personalised
-                experiences. Web beacons, tags and scripts may be used in the Websites or in emails to
-                help us to deliver cookies, count visits, understand usage and campaign effectiveness and
-                determine whether an email has been opened and acted upon.
-              </p>
-              <p>There are two main types of cookies:</p>
+              <p>Cookies can be:</p>
               <ul>
-                <li>
-                  <strong>Persistent cookies:</strong> Help recognise returning users, remaining in
-                  browsers across sessions.
-                </li>
-                <li>
-                  <strong>Session cookies:</strong> Last only during the current visit or browser session.
-                </li>
+                <li><strong>Session cookies</strong> &mdash; temporary, and deleted when you close your browser.</li>
+                <li><strong>Persistent cookies</strong> &mdash; remain on your device for a set period, or until you delete them, so the site can recognise you on a return visit.</li>
+                <li><strong>First-party cookies</strong> &mdash; set directly by collegencourses.com.</li>
+                <li><strong>Third-party cookies</strong> &mdash; set by a service we use (such as an analytics or advertising provider), not by us directly.</li>
               </ul>
             </div>
 
-            {/* 3. What Are Cookies Used For? */}
-            <div className="legal-section" id="cookies-used-for">
-              <h2>What are cookies used for?</h2>
-              <p>
-                When you visit our Websites, we may place a number of cookies in your browser. These are
-                known as First Party Cookies and are required to enable to hold session information as you
-                navigate from page to page within the website.
-              </p>
-              <p>
-                Cookies track preferences, improve experience, and analyse usage statistics. They deliver
-                targeted advertising and enable customised features. Users can control cookies at browser
-                level, though limiting cookies may restrict website functionality.
-              </p>
+            {/* 2. Why We Use Cookies */}
+            <div className="legal-section" id="why-we-use">
+              <h2>2. Why We Use Cookies</h2>
 
-              {/* Cookie category cards */}
               <div className="cookie-categories">
-                {COOKIE_CATEGORIES.map((cat) => (
+                {CATEGORIES.map((cat) => (
                   <div key={cat.num} className="cookie-cat-card">
                     <div className="cookie-cat-badge">{cat.num}</div>
                     <div>
                       <div className="cookie-cat-name">{cat.name}</div>
-                      <p className="cookie-cat-desc">{cat.desc}</p>
+                      <p className="cookie-cat-desc">{cat.purpose}</p>
+                      <p className="cookie-cat-disable">Can you disable it? {cat.disable}</p>
                     </div>
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* 4. When Are Cookies Placed? */}
-            <div className="legal-section" id="when-placed">
-              <h2>When does Collegencourses.com place cookies?</h2>
-              <p>
-                Cookies are placed on websites, mobile sites, and mobile applications. Any browser
-                visiting these sites will receive cookies from us which helps us identify you more quickly
-                when you return.
-              </p>
-              <p>
-                The organisation uses both Google Analytics and proprietary analytics cookies to generate
-                statistics and reports about visitor activities.
-              </p>
-            </div>
-
-            {/* 5. Analytics */}
-            <div className="legal-section" id="analytics">
-              <h2>How cookies are used for online analytics purposes</h2>
-              <p>
-                We may use web analytics services on Collegencourses.com, such as those of Google
-                Analytics. These services help us analyse how users use the services, including by noting
-                the third-party website from which you arrive.
-              </p>
-              <p>
-                Service providers collect and use this information to evaluate service usage, compile
-                reports on website activity, and provide other services relating to website activity and
-                internet usage.
+              <div className="legal-highlight" style={{ marginTop: 20 }}>
+                <p style={{ marginBottom: 6 }}><strong>Example &mdash; a cookie we actually use</strong></p>
+                <p style={{ marginBottom: 4 }}><strong>Name:</strong> cnc_lead_submitted</p>
+                <p style={{ marginBottom: 4 }}><strong>Provider:</strong> collegencourses.com (first-party)</p>
+                <p style={{ marginBottom: 4 }}><strong>Purpose:</strong> Strictly necessary &mdash; prevents the same enquiry from being submitted twice in a short window.</p>
+                <p style={{ margin: 0 }}><strong>Expiry:</strong> 24 hours</p>
+              </div>
+              <p style={{ marginTop: 16, fontSize: 13, color: "var(--grey)" }}>
+                As we activate analytics and advertising tools (such as Google Analytics, Google
+                Ads, or Meta Pixel) on the Platform, we&apos;ll add their specific cookies to this
+                list.
               </p>
             </div>
 
-            {/* 6. Advertising */}
-            <div className="legal-section" id="advertising">
-              <h2>How are cookies used for advertising purposes?</h2>
-              <p>
-                Cookies and other ad technology such as beacons, pixels, and tags help us serve relevant
-                ads to you more effectively.
-              </p>
-              <p>
-                The organisation partners with analytics and advertising networks including Google Display
-                Network and Facebook to deliver targeted advertisements. This information allows an ad
-                network to deliver targeted advertisements that they believe will be of most interest to
-                you, and it allows Collegencourses.com to optimise the performance of our advertising
-                campaigns and the usability of our website.
-              </p>
-            </div>
-
-            {/* 7. Third-Party Cookies */}
+            {/* 3. Cookies Set By Third Parties */}
             <div className="legal-section" id="third-party">
-              <h2>What third-party cookies does Collegencourses.com use?</h2>
+              <h2>3. Cookies Set By Third Parties</h2>
               <p>
-                Please note that third parties (advertising networks and providers of external services
-                like web traffic analysis services) may also use cookies on our Services.
+                Some cookies on the Platform are set by services we work with, not by us directly.
+                These may include analytics providers, advertising platforms (Google, Meta), and
+                our CRM or chat-tool provider. Each of these third parties has its own privacy and
+                cookie practices, which we encourage you to review:
               </p>
-              <p>
-                Third-party cookie names and technologies may change over time. Social networks including
-                Facebook, Google, and Twitter may place cookies when users log in through the website.
-              </p>
-              <p>For more information, visit the privacy policies of the relevant third parties:</p>
               <ul>
-                {THIRD_PARTY_LINKS.map((link) => (
-                  <li key={link.name}>
-                    <strong>{link.name}:</strong>{" "}
-                    <a href={link.url} target="_blank" rel="noopener noreferrer">
-                      {link.url}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <strong>Google:</strong>{" "}
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">
+                    policies.google.com/privacy
+                  </a>
+                </li>
+                <li>
+                  <strong>Meta:</strong>{" "}
+                  <a href="https://www.facebook.com/privacy/policy" target="_blank" rel="noopener noreferrer">
+                    facebook.com/privacy/policy
+                  </a>
+                </li>
               </ul>
             </div>
 
-            {/* 8. Web Beacons */}
-            <div className="legal-section" id="web-beacons">
-              <h2>What are web beacons?</h2>
+            {/* 4. Managing Your Cookie Preferences */}
+            <div className="legal-section" id="managing">
+              <h2>4. Managing Your Cookie Preferences</h2>
+              <h3>4.1 On this site</h3>
               <p>
-                Collegencourses.com occasionally advertises on third party web sites. As part of our
-                effort to track the success of our advertising campaigns, we may at times use a visitor
-                identification technology such as &ldquo;web beacons,&rdquo; or &ldquo;action tags,&rdquo;
-                which count visitors who have come to our site after being exposed to a
-                Collegencourses.com banner ad on a third party site.
+                Where a cookie-consent banner is active on the Platform, you can accept or decline
+                non-essential cookie categories at any time by revisiting your cookie preferences
+                (typically available via a link in the footer).
               </p>
+              <h3>4.2 In your browser</h3>
               <p>
-                By navigating on our site, you agree that we can place cookies and web beacons on your
-                computer or device.
+                Most browsers let you view, delete, and block cookies through their settings menu
+                (usually under &ldquo;Privacy&rdquo; or &ldquo;Settings&rdquo;). Since browsers
+                differ, check your specific browser&apos;s help section for exact steps. Note that
+                blocking all cookies may affect how parts of the Platform function &mdash; for
+                example, our multi-step enquiry form or AI Counsellor tool may not work correctly
+                without strictly necessary cookies enabled.
+              </p>
+              <h3>4.3 Ad platform opt-outs</h3>
+              <p>
+                You can also manage ad personalisation directly through{" "}
+                <a href="https://adssettings.google.com" target="_blank" rel="noopener noreferrer">
+                  Google Ads Settings
+                </a>{" "}
+                and{" "}
+                <a href="https://www.facebook.com/adpreferences" target="_blank" rel="noopener noreferrer">
+                  Meta Ad Preferences
+                </a>.
               </p>
             </div>
 
-            {/* 9. How to Control Cookies */}
-            <div className="legal-section" id="control-cookies">
-              <h2>How to control cookies</h2>
+            {/* 5. Do Not Track */}
+            <div className="legal-section" id="dnt">
+              <h2>5. Do Not Track</h2>
               <p>
-                Most browsers allow you to control cookies through their settings preferences. However,
-                if you choose to turn off these cookies, you will still see advertising on the internet
-                but it may not be tailored to your interests.
+                Some browsers offer a &ldquo;Do Not Track&rdquo; (DNT) signal. There isn&apos;t a
+                single accepted industry standard for how websites should respond to DNT signals,
+                and the Platform does not currently respond differently based on a DNT signal. You
+                can still manage your cookie preferences directly through the methods in Section 4.
               </p>
-              <p>
-                Essential cookies cannot be disabled. Disabling other cookies may limit website access
-                and functionality.
-              </p>
+            </div>
 
-              <div className="legal-highlight">
-                <p style={{ marginBottom: 8 }}>
-                  <strong>Changing your cookie settings</strong>
-                </p>
-                <p style={{ marginBottom: 8 }}>
-                  Browser settings for cookies are typically found in options or preferences menus:
-                </p>
-                <ul style={{ margin: "0 0 0 16px", display: "flex", flexDirection: "column", gap: 4 }}>
-                  {BROWSER_LINKS.map((b) => (
-                    <li key={b.name} style={{ fontSize: 14 }}>
-                      <a href={b.url} target="_blank" rel="noopener noreferrer"
-                        style={{ color: "var(--navy)", fontWeight: 600 }}>
-                        Cookie settings in {b.name}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <h3>More information</h3>
+            {/* 6. Changes to This Policy */}
+            <div className="legal-section" id="changes">
+              <h2>6. Changes to This Policy</h2>
               <p>
-                For additional information about cookies, visit{" "}
-                <a href="https://www.allaboutcookies.org" target="_blank" rel="noopener noreferrer">
-                  www.allaboutcookies.org
-                </a>
-                . To learn about opting out of interest-based ads, visit{" "}
-                <a href="https://optout.aboutads.info" target="_blank" rel="noopener noreferrer">
-                  optout.aboutads.info
-                </a>{" "}
-                and{" "}
-                <a href="https://www.networkadvertising.org/choices" target="_blank" rel="noopener noreferrer">
-                  www.networkadvertising.org/choices
-                </a>
-                . Google and Facebook offer customisable preference options for internet browsing
-                advertisements.
+                We may update this Cookie Policy from time to time, particularly as our use of
+                analytics and marketing tools evolves, or as consent requirements under Indian law
+                develop. We&apos;ll update the &ldquo;Last updated&rdquo; date at the top of this
+                page when we do.
               </p>
+            </div>
+
+            {/* 7. Contact Us */}
+            <div className="legal-section" id="contact">
+              <h2>7. Contact Us</h2>
+              <p>For any questions about this Cookie Policy:</p>
               <p>
-                For any questions about this Cookie Policy, please contact us at{" "}
-                <a href="mailto:privacy@collegencourses.com">privacy@collegencourses.com</a>.
+                DNYANAL EDUCON PRIVATE LIMITED<br />
+                FLNO A-603, Utsav Homes, Patil Nagar, Bavdhan BK, Pune &ndash; 411021, Maharashtra, India<br />
+                Email: <a href="mailto:info@collegencourses.com">info@collegencourses.com</a>
+                {" "}| Phone: <a href="tel:+917350460393">+91 7350 460 393</a>
               </p>
             </div>
 
@@ -346,7 +268,7 @@ export default function CookiePolicyPage() {
         </div>
       </div>
 
-      {/* Page-scoped styles — identical base to privacy-policy / terms-conditions */}
+      {/* Page-scoped styles — identical base to privacy-policy / terms-conditions / grievances */}
       <style>{`
         .legal-doc-header {
           background: var(--white);
@@ -366,12 +288,6 @@ export default function CookiePolicyPage() {
           display: flex; align-items: center; gap: 6px;
         }
         .legal-meta-item strong { color: var(--navy); }
-        .legal-updated-badge {
-          display: inline-flex; align-items: center; gap: 6px;
-          background: #E8F5EA; color: #2A7A3A;
-          font-size: 11px; font-weight: 700;
-          padding: 4px 10px; border-radius: 999px;
-        }
 
         .legal-layout {
           display: grid;
@@ -494,6 +410,8 @@ export default function CookiePolicyPage() {
         }
         .legal-highlight p + p { margin-top: 8px; }
         .legal-highlight a { color: var(--navy); font-weight: 600; }
+        .legal-highlight ul { margin: 8px 0 0 18px; }
+        .legal-highlight li { font-size: 14px; color: var(--navy); line-height: 1.6; }
 
         /* Cookie category cards */
         .cookie-categories {
@@ -529,6 +447,12 @@ export default function CookiePolicyPage() {
           font-size: 13px !important;
           color: var(--grey) !important;
           line-height: 1.55 !important;
+          margin: 0 0 6px !important;
+        }
+        .cookie-cat-disable {
+          font-size: 12px !important;
+          color: var(--navy) !important;
+          font-weight: 600 !important;
           margin: 0 !important;
         }
       `}</style>
