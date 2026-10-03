@@ -572,12 +572,17 @@ export default function PrivacyPolicyPage() {
           line-height: 1.7; margin-bottom: 1em;
         }
         .legal-section ul, .legal-section ol {
-          margin: 10px 0 16px 20px;
-          display: flex; flex-direction: column; gap: 6px;
+          margin: 10px 0 16px 0;
+          padding-left: 20px;
         }
+        .legal-section ul { list-style: disc outside; }
+        .legal-section ol { list-style: decimal outside; }
+        .legal-section ul ul, .legal-section ol ul { list-style: circle outside; }
         .legal-section li {
           font-size: 14px; color: var(--charcoal); line-height: 1.6;
+          margin-bottom: 6px;
         }
+        .legal-section li:last-child { margin-bottom: 0; }
         .legal-section a {
           color: var(--navy);
           text-decoration: underline;
@@ -597,7 +602,7 @@ export default function PrivacyPolicyPage() {
         }
         .legal-highlight p + p { margin-top: 8px; }
         .legal-highlight a { color: var(--navy); font-weight: 600; }
-        .legal-highlight ul { margin: 8px 0 0 18px; }
+        .legal-highlight ul { margin: 8px 0 0 0; padding-left: 18px; list-style: disc outside; }
         .legal-highlight li { font-size: 14px; color: var(--navy); line-height: 1.6; }
 
         .legal-placeholder {
