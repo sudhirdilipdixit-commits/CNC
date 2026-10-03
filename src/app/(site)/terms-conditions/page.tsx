@@ -67,12 +67,6 @@ export default function TermsConditionsPage() {
                 </svg>
                 Last updated: <strong>15 July 2026</strong>
               </div>
-              <span className="legal-updated-badge legal-updated-badge-draft">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
-                  <path d="M12 9v4M12 17h.01M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" />
-                </svg>
-                Draft — pending legal review
-              </span>
             </div>
           </div>
         </div>
@@ -94,8 +88,7 @@ export default function TermsConditionsPage() {
                 collegencourses.com and related services (the &ldquo;Platform&rdquo;), operated by{" "}
                 <strong>DNYANAL EDUCON PRIVATE LIMITED</strong>{" "}
                 (&ldquo;DEPL&rdquo;, &ldquo;Company&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;,
-                &ldquo;our&rdquo;), a company incorporated in India (CIN:{" "}
-                <mark className="legal-placeholder">Insert CIN Number</mark>) with its registered
+                &ldquo;our&rdquo;), a company incorporated in India (CIN: U85499PN2023PTC220146) with its registered
                 office at FLNO A-603, Utsav Homes, Patil Nagar, Bavdhan BK, Pune &ndash; 411021,
                 Maharashtra, India.
               </p>
@@ -154,13 +147,9 @@ export default function TermsConditionsPage() {
               <p>
                 Our counselling service is free to you. We do not charge aspirants a fee to use the
                 Platform, receive counselling, or be connected with an institution. Where
-                CollegeNCourses has a commercial relationship with a partner institution (
-                <mark className="legal-placeholder">
-                  Confirm: describe actual commercial arrangement &mdash; e.g. referral fee,
-                  commission, sponsorship
-                </mark>
-                ), this does not change the price you pay to that institution, and it does not
-                affect the honesty of our recommendation &mdash; see our counsellor promise at{" "}
+                CollegeNCourses has a commercial relationship with a partner institution, this does
+                not change the price you pay to that institution, and it does not affect the
+                honesty of our recommendation &mdash; see our counsellor promise at{" "}
                 <Link href="/about">About Us</Link>.
               </p>
             </div>
@@ -254,12 +243,6 @@ export default function TermsConditionsPage() {
                 implied warranties of merchantability, fitness for a particular purpose, and
                 non-infringement. We do not warrant that the Platform will be uninterrupted,
                 error-free, or entirely secure.
-              </p>
-              <p>
-                <mark className="legal-placeholder">
-                  Legal: confirm whether the Consumer Protection (E-Commerce) Rules, 2020 apply to
-                  this Platform&apos;s model and whether additional disclosures are required here.
-                </mark>
               </p>
               <p>
                 Nothing in this Section limits any right you may have under the Consumer Protection
