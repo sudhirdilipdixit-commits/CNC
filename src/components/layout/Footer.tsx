@@ -48,10 +48,10 @@ export default function Footer() {
             <h4><a href="/study-in-india" style={{ color: 'inherit', textDecoration: 'none' }}>Study in India</a></h4>
             <ul className="footer-list">
               <li><a href="/online-mba">Online MBA</a></li>
-              <li><a href="#">Distance MBA</a></li>
-              <li><a href="#">Executive MBA</a></li>
-              <li><a href="#">Regular MBA</a></li>
-              <li><a href="#">Design Programmes</a></li>
+              <li><a href="/distance-mba">Distance MBA</a></li>
+              <li><a href="/executive-mba">Executive MBA</a></li>
+              <li><a href="/regular-mba">Regular MBA</a></li>
+              <li><a href="/design">Design Programmes</a></li>
               <li><a href="#">Specializations Guide</a></li>
               <li><a href="#">Universities and Courses</a></li>
             </ul>
