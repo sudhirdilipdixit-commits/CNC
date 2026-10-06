@@ -177,15 +177,6 @@ export default function PrivacyPolicyPage() {
                 not store the OTP itself beyond the verification window.
               </p>
               <p>
-                <strong>3.6 Sensitive data (Study Abroad services only).</strong> If and when you
-                engage our Study Abroad counselling services specifically, we may collect passport
-                details, academic transcripts, and other documents needed to support letters of
-                recommendation, visa applications, and university applications on your behalf. This
-                category of data is collected only in the context of that specific service, only
-                with your explicit consent, and is handled with additional care as outlined in
-                Section 9.
-              </p>
-              <p>
                 We do not knowingly collect financial account details, health data, or biometric
                 data through the general counselling Platform.
               </p>
