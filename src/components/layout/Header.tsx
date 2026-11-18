@@ -26,6 +26,8 @@ const NAV_ITEMS = [
       { label: "Universities and Courses", href: "#" },
     ],
   },
+  { label: "Programs", href: "/#programmes" },
+  { label: "Specializations", href: "/specializations-guide" },
   {
     label: "Resources",
     href: null,

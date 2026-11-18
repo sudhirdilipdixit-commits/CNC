@@ -711,7 +711,7 @@ section { padding: 56px 0; }
 /* =====================================================================
    PROGRAMME CARDS
    ===================================================================== */
-.section-programmes { background: var(--white); }
+.section-programmes { background: var(--white); scroll-margin-top: 90px; }
 .section-programmes + .section-programmes { padding-top: 0; }
 
 .programme-grid {
