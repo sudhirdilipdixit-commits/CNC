@@ -1,19 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Serif_Display, Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import { CookieConsentProvider } from "@/components/cookie-consent/CookieConsentContext";
 import CookieConsentBanner from "@/components/cookie-consent/CookieConsentBanner";
 import GtmLoader from "@/components/cookie-consent/GtmLoader";
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
-
-const dmSerifDisplay = DM_Serif_Display({
-  weight: ["400"],
-  style: ["normal", "italic"],
-  variable: "--font-dm-serif",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const inter = Inter({
   weight: ["300", "400", "500", "600", "700", "800"],
@@ -52,7 +44,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${dmSerifDisplay.variable} ${inter.variable}`}
+      className={inter.variable}
     >
       <head>
         <link rel="preconnect" href="https://cdn.sanity.io" />

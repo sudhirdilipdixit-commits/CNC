@@ -22,7 +22,14 @@ const config: Config = {
         mist: "#E8EEF2",
       },
       fontFamily: {
-        serif: ['"DM Serif Display"', "Georgia", '"Times New Roman"', "serif"],
+        serif: [
+          "Inter",
+          "-apple-system",
+          "BlinkMacSystemFont",
+          '"Segoe UI"',
+          "Roboto",
+          "sans-serif",
+        ],
         sans: [
           "Inter",
           "-apple-system",

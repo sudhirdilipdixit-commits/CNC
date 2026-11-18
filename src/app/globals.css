@@ -21,8 +21,8 @@
   --shadow-lg: 0 12px 32px rgba(36, 48, 72, 0.12);
   --shadow-cta: 0 4px 14px rgba(36, 48, 72, 0.18);
 
-  --font-serif: var(--font-dm-serif, 'DM Serif Display', Georgia, 'Times New Roman', serif);
-  --font-heading: Georgia, 'Times New Roman', Times, serif;
+  --font-serif: var(--font-inter, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
+  --font-heading: var(--font-inter, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
   --font-sans: var(--font-inter, 'Inter', -apple-system, BlinkMacSystemFont, sans-serif);
 
   --container-max: 1200px;
