@@ -26,14 +26,13 @@ const NAV_ITEMS = [
       { label: "Universities and Courses", href: "#" },
     ],
   },
-  { label: "Programs", href: "/#programmes" },
   { label: "Specializations", href: "/specializations-guide" },
+  { label: "Programs", href: "/#programmes" },
   {
     label: "Resources",
     href: null,
     children: [
       { label: "Blog", href: "/blog" },
-      { label: "Guides", href: "#" },
       { label: "Tools and Calculator", href: "/resources/tools-and-calculators" },
     ],
   },
