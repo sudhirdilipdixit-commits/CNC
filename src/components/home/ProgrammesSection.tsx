@@ -77,8 +77,8 @@ export default function ProgrammesSection({ onOpenLeadForm, heading, subheading,
                   <Image
                     src={course.universityLogoUrl}
                     alt={course.universityName ?? course.courseName}
-                    width={220}
-                    height={90}
+                    width={400}
+                    height={200}
                     className="fp-card-logo"
                   />
                 ) : (
@@ -119,7 +119,7 @@ export default function ProgrammesSection({ onOpenLeadForm, heading, subheading,
 
               <div className="fp-card-actions">
                 <button type="button" className="fp-btn-primary" onClick={onOpenLeadForm}>
-                  Get Free Guidance
+                  Get Details
                 </button>
               </div>
             </article>

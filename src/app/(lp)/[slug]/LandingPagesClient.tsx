@@ -272,8 +272,8 @@ function CourseCard({
           <Image
             src={item.universityLogoUrl}
             alt={item.universityName || item.courseName}
-            width={243}
-            height={100}
+            width={400}
+            height={200}
             className="lp-card-logo"
           />
         ) : (
@@ -335,8 +335,8 @@ function UniversityCard({
           <Image
             src={item.universityLogoUrl}
             alt={item.universityName}
-            width={243}
-            height={100}
+            width={400}
+            height={200}
             className="lp-card-logo"
           />
         ) : (
@@ -1018,8 +1018,8 @@ export default function LandingPagesClient({
         .lp-card--featured { border-top-color: var(--yellow); }
         .lp-card-badge { position: absolute; top: 12px; right: 12px; background: var(--yellow); color: var(--navy); font-size: 9px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
         .lp-card-head { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding-bottom: 4px; }
-        .lp-card-logo { width: 243px; max-width: 100%; height: 100px; object-fit: contain; border: 1px solid var(--mist); border-radius: 10px; background: var(--ivory); padding: 8px; }
-        .lp-card-logo-ph { width: 243px; max-width: 100%; height: 100px; border-radius: 10px; background: var(--navy); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 800; font-family: var(--font-serif); }
+        .lp-card-logo { width: 400px; max-width: 100%; height: 200px; object-fit: contain; border: 1px solid var(--mist); border-radius: 10px; background: var(--ivory); padding: 8px; }
+        .lp-card-logo-ph { width: 400px; max-width: 100%; height: 200px; border-radius: 10px; background: var(--navy); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 800; font-family: var(--font-serif); }
         .lp-card-name { font-family: var(--font-serif); font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--navy); margin-bottom: 0; }
         .lp-card-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 0; border-top: 1px solid var(--mist); border-bottom: 1px solid var(--mist); }
         .lp-meta-cell { display: flex; flex-direction: column; gap: 2px; }
