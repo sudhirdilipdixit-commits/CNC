@@ -831,12 +831,12 @@ export default function LandingPageClient({
         .lp-card-logo { width: 243px; max-width: 100%; height: 100px; object-fit: contain; border: 1px solid var(--mist); border-radius: 10px; background: var(--ivory); padding: 8px; }
         .lp-card-logo-ph { width: 243px; max-width: 100%; height: 100px; border-radius: 10px; background: var(--navy); color: var(--yellow); display: flex; align-items: center; justify-content: center; font-size: 40px; font-weight: 800; font-family: var(--font-serif); }
         .lp-card-name { font-family: var(--font-serif); font-size: 15px; font-weight: 700; line-height: 1.3; color: var(--navy); margin-bottom: 0; }
-        .lp-card-sub { font-size: 12px; color: var(--grey); margin-bottom: 0; }
+        .lp-card-sub { font-size: 14px; color: var(--grey); margin-bottom: 0; }
         .lp-card-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 0; border-top: 1px solid var(--mist); border-bottom: 1px solid var(--mist); }
         .lp-meta-cell { display: flex; flex-direction: column; gap: 2px; }
         .lp-meta-label { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
         .lp-meta-val { font-size: 13px; font-weight: 700; color: var(--navy); }
-        .lp-card-info-row { font-size: 12px; color: var(--charcoal); line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+        .lp-card-info-row { font-size: 14px; color: var(--charcoal); line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
         .lp-card-actions { display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 2px; }
         .lp-btn-primary-full { width: 100%; background: var(--yellow); color: var(--navy); border: 2px solid var(--navy); border-radius: 8px; font-size: 13px; font-weight: 700; font-family: var(--font-sans); padding: 9px 16px; cursor: pointer; transition: background .15s; text-align: center; }
         .lp-btn-primary-full:hover { background: #e6b800; }

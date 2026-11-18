@@ -1025,7 +1025,7 @@ export default function LandingPagesClient({
         .lp-meta-cell { display: flex; flex-direction: column; gap: 2px; }
         .lp-meta-label { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--grey); }
         .lp-meta-val { font-size: 13px; font-weight: 700; color: var(--navy); }
-        .lp-card-info-row { font-size: 12px; color: var(--charcoal); line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
+        .lp-card-info-row { font-size: 14px; color: var(--charcoal); line-height: 1.5; display: flex; flex-direction: column; gap: 2px; }
         .lp-card-actions { display: flex; flex-direction: column; gap: 8px; margin-top: auto; padding-top: 2px; }
         .lp-btn-primary-full { width: 100%; background: var(--yellow); color: var(--navy); border: 2px solid var(--navy); border-radius: 8px; font-size: 13px; font-weight: 700; font-family: var(--font-sans); padding: 9px 16px; cursor: pointer; transition: background .15s; text-align: center; }
         .lp-btn-primary-full:hover { background: #e6b800; }
