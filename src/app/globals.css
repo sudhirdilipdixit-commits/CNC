@@ -1147,7 +1147,7 @@ section { padding: 56px 0; }
   grid-template-columns: 1fr;
   gap: 32px;
 }
-@media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; } }
+@media (min-width: 768px) { .footer-grid { grid-template-columns: 2fr 1fr 1fr; } }
 
 .footer-col h4 {
   font-family: var(--font-heading);

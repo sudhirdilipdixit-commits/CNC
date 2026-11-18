@@ -50,23 +50,8 @@ export default function Footer() {
               <li><a href="/online-mba">Online MBA</a></li>
               <li><a href="/distance-mba">Distance MBA</a></li>
               <li><a href="/executive-mba">Executive MBA</a></li>
-              <li><a href="/regular-mba">Regular MBA</a></li>
-              <li><a href="/design">Design Programmes</a></li>
               <li><a href="#">Specializations Guide</a></li>
               <li><a href="#">Universities and Courses</a></li>
-            </ul>
-          </div>
-
-          <div className="footer-col">
-            <h4><a href="/study-abroad" style={{ color: 'inherit', textDecoration: 'none' }}>Study Abroad</a></h4>
-            <ul className="footer-list">
-              <li><a href="/study-abroad/by-destination">By Destination</a></li>
-              <li><a href="/study-abroad/by-programme">By Programme</a></li>
-              <li><a href="/study-abroad/profile-evaluation">Profile Evaluation</a></li>
-              <li><a href="/study-abroad/loans">Education Loans Abroad</a></li>
-              <li><a href="/study-abroad/scholarships">Scholarships</a></li>
-              <li><a href="/study-abroad/visa-guides">Visa Guides</a></li>
-              <li><a href="/study-abroad/cost-calculator">Cost Calculator</a></li>
             </ul>
           </div>
 
