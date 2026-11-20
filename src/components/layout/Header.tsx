@@ -22,7 +22,6 @@ const NAV_ITEMS = [
       { label: "Online MBA", href: "/online-mba" },
       { label: "Distance MBA", href: "/distance-mba" },
       { label: "Executive MBA", href: "/executive-mba" },
-      { label: "Specializations Guide", href: "https://cnc-kohl.vercel.app/specializations-guide" },
       { label: "Universities and Courses", href: "#" },
     ],
   },

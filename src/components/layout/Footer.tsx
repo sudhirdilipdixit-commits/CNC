@@ -50,7 +50,6 @@ export default function Footer() {
               <li><a href="/online-mba">Online MBA</a></li>
               <li><a href="/distance-mba">Distance MBA</a></li>
               <li><a href="/executive-mba">Executive MBA</a></li>
-              <li><a href="https://cnc-kohl.vercel.app/specializations-guide">Specializations Guide</a></li>
               <li><a href="#">Universities and Courses</a></li>
             </ul>
           </div>
