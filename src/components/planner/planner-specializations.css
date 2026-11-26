@@ -1,0 +1,28 @@
+/*
+  Additional styles for the /specializations-guide-preview hub page, built in the
+  planner theme. Loaded alongside planner-theme.css and planner-inner-page.css.
+  Every rule stays namespaced under .planner-theme so it cannot leak elsewhere.
+*/
+
+/* Simple single-column hero (no sidebar) */
+.planner-theme .spec-hero-inner{max-width:720px}
+.planner-theme .spec-hero-inner h1{margin-top:14px;font-size:46px}
+
+.planner-theme .not-sure-box{margin-top:28px;background:var(--p-white);border:2px solid var(--ink);border-left:6px solid var(--sun);border-radius:0 18px 18px 0;padding:18px 22px;display:flex;flex-wrap:wrap;gap:16px;align-items:center;box-shadow:var(--shadow)}
+.planner-theme .not-sure-box p{flex:1;min-width:220px;font-size:14.5px;line-height:1.5}
+
+/* Spec grid: reuse .c-grid / .c-card from planner-theme.css, extend with a footer row */
+.planner-theme .c-card .c-card-footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;border-top:2px solid var(--ink);padding-top:12px}
+.planner-theme .c-card .c-salary{font-size:13px;font-weight:800}
+.planner-theme .c-card .c-salary span{font-weight:500;color:var(--muted)}
+.planner-theme .c-card .go{border-top:none;padding-top:0}
+
+/* Freshness dark card */
+.planner-theme .freshness-card{background:var(--ink);color:var(--lilac);border-radius:22px;border:2px solid var(--ink);box-shadow:var(--shadow);padding:36px 40px}
+.planner-theme .freshness-card .p-eyebrow{color:var(--sun)}
+.planner-theme .freshness-card h3{color:var(--p-white);font-size:26px;margin-top:10px;margin-bottom:16px}
+.planner-theme .freshness-card p{color:var(--lilac);font-size:15.5px;line-height:1.7}
+
+@media (max-width:600px){
+  .planner-theme .freshness-card{padding:28px 24px}
+}

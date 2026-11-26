@@ -6,7 +6,7 @@ import LeadModal from "@/components/forms/LeadModal";
 import PlannerHeader from "@/components/planner/PlannerHeader";
 import PlannerFooter from "@/components/planner/PlannerFooter";
 import "@/components/planner/planner-theme.css";
-import "@/components/planner/planner-online-mba.css";
+import "@/components/planner/planner-inner-page.css";
 
 const bricolage = Bricolage_Grotesque({
   weight: ["500", "700", "800"],
