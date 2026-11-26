@@ -1,0 +1,47 @@
+/*
+  Additional styles for programme "landing page" prototypes (e.g.
+  /top-distance-mba-business-management) built in the planner theme. Loaded
+  alongside planner-theme.css and planner-inner-page.css. Every rule stays
+  namespaced under .planner-theme so it cannot leak elsewhere.
+*/
+
+/* Scrolling notification ticker */
+.planner-theme .lp-ticker{background:var(--sun);border-bottom:2px solid var(--ink);overflow:hidden;white-space:nowrap;padding:8px 0}
+.planner-theme .lp-ticker-track{display:inline-block;padding-left:100%;animation:lpTicker 28s linear infinite;font-size:13px;font-weight:700}
+@keyframes lpTicker{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+
+/* Icon strip */
+.planner-theme .icon-strip{background:var(--p-white);border-bottom:2px solid var(--ink)}
+.planner-theme .icon-strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;padding:28px 24px}
+.planner-theme .icon-strip-item{display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px}
+.planner-theme .icon-strip-item img{width:44px;height:44px;object-fit:contain}
+.planner-theme .icon-strip-item span{font-size:13.5px;font-weight:700}
+
+/* Sort chips + results line */
+.planner-theme .lp-results-row{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;margin-bottom:24px}
+.planner-theme .lp-results-count{font-size:14px;color:var(--muted);font-weight:600}
+.planner-theme .lp-sort-chips{display:flex;gap:8px;flex-wrap:wrap}
+
+/* Course card grid */
+.planner-theme .course-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.planner-theme .course-card{background:var(--p-white);border:2px solid var(--ink);border-radius:18px;box-shadow:3px 3px 0 var(--ink);padding:20px;display:flex;flex-direction:column;gap:12px}
+.planner-theme .course-card-logo{height:54px;display:flex;align-items:center}
+.planner-theme .course-card-logo img{max-height:54px;max-width:160px;object-fit:contain}
+.planner-theme .course-card h3{font-size:16.5px;line-height:1.3}
+.planner-theme .course-card .uni-name{font-size:13.5px;color:var(--muted);margin-top:-6px}
+.planner-theme .course-card .facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:13px}
+.planner-theme .course-card .facts span{display:block;color:var(--muted);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.planner-theme .course-card .facts b{font-size:14px}
+.planner-theme .course-card .elig{font-size:12px;color:var(--muted);line-height:1.5;border-top:1.5px solid var(--lilac);padding-top:10px}
+.planner-theme .course-card .btn{margin-top:auto;width:100%}
+
+.planner-theme .lp-load-more{display:flex;justify-content:center;margin-top:32px}
+
+@media (max-width:1060px){
+  .planner-theme .icon-strip .wrap{grid-template-columns:repeat(2,1fr)}
+  .planner-theme .course-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:600px){
+  .planner-theme .icon-strip .wrap{grid-template-columns:1fr}
+  .planner-theme .course-grid{grid-template-columns:1fr}
+}

@@ -1,0 +1,39 @@
+/*
+  Additional styles for long-form legal pages (privacy policy, terms, cookie
+  policy, grievances) built in the planner theme. Loaded alongside
+  planner-theme.css and planner-inner-page.css. Every rule stays namespaced
+  under .planner-theme so it cannot leak elsewhere.
+*/
+
+.planner-theme .legal-head{padding:48px 0 0}
+.planner-theme .legal-meta{margin-top:14px;display:flex;gap:18px;flex-wrap:wrap;font-size:13.5px;color:var(--muted)}
+.planner-theme .legal-meta strong{color:var(--ink)}
+
+.planner-theme .legal-layout{display:grid;grid-template-columns:260px 1fr;gap:48px;align-items:start;padding-top:36px}
+.planner-theme .legal-toc{position:sticky;top:100px;display:flex;flex-direction:column;gap:2px;max-height:calc(100vh - 130px);overflow-y:auto;padding-right:8px}
+.planner-theme .legal-toc a{display:block;padding:8px 12px;border-radius:10px;font-size:13.5px;font-weight:600;color:var(--muted)}
+.planner-theme .legal-toc a:hover{background:var(--lilac);color:var(--ink)}
+.planner-theme .legal-toc a.active{background:var(--ink);color:var(--p-white)}
+.planner-theme .legal-toc-mobile{display:none;margin-bottom:28px}
+.planner-theme .legal-toc-mobile select{width:100%;padding:12px 14px;border:2px solid var(--ink);border-radius:12px;font-family:var(--body);font-size:15px;background:var(--p-white)}
+
+.planner-theme .legal-body{max-width:760px}
+.planner-theme .legal-section{padding-bottom:32px;margin-bottom:32px;border-bottom:1.5px solid var(--lilac)}
+.planner-theme .legal-section:last-child{border-bottom:none}
+.planner-theme .legal-section h2{font-size:24px;position:relative;padding-bottom:12px}
+.planner-theme .legal-section h2::after{content:"";position:absolute;left:0;bottom:0;width:48px;height:4px;background:var(--sun);border-radius:2px}
+.planner-theme .legal-section p{font-size:15px;line-height:1.75;color:var(--ink);margin-top:14px}
+.planner-theme .legal-section ul{margin-top:14px;display:flex;flex-direction:column;gap:8px}
+.planner-theme .legal-section li{font-size:15px;line-height:1.65;padding-left:18px;position:relative}
+.planner-theme .legal-section li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--ink)}
+.planner-theme .legal-section li strong{font-weight:800}
+.planner-theme .legal-callout{margin-top:18px;background:var(--mint);border:2px solid var(--ink);border-left:6px solid var(--sun);border-radius:0 16px 16px 0;padding:18px 22px}
+.planner-theme .legal-callout p{margin-top:0}
+.planner-theme .legal-callout p + p{margin-top:10px}
+.planner-theme .legal-callout ul{margin-top:10px}
+
+@media (max-width:900px){
+  .planner-theme .legal-layout{grid-template-columns:1fr}
+  .planner-theme .legal-toc{display:none}
+  .planner-theme .legal-toc-mobile{display:block}
+}

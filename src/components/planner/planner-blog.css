@@ -1,0 +1,79 @@
+/*
+  Additional styles for /blog (index) and /blog/<post> prototypes, built in the
+  planner theme. Loaded alongside planner-theme.css and planner-inner-page.css.
+  Every rule stays namespaced under .planner-theme so it cannot leak elsewhere.
+*/
+
+/* Filter chip bar */
+.planner-theme .blog-filters{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px;padding-bottom:4px}
+.planner-theme .blog-chip{font-size:13.5px;font-weight:700;padding:8px 18px;border-radius:999px;border:2px solid var(--ink);background:var(--p-white);cursor:pointer;white-space:nowrap}
+.planner-theme .blog-chip.active{background:var(--sun)}
+
+/* Card grid */
+.planner-theme .blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:32px}
+.planner-theme .blog-card{background:var(--p-white);border:2px solid var(--ink);border-radius:20px;overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.planner-theme .blog-card.featured{grid-column:span 3;display:grid;grid-template-columns:1.1fr 1fr}
+.planner-theme .blog-card.featured .blog-card-media{height:100%;min-height:260px}
+.planner-theme .blog-card-media{position:relative;height:190px;border-bottom:2px solid var(--ink);overflow:hidden;background:var(--lilac)}
+.planner-theme .blog-card.featured .blog-card-media{border-bottom:none;border-right:2px solid var(--ink)}
+.planner-theme .blog-card-media img{width:100%;height:100%;object-fit:cover}
+.planner-theme .blog-tag-pill{position:absolute;top:12px;left:12px;background:var(--sun);border:1.5px solid var(--ink);border-radius:999px;padding:4px 12px;font-size:11.5px;font-weight:700}
+.planner-theme .blog-edit-pick{position:absolute;top:12px;right:12px;background:var(--ink);color:var(--p-white);border-radius:999px;padding:4px 12px;font-size:11px;font-weight:700}
+.planner-theme .blog-card-body{padding:20px 22px;display:flex;flex-direction:column;gap:10px;flex-grow:1}
+.planner-theme .blog-card.featured .blog-card-body{justify-content:center;padding:26px 30px}
+.planner-theme .blog-card h3{font-size:18px;line-height:1.3}
+.planner-theme .blog-card.featured h3{font-size:26px}
+.planner-theme .blog-card-meta{font-size:12.5px;color:var(--muted);font-weight:600}
+.planner-theme .blog-read-link{margin-top:auto;font-weight:700;font-size:14px;display:inline-flex;align-items:center;gap:6px}
+.planner-theme .blog-card:hover .blog-read-link{color:var(--blue-d)}
+
+/* Mid-grid lead banner */
+.planner-theme .blog-lead-banner{grid-column:span 3;background:var(--blue);color:var(--p-white);border:2px solid var(--ink);border-radius:20px;box-shadow:var(--shadow);padding:30px 34px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.planner-theme .blog-lead-banner h3{color:var(--p-white);font-size:22px}
+.planner-theme .blog-lead-banner p{color:var(--lilac);margin-top:6px;font-size:14.5px}
+
+.planner-theme .blog-load-more{display:flex;flex-direction:column;align-items:center;gap:12px;margin-top:40px}
+.planner-theme .blog-load-more small{color:var(--muted);font-size:13px}
+
+/* Article page */
+.planner-theme .article-tag{display:inline-block;background:var(--sun);border:1.5px solid var(--ink);border-radius:999px;padding:5px 14px;font-size:12px;font-weight:700;margin-bottom:16px}
+.planner-theme .article-byline{display:flex;align-items:center;gap:12px;margin-top:22px}
+.planner-theme .article-avatar{width:44px;height:44px;border-radius:50%;border:2px solid var(--ink);background:var(--lilac);display:flex;align-items:center;justify-content:center;font-family:var(--display);font-weight:800;font-size:15px}
+.planner-theme .article-byline-name{font-weight:700;font-size:14.5px}
+.planner-theme .article-byline-meta{font-size:12.5px;color:var(--muted)}
+.planner-theme .article-hero-img{margin-top:28px;border:2px solid var(--ink);border-radius:22px;overflow:hidden;box-shadow:var(--shadow)}
+.planner-theme .article-hero-img img{width:100%;height:auto;display:block}
+
+.planner-theme .article-layout{display:grid;grid-template-columns:1fr 300px;gap:48px;align-items:start}
+.planner-theme .article-body{max-width:720px;font-size:16.5px;line-height:1.8;color:var(--ink)}
+.planner-theme .article-body h2{font-size:26px;margin-top:40px;margin-bottom:14px;scroll-margin-top:110px}
+.planner-theme .article-body h3{font-size:20px;margin-top:28px;margin-bottom:10px;scroll-margin-top:110px}
+.planner-theme .article-body p{margin-bottom:18px}
+.planner-theme .article-body a{color:var(--blue-d);font-weight:700;text-decoration:underline}
+.planner-theme .article-figure{margin:26px 0;border:2px solid var(--ink);border-radius:18px;overflow:hidden;background:var(--lilac);box-shadow:3px 3px 0 var(--ink)}
+.planner-theme .article-figure img{width:100%;display:block}
+.planner-theme .article-figure figcaption{padding:10px 16px;font-size:12.5px;color:var(--muted);border-top:1.5px solid var(--lilac)}
+
+.planner-theme .article-sidebar{position:sticky;top:100px;display:flex;flex-direction:column;gap:20px}
+.planner-theme .article-toc{background:var(--p-white);border:2px solid var(--ink);border-radius:18px;padding:20px 22px;box-shadow:3px 3px 0 var(--ink)}
+.planner-theme .article-toc h4{font-size:13px;text-transform:uppercase;letter-spacing:.06em;margin-bottom:12px}
+.planner-theme .article-toc a{display:block;font-size:13.5px;padding:6px 0;color:var(--muted);line-height:1.4}
+.planner-theme .article-toc a:hover,.planner-theme .article-toc a.active{color:var(--blue-d);font-weight:700}
+.planner-theme .article-lead-box{background:var(--sun);border:2px solid var(--ink);border-radius:18px;padding:20px 22px;box-shadow:3px 3px 0 var(--ink)}
+.planner-theme .article-lead-box h4{font-size:15px;margin-bottom:14px}
+.planner-theme .article-lead-box .pf-field{margin-bottom:12px}
+.planner-theme .article-lead-box .pf-input{background:var(--p-white)}
+
+.planner-theme .related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:28px}
+
+@media (max-width:1060px){
+  .planner-theme .blog-grid{grid-template-columns:repeat(2,1fr)}
+  .planner-theme .blog-card.featured,.planner-theme .blog-lead-banner{grid-column:span 2}
+  .planner-theme .blog-card.featured{grid-template-columns:1fr}
+  .planner-theme .article-layout{grid-template-columns:1fr}
+  .planner-theme .article-sidebar{position:static}
+}
+@media (max-width:600px){
+  .planner-theme .blog-grid,.planner-theme .related-grid{grid-template-columns:1fr}
+  .planner-theme .blog-card.featured,.planner-theme .blog-lead-banner{grid-column:span 1}
+}

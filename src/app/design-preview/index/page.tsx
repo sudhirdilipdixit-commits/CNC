@@ -9,6 +9,12 @@ const PAGES = [
   { href: "/design-preview/home", label: "Home" },
   { href: "/design-preview/online-mba", label: "Online MBA" },
   { href: "/design-preview/specializations-guide", label: "Specializations Guide" },
+  { href: "/design-preview/about", label: "About" },
+  { href: "/design-preview/contact-us", label: "Contact Us" },
+  { href: "/design-preview/privacy-policy", label: "Privacy Policy" },
+  { href: "/design-preview/blog", label: "Blog" },
+  { href: "/design-preview/blog-post", label: "Blog post (Mastering People Data)" },
+  { href: "/design-preview/distance-mba", label: "Top Distance/Online MBA" },
 ];
 
 export default function DesignPreviewIndexPage() {

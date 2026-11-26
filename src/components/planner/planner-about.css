@@ -1,0 +1,43 @@
+/*
+  Additional styles for the /about page prototype, built in the planner theme.
+  Loaded alongside planner-theme.css and planner-inner-page.css. Every rule
+  stays namespaced under .planner-theme so it cannot leak elsewhere.
+*/
+
+/* Stats grid */
+.planner-theme .stat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:36px}
+.planner-theme .stat-tile{background:var(--p-white);border:2px solid var(--ink);border-radius:20px;padding:26px 22px;box-shadow:var(--shadow)}
+.planner-theme .stat-num{font-family:var(--display);font-weight:800;font-size:38px;line-height:1}
+.planner-theme .stat-label{margin-top:8px;font-size:14px;color:var(--muted);line-height:1.4}
+
+/* Two side-by-side pillar cards */
+.planner-theme .pillar-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:32px}
+.planner-theme .pillar-card{border:2px solid var(--ink);border-radius:20px;padding:26px 28px;box-shadow:var(--shadow)}
+.planner-theme .pillar-card.c-blue{background:var(--lilac)}
+.planner-theme .pillar-card.c-mint{background:var(--mint)}
+.planner-theme .pillar-card h4{font-size:20px;margin-bottom:10px}
+.planner-theme .pillar-card p{font-size:14.5px;line-height:1.6}
+
+/* Commitment dark card with bullets */
+.planner-theme .commitment-card{background:var(--ink);color:var(--lilac);border-radius:22px;border:2px solid var(--ink);box-shadow:var(--shadow);padding:36px 40px;margin-top:28px}
+.planner-theme .commitment-card ul{display:flex;flex-direction:column;gap:14px}
+.planner-theme .commitment-card li{position:relative;padding-left:26px;font-size:15.5px;line-height:1.6;color:var(--p-white)}
+.planner-theme .commitment-card li::before{content:"\2715";position:absolute;left:0;top:1px;color:var(--sun);font-weight:800;font-size:13px}
+
+/* Legal / accreditation 3-col cards */
+.planner-theme .legal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:32px}
+.planner-theme .legal-card{background:var(--p-white);border:2px solid var(--ink);border-radius:18px;padding:22px 24px;box-shadow:3px 3px 0 var(--ink)}
+.planner-theme .legal-card h4{font-size:16px;margin-bottom:12px}
+.planner-theme .legal-card ul{display:flex;flex-direction:column;gap:8px}
+.planner-theme .legal-card li{font-size:13.5px;color:var(--muted);line-height:1.5;padding-left:16px;position:relative}
+.planner-theme .legal-card li::before{content:"";position:absolute;left:0;top:6px;width:6px;height:6px;border-radius:50%;background:var(--ink)}
+
+@media (max-width:900px){
+  .planner-theme .stat-grid{grid-template-columns:repeat(2,1fr)}
+  .planner-theme .pillar-grid{grid-template-columns:1fr}
+  .planner-theme .legal-grid{grid-template-columns:1fr}
+}
+@media (max-width:600px){
+  .planner-theme .stat-grid{grid-template-columns:1fr}
+  .planner-theme .commitment-card{padding:26px 22px}
+}
