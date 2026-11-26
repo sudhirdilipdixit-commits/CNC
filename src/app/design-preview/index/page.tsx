@@ -15,6 +15,8 @@ const PAGES = [
   { href: "/design-preview/blog", label: "Blog" },
   { href: "/design-preview/blog-post", label: "Blog post (Mastering People Data)" },
   { href: "/design-preview/distance-mba", label: "Top Distance/Online MBA" },
+  { href: "/design-preview/study-in-india", label: "Study in India" },
+  { href: "/design-preview/specializations-guide-marketing", label: "Specializations Guide: Marketing" },
 ];
 
 export default function DesignPreviewIndexPage() {
