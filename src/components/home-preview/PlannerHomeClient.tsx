@@ -3,7 +3,9 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Bricolage_Grotesque, Figtree } from "next/font/google";
 import LeadModal from "@/components/forms/LeadModal";
-import "./planner-theme.css";
+import PlannerHeader from "@/components/planner/PlannerHeader";
+import PlannerFooter from "@/components/planner/PlannerFooter";
+import "@/components/planner/planner-theme.css";
 
 const bricolage = Bricolage_Grotesque({
   weight: ["500", "700", "800"],
@@ -110,34 +112,9 @@ const DEFAULT_FAQS: Faq[] = [
   { question: "Does CollegeNCourses support Study Abroad options?", answer: "Yes. CollegeNCourses covers both Study in India and Study Abroad. For international programmes, the AI Counsellor's Abroad track (Profile Evaluator) takes your academics, test scores, target country, and budget to generate a shortlist of Ambitious, Target, and Safe universities." },
 ];
 
-const NAV_ITEMS = [
-  {
-    label: "Programs",
-    href: "/study-in-india",
-    children: [
-      { label: "Online MBA", href: "/online-mba" },
-      { label: "Distance MBA", href: "/distance-mba" },
-      { label: "Executive MBA", href: "/executive-mba" },
-      { label: "Universities and Courses", href: "#universities" },
-    ],
-  },
-  { label: "Specializations", href: "/specializations-guide" },
-  {
-    label: "Resources",
-    href: null as string | null,
-    children: [
-      { label: "Blog", href: "/blog" },
-      { label: "Tools and Calculator", href: "/resources/tools-and-calculators" },
-    ],
-  },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact-us" },
-];
-
 export default function PlannerHomeClient({ cmsData }: PlannerHomeClientProps) {
   const [modalOpen, setModalOpen] = useState(false);
   const [modalSource, setModalSource] = useState("home-preview");
-  const [mobileOpen, setMobileOpen] = useState(false);
   const railRef = useRef<HTMLDivElement>(null);
   const [railAtStart, setRailAtStart] = useState(true);
   const [railAtEnd, setRailAtEnd] = useState(false);
@@ -182,90 +159,7 @@ export default function PlannerHomeClient({ cmsData }: PlannerHomeClientProps) {
 
   return (
     <div className={`planner-theme ${bricolage.variable} ${figtree.variable}`}>
-      {/* TOP BAR */}
-      <div className="topbar">
-        <div className="wrap">
-          <div className="tb-left">
-            <a href="tel:+917350460393">+91 7350 460 393</a>
-            <a href="mailto:info@collegencourses.com">info@collegencourses.com</a>
-          </div>
-          <div className="tb-social">
-            <a href="https://www.facebook.com/CollegeNCourses/" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 22v-9h3l1-4h-4V7c0-1 .6-2 2-2h2V1h-3c-3 0-4.5 2-4.5 4.5V9H8v4h3v9" /></svg></a>
-            <a href="https://www.instagram.com/collegencourses/" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" /></svg></a>
-            <a href="https://www.linkedin.com/company/college-n-courses/" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 014 0v4M12 13v4" /></svg></a>
-          </div>
-        </div>
-      </div>
-
-      {/* HEADER */}
-      <header>
-        <div className="wrap navrow">
-          <a href="/" className="logo" aria-label="CollegeNCourses home">
-            <img className="logo-img" src="/logo.webp" alt="CollegeNCourses" />
-          </a>
-
-          <div className="nav-right">
-            <nav aria-label="Primary">
-              <ul>
-                <li><a href="/">Home</a></li>
-                {NAV_ITEMS.map((item) => (
-                  <li key={item.label}>
-                    {item.children ? (
-                      <span className="nav-label">
-                        {item.label}
-                        <svg className="nav-chevron" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" /></svg>
-                      </span>
-                    ) : (
-                      <a href={item.href}>{item.label}</a>
-                    )}
-                    {item.children && (
-                      <div className="nav-drop">
-                        {item.children.map((child) => (
-                          <a key={child.label} href={child.href}>{child.label}</a>
-                        ))}
-                      </div>
-                    )}
-                  </li>
-                ))}
-              </ul>
-            </nav>
-            <button type="button" className="btn btn-sun btn-sm" onClick={() => openLeadForm("header")}>
-              {primaryCTA}
-            </button>
-            <button
-              type="button"
-              className="burger"
-              aria-label="Toggle menu"
-              aria-expanded={mobileOpen}
-              onClick={() => setMobileOpen((v) => !v)}
-            >
-              <span></span><span></span><span></span>
-            </button>
-          </div>
-        </div>
-
-        <div className={`mobile-nav${mobileOpen ? " open" : ""}`}>
-          <ul>
-            <li><a href="/" onClick={() => setMobileOpen(false)}>Home</a></li>
-            {NAV_ITEMS.map((item) => (
-              <li key={item.label}>
-                {item.href ? (
-                  <a href={item.href} onClick={() => setMobileOpen(false)}>{item.label}</a>
-                ) : (
-                  <span className="nav-label">{item.label}</span>
-                )}
-                {item.children && (
-                  <div className="nav-drop">
-                    {item.children.map((child) => (
-                      <a key={child.label} href={child.href} onClick={() => setMobileOpen(false)}>{child.label}</a>
-                    ))}
-                  </div>
-                )}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </header>
+      <PlannerHeader primaryCTA={primaryCTA} onOpenLeadForm={openLeadForm} />
 
       {/* HERO */}
       <section className="hero">
@@ -465,55 +359,7 @@ export default function PlannerHomeClient({ cmsData }: PlannerHomeClientProps) {
         </div>
       </section>
 
-      {/* FOOTER */}
-      <footer>
-        <div className="wrap">
-          <div className="f-grid">
-            <div>
-              <h4>CollegeNCourses</h4>
-              <p>India&apos;s trusted compass for higher-education decisions. Study in India and Study Abroad, compared honestly.</p>
-              <div className="f-social">
-                <a href="https://www.facebook.com/CollegeNCourses/" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 22v-9h3l1-4h-4V7c0-1 .6-2 2-2h2V1h-3c-3 0-4.5 2-4.5 4.5V9H8v4h3v9" /></svg></a>
-                <a href="https://www.instagram.com/collegencourses/" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5" /><circle cx="12" cy="12" r="4" /><circle cx="17.5" cy="6.5" r="1" /></svg></a>
-                <a href="https://www.linkedin.com/company/college-n-courses/" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="3" /><path d="M8 10v7M8 7v.01M12 17v-4a2 2 0 014 0v4M12 13v4" /></svg></a>
-              </div>
-            </div>
-            <div>
-              <h4>Programs</h4>
-              <ul>
-                <li><a href="/online-mba">Online MBA</a></li>
-                <li><a href="/distance-mba">Distance MBA</a></li>
-                <li><a href="/executive-mba">Executive MBA</a></li>
-                <li><a href="#universities">Universities and Courses</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Company</h4>
-              <ul>
-                <li><a href="/about">About Us</a></li>
-                <li><a href="/blog">Blog</a></li>
-                <li><a href="/contact-us">Contact Us</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4>Legal</h4>
-              <ul>
-                <li><a href="/privacy-policy">Privacy Policy</a></li>
-                <li><a href="/terms-conditions">Terms &amp; Conditions</a></li>
-                <li><a href="/cookie-policy">Cookie Policy</a></li>
-                <li><a href="/grievances">Grievances</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="f-word" aria-hidden="true">CollegeNCourses</div>
-        </div>
-        <div className="f-bottom">
-          <div className="wrap" style={{ display: "flex", justifyContent: "space-between", gap: 12, flexWrap: "wrap" }}>
-            <span>&copy; 2026 DNYANAL EDUCON PRIVATE LIMITED. All university names and logos belong to their respective owners.</span>
-            <a href="tel:+917350460393">+91 7350 460 393</a>
-          </div>
-        </div>
-      </footer>
+      <PlannerFooter />
 
       <LeadModal open={modalOpen} onClose={() => setModalOpen(false)} source={modalSource} />
     </div>
