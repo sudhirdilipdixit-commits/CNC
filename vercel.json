@@ -19,5 +19,10 @@
       "destination": "/studio/:path*"
     }
   ],
-  "crons": []
+  "crons": [
+    {
+      "path": "/api/cron/keepalive",
+      "schedule": "0 3 * * *"
+    }
+  ]
 }
